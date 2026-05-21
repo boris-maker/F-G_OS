@@ -440,12 +440,18 @@ body{
 .cmdk-foot kbd{border:1px solid var(--line-2);border-radius:2px;padding:0 5px;color:var(--fg-dim);}
 
 /* ===== BOOT ========================================================= */
-.boot{position:fixed;inset:0;z-index:1000;background:var(--bg);display:flex;align-items:center;justify-content:center;flex-direction:column;font-size:13px;color:var(--fg-dim);transition:opacity .4s ease;}
+.boot{position:fixed;inset:0;z-index:1000;background:var(--bg);display:flex;align-items:center;justify-content:center;flex-direction:column;gap:0;font-size:13px;color:var(--fg-dim);transition:opacity .5s ease;}
 .boot.gone{opacity:0;pointer-events:none;}
-.boot pre{white-space:pre;font-size:11px;line-height:1.3;color:var(--fg);margin-bottom:18px;}
-.boot .line{min-height:1.6em;}
+.boot-rock{margin-bottom:20px;color:var(--fg);opacity:.85;}
+.boot-rock svg{display:block;}
+.boot-artist{font-family:var(--disp);font-size:15px;font-weight:800;letter-spacing:.22em;text-transform:uppercase;color:var(--fg-bright);margin-bottom:8px;text-align:center;}
+.boot-title{font-size:10px;color:var(--fg-dim);max-width:300px;text-align:center;line-height:1.6;letter-spacing:.02em;margin-bottom:22px;font-style:italic;}
+.boot-rule{width:200px;border:none;border-top:1px solid var(--line);margin:0 0 18px;}
+.boot .line{min-height:1.6em;font-size:11px;letter-spacing:.03em;text-align:center;}
 .boot .ok{color:var(--fg-bright);}
-.boot .skip{margin-top:22px;font-size:10px;color:var(--fg-faint);letter-spacing:.1em;}
+.boot-bar-wrap{width:200px;height:2px;background:var(--line);margin-top:20px;overflow:hidden;}
+.boot-bar-fill{height:100%;width:0%;background:var(--fg-bright);transition:width .22s ease;}
+.boot .skip{margin-top:18px;font-size:10px;color:var(--fg-faint);letter-spacing:.1em;}
 
 /* ===== RESPONSIVE =================================================== */
 @media (max-width:920px){
@@ -474,10 +480,20 @@ body{
 
 <!-- BOOT -->
 <div class="boot" id="boot">
-  <pre> ╦ ╦ ╦ ╦ ╔═╗ ╔═╗ ╦═╗   ╔═╗ ╔═╗ ╔═╗ ╦   ╔═╗ ╔═╗ ╦ ╦
- ╠═╣ ╚╦╝ ╠═╝ ║╣  ╠╦╝   ║ ╦ ║╣  ║ ║ ║   ║ ║ ║ ╦ ╚╦╝
- ╩ ╩  ╩  ╩   ╚═╝ ╩╚═   ╚═╝ ╚═╝ ╚═╝ ╩═╝ ╚═╝ ╚═╝  ╩ </pre>
+  <div class="boot-rock">
+    <svg width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <polygon points="18,3 30,9 33,20 26,31 12,32 4,23 6,11" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round" fill="none"/>
+      <line x1="13" y1="12" x2="17" y2="18" stroke="currentColor" stroke-width="1" stroke-linecap="round" opacity="0.5"/>
+      <line x1="20" y1="15" x2="25" y2="21" stroke="currentColor" stroke-width="1" stroke-linecap="round" opacity="0.5"/>
+      <circle cx="11" cy="22" r="1.2" fill="currentColor" opacity="0.35"/>
+      <circle cx="22" cy="10" r="0.8" fill="currentColor" opacity="0.35"/>
+    </svg>
+  </div>
+  <div class="boot-artist">Faivovich &amp; Goldberg</div>
+  <div class="boot-title">Un meteorito para la Sociedad Científica Argentina del año 2105</div>
+  <hr class="boot-rule">
   <div class="line" id="bootline">&nbsp;</div>
+  <div class="boot-bar-wrap"><div class="boot-bar-fill" id="bootbar"></div></div>
   <div class="skip">press any key to skip ▮</div>
 </div>
 
@@ -1623,23 +1639,24 @@ body{
   }
 
   /* ---- boot sequence ---- */
-  var boot = $("#boot"), bl = $("#bootline");
+  var boot = $("#boot"), bl = $("#bootline"), bar = $("#bootbar");
   var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion:reduce)").matches;
   var lines = [
-    "» initializing hyper-geology kernel ........ <span class='ok'>OK</span>",
-    "» mounting custody ledger 2018→2105 ........ <span class='ok'>OK</span>",
-    "» loading 15 documentation modules ......... <span class='ok'>OK</span>",
-    "» protocol: TSSP / proof-of-care ........... <span class='ok'>OK</span>",
-    "» ready."
+    "» CdC/AR · iron · 4000yr · 41kg ........... <span class='ok'>OK</span>",
+    "» TSSP/1 · 11 slots · 87yr arc ............ <span class='ok'>OK</span>",
+    "» endo:$250k · QV · chain:BASE ............. <span class='ok'>OK</span>",
+    "» assembly:nonhuman · proxy:meteor ......... <span class='ok'>OK</span>",
+    "» hyper geology — online."
   ];
-  function endBoot(){ boot.classList.add("gone"); setTimeout(function(){ if(boot && boot.parentNode) boot.parentNode.removeChild(boot); },420); }
+  function endBoot(){ boot.classList.add("gone"); setTimeout(function(){ if(boot && boot.parentNode) boot.parentNode.removeChild(boot); },500); }
   if(reduce){ endBoot(); }
   else {
     var li=0;
     (function next(){
-      if(li>=lines.length){ setTimeout(endBoot, 350); return; }
+      if(li>=lines.length){ if(bar) bar.style.width="100%"; setTimeout(endBoot, 400); return; }
       bl.innerHTML = lines[li++];
-      setTimeout(next, 230);
+      if(bar) bar.style.width = Math.round((li/lines.length)*100) + "%";
+      setTimeout(next, 260);
     })();
     var skip = function(){ endBoot(); document.removeEventListener("keydown",skip); document.removeEventListener("click",skip); };
     document.addEventListener("keydown", skip);
