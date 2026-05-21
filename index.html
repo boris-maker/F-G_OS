@@ -1,0 +1,1449 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Un meteorito para la Sociedad Científica Argentina del año 2105 — Faivovich &amp; Goldberg</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,300;0,400;0,500;0,700;1,400&family=Martian+Mono:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   HYPER GEOLOGY — TERMINAL EDITION
+   Monochrome / monospace / character-grid
+   Inspired by: The Monospace Web (owickstrom), terminal.css,
+   U.S. Graphics Co. spec-sheet aesthetic, cmdk command palette.
+   ============================================================ */
+
+:root[data-theme="dark"]{
+  --bg:#0b0b0b; --bg-soft:#111111; --bg-inset:#161616;
+  --line:#2b2b2b; --line-2:#3d3d3d;
+  --fg:#e6e6e6; --fg-dim:#8d8d8d; --fg-faint:#5a5a5a;
+  --fg-bright:#ffffff;
+  --inv-bg:#e9e9e9; --inv-fg:#0b0b0b;
+  --grain:0.025; --scan:0.05;
+}
+:root[data-theme="light"]{
+  --bg:#f3f1ea; --bg-soft:#eae8df; --bg-inset:#e2e0d6;
+  --line:#cbc9bd; --line-2:#a8a698;
+  --fg:#16150f; --fg-dim:#5e5c50; --fg-faint:#908e80;
+  --fg-bright:#000000;
+  --inv-bg:#16150f; --inv-fg:#f3f1ea;
+  --grain:0.02; --scan:0.0;
+}
+
+:root{
+  --mono:'JetBrains Mono',ui-monospace,'SF Mono',Menlo,Consolas,monospace;
+  --disp:'Martian Mono','JetBrains Mono',monospace;
+  --fs:14px; --lh:1.65;
+  --ch:0.6em;
+  --sidebar:300px; --topbar:42px; --footbar:30px;
+}
+
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+
+body{
+  background:var(--bg); color:var(--fg);
+  font-family:var(--mono); font-size:var(--fs); line-height:var(--lh);
+  font-weight:400; min-height:100vh;
+  -webkit-font-smoothing:antialiased;
+  font-variant-ligatures:none;
+}
+
+/* texture overlays --------------------------------------------------- */
+.fx-scan,.fx-grain{position:fixed;inset:0;pointer-events:none;z-index:9999;}
+.fx-scan{
+  background:repeating-linear-gradient(0deg,
+    rgba(255,255,255,var(--scan)) 0px,
+    rgba(255,255,255,var(--scan)) 1px,
+    transparent 1px, transparent 3px);
+  mix-blend-mode:overlay; opacity:.6;
+}
+.fx-grain{
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+  opacity:var(--grain); mix-blend-mode:overlay;
+}
+
+::selection{background:var(--inv-bg);color:var(--inv-fg);}
+::-webkit-scrollbar{width:8px;height:8px;}
+::-webkit-scrollbar-track{background:var(--bg);}
+::-webkit-scrollbar-thumb{background:var(--line-2);border:2px solid var(--bg);}
+::-webkit-scrollbar-thumb:hover{background:var(--fg-faint);}
+
+/* ===== TOP BAR ====================================================== */
+.topbar{
+  position:fixed;top:0;left:0;right:0;height:var(--topbar);
+  display:flex;align-items:center;gap:0;
+  background:var(--bg);border-bottom:1px solid var(--line);
+  z-index:120;font-size:11px;letter-spacing:.04em;
+}
+.tb-brand{
+  width:var(--sidebar);min-width:var(--sidebar);height:100%;
+  display:flex;align-items:center;gap:.7ch;padding:0 14px;
+  border-right:1px solid var(--line);color:var(--fg-bright);overflow:hidden;
+}
+.tb-title{
+  font-family:var(--mono);font-weight:700;font-size:9px;line-height:1.18;
+  letter-spacing:.01em;color:var(--fg-bright);
+  display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;
+  overflow:hidden;text-transform:uppercase;
+}
+.tb-title .by{color:var(--fg-dim);font-weight:400;text-transform:none;}
+.tb-brand .glyph{
+  flex-shrink:0;
+  display:inline-block;width:14px;height:14px;
+  background:var(--inv-bg);
+  -webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12 2 L22 8 L22 16 L12 22 L2 16 L2 8 Z M12 7 L17 10 L12 13 L7 10 Z'/%3E%3C/svg%3E") center/contain no-repeat;
+          mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12 2 L22 8 L22 16 L12 22 L2 16 L2 8 Z M12 7 L17 10 L12 13 L7 10 Z'/%3E%3C/svg%3E") center/contain no-repeat;
+}
+.tb-path{
+  flex:1;display:flex;align-items:center;gap:1ch;padding:0 16px;
+  color:var(--fg-dim);overflow:hidden;white-space:nowrap;
+}
+.tb-path .seg-host{color:var(--fg-bright);}
+.tb-path .seg-sep{color:var(--fg-faint);}
+.tb-path .seg-cur{color:var(--fg);background:var(--bg-inset);padding:1px 6px;border:1px solid var(--line);}
+.tb-meta{display:flex;align-items:center;height:100%;}
+.tb-cell{
+  height:100%;display:flex;align-items:center;gap:.6ch;
+  padding:0 14px;border-left:1px solid var(--line);
+  color:var(--fg-dim);white-space:nowrap;
+}
+.tb-cell b{color:var(--fg-bright);font-weight:500;}
+.tb-btn{
+  height:100%;border:none;border-left:1px solid var(--line);
+  background:transparent;color:var(--fg-dim);font-family:var(--mono);
+  font-size:11px;letter-spacing:.04em;padding:0 14px;cursor:pointer;
+  display:flex;align-items:center;gap:.6ch;transition:.12s;
+}
+.tb-btn:hover{background:var(--bg-inset);color:var(--fg-bright);}
+.tb-btn kbd{
+  font-family:var(--mono);font-size:9px;border:1px solid var(--line-2);
+  border-radius:2px;padding:1px 4px;color:var(--fg-faint);
+}
+.menu-toggle{display:none;}
+
+/* ===== SIDEBAR ====================================================== */
+.sidebar{
+  position:fixed;top:var(--topbar);left:0;bottom:var(--footbar);
+  width:var(--sidebar);background:var(--bg);
+  border-right:1px solid var(--line);overflow-y:auto;z-index:110;
+}
+.banner{
+  padding:18px 16px 14px;border-bottom:1px solid var(--line);
+  white-space:pre;font-size:10px;line-height:1.25;color:var(--fg-dim);
+  letter-spacing:0;overflow:hidden;
+}
+.banner .ttl{color:var(--fg-bright);}
+.banner-meta{
+  display:flex;justify-content:space-between;align-items:baseline;
+  margin-top:12px;font-size:10px;letter-spacing:.08em;color:var(--fg-faint);
+}
+.banner-meta .yr{font-family:var(--disp);font-weight:800;font-size:22px;color:var(--fg);letter-spacing:-.02em;}
+
+.searchbtn{
+  margin:14px 16px 6px;width:calc(100% - 32px);
+  display:flex;align-items:center;gap:1ch;
+  background:var(--bg-inset);border:1px solid var(--line);
+  color:var(--fg-faint);font-family:var(--mono);font-size:11px;
+  padding:7px 10px;cursor:pointer;text-align:left;transition:.12s;
+}
+.searchbtn:hover{border-color:var(--line-2);color:var(--fg-dim);}
+.searchbtn .sb-icon{color:var(--fg-dim);}
+.searchbtn kbd{
+  margin-left:auto;font-family:var(--mono);font-size:9px;
+  border:1px solid var(--line-2);border-radius:2px;padding:1px 5px;color:var(--fg-faint);
+}
+
+.nav{padding:8px 0 24px;}
+.nav-grp{margin-top:14px;}
+.nav-grp-label{
+  font-size:9px;letter-spacing:.22em;text-transform:uppercase;
+  color:var(--fg-faint);padding:4px 16px;
+  display:flex;align-items:center;gap:1ch;
+}
+.nav-grp-label::after{content:"";flex:1;border-top:1px dashed var(--line);}
+.nav-item{
+  display:flex;align-items:center;gap:1ch;
+  padding:5px 16px 5px 16px;cursor:pointer;color:var(--fg-dim);
+  font-size:13px;border-left:2px solid transparent;transition:.1s;
+  user-select:none;
+}
+.nav-item .ix{color:var(--fg-faint);font-size:11px;min-width:2.4ch;}
+.nav-item .nm{flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.nav-item:hover{color:var(--fg-bright);background:var(--bg-soft);}
+.nav-item.active{
+  color:var(--inv-fg);background:var(--inv-bg);border-left-color:var(--inv-bg);
+}
+.nav-item.active .ix{color:var(--inv-fg);opacity:.6;}
+.nav-item.active::before{content:"▸ ";margin-left:-1ch;}
+
+.nav-hint{
+  padding:16px;margin-top:10px;border-top:1px dashed var(--line);
+  font-size:10px;line-height:1.9;color:var(--fg-faint);
+}
+.nav-hint .row{display:flex;justify-content:space-between;}
+.nav-hint kbd{
+  font-family:var(--mono);border:1px solid var(--line);border-radius:2px;
+  padding:0 5px;color:var(--fg-dim);font-size:10px;
+}
+
+/* ===== MAIN ========================================================= */
+.main{
+  margin-left:var(--sidebar);margin-top:var(--topbar);margin-bottom:var(--footbar);
+  min-height:calc(100vh - var(--topbar) - var(--footbar));
+}
+.progress{position:fixed;top:var(--topbar);left:var(--sidebar);right:0;height:2px;background:transparent;z-index:115;}
+.progress-fill{height:100%;width:0;background:var(--inv-bg);transition:width .08s linear;}
+
+.section{display:none;max-width:920px;padding:40px 56px 120px;animation:fadein .25s ease;}
+.section.active{display:block;}
+@keyframes fadein{from{opacity:0;transform:translateY(6px);}to{opacity:1;transform:none;}}
+
+.cmdline{
+  font-size:12px;color:var(--fg-dim);margin-bottom:6px;letter-spacing:.02em;
+}
+.cmdline .p{color:var(--fg-faint);}
+.cmdline .c{color:var(--fg);}
+.cmdline .cur{display:inline-block;width:8px;height:1em;background:var(--fg);
+  transform:translateY(2px);margin-left:2px;animation:blink 1.1s step-end infinite;}
+@keyframes blink{50%{opacity:0;}}
+
+.section-tag{
+  font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:var(--fg-faint);
+  margin-bottom:10px;
+}
+.section h1{
+  font-family:var(--disp);font-weight:800;font-size:30px;line-height:1.15;
+  letter-spacing:-.01em;color:var(--fg-bright);margin-bottom:8px;
+  padding-bottom:18px;border-bottom:1px solid var(--line);
+  position:relative;
+}
+.section h1::after{
+  content:"";position:absolute;left:0;bottom:-1px;width:80px;height:1px;background:var(--inv-bg);
+}
+.section h2{
+  font-family:var(--disp);font-weight:600;font-size:15px;letter-spacing:.04em;
+  text-transform:uppercase;color:var(--fg-bright);margin:38px 0 14px;
+  display:flex;align-items:center;gap:1.4ch;
+}
+.section h2::before{content:"§";color:var(--fg-faint);font-weight:400;}
+.section h2::after{content:"";flex:1;border-top:1px dashed var(--line);}
+.section h3{
+  font-size:12px;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--fg-dim);margin:24px 0 10px;font-weight:500;
+}
+.section h3::before{content:"›› ";color:var(--fg-faint);}
+
+.section p{margin:0 0 14px;color:var(--fg);max-width:74ch;}
+.section p strong{color:var(--fg-bright);font-weight:700;}
+.section p em{font-style:italic;color:var(--fg-dim);}
+.section a{color:var(--fg-bright);text-decoration:underline;text-underline-offset:2px;text-decoration-style:dotted;}
+
+/* hero quote */
+.quote{
+  border-left:2px solid var(--inv-bg);padding:14px 0 14px 20px;margin:22px 0;
+  font-size:17px;line-height:1.5;color:var(--fg-bright);max-width:70ch;
+}
+.quote em{color:var(--fg-dim);}
+.quote::before{content:"“";color:var(--fg-faint);}
+.quote::after{content:"”";color:var(--fg-faint);}
+
+/* status strip */
+.stats{
+  display:flex;flex-wrap:wrap;border:1px solid var(--line);
+  background:var(--bg-soft);margin:20px 0;
+}
+.stat{
+  flex:1;min-width:120px;padding:12px 16px;
+  border-right:1px solid var(--line);border-bottom:1px solid var(--line);
+}
+.stat:last-child{border-right:none;}
+.stat .k{font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:var(--fg-faint);}
+.stat .v{font-family:var(--disp);font-weight:600;font-size:20px;color:var(--fg);margin-top:4px;}
+.stat .v.hl{color:var(--fg-bright);}
+.stat .v.hl::after{content:" ◆";font-size:11px;color:var(--fg-dim);}
+
+/* panel / callout */
+.panel{
+  position:relative;border:1px solid var(--line-2);background:var(--bg-soft);
+  padding:18px 20px 16px;margin:18px 0;
+}
+.panel::before{
+  content:"┌";position:absolute;top:-2px;left:-1px;color:var(--fg-dim);font-size:11px;line-height:1;
+}
+.panel::after{
+  content:"┘";position:absolute;bottom:-9px;right:-1px;color:var(--fg-dim);font-size:11px;line-height:1;
+}
+.panel.alt{border-style:dashed;}
+.panel.dbl{border-style:double;border-width:3px;}
+.panel-label{
+  position:absolute;top:-9px;left:14px;background:var(--bg);padding:0 8px;
+  font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:var(--fg-bright);
+}
+.panel.alt .panel-label::before{content:"! ";color:var(--fg-dim);}
+.panel.dbl .panel-label::before{content:"!! ";color:var(--fg-dim);}
+.panel p:last-child{margin-bottom:0;}
+
+/* layer blocks */
+.layer{
+  display:grid;grid-template-columns:54px 1fr;border:1px solid var(--line);
+  margin:10px 0;background:var(--bg-soft);
+}
+.layer-num{
+  font-family:var(--disp);font-weight:800;font-size:18px;
+  display:flex;align-items:center;justify-content:center;
+  border-right:1px solid var(--line);color:var(--fg-bright);
+  background:var(--bg-inset);
+}
+.layer-body{padding:14px 16px;}
+.layer-head{display:flex;align-items:center;gap:1.4ch;margin-bottom:6px;flex-wrap:wrap;}
+.layer-title{font-weight:700;color:var(--fg-bright);font-size:14px;}
+.layer-txt{color:var(--fg-dim);font-size:13px;max-width:72ch;}
+
+/* tags */
+.tag{
+  display:inline-block;font-size:9px;letter-spacing:.12em;text-transform:uppercase;
+  border:1px solid var(--line-2);padding:2px 7px;color:var(--fg-dim);margin:2px 4px 2px 0;
+  white-space:nowrap;
+}
+.tag::before{content:"[";color:var(--fg-faint);margin-right:2px;}
+.tag::after{content:"]";color:var(--fg-faint);margin-left:2px;}
+.tag.fill{background:var(--inv-bg);color:var(--inv-fg);border-color:var(--inv-bg);}
+.tag.fill::before,.tag.fill::after{color:var(--inv-fg);opacity:.5;}
+.tag.dash{border-style:dashed;}
+
+/* tables */
+.tbl{width:100%;border-collapse:collapse;margin:16px 0;font-size:13px;border:1px solid var(--line);}
+.tbl th{
+  text-align:left;font-size:9px;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--fg-faint);padding:9px 14px;border-bottom:1px solid var(--line-2);
+  background:var(--bg-inset);font-weight:500;
+}
+.tbl td{padding:9px 14px;border-bottom:1px solid var(--line);color:var(--fg-dim);vertical-align:top;}
+.tbl tr:last-child td{border-bottom:none;}
+.tbl tr:hover td{background:var(--bg-soft);color:var(--fg);}
+.tbl td:first-child{color:var(--fg-bright);}
+
+/* slot map */
+.slotmap{display:flex;flex-wrap:wrap;gap:8px;margin:18px 0;}
+.slot{
+  width:118px;border:1px solid var(--line-2);background:var(--bg-soft);
+  padding:10px 12px;position:relative;
+}
+.slot .sid{font-family:var(--disp);font-weight:800;font-size:18px;color:var(--fg);}
+.slot .syr{font-size:10px;color:var(--fg-faint);margin:3px 0 6px;letter-spacing:.04em;}
+.slot .swho{font-size:11px;color:var(--fg-dim);min-height:2.6em;line-height:1.3;}
+.slot .dot{position:absolute;top:10px;right:12px;width:7px;height:7px;border:1px solid var(--fg-faint);}
+.slot.active{background:var(--inv-bg);}
+.slot.active .sid,.slot.active .swho{color:var(--inv-fg);}
+.slot.active .syr{color:var(--inv-fg);opacity:.7;}
+.slot.active .dot{background:var(--inv-fg);border-color:var(--inv-fg);}
+.slot.future{border-style:dashed;opacity:.7;}
+.slot.final{border-style:double;border-width:3px;border-color:var(--fg-dim);}
+.slot.final .sid{font-size:15px;}
+
+/* agent grid */
+.agents{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:18px 0;}
+.agent{border:1px solid var(--line);background:var(--bg-soft);padding:16px 18px;}
+.agent-nm{font-family:var(--disp);font-weight:600;font-size:13px;color:var(--fg-bright);letter-spacing:.04em;text-transform:uppercase;margin-bottom:8px;}
+.agent-nm::before{content:"● ";color:var(--fg-faint);}
+.agent-desc{font-size:12px;color:var(--fg-dim);margin-bottom:12px;line-height:1.5;}
+.agent .lbl{font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:var(--fg-faint);margin-top:10px;}
+.agent .lbl.r::before{content:"+ ";color:var(--fg);}
+.agent .lbl.o::before{content:"− ";color:var(--fg);}
+.agent .body{font-size:12px;color:var(--fg-dim);line-height:1.5;margin-top:3px;}
+
+/* proof steps */
+.proof{display:flex;gap:10px;margin:18px 0;flex-wrap:wrap;}
+.pstep{flex:1;min-width:200px;border:1px solid var(--line-2);background:var(--bg-soft);padding:14px 16px;position:relative;}
+.pstep .pt{font-family:var(--disp);font-weight:600;font-size:13px;color:var(--fg-bright);letter-spacing:.04em;margin-bottom:8px;}
+.pstep .pt::before{content:"◆ ";color:var(--fg-dim);}
+.pstep .pd{font-size:12px;color:var(--fg-dim);line-height:1.5;}
+
+/* timeline */
+.timeline{margin:18px 0;border-left:1px solid var(--line-2);padding-left:0;}
+.tl-item{position:relative;padding:0 0 22px 26px;}
+.tl-item::before{content:"▸";position:absolute;left:-7px;top:0;color:var(--fg);background:var(--bg);font-size:12px;}
+.tl-item:last-child{padding-bottom:0;}
+.tl-yr{font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--fg-faint);}
+.tl-ttl{font-weight:700;color:var(--fg-bright);font-size:13px;margin:2px 0 4px;}
+.tl-desc{font-size:12px;color:var(--fg-dim);line-height:1.5;max-width:70ch;}
+
+/* dist bars */
+.dist{margin:14px 0;border:1px solid var(--line);background:var(--bg-soft);padding:14px 16px;}
+.dist-row{display:grid;grid-template-columns:46px auto 1fr;gap:12px;align-items:center;padding:5px 0;}
+.dist-pct{font-family:var(--disp);font-weight:600;font-size:13px;color:var(--fg-bright);text-align:right;}
+.dist-bar{font-family:var(--mono);font-size:12px;letter-spacing:-.5px;color:var(--fg);white-space:nowrap;}
+.dist-bar .empty{color:var(--fg-faint);}
+.dist-desc{font-size:11px;color:var(--fg-dim);overflow:hidden;text-overflow:ellipsis;}
+
+/* what-ifs */
+.wiflist{margin:14px 0;}
+.wif{display:grid;grid-template-columns:42px 1fr;gap:14px;border:1px solid var(--line);background:var(--bg-soft);padding:14px 16px;margin-bottom:8px;align-items:start;}
+.wif-ix{font-family:var(--disp);font-weight:800;font-size:16px;color:var(--fg-faint);}
+.wif-tx{font-size:13px;color:var(--fg-dim);line-height:1.5;}
+.wif-tx strong{color:var(--fg-bright);}
+.wif-tags{margin-top:8px;}
+
+/* glossary */
+.gloss{border:1px solid var(--line);background:var(--bg-soft);padding:13px 16px;margin-bottom:6px;}
+.gloss .term{font-weight:700;color:var(--fg-bright);font-size:13px;}
+.gloss .term::before{content:"» ";color:var(--fg-faint);}
+.gloss .def{font-size:12px;color:var(--fg-dim);margin-top:4px;line-height:1.5;max-width:80ch;}
+
+.inline-list{color:var(--fg-dim);font-size:13px;max-width:80ch;}
+
+/* ===== FOOTER ======================================================= */
+.footbar{
+  position:fixed;left:0;right:0;bottom:0;height:var(--footbar);
+  display:flex;align-items:center;background:var(--bg);
+  border-top:1px solid var(--line);z-index:120;font-size:10px;
+  letter-spacing:.06em;color:var(--fg-faint);
+}
+.fb-cell{padding:0 14px;height:100%;display:flex;align-items:center;gap:.8ch;border-right:1px solid var(--line);white-space:nowrap;}
+.fb-cell:last-child{border-right:none;margin-left:auto;border-left:1px solid var(--line);}
+.fb-cell b{color:var(--fg-dim);}
+.fb-blink{color:var(--fg);animation:blink 1.4s step-end infinite;}
+
+/* ===== COMMAND PALETTE ============================================== */
+.cmdk-overlay{
+  position:fixed;inset:0;z-index:500;display:none;
+  background:rgba(0,0,0,.55);backdrop-filter:blur(2px);
+  align-items:flex-start;justify-content:center;padding-top:14vh;
+}
+:root[data-theme="light"] .cmdk-overlay{background:rgba(120,118,108,.45);}
+.cmdk-overlay.open{display:flex;animation:fadein .12s ease;}
+.cmdk{
+  width:min(620px,92vw);background:var(--bg);border:1px solid var(--line-2);
+  box-shadow:0 24px 80px rgba(0,0,0,.5);
+}
+.cmdk-input-wrap{display:flex;align-items:center;gap:1.4ch;padding:14px 18px;border-bottom:1px solid var(--line);}
+.cmdk-prompt{color:var(--fg-dim);font-size:14px;}
+.cmdk-input{flex:1;background:transparent;border:none;outline:none;color:var(--fg-bright);font-family:var(--mono);font-size:15px;}
+.cmdk-input::placeholder{color:var(--fg-faint);}
+.cmdk-esc{font-size:9px;border:1px solid var(--line-2);border-radius:2px;padding:2px 6px;color:var(--fg-faint);}
+.cmdk-results{max-height:48vh;overflow-y:auto;padding:6px;}
+.cmdk-grouplbl{font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:var(--fg-faint);padding:10px 12px 4px;}
+.cmdk-item{display:flex;align-items:center;gap:1.4ch;padding:9px 12px;cursor:pointer;color:var(--fg-dim);font-size:13px;}
+.cmdk-item .ci-ix{color:var(--fg-faint);font-size:11px;min-width:2.6ch;}
+.cmdk-item .ci-nm{flex:1;color:var(--fg);}
+.cmdk-item .ci-grp{font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:var(--fg-faint);}
+.cmdk-item.sel{background:var(--inv-bg);}
+.cmdk-item.sel .ci-nm,.cmdk-item.sel .ci-ix,.cmdk-item.sel .ci-grp{color:var(--inv-fg);}
+.cmdk-item.sel .ci-grp{opacity:.6;}
+.cmdk-item .ci-arrow{color:var(--inv-fg);opacity:0;}
+.cmdk-item.sel .ci-arrow{opacity:1;}
+.cmdk-empty{padding:24px;text-align:center;color:var(--fg-faint);font-size:13px;}
+.cmdk-foot{display:flex;gap:2ch;padding:9px 16px;border-top:1px solid var(--line);font-size:10px;color:var(--fg-faint);letter-spacing:.04em;}
+.cmdk-foot kbd{border:1px solid var(--line-2);border-radius:2px;padding:0 5px;color:var(--fg-dim);}
+
+/* ===== BOOT ========================================================= */
+.boot{position:fixed;inset:0;z-index:1000;background:var(--bg);display:flex;align-items:center;justify-content:center;flex-direction:column;font-size:13px;color:var(--fg-dim);transition:opacity .4s ease;}
+.boot.gone{opacity:0;pointer-events:none;}
+.boot pre{white-space:pre;font-size:11px;line-height:1.3;color:var(--fg);margin-bottom:18px;}
+.boot .line{min-height:1.6em;}
+.boot .ok{color:var(--fg-bright);}
+.boot .skip{margin-top:22px;font-size:10px;color:var(--fg-faint);letter-spacing:.1em;}
+
+/* ===== RESPONSIVE =================================================== */
+@media (max-width:920px){
+  :root{--sidebar:0px;}
+  .menu-toggle{display:flex;}
+  .tb-brand{width:auto;min-width:0;max-width:64vw;border-right:1px solid var(--line);}
+  .tb-title{-webkit-line-clamp:1;}
+  .sidebar{transform:translateX(-100%);width:300px;transition:transform .2s ease;box-shadow:0 0 60px rgba(0,0,0,.5);}
+  body.nav-open .sidebar{transform:none;}
+  .main{margin-left:0;}
+  .progress{left:0;}
+  .section{padding:28px 22px 110px;}
+  .agents{grid-template-columns:1fr;}
+  .tb-cell.hide-sm{display:none;}
+  .scrim{position:fixed;inset:var(--topbar) 0 var(--footbar) 0;background:rgba(0,0,0,.5);z-index:105;display:none;}
+  body.nav-open .scrim{display:block;}
+}
+@media (prefers-reduced-motion:reduce){
+  *{animation:none !important;transition:none !important;}
+}
+</style>
+</head>
+<body>
+<div class="fx-grain"></div>
+<div class="fx-scan"></div>
+
+<!-- BOOT -->
+<div class="boot" id="boot">
+  <pre> ╦ ╦ ╦ ╦ ╔═╗ ╔═╗ ╦═╗   ╔═╗ ╔═╗ ╔═╗ ╦   ╔═╗ ╔═╗ ╦ ╦
+ ╠═╣ ╚╦╝ ╠═╝ ║╣  ╠╦╝   ║ ╦ ║╣  ║ ║ ║   ║ ║ ║ ╦ ╚╦╝
+ ╩ ╩  ╩  ╩   ╚═╝ ╩╚═   ╚═╝ ╚═╝ ╚═╝ ╩═╝ ╚═╝ ╚═╝  ╩ </pre>
+  <div class="line" id="bootline">&nbsp;</div>
+  <div class="skip">press any key to skip ▮</div>
+</div>
+
+<!-- TOP BAR -->
+<header class="topbar">
+  <div class="tb-brand">
+    <button class="tb-btn menu-toggle" id="menuToggle" style="border-left:none;padding:0 12px 0 14px;">≡</button>
+    <span class="glyph"></span>
+    <span class="tb-title">Un meteorito para la Sociedad Científica Argentina del año 2105 <span class="by">· Faivovich &amp; Goldberg</span></span>
+  </div>
+  <div class="tb-path" id="crumb">
+    <span class="seg-host">hyper://</span><span class="seg-cur">overview</span>
+  </div>
+  <div class="tb-meta">
+    <div class="tb-cell hide-sm">T−<b id="countdown">…</b> → 2105</div>
+    <div class="tb-cell hide-sm">UTC <b id="clock">--:--:--</b></div>
+    <button class="tb-btn" id="openCmd"><span class="sb-icon">⌕</span>SEARCH <kbd>⌘K</kbd></button>
+    <button class="tb-btn" id="themeBtn" title="toggle theme (t)">◑ THEME</button>
+  </div>
+</header>
+
+<div class="progress"><div class="progress-fill" id="prog"></div></div>
+
+<!-- SIDEBAR -->
+<aside class="sidebar" id="sidebar">
+  <div class="banner">
+<span class="ttl">┌──────────────────────────┐
+│  META-INSTITUTION  v0.1  │
+│  intergenerational       │
+│  stewardship · 87 yrs    │
+└──────────────────────────┘</span>
+    <div class="banner-meta">
+      <span>2018 → 2105</span>
+      <span class="yr">2105</span>
+    </div>
+  </div>
+
+  <button class="searchbtn" id="openCmd2">
+    <span class="sb-icon">⌕</span> search the wiki… <kbd>/</kbd>
+  </button>
+
+  <nav class="nav" id="nav"></nav>
+
+  <div class="nav-hint">
+    <div class="row"><span>navigate</span><span><kbd>j</kbd> <kbd>k</kbd></span></div>
+    <div class="row"><span>command palette</span><span><kbd>⌘K</kbd></span></div>
+    <div class="row"><span>search</span><span><kbd>/</kbd></span></div>
+    <div class="row"><span>toggle theme</span><span><kbd>t</kbd></span></div>
+  </div>
+</aside>
+<div class="scrim" id="scrim"></div>
+
+<!-- MAIN -->
+<main class="main" id="main">
+
+  <!-- OVERVIEW -->
+  <section class="section active" id="overview">
+    <div class="cmdline"><span class="p">hyper@geology:~$</span> <span class="c">cat overview.md</span><span class="cur"></span></div>
+    <div class="section-tag">// getting started</div>
+    <h1>Overview</h1>
+
+    <div class="quote">A Hyper Institution for the management, care, and monitoring of the artwork <em>Un meteorito para la Sociedad Científica Argentina del año 2105</em> by Faivovich &amp; Goldberg.</div>
+
+    <div class="stats">
+      <div class="stat"><div class="k">Duration</div><div class="v">87 yrs</div></div>
+      <div class="stat"><div class="k">Start</div><div class="v">2018</div></div>
+      <div class="stat"><div class="k">End</div><div class="v hl">2105</div></div>
+      <div class="stat"><div class="k">Slots</div><div class="v">11</div></div>
+      <div class="stat"><div class="k">Endowment</div><div class="v">$250k</div></div>
+      <div class="stat"><div class="k">Whitepaper</div><div class="v">v0.1</div></div>
+    </div>
+
+    <p><strong>HYPER GEOLOGY</strong> is a meta-institution for intergenerational stewardship — a speculative art project, a governance experiment, and an institutional design challenge compressed into a single 87-year arc.</p>
+    <p>At its core is a meteorite encapsulated as an artwork, traveling through a chain of institutional custodians from 2018 to 2105, when it is scheduled for ceremonial delivery to the <strong>Sociedad Científica Argentina (SCA)</strong>.</p>
+    <p>The project establishes a Hyper Institution — a hybrid meta-structure operating simultaneously online and offline — that governs, finances, documents, and audits the custody chain across generations, using blockchain-based protocols alongside traditional legal frameworks.</p>
+
+    <h2>What This Wiki Covers</h2>
+    <p>This documentation is the single source of truth for everyone involved in or onboarding to the project: artists, institutional stewards, DAO participants, legal counsel, and future generations who may inherit a slot.</p>
+
+    <div class="panel"><div class="panel-label">Core Thesis</div>
+      <p>The artwork is the infrastructure that guarantees its own continuity during 100 years. The DAO is not the endpoint — it is the institutional technology that makes the promise survivable.</p>
+    </div>
+
+    <h2>Three Conceptual Layers</h2>
+    <div class="layer"><div class="layer-num">01</div><div class="layer-body">
+      <div class="layer-head"><span class="layer-title">The Artwork</span><span class="tag dash">Arte</span></div>
+      <div class="layer-txt">A meteorite encapsulated as a work of art, destined for the Sociedad Científica Argentina in 2105. The object itself — material, physical, mortal — is the provocation around which everything else organizes.</div>
+    </div></div>
+    <div class="layer"><div class="layer-num">02</div><div class="layer-body">
+      <div class="layer-head"><span class="layer-title">The Protocol</span><span class="tag dash">Tecnología</span></div>
+      <div class="layer-txt">A Time Slot Stewardship Protocol (TSSP) governing the handoff of custody across 11 institutional holders. Each slot is tokenized, each transfer is immutable on-chain, each holder carries defined rights and obligations.</div>
+    </div></div>
+    <div class="layer"><div class="layer-num">03</div><div class="layer-body">
+      <div class="layer-head"><span class="layer-title">The Meta-Institution</span><span class="tag dash">Gobernanza</span></div>
+      <div class="layer-txt">A DAO-powered governance structure operating in parallel to the State, to museums, to the SCA, and to the artists' own lifespans. A third type of institution — neither fully public nor private — built to outlast its founders.</div>
+    </div></div>
+
+    <h2>Strategic Phase 2025–2027</h2>
+    <div class="timeline">
+      <div class="tl-item"><div class="tl-yr">NOW — 2025</div><div class="tl-ttl">Finalize Slot Structure &amp; Legal Framework</div><div class="tl-desc">Confirm first institutional stewards, establish comodato contracts, define jurisdiction.</div></div>
+      <div class="tl-item"><div class="tl-yr">2025 – 2026</div><div class="tl-ttl">Structure Endowment Treasury</div><div class="tl-desc">Establish USD 250,000 capital base with compound interest model. Hybrid endowment structure launched.</div></div>
+      <div class="tl-item"><div class="tl-yr">2026</div><div class="tl-ttl">Launch Governance Infrastructure</div><div class="tl-desc">Deploy smart contracts, token issuance, on-chain slot registry, and the public monitoring platform.</div></div>
+      <div class="tl-item"><div class="tl-yr">2026 – 2027</div><div class="tl-ttl">Publish "Informe 2105"</div><div class="tl-desc">A hybrid artistic-financial document that inaugurates the project's public presence.</div></div>
+    </div>
+  </section>
+
+  <!-- ARTWORK -->
+  <section class="section" id="artwork">
+    <div class="cmdline"><span class="p">hyper@geology:~$</span> <span class="c">cat artwork.md</span><span class="cur"></span></div>
+    <div class="section-tag">// getting started</div>
+    <h1>The Artwork</h1>
+    <p><em>Un meteorito para la Sociedad Científica Argentina del año 2105</em> is a work by artists <strong>Faivovich &amp; Goldberg</strong>. A meteorite — donated by an anonymous donor — has been encapsulated as an artwork with a specific institutional destination: it is intended for the Sociedad Científica Argentina (SCA) and is scheduled to arrive there on July 9, 2105.</p>
+    <div class="quote">The artwork is not the meteorite. The artwork is the 87-year institutional promise.</div>
+
+    <h2>The Object</h2>
+    <p>The meteorite resides inside a capsule made of advanced materials. The capsule is both a preservation vessel and an exhibition object. It is designed for each exhibition context with a purpose-built base ("ajuar") — neither the base nor its surroundings are fixed. Each institutional holder may commission a new display configuration.</p>
+
+    <div class="panel alt"><div class="panel-label">On the status of the object</div>
+      <p>A key open legal and ontological question: <strong>does the meteorite cease to be classified as a meteorite once it becomes a component of an artwork?</strong> This has direct implications for patrimony law, export regulations, and the artists' rights as legatarios.</p>
+    </div>
+
+    <h2>Exhibition History — Slot 000 (2018–2025)</h2>
+    <p>The zero-th slot is held by F&amp;G themselves. Past and present exhibitions include:</p>
+    <div class="slotmap">
+      <div class="slot active"><span class="dot"></span><div class="sid">000</div><div class="syr">2018–2025</div><div class="swho">F&amp;G (Artists)</div></div>
+    </div>
+    <table class="tbl">
+      <thead><tr><th>Year</th><th>Exhibition</th><th>Venue</th></tr></thead>
+      <tbody>
+        <tr><td>2018</td><td>arteBA</td><td>—</td></tr>
+        <tr><td>2020</td><td>Tamayo</td><td>—</td></tr>
+        <tr><td>2022</td><td>Barro</td><td>—</td></tr>
+        <tr><td>2023</td><td>Moderno</td><td>—</td></tr>
+        <tr><td>2025</td><td>Trabucco / Klemm / ANBA</td><td>—</td></tr>
+      </tbody>
+    </table>
+
+    <h2>The Capsule — Exhibition Specifications (2025)</h2>
+    <p>For the 2025 Trabucco/Klemm exhibition, the following is under consideration:</p>
+    <table class="tbl">
+      <thead><tr><th>Element</th><th>Notes</th></tr></thead>
+      <tbody>
+        <tr><td>Base</td><td>New design TBD — Moderno, U-Turn, or new commission</td></tr>
+        <tr><td>Commemorative Plaque</td><td>"Faivovich &amp; Goldberg / Sociedad Científica Argentina / 2102–2105"</td></tr>
+        <tr><td>Perimeter</td><td>Airport tape boundary (as in 2018) — TBD</td></tr>
+        <tr><td>Technology</td><td>TV / projection / LED — TBD</td></tr>
+        <tr><td>Conservation Sensors</td><td>Humidity / temperature monitoring equipment</td></tr>
+        <tr><td>Connectivity</td><td>Internet access for live data feed</td></tr>
+      </tbody>
+    </table>
+
+    <h2>Destination: SCA, 2105</h2>
+    <p>The final act of the artwork is ceremonial delivery to the Sociedad Científica Argentina. The SCA will receive the capsule and — pending a governance vote by the DAO — open it. The meteorite would then be permanently displayed in the SCA's hall alongside the busts of 19th-century scientific luminaries.</p>
+    <div class="panel dbl"><div class="panel-label">Open Question</div>
+      <p>The SCA's acceptance is not guaranteed. If the SCA dissolves before 2105, refuses the donation, or cannot be located, fallback protocols activate. See <strong>Edge Cases</strong> for full contingency logic.</p>
+    </div>
+  </section>
+
+  <!-- INSTITUTION -->
+  <section class="section" id="institution">
+    <div class="cmdline"><span class="p">hyper@geology:~$</span> <span class="c">cat hyper-institution.md</span><span class="cur"></span></div>
+    <div class="section-tag">// getting started</div>
+    <h1>Hyper Institution</h1>
+    <div class="quote">A third type of institution — not public, not private — using the tools of the present to make promises into the future.</div>
+    <p>The Hyper Institution is a meta-institutional framework that operates with significance both online and offline. It is the device that allows the artwork — and the promise it encodes — to survive 100 years regardless of what happens to any individual actor, institution, or technology within it.</p>
+
+    <h2>Why Not Just a DAO?</h2>
+    <p>The DAO is not the end. It is a layer of technology deployed within a larger institutional design. The Meta-Institution is what uses the DAO as a social technology — it operates in parallel to the State, to museums, to the SCA, and to the artists themselves.</p>
+    <div class="panel"><div class="panel-label">Key Distinction</div>
+      <p>The Meta-Institution is <strong>not a legal owner</strong> of the meteorite. It does not replace comodatos or contracts. It is a layer of traceability, coordination, and distributed legitimacy that runs alongside traditional legal structures.</p>
+    </div>
+
+    <h2>Three Institutional Layers</h2>
+    <div class="layer"><div class="layer-num">A</div><div class="layer-body">
+      <div class="layer-head"><span class="layer-title">Legal Layer</span><span class="tag">Offline</span></div>
+      <div class="layer-txt">Traditional contracts (comodatos), insurance policies, institutional stewardship agreements, and Argentine jurisdiction. This layer governs liability, physical custody, and enforceable obligations.</div>
+    </div></div>
+    <div class="layer"><div class="layer-num">B</div><div class="layer-body">
+      <div class="layer-head"><span class="layer-title">Protocol Layer</span><span class="tag">On-Chain</span></div>
+      <div class="layer-txt">Blockchain-based registration of: Time Slots, steward identity (wallet), proof-of-care reports, and a public custody index. Immutable, publicly auditable, tamper-resistant.</div>
+    </div></div>
+    <div class="layer"><div class="layer-num">C</div><div class="layer-body">
+      <div class="layer-head"><span class="layer-title">Narrative Layer</span><span class="tag">Hyper Geology</span></div>
+      <div class="layer-txt">The conceptual framework: deep time + deep computation. Blockchain as geological sedimentation. Each slot is a stratum. Each steward is a tectonic layer. Each governance vote is a fault. This layer gives the institution cultural legitimacy across generations.</div>
+    </div></div>
+
+    <h2>Hyper Geology: The Conceptual Framework</h2>
+    <p><strong>Hyper Geology</strong> treats the geological not as static or natural, but as a hyper-mediated terrain shaped by financial speculation, digital simulation, algorithmic extraction, and post-human imaginaries.</p>
+    <p>The project proposes an expanded geology that includes: data sediments, synthetic fossils, planetary-scale computation, and the cryptographic mineralization of value (tokens, NFTs, DAOs).</p>
+    <h3>Key Concepts</h3>
+    <table class="tbl">
+      <thead><tr><th>Concept</th><th>Geological Mapping</th></tr></thead>
+      <tbody>
+        <tr><td>Blockchain</td><td>Geological strata — immutable, sequential, layered</td></tr>
+        <tr><td>Smart contracts</td><td>Tectonic shifts in value perception</td></tr>
+        <tr><td>Artists</td><td>Geologists of the future — excavating and depositing cultural matter</td></tr>
+        <tr><td>Time Slots</td><td>Geological epochs</td></tr>
+        <tr><td>Governance votes</td><td>Fault lines</td></tr>
+        <tr><td>NFTs</td><td>Synthetic minerals / artistic strata</td></tr>
+      </tbody>
+    </table>
+    <h3>Theoretical Influences</h3>
+    <p class="inline-list">Speculative Realism and Object-Oriented Ontology · Geophilosophy (Deleuze &amp; Guattari) · Benjamin Bratton's <em>The Stack</em> · Donna Haraway's multi-species entanglements · Cryptographic extractivism critique · Vitalik Buterin's governance minimization · Elinor Ostrom's commons governance · Quadratic voting (Lalley &amp; Weyl)</p>
+  </section>
+
+  <!-- STEWARDSHIP -->
+  <section class="section" id="stewardship">
+    <div class="cmdline"><span class="p">hyper@geology:~/protocol$</span> <span class="c">cat stewardship.md</span><span class="cur"></span></div>
+    <div class="section-tag">// protocol</div>
+    <h1>Stewardship &amp; Slots</h1>
+    <p>The period 2018–2105 is divided into <strong>Septenios</strong> — cycles of institutional custody lasting 7 to 8 years each. Each Septenio is assigned contractually to an institution, registered on-chain via a tokenized certificate, and governed by the Time Slot Stewardship Protocol (TSSP).</p>
+    <div class="stats">
+      <div class="stat"><div class="k">Total Period</div><div class="v">87 yrs</div></div>
+      <div class="stat"><div class="k">Active Slots</div><div class="v">10–11</div></div>
+      <div class="stat"><div class="k">Slot Duration</div><div class="v">7–8 yrs</div></div>
+      <div class="stat"><div class="k">SCA Final</div><div class="v hl">3 yrs</div></div>
+    </div>
+
+    <h2>Slot Map (2018–2105)</h2>
+    <div class="slotmap">
+      <div class="slot active"><span class="dot"></span><div class="sid">000</div><div class="syr">2018–2025</div><div class="swho">F&amp;G (Artists)</div></div>
+      <div class="slot"><span class="dot"></span><div class="sid">01</div><div class="syr">2025–2033</div><div class="swho">TBD</div></div>
+      <div class="slot future"><span class="dot"></span><div class="sid">02</div><div class="syr">2033–2041</div><div class="swho">Available</div></div>
+      <div class="slot future"><span class="dot"></span><div class="sid">03</div><div class="syr">2041–2049</div><div class="swho">Available</div></div>
+      <div class="slot future"><span class="dot"></span><div class="sid">04</div><div class="syr">2049–2057</div><div class="swho">Available</div></div>
+      <div class="slot future"><span class="dot"></span><div class="sid">05</div><div class="syr">2057–2065</div><div class="swho">Available</div></div>
+      <div class="slot future"><span class="dot"></span><div class="sid">06</div><div class="syr">2065–2073</div><div class="swho">Available</div></div>
+      <div class="slot future"><span class="dot"></span><div class="sid">07</div><div class="syr">2073–2081</div><div class="swho">Available</div></div>
+      <div class="slot future"><span class="dot"></span><div class="sid">08</div><div class="syr">2081–2089</div><div class="swho">Available</div></div>
+      <div class="slot future"><span class="dot"></span><div class="sid">09</div><div class="syr">2089–2097</div><div class="swho">Available</div></div>
+      <div class="slot future"><span class="dot"></span><div class="sid">10</div><div class="syr">2097–2102</div><div class="swho">Available</div></div>
+      <div class="slot final"><span class="dot"></span><div class="sid">SCA</div><div class="syr">2102–2105</div><div class="swho">Sociedad Científica Argentina</div></div>
+    </div>
+
+    <h2>Slot Acquisition</h2>
+    <p>A Slot can be acquired through:</p>
+    <table class="tbl">
+      <thead><tr><th>Method</th><th>Description</th></tr></thead>
+      <tbody>
+        <tr><td>Direct Acquisition</td><td>Institution acquires via its own mechanisms (purchase, institutional decision)</td></tr>
+        <tr><td>Private Donation</td><td>A private collector or patron donates a slot to an institution</td></tr>
+        <tr><td>Prize Acquisition</td><td>Hypothetical: Trabucco Prize winner acquires a slot as part of the award</td></tr>
+        <tr><td>DAO Nomination</td><td>A private acquires a slot for the DAO community to nominate the institution</td></tr>
+      </tbody>
+    </table>
+
+    <h2>Slot Contracts</h2>
+    <h3>Acquisition Contract</h3>
+    <p>The Slot acquisition contract must specify: duration, slot number, exact dates, all parties involved, contact channels, and the process for initiating execution.</p>
+    <h3>Execution Contract (Dominio Pro Tempore)</h3>
+    <p>The slot execution contract governs: logistics (cargo of the next slot holder), preservation protocol, exhibition criteria ("el yeite de las bases"), potential loans to third institutions during the period, and communications/diffusion obligations.</p>
+    <div class="panel alt"><div class="panel-label">Open Design Question</div>
+      <p>Are all slots sold simultaneously at project launch, or released progressively over time? Each model has different implications for funding, institutional engagement, and speculative dynamics.</p>
+    </div>
+  </section>
+
+  <!-- AGENTS -->
+  <section class="section" id="agents">
+    <div class="cmdline"><span class="p">hyper@geology:~/protocol$</span> <span class="c">cat agents.md</span><span class="cur"></span></div>
+    <div class="section-tag">// protocol</div>
+    <h1>Agents &amp; Roles</h1>
+    <p>Every participant in the Hyper Institution occupies a defined role with specific rights and obligations. These are enforced through a combination of traditional contracts and on-chain smart contract logic.</p>
+    <div class="agents">
+      <div class="agent">
+        <div class="agent-nm">Active Holder</div>
+        <div class="agent-desc">The institution or individual currently holding the physical custody of the meteorite during their assigned slot.</div>
+        <div class="lbl r">Rights</div>
+        <div class="body">Exhibition rights · Institutional visibility · Unlock of Slot NFT · Access to governance hub</div>
+        <div class="lbl o">Obligations</div>
+        <div class="body">Full preservation responsibility · Proof-of-care reports (T0, T½, T1) · Logistics for next transfer · Cost of care and transport</div>
+      </div>
+      <div class="agent">
+        <div class="agent-nm">Inactive Holders</div>
+        <div class="agent-desc">Past stewards who have fulfilled their slot, and future stewards whose slot has not yet begun.</div>
+        <div class="lbl r">Rights</div>
+        <div class="body">Governance participation · Community membership · Access to archive records</div>
+        <div class="lbl o">Obligations</div>
+        <div class="body">No active physical obligations · May be asked to participate in SCA ceremony 2105</div>
+      </div>
+      <div class="agent">
+        <div class="agent-nm">Emergency Caretakers</div>
+        <div class="agent-desc">A list of up to 50 individuals and institutions who voluntarily register as fallback custodians. Rights are transferable. Registered by the artists.</div>
+        <div class="lbl r">Rights</div>
+        <div class="body">Transferable slot rights · Priority access to governance decisions in emergencies</div>
+        <div class="lbl o">Obligations</div>
+        <div class="body">Available to receive custody if a slot fails or is abandoned · Must maintain active registration</div>
+      </div>
+      <div class="agent">
+        <div class="agent-nm">Artists / Core Team</div>
+        <div class="agent-desc">Faivovich &amp; Goldberg, or a designated management group. The ultimate fallback in every failure scenario. Responsible until the last day.</div>
+        <div class="lbl r">Rights</div>
+        <div class="body">Veto on fundamental changes to the artwork · Management authority · Protocol governance</div>
+        <div class="lbl o">Obligations</div>
+        <div class="body">Guarantee of reception if any slot fails · Succession planning for their own deaths · Emergency management of unclaimed slots</div>
+      </div>
+    </div>
+
+    <h2>On-Chain Identity</h2>
+    <p>All agents are identified on-chain via tokenized wallet identities. Each participant type — whether an institution or an individual — has a verified wallet associated with their role. This enables:</p>
+    <p class="inline-list">Public indexing of who holds which slot at any given moment · Automated claim windows triggered by smart contracts · Immutable record of custody transfers</p>
+    <div class="panel"><div class="panel-label">Artists' Succession</div>
+      <p>A critical open question: if the artists die while holding a majority of governance tokens, what happens? The protocol must define succession mechanisms for both physical stewardship rights and governance weight.</p>
+    </div>
+  </section>
+
+  <!-- CARE -->
+  <section class="section" id="care">
+    <div class="cmdline"><span class="p">hyper@geology:~/protocol$</span> <span class="c">cat protocol-of-care.md</span><span class="cur"></span></div>
+    <div class="section-tag">// protocol</div>
+    <h1>Protocol of Care</h1>
+    <p>The Protocol of Care defines the operational mechanics of how custody transfers happen and how stewards prove they are maintaining the artwork responsibly.</p>
+    <h2>Claim Mechanism</h2>
+    <p>The claim is always initiated by the <strong>incoming holder</strong> — the institution whose slot is next. They bear the logistical and financial responsibility for receiving the work.</p>
+    <div class="panel"><div class="panel-label">Claim Window</div>
+      <p>The incoming holder has <strong>30 days</strong> from the start of their slot to claim it. If unclaimed, custody passes to the next slot in sequence. If no next slot is available, it returns to Artists Management.</p>
+    </div>
+    <div class="panel alt"><div class="panel-label">SCA Final Slot Exception</div>
+      <p>The SCA has a <strong>60-day</strong> claim window given the ceremonial weight of the final transfer. If the SCA does not claim within 60 days, custody returns to the artists, then cascades to the Emergency Caretakers list in sequential order.</p>
+    </div>
+
+    <h2>Proof of Care</h2>
+    <p>Each active holder must submit three status reports, uploaded to the platform and timestamped on-chain:</p>
+    <div class="proof">
+      <div class="pstep"><div class="pt">T0 — Inicio</div><div class="pd">Reception report. Confirms physical condition of capsule and meteorite upon arrival. Includes environmental data, photographic documentation.</div></div>
+      <div class="pstep"><div class="pt">T½ — Mitad</div><div class="pd">Midpoint status report. Confirms ongoing preservation conditions, any incidents or changes, current exhibition status.</div></div>
+      <div class="pstep"><div class="pt">T1 — Entrega</div><div class="pd">Transfer report. Confirms final condition before handoff. Initiates logistics for next holder. Slot NFT unlocked for new holder.</div></div>
+    </div>
+
+    <h2>Logistics &amp; Costs</h2>
+    <table class="tbl">
+      <thead><tr><th>Responsibility</th><th>Who Bears It</th></tr></thead>
+      <tbody>
+        <tr><td>Transport logistics &amp; arrangements</td><td>Incoming holder (next slot)</td></tr>
+        <tr><td>All transport costs</td><td>Incoming holder (next slot)</td></tr>
+        <tr><td>Care costs during slot period</td><td>Active holder (current slot)</td></tr>
+        <tr><td>Insurance during slot period</td><td>Active holder — open question, TBD</td></tr>
+        <tr><td>Emergency logistical costs</td><td>Emergency Caretaker or Artists Management</td></tr>
+      </tbody>
+    </table>
+
+    <h2>On-Chain Automation</h2>
+    <p>When a whitelisted wallet claims a period upon its start, the smart contract automatically unlocks the Slot NFT and transfers it to the incoming holder's wallet. Period certificates are minted when the moment arrives and made available for 30 days. If unclaimed, the contract initiates fallback logic.</p>
+
+    <h2>Open Questions</h2>
+    <div class="wiflist">
+      <div class="wif"><div class="wif-ix">?</div><div class="wif-tx">How are transport costs calculated when distance is extreme (e.g., Córdoba to Amsterdam)?</div></div>
+      <div class="wif"><div class="wif-ix">?</div><div class="wif-tx">Are Slots sold/priced? Is there a market for acquiring a slot? Does the holder pay for the privilege?</div></div>
+      <div class="wif"><div class="wif-ix">?</div><div class="wif-tx">What happens if an active holder is removed from a slot (by choice or default) and the next holder is geographically far?</div></div>
+    </div>
+  </section>
+
+  <!-- GOVERNANCE -->
+  <section class="section" id="governance">
+    <div class="cmdline"><span class="p">hyper@geology:~/protocol$</span> <span class="c">cat governance.md</span><span class="cur"></span></div>
+    <div class="section-tag">// protocol</div>
+    <h1>Governance</h1>
+    <p>The Hyper Institution uses a collaborative governance model where decisions about the project's direction, finances, and operations are made collectively by token holders — but with safeguards to prevent plutocratic concentration of power.</p>
+    <h2>Scope of Governance</h2>
+    <p>The DAO governs decisions over:</p>
+    <table class="tbl">
+      <thead><tr><th>Domain</th><th>Examples</th></tr></thead>
+      <tbody>
+        <tr><td>Preservation</td><td>Choosing service providers, approving maintenance protocols</td></tr>
+        <tr><td>Location</td><td>Redefining exhibition venue if necessary</td></tr>
+        <tr><td>Cultural Programming</td><td>Educational programs, debates, publications</td></tr>
+        <tr><td>Treasury</td><td>Annual budget approval, emergency fund allocation</td></tr>
+        <tr><td>Ceremony 2105</td><td>Vote on whether to open or not open the capsule</td></tr>
+      </tbody>
+    </table>
+
+    <h2>Quadratic Voting</h2>
+    <p>Voting uses a <strong>quadratic model</strong>: each additional vote costs progressively more in tokens. This design means large token holders cannot simply outspend smaller participants — the marginal cost of influence increases non-linearly.</p>
+    <div class="panel"><div class="panel-label">Quadratic Voting Principle</div>
+      <p>Cost of N votes = N². Casting 1 vote costs 1 token. Casting 4 votes costs 16 tokens. This forces large holders to choose their battles carefully and gives genuine weight to distributed community opinion.</p>
+    </div>
+
+    <h2>Proposal Process</h2>
+    <div class="timeline">
+      <div class="tl-item"><div class="tl-yr">Draft</div><div class="tl-ttl">Proposal Co-Authorship</div><div class="tl-desc">Proposals are collaboratively drafted in the governance forum, iteratively refined before formal submission.</div></div>
+      <div class="tl-item"><div class="tl-yr">Submit</div><div class="tl-ttl">On-Chain Submission</div><div class="tl-desc">Proposal is registered on-chain with a fixed voting window and quorum requirement.</div></div>
+      <div class="tl-item"><div class="tl-yr">Vote</div><div class="tl-ttl">Quadratic Voting Period</div><div class="tl-desc">Token holders cast votes via Snapshot or equivalent. Results are publicly verifiable.</div></div>
+      <div class="tl-item"><div class="tl-yr">Execute</div><div class="tl-ttl">Implementation</div><div class="tl-desc">Passed proposals are executed by the core team or via smart contract automation where possible.</div></div>
+    </div>
+
+    <h2>Governance Minimization</h2>
+    <p>Following Vitalik Buterin's principle of governance minimization, the DAO avoids making governance necessary for routine operations. Smart contracts automate what can be automated. Human governance is reserved for decisions that genuinely require human judgment.</p>
+    <div class="panel alt"><div class="panel-label">Delegated Voting</div>
+      <p>Members may delegate their voting power to trusted experts in specific domains — a care-based practice where influence follows expertise rather than wealth alone.</p>
+    </div>
+  </section>
+
+  <!-- TOKENOMICS -->
+  <section class="section" id="tokenomics">
+    <div class="cmdline"><span class="p">hyper@geology:~/economics$</span> <span class="c">cat tokenomics.md</span><span class="cur"></span></div>
+    <div class="section-tag">// economics</div>
+    <h1>Tokenomics</h1>
+    <p>The Hyper Institution deploys two distinct token types, designed to avoid speculative pump-and-dump dynamics while enabling meaningful community ownership and stewardship financing.</p>
+    <h2>Token 1: $HYPER (Governance)</h2>
+    <div class="panel"><div class="panel-label">$HYPER</div>
+      <p>A limited-supply governance token. Its primary use is voting and deliberation, not trading. The focus is on long-term institutional participation, not financial speculation.</p>
+    </div>
+    <h3>Supply &amp; Distribution</h3>
+    <div class="dist" id="distChart">
+      <div class="dist-row"><span class="dist-pct">40%</span><span class="dist-bar" data-pct="40"></span><span class="dist-desc">Initial sale — funds first 10 years of maintenance</span></div>
+      <div class="dist-row"><span class="dist-pct">30%</span><span class="dist-bar" data-pct="30"></span><span class="dist-desc">Community fund — rewards and participation incentives</span></div>
+      <div class="dist-row"><span class="dist-pct">15%</span><span class="dist-bar" data-pct="15"></span><span class="dist-desc">Founding team &amp; developers — locked 4 years</span></div>
+      <div class="dist-row"><span class="dist-pct">10%</span><span class="dist-bar" data-pct="10"></span><span class="dist-desc">Emergency reserve — insurance against failures, climate events</span></div>
+      <div class="dist-row"><span class="dist-pct">5%</span><span class="dist-bar" data-pct="5"></span><span class="dist-desc">Strategic partnerships &amp; marketing</span></div>
+    </div>
+    <h3>Deflationary Mechanism</h3>
+    <p>Each year, a small percentage of tokens used in voting are burned. This creates progressive scarcity, rewarding long-term holders and reducing speculative churn over decades.</p>
+
+    <h2>Token 2: Slot-Linked ERC-20</h2>
+    <p>Each institutional holder may issue a fungible token linked to their custody slot. This enables:</p>
+    <div class="panel alt"><div class="panel-label">Example</div>
+      <p>The Museo de Córdoba holds Slot 3. Against their Slot NFT, they issue 1,000,000 fungible ERC-20 tokens. These are sold to the community, allowing micro-ownership of that specific stewardship period — funding logistics, sponsorship, and public engagement for that slot.</p>
+    </div>
+    <h3>Staking &amp; Incentives</h3>
+    <table class="tbl">
+      <thead><tr><th>Mechanism</th><th>Description</th></tr></thead>
+      <tbody>
+        <tr><td>Staking $HYPER</td><td>Earns income from economic activities (ticket sales, NFT sales, partnerships)</td></tr>
+        <tr><td>Voting participation</td><td>Generates additional token rewards</td></tr>
+        <tr><td>Non-linear staking</td><td>Staking weight grows based on community contributions, not just token size</td></tr>
+        <tr><td>Retroactive funding</td><td>Good stewards who document care well may receive retroactive public goods funding</td></tr>
+      </tbody>
+    </table>
+    <h2>Revenue Streams</h2>
+    <table class="tbl">
+      <thead><tr><th>Source</th><th>Notes</th></tr></thead>
+      <tbody>
+        <tr><td>Token issuance</td><td>Initial $HYPER sale and slot-linked token sales</td></tr>
+        <tr><td>Exhibition revenue</td><td>Ticket sales from exhibitions during slots</td></tr>
+        <tr><td>Commemorative NFTs</td><td>Limited editions: 3D models, photographs, milestone artifacts</td></tr>
+        <tr><td>Institutional partnerships</td><td>Collaborations with museums, galleries, scientific institutions</td></tr>
+        <tr><td>Platform fees</td><td>Small percentage of on-platform transactions</td></tr>
+        <tr><td>Endowment yield</td><td>Returns from the hybrid endowment fund (target 3–5%/yr)</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- FINANCE -->
+  <section class="section" id="finance">
+    <div class="cmdline"><span class="p">hyper@geology:~/economics$</span> <span class="c">cat financial-model.md</span><span class="cur"></span></div>
+    <div class="section-tag">// economics</div>
+    <h1>Financial Model</h1>
+    <p>The financial architecture of the Hyper Institution is built around a <strong>Hybrid Endowment Structure</strong> — inspired by long-term institutional fund models (Yale endowment, Swensen) but adapted for a 100-year cultural project.</p>
+    <div class="panel"><div class="panel-label">Core Principle</div>
+      <p>Compound interest is not just financial. It is reputational, institutional, and geological. The endowment grows in all three dimensions simultaneously.</p>
+    </div>
+    <h2>Hybrid Endowment Structure</h2>
+    <div class="layer"><div class="layer-num">1</div><div class="layer-body">
+      <div class="layer-head"><span class="layer-title">Fondo Base — Conservative</span><span class="tag">Low Risk</span></div>
+      <div class="layer-txt">Traditional long-term investments. Bonds, treasuries, stable assets. The bedrock of the endowment — its job is to exist in 2105 regardless of what happens to the rest.</div>
+    </div></div>
+    <div class="layer"><div class="layer-num">2</div><div class="layer-body">
+      <div class="layer-head"><span class="layer-title">Fondo Activo — DeFi Conservative</span><span class="tag">Medium Risk</span></div>
+      <div class="layer-txt">On-chain endowments using established DeFi protocols. Generates yield while maintaining transparency and traceability. Targets 3–5% annual return.</div>
+    </div></div>
+    <div class="layer"><div class="layer-num">3</div><div class="layer-body">
+      <div class="layer-head"><span class="layer-title">Fondo Cultural — NFTs / Events</span><span class="tag">Active</span></div>
+      <div class="layer-txt">Revenue from exhibitions, NFT sales, institutional partnerships, and cultural programming. Feeds back into the endowment and finances active operations.</div>
+    </div></div>
+    <div class="layer"><div class="layer-num">4</div><div class="layer-body">
+      <div class="layer-head"><span class="layer-title">Fondo Emergencial</span><span class="tag">Reserve</span></div>
+      <div class="layer-txt">Liquid emergency reserves. Activated only in case of failed slot claims, institutional dissolution, legal disputes, or blackout events. Never touched for routine operations.</div>
+    </div></div>
+    <h2>Target Parameters</h2>
+    <table class="tbl">
+      <thead><tr><th>Parameter</th><th>Value</th></tr></thead>
+      <tbody>
+        <tr><td>Initial Capital Target</td><td>USD 250,000</td></tr>
+        <tr><td>Target Return</td><td>3–5% per year</td></tr>
+        <tr><td>Spend Rule</td><td>Sustainable partial reinvestment model</td></tr>
+        <tr><td>Horizon</td><td>100 years</td></tr>
+        <tr><td>Audit Frequency</td><td>Annual — results public to all members</td></tr>
+      </tbody>
+    </table>
+    <h2>Business Model (Membership)</h2>
+    <table class="tbl">
+      <thead><tr><th>Tier</th><th>Access</th><th>Based On</th></tr></thead>
+      <tbody>
+        <tr><td>Core Steward</td><td>Full governance, physical custody</td><td>Slot ownership</td></tr>
+        <tr><td>Governance Member</td><td>Voting, proposals, forums</td><td>$HYPER holdings</td></tr>
+        <tr><td>Community Member</td><td>Community access, NFT purchasing</td><td>Slot-linked token holdings</td></tr>
+        <tr><td>Observer</td><td>Read-only platform access</td><td>Public — no token required</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- PLATFORM -->
+  <section class="section" id="platform">
+    <div class="cmdline"><span class="p">hyper@geology:~/platform$</span> <span class="c">cat online-platform.md</span><span class="cur"></span></div>
+    <div class="section-tag">// platform</div>
+    <h1>Online Platform</h1>
+    <p>The Hyper Institution operates an online platform that serves as the public-facing interface, monitoring dashboard, governance hub, and living archive of the project.</p>
+    <div class="panel"><div class="panel-label">Platform Principle</div>
+      <p>The platform shows who holds the meteorite now (live), who held it and their proof-of-care records, who will hold it next, and which slots remain available. It is a 100-year public ledger.</p>
+    </div>
+    <h2>Core Features</h2>
+    <h3>1. Preservation Monitoring Dashboard</h3>
+    <p>A real-time feed of environmental data from inside the capsule (temperature, humidity, air quality). Maintenance logs showing service providers, costs, and schedules. AI-driven capsule health reports predicting potential issues.</p>
+    <h3>2. Stewardship Index</h3>
+    <p>The live custody map — who holds the meteorite right now, based on which on-chain tokenized wallet holds the active Slot NFT. Past stewards with images and proof-of-care records. Future slot allocations and availability.</p>
+    <h3>3. Governance Hub</h3>
+    <p>The voting interface using quadratic voting. A proposal tracker with timeline of past, current, and upcoming proposals with results. Token management for $HYPER holders. Delegation tools.</p>
+    <h3>4. Community Engagement</h3>
+    <p>Interactive forum for proposals, ideas, and collaborative thinking. Educational resources on the meteorite's cultural and scientific significance. Event calendar for exhibitions, meetups, and educational workshops.</p>
+    <h3>5. NFT Marketplace</h3>
+    <p>Commemorative NFTs representing milestones: each custody transfer, each exhibition, each proof-of-care report. Slot-linked fungible tokens. Biodiversity and environmental credits if applicable.</p>
+    <h3>6. Self-Admin for Holders</h3>
+    <p>Each active holder can self-manage their slot page: uploading proof-of-care reports, documenting exhibitions, publishing news, and managing their public institutional profile within the platform.</p>
+  </section>
+
+  <!-- TECH -->
+  <section class="section" id="tech">
+    <div class="cmdline"><span class="p">hyper@geology:~/platform$</span> <span class="c">cat tech-stack.md</span><span class="cur"></span></div>
+    <div class="section-tag">// platform</div>
+    <h1>Technology Stack</h1>
+    <h2>Blockchain Layer</h2>
+    <table class="tbl">
+      <thead><tr><th>Component</th><th>Function</th></tr></thead>
+      <tbody>
+        <tr><td>Smart Contracts</td><td>Govern proposals, voting, fund allocation, slot claims, and NFT minting autonomously</td></tr>
+        <tr><td>Slot NFTs (ERC-721)</td><td>Non-fungible tokens representing each custody period — unique, non-replicable</td></tr>
+        <tr><td>$HYPER (ERC-20)</td><td>Governance token — limited supply, deflationary</td></tr>
+        <tr><td>Slot-Linked Tokens (ERC-20)</td><td>Fungible tokens issued by each institutional holder against their Slot NFT</td></tr>
+        <tr><td>Snapshot / Tally</td><td>Off-chain or hybrid voting to reduce gas costs</td></tr>
+        <tr><td>Multisig</td><td>Cold storage multisig for emergency protocols and treasury security</td></tr>
+      </tbody>
+    </table>
+    <h2>IoT &amp; Monitoring</h2>
+    <table class="tbl">
+      <thead><tr><th>Component</th><th>Function</th></tr></thead>
+      <tbody>
+        <tr><td>IoT Sensors</td><td>Humidity, temperature, air quality monitoring inside the capsule</td></tr>
+        <tr><td>Video Camera</td><td>Visual monitoring of the capsule's physical condition</td></tr>
+        <tr><td>Internet Connectivity</td><td>Required at each holding institution for live data feed</td></tr>
+        <tr><td>AI Analytics</td><td>Predictive models for preservation issues based on sensor data</td></tr>
+      </tbody>
+    </table>
+    <h2>Emergency Protocols</h2>
+    <div class="panel dbl"><div class="panel-label">Digital Blackout Scenario</div>
+      <p>If blockchain infrastructure becomes inaccessible: Cold storage multisig for treasury · Legal fallback trust structure · Manual override by Custodial Committee · Offline backup archive of all records</p>
+    </div>
+    <h2>Platform Tech</h2>
+    <p>Mobile companion app for real-time notifications, voting, and wallet management. AR features for immersive meteorite visualization. The platform is designed for an 80-year operational lifespan, requiring modular architecture for technology stack evolution over time.</p>
+  </section>
+
+  <!-- WHATIFS -->
+  <section class="section" id="whatifs">
+    <div class="cmdline"><span class="p">hyper@geology:~/reference$</span> <span class="c">cat edge-cases.md</span><span class="cur"></span></div>
+    <div class="section-tag">// reference</div>
+    <h1>Edge Cases &amp; What-Ifs</h1>
+    <p>Designing for 100 years requires planning for scenarios that seem unlikely in the present. These are the known edge cases that the protocol must formally address before launch.</p>
+    <h2>Institutional Scenarios</h2>
+    <div class="wiflist">
+      <div class="wif"><div class="wif-ix">01</div><div class="wif-tx"><strong>A slot-holding institution dissolves or ceases to exist.</strong> Custody returns to Artists Management. The emergency caretaker list activates in sequential order.<div class="wif-tags"><span class="tag fill">SlotMgmt</span><span class="tag">Legal</span></div></div></div>
+      <div class="wif"><div class="wif-ix">02</div><div class="wif-tx"><strong>An institution wants to transfer its slot to another institution.</strong> Is this permitted? Under what conditions? Does the DAO vote? What restrictions apply?<div class="wif-tags"><span class="tag fill">SlotMgmt</span></div></div></div>
+      <div class="wif"><div class="wif-ix">03</div><div class="wif-tx"><strong>An institution wants to hold more than one slot.</strong> If not permitted, this restriction must be formally encoded in the acquisition contract.<div class="wif-tags"><span class="tag fill">SlotMgmt</span></div></div></div>
+      <div class="wif"><div class="wif-ix">04</div><div class="wif-tx"><strong>Slot 1 is not confirmed in 2025.</strong> How does this affect the 80-year count? Does the number of slots change? How is the SCA slot recalculated?<div class="wif-tags"><span class="tag fill">SlotMgmt</span></div></div></div>
+      <div class="wif"><div class="wif-ix">05</div><div class="wif-tx"><strong>An institution wants to loan the capsule to another institution during its slot.</strong> Exhibition protocol must define sub-lending conditions, responsibilities, and documentation requirements.<div class="wif-tags"><span class="tag fill">SlotMgmt</span><span class="tag">Legal</span></div></div></div>
+    </div>
+    <h2>Legal Scenarios</h2>
+    <div class="wiflist">
+      <div class="wif"><div class="wif-ix">06</div><div class="wif-tx"><strong>National jurisdiction attempts to act on ownership of the meteorite.</strong> To what extent does the meteorite cease to be classified as a meteorite when it is a component of an artwork? How does this affect the artists as legatarios?<div class="wif-tags"><span class="tag fill">Legal</span></div></div></div>
+      <div class="wif"><div class="wif-ix">07</div><div class="wif-tx"><strong>After the anonymous donor dies, the family claims the meteorite.</strong> Legal framework must anticipate patrimony claims from donor heirs.<div class="wif-tags"><span class="tag fill">Legal</span></div></div></div>
+      <div class="wif"><div class="wif-ix">08</div><div class="wif-tx"><strong>The capsule must leave Argentina.</strong> Export regulations, patrimony law, international transport logistics, insurance across jurisdictions.<div class="wif-tags"><span class="tag fill">Legal</span></div></div></div>
+      <div class="wif"><div class="wif-ix">09</div><div class="wif-tx"><strong>The SCA dissolves before 2105.</strong> If the SCA dissolves in 2040 and an institution had a scheduled slot in 205x, how does the chain reconfigure?<div class="wif-tags"><span class="tag fill">Legal</span><span class="tag">Institutional</span></div></div></div>
+      <div class="wif"><div class="wif-ix">10</div><div class="wif-tx"><strong>The SCA refuses the donation in 2105.</strong> Fallback destination must be defined in advance. Emergency caretakers? Alternative institution? DAO vote?<div class="wif-tags"><span class="tag fill">Legal</span><span class="tag">DAO</span></div></div></div>
+    </div>
+    <h2>DAO &amp; Tokenomics Scenarios</h2>
+    <div class="wiflist">
+      <div class="wif"><div class="wif-ix">11</div><div class="wif-tx"><strong>The artists die while holding a majority of governance tokens.</strong> Succession mechanisms for both physical rights and governance weight must be formally specified.<div class="wif-tags"><span class="tag fill">DAO</span><span class="tag">Legal</span></div></div></div>
+      <div class="wif"><div class="wif-ix">12</div><div class="wif-tx"><strong>Digital blackout.</strong> If blockchain infrastructure collapses or becomes inaccessible, what are the manual override procedures? Who is the custodial committee?<div class="wif-tags"><span class="tag fill">DAO</span><span class="tag">Tech</span></div></div></div>
+      <div class="wif"><div class="wif-ix">13</div><div class="wif-tx"><strong>The endowment fund fails or is depleted.</strong> If the financial base collapses, which operations are prioritized? What is the minimum viable stewardship budget?<div class="wif-tags"><span class="tag fill">DAO</span><span class="tag">Finance</span></div></div></div>
+      <div class="wif"><div class="wif-ix">14</div><div class="wif-tx"><strong>A private acquires a slot to allow the DAO to nominate institutions.</strong> This creates an interesting indirect mechanism for community governance of physical custody. Protocol must define this pathway.<div class="wif-tags"><span class="tag fill">DAO</span><span class="tag">Tokenomics</span></div></div></div>
+    </div>
+    <h2>Emergency Protocol Summary</h2>
+    <div class="panel dbl"><div class="panel-label">Emergency Protocol Layer</div>
+      <p>Cold storage multisig · Legal fallback trust · Manual override by Custodial Committee · Backup offline archive of all records · Emergency Caretaker list of 50 (sequentially ordered, rights transferable)</p>
+    </div>
+  </section>
+
+  <!-- CEREMONY -->
+  <section class="section" id="ceremony">
+    <div class="cmdline"><span class="p">hyper@geology:~/reference$</span> <span class="c">cat ceremony-2105.md</span><span class="cur"></span></div>
+    <div class="section-tag">// reference</div>
+    <h1>Ceremony 2105</h1>
+    <div class="quote">July 9, 2105. The meteorite arrives at its programmed encounter with the Sociedad Científica Argentina.</div>
+    <p>The Ceremony of 2105 is not merely a delivery. It is an accumulated institutional act — a financial archive of 100 years, a genealogy of caretakers, a public ledger of sustained trust.</p>
+    <h2>What Will Be Delivered</h2>
+    <p>The physical object — the encapsulated meteorite — will arrive at the SCA. But accompanying it will be:</p>
+    <table class="tbl">
+      <thead><tr><th>Layer</th><th>Content</th></tr></thead>
+      <tbody>
+        <tr><td>Physical</td><td>The meteorite, preserved inside its capsule, in documented condition</td></tr>
+        <tr><td>Archival</td><td>A 100-year record of custody — every proof-of-care report, every holder, every exhibition</td></tr>
+        <tr><td>Financial</td><td>A century of endowment history — contributions, yields, expenditures, governance decisions</td></tr>
+        <tr><td>Institutional</td><td>A network of all prior steward institutions, invited to participate in the ceremony</td></tr>
+        <tr><td>Blockchain</td><td>An immutable on-chain record of the complete custody chain</td></tr>
+      </tbody>
+    </table>
+    <h2>The Opening Decision</h2>
+    <p>Whether to open the capsule is subject to a DAO governance vote. The SCA may choose to open it — revealing the meteorite as a permanent display in the SCA's hall — or to keep it sealed. This decision is one of the most significant acts the DAO will ever govern.</p>
+    <div class="panel alt"><div class="panel-label">If Opened</div>
+      <p>The meteorite is permanently displayed in the SCA hall alongside the busts of 19th-century scientific luminaries. A ceremony is performed inspired by the F&amp;G memo of 2016. All prior steward institutions participate.</p>
+    </div>
+    <div class="panel"><div class="panel-label">If Not Opened</div>
+      <p>The capsule remains sealed. The work continues to exist as a promise. The DAO may vote on future opening conditions or reconstitution.</p>
+    </div>
+    <h2>Post-Ceremony: DAO Fate</h2>
+    <p>At the Ceremony of 2105, the DAO faces its own existential decision: dissolve, or reinvent itself as a conservation structure for the meteorite as cultural patrimony. This too may be put to a governance vote — potentially the last act of the original institution, or the first act of its successor.</p>
+    <div class="timeline">
+      <div class="tl-item"><div class="tl-yr">2102</div><div class="tl-ttl">Final Transfer — Slot SCA Begins</div><div class="tl-desc">Ceremonial transfer to SCA. 60-day claim window opens.</div></div>
+      <div class="tl-item"><div class="tl-yr">July 9, 2105</div><div class="tl-ttl">Ceremony Day</div><div class="tl-desc">The programmed encounter. All prior institutions invited. DAO vote on opening the capsule. Public ceremony.</div></div>
+      <div class="tl-item"><div class="tl-yr">Post-2105</div><div class="tl-ttl">DAO Reconstitution Vote</div><div class="tl-desc">The DAO votes on its own future: dissolve, or continue as a cultural patrimony preservation institution.</div></div>
+    </div>
+  </section>
+
+  <!-- GLOSSARY -->
+  <section class="section" id="glossary">
+    <div class="cmdline"><span class="p">hyper@geology:~/reference$</span> <span class="c">cat glossary.md</span><span class="cur"></span></div>
+    <div class="section-tag">// reference</div>
+    <h1>Glossary</h1>
+    <div class="gloss"><div class="term">Active Holder</div><div class="def">The institution or individual currently holding physical custody of the meteorite during their assigned Time Slot.</div></div>
+    <div class="gloss"><div class="term">Claim Window</div><div class="def">The 30-day period (60 for SCA) during which an incoming holder must formally claim their slot on-chain. Failure to claim activates fallback logic.</div></div>
+    <div class="gloss"><div class="term">Comodato</div><div class="def">Traditional Argentine legal instrument for the loan of an object. The legal backbone of each stewardship agreement.</div></div>
+    <div class="gloss"><div class="term">DAO</div><div class="def">Decentralized Autonomous Organization. A governance structure where decisions are made collectively by token holders via on-chain voting, without a central authority.</div></div>
+    <div class="gloss"><div class="term">Emergency Caretakers</div><div class="def">A list of up to 50 registered volunteers (institutions and individuals) who serve as ordered fallback custodians if a slot fails. Rights are transferable.</div></div>
+    <div class="gloss"><div class="term">Hyper Institution</div><div class="def">A meta-institution with relevance both online and offline. Neither fully public nor private. Uses DAO technology as social infrastructure to govern a 100-year cultural project.</div></div>
+    <div class="gloss"><div class="term">Proof of Care</div><div class="def">Three mandatory status reports submitted by each active holder (T0 reception, T½ midpoint, T1 transfer), uploaded to the platform and timestamped immutably on-chain.</div></div>
+    <div class="gloss"><div class="term">Quadratic Voting</div><div class="def">A voting mechanism where the cost of casting N votes is N². Prevents plutocratic dominance by large token holders. Cost of 1 vote = 1 token; cost of 4 votes = 16 tokens.</div></div>
+    <div class="gloss"><div class="term">SCA</div><div class="def">Sociedad Científica Argentina. The intended final recipient of the meteorite in 2105.</div></div>
+    <div class="gloss"><div class="term">Septenio</div><div class="def">A 7–8 year cycle of institutional custody. The basic unit of the Time Slot Stewardship Protocol.</div></div>
+    <div class="gloss"><div class="term">Slot</div><div class="def">A defined period of custody within the overall 2018–2105 arc. Each slot is a tokenized unit with an assigned institutional holder, on-chain record, and associated rights/obligations.</div></div>
+    <div class="gloss"><div class="term">Slot NFT</div><div class="def">A non-fungible token representing a specific custody period. Minted when a slot period arrives and unlocked to the holder upon successful claim.</div></div>
+    <div class="gloss"><div class="term">$HYPER</div><div class="def">The primary governance token of the Hyper Institution DAO. Limited supply, deflationary, used for voting and deliberation rather than speculation.</div></div>
+    <div class="gloss"><div class="term">TSSP</div><div class="def">Time Slot Stewardship Protocol. The full operational protocol governing how custody transfers occur, how slots are claimed, and how proof-of-care is documented.</div></div>
+    <div class="gloss"><div class="term">White Paper</div><div class="def">The founding document of the Hyper Institution. Current version: v0.1. Code name: HYPER GEOLOGY.</div></div>
+  </section>
+
+  <!-- BIBLIOGRAPHY -->
+  <section class="section" id="bibliography">
+    <div class="cmdline"><span class="p">hyper@geology:~/reference$</span> <span class="c">cat bibliography.md</span><span class="cur"></span></div>
+    <div class="section-tag">// reference</div>
+    <h1>Bibliography &amp; References</h1>
+    <h2>Academic &amp; Theoretical</h2>
+    <table class="tbl">
+      <thead><tr><th>Author / Work</th><th>Relevance</th></tr></thead>
+      <tbody>
+        <tr><td>Vitalik Buterin — Governance Minimization</td><td>DAO design principle: automate what can be automated, govern what requires human judgment</td></tr>
+        <tr><td>Primavera De Filippi &amp; Aaron Wright — Lex Cryptographia</td><td>Smart contracts as a new layer of law operating alongside traditional legal structures</td></tr>
+        <tr><td>Elinor Ostrom — Governing the Commons</td><td>Non-market, non-state solutions for managing shared resources — foundational for DAO commons design</td></tr>
+        <tr><td>Lalley &amp; Weyl — Quadratic Voting</td><td>Mechanism for equitable collective decision-making</td></tr>
+        <tr><td>Hurwicz, Maskin, Myerson — Mechanism Design</td><td>Theoretical foundation for incentive-compatible governance structures</td></tr>
+        <tr><td>Deleuze &amp; Guattari — Geophilosophy</td><td>Conceptual framework for Hyper Geology's treatment of terrain, territory, and time</td></tr>
+        <tr><td>Benjamin Bratton — The Stack</td><td>Planetary computation and layered governance as infrastructure</td></tr>
+        <tr><td>Donna Haraway — Multi-species entanglements</td><td>Non-human actors within governance and care frameworks</td></tr>
+        <tr><td>David Swensen — Yale Endowment Model</td><td>Long-term institutional endowment strategy, adapted for 100-year cultural financing</td></tr>
+      </tbody>
+    </table>
+    <h2>DAO &amp; Web3 Projects</h2>
+    <table class="tbl">
+      <thead><tr><th>Project</th><th>URL</th><th>Relevance</th></tr></thead>
+      <tbody>
+        <tr><td>PlanetDAO</td><td>smartmoneyasia.com</td><td>Preserving Japanese cultural properties via DAO governance</td></tr>
+        <tr><td>DAOWO</td><td>daowo.org</td><td>DAO + art intersection, speculative governance</td></tr>
+        <tr><td>Masterworks</td><td>masterworks.com</td><td>Fractional art ownership model — tokenized cultural assets</td></tr>
+        <tr><td>Furtherfield</td><td>furtherfield.org</td><td>Art, technology, and commons governance</td></tr>
+      </tbody>
+    </table>
+    <h2>Key Concepts to Deepen</h2>
+    <p class="inline-list">Quadratic Funding (Gitcoin model) · Retroactive Public Goods Funding (Optimism) · Token Engineering (TE Commons) · On-chain Endowments · Regenerative Finance (ReFi) · Feminist Economics and care work tokenization · Perpetual Purpose Trusts as legal analogs</p>
+    <h2>Internal Documents</h2>
+    <table class="tbl">
+      <thead><tr><th>Document</th><th>Status</th></tr></thead>
+      <tbody>
+        <tr><td>Especulative DAO (2)</td><td>Working notes — protocol draft</td></tr>
+        <tr><td>H.G. ExecSum V0.8</td><td>Executive Summary — Hyper Institution overview</td></tr>
+        <tr><td>Hyper Geology</td><td>Conceptual framework document</td></tr>
+        <tr><td>Digest, Status and Next Steps</td><td>White Paper v0.1 — current working document</td></tr>
+        <tr><td>Interest Compuesto</td><td>Financial modeling document</td></tr>
+        <tr><td>Season 2 — Hyper Institution</td><td>Phase 2 planning document</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+</main>
+
+<!-- FOOTER -->
+<footer class="footbar">
+  <div class="fb-cell"><span class="fb-blink">●</span> ONLINE</div>
+  <div class="fb-cell hide-sm">HYPER GEOLOGY // META-INSTITUTION</div>
+  <div class="fb-cell hide-sm">whitepaper <b>v0.1</b></div>
+  <div class="fb-cell" id="fbSection">§ overview</div>
+</footer>
+
+<!-- COMMAND PALETTE -->
+<div class="cmdk-overlay" id="cmdk">
+  <div class="cmdk">
+    <div class="cmdk-input-wrap">
+      <span class="cmdk-prompt">›</span>
+      <input class="cmdk-input" id="cmdkInput" placeholder="jump to section, search the wiki…" autocomplete="off" spellcheck="false">
+      <span class="cmdk-esc">ESC</span>
+    </div>
+    <div class="cmdk-results" id="cmdkResults"></div>
+    <div class="cmdk-foot">
+      <span><kbd>↑↓</kbd> navigate</span><span><kbd>↵</kbd> open</span><span><kbd>esc</kbd> close</span>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  "use strict";
+
+  /* ---- section registry ---- */
+  var SECTIONS = [
+    {id:"overview",     nm:"Overview",                grp:"Getting Started"},
+    {id:"artwork",      nm:"The Artwork",             grp:"Getting Started"},
+    {id:"institution",  nm:"Hyper Institution",       grp:"Getting Started"},
+    {id:"stewardship",  nm:"Stewardship & Slots",     grp:"Protocol"},
+    {id:"agents",       nm:"Agents & Roles",          grp:"Protocol"},
+    {id:"care",         nm:"Protocol of Care",        grp:"Protocol"},
+    {id:"governance",   nm:"Governance",              grp:"Protocol"},
+    {id:"tokenomics",   nm:"Tokenomics",              grp:"Economics"},
+    {id:"finance",      nm:"Financial Model",         grp:"Economics"},
+    {id:"platform",     nm:"Online Platform",         grp:"Platform"},
+    {id:"tech",         nm:"Technology Stack",        grp:"Platform"},
+    {id:"whatifs",      nm:"Edge Cases & What-Ifs",   grp:"Reference"},
+    {id:"ceremony",     nm:"Ceremony 2105",           grp:"Reference"},
+    {id:"glossary",     nm:"Glossary",                grp:"Reference"},
+    {id:"bibliography", nm:"Bibliography",            grp:"Reference"}
+  ];
+  var GROUP_PATH = {
+    "Getting Started":"", "Protocol":"protocol/", "Economics":"economics/",
+    "Platform":"platform/", "Reference":"reference/"
+  };
+
+  var $  = function(s,c){return (c||document).querySelector(s);};
+  var $$ = function(s,c){return Array.prototype.slice.call((c||document).querySelectorAll(s));};
+
+  /* ---- build sidebar nav ---- */
+  var nav = $("#nav");
+  var lastGrp = null, count = 0;
+  SECTIONS.forEach(function(s){
+    if(s.grp !== lastGrp){
+      var gl = document.createElement("div");
+      gl.className = "nav-grp-label";
+      gl.textContent = s.grp;
+      nav.appendChild(gl);
+      lastGrp = s.grp;
+    }
+    count++;
+    var it = document.createElement("div");
+    it.className = "nav-item" + (s.id==="overview"?" active":"");
+    it.setAttribute("data-id", s.id);
+    it.innerHTML = '<span class="ix">'+String(count).padStart(2,"0")+'</span><span class="nm">'+s.nm+'</span>';
+    it.addEventListener("click", function(){ go(s.id); closeNav(); });
+    nav.appendChild(it);
+  });
+
+  /* ---- navigation ---- */
+  var current = "overview";
+  function go(id){
+    var sec = document.getElementById(id);
+    if(!sec) return;
+    $$(".section").forEach(function(s){s.classList.remove("active");});
+    sec.classList.add("active");
+    $$(".nav-item").forEach(function(n){
+      n.classList.toggle("active", n.getAttribute("data-id")===id);
+    });
+    current = id;
+    $("#main").scrollTo(0,0);
+    window.scrollTo(0,0);
+    updateCrumb(id);
+    var meta = SECTIONS.filter(function(s){return s.id===id;})[0];
+    $("#fbSection").textContent = "§ " + (meta?meta.nm.toLowerCase():id);
+    updateProgress();
+    try{ history.replaceState(null,"","#"+id); }catch(e){}
+  }
+
+  function updateCrumb(id){
+    var meta = SECTIONS.filter(function(s){return s.id===id;})[0];
+    if(!meta) return;
+    var path = GROUP_PATH[meta.grp] || "";
+    $("#crumb").innerHTML =
+      '<span class="seg-host">hyper://</span>' +
+      (path? '<span class="seg-sep">'+path.replace("/","")+'</span><span class="seg-sep">/</span>' : '') +
+      '<span class="seg-cur">'+id+'</span>';
+  }
+
+  function navIndex(id){
+    for(var i=0;i<SECTIONS.length;i++){ if(SECTIONS[i].id===id) return i; }
+    return 0;
+  }
+  function step(delta){
+    var i = navIndex(current) + delta;
+    if(i<0) i=0; if(i>=SECTIONS.length) i=SECTIONS.length-1;
+    go(SECTIONS[i].id);
+  }
+
+  /* ---- progress ---- */
+  function updateProgress(){
+    var doc = document.documentElement;
+    var max = doc.scrollHeight - doc.clientHeight;
+    var pct = max>0 ? (doc.scrollTop || document.body.scrollTop)/max*100 : 0;
+    $("#prog").style.width = pct + "%";
+  }
+  window.addEventListener("scroll", updateProgress, {passive:true});
+
+  /* ---- distribution ASCII bars ---- */
+  var TRACK = 30;
+  $$(".dist-bar").forEach(function(b){
+    var pct = parseInt(b.getAttribute("data-pct"),10);
+    var fill = Math.max(1, Math.round(pct/100*TRACK));
+    var empt = TRACK - fill;
+    b.innerHTML = '<span class="filled">'+"█".repeat(fill)+'</span><span class="empty">'+"░".repeat(empt)+'</span>';
+  });
+
+  /* ---- command palette ---- */
+  var cmdk = $("#cmdk"), input = $("#cmdkInput"), results = $("#cmdkResults");
+  var sel = 0, filtered = [];
+
+  function fuzzy(q){
+    q = q.trim().toLowerCase();
+    if(!q) return SECTIONS.slice();
+    return SECTIONS.map(function(s){
+      var hay = (s.nm + " " + s.grp + " " + s.id).toLowerCase();
+      var idx = hay.indexOf(q);
+      // loose subsequence fallback
+      var sub = 0, qi = 0;
+      for(var i=0;i<hay.length && qi<q.length;i++){ if(hay[i]===q[qi]){qi++; sub++;} }
+      var match = idx>=0 || qi===q.length;
+      return {s:s, score: idx>=0 ? idx : 999, ok:match};
+    }).filter(function(o){return o.ok;})
+      .sort(function(a,b){return a.score-b.score;})
+      .map(function(o){return o.s;});
+  }
+
+  function renderResults(){
+    filtered = fuzzy(input.value);
+    if(sel >= filtered.length) sel = Math.max(0, filtered.length-1);
+    if(!filtered.length){
+      results.innerHTML = '<div class="cmdk-empty">no matching sections — try "slot", "token", "ceremony"…</div>';
+      return;
+    }
+    var html = "", lastG=null;
+    filtered.forEach(function(s,i){
+      if(!input.value.trim() && s.grp!==lastG){
+        html += '<div class="cmdk-grouplbl">'+s.grp+'</div>';
+        lastG = s.grp;
+      }
+      html += '<div class="cmdk-item'+(i===sel?' sel':'')+'" data-id="'+s.id+'" data-i="'+i+'">'+
+              '<span class="ci-ix">'+String(navIndex(s.id)+1).padStart(2,"0")+'</span>'+
+              '<span class="ci-nm">'+s.nm+'</span>'+
+              '<span class="ci-grp">'+s.grp+'</span>'+
+              '<span class="ci-arrow">↵</span></div>';
+    });
+    results.innerHTML = html;
+    $$(".cmdk-item", results).forEach(function(el){
+      el.addEventListener("mouseenter", function(){ sel = parseInt(el.getAttribute("data-i"),10); paintSel(); });
+      el.addEventListener("click", function(){ go(el.getAttribute("data-id")); closeCmd(); });
+    });
+    paintSel();
+  }
+  function paintSel(){
+    $$(".cmdk-item", results).forEach(function(el,i){ el.classList.toggle("sel", i===sel); });
+    var act = $(".cmdk-item.sel", results);
+    if(act && act.scrollIntoView) act.scrollIntoView({block:"nearest"});
+  }
+  function openCmd(){ cmdk.classList.add("open"); input.value=""; sel=0; renderResults(); setTimeout(function(){input.focus();},20); }
+  function closeCmd(){ cmdk.classList.remove("open"); input.blur(); }
+
+  $("#openCmd").addEventListener("click", openCmd);
+  $("#openCmd2").addEventListener("click", openCmd);
+  input.addEventListener("input", function(){ sel=0; renderResults(); });
+  cmdk.addEventListener("click", function(e){ if(e.target===cmdk) closeCmd(); });
+
+  /* ---- theme ---- */
+  function setTheme(t){
+    document.documentElement.setAttribute("data-theme", t);
+    try{ localStorage.setItem("hg-theme", t); }catch(e){}
+  }
+  function toggleTheme(){
+    var cur = document.documentElement.getAttribute("data-theme");
+    setTheme(cur==="dark" ? "light" : "dark");
+  }
+  $("#themeBtn").addEventListener("click", toggleTheme);
+  try{ var saved = localStorage.getItem("hg-theme"); if(saved) setTheme(saved); }catch(e){}
+
+  /* ---- mobile nav ---- */
+  function closeNav(){ document.body.classList.remove("nav-open"); }
+  $("#menuToggle").addEventListener("click", function(){ document.body.classList.toggle("nav-open"); });
+  $("#scrim").addEventListener("click", closeNav);
+
+  /* ---- keyboard ---- */
+  document.addEventListener("keydown", function(e){
+    var inField = /input|textarea/i.test((e.target.tagName||""));
+    // command palette
+    if((e.metaKey||e.ctrlKey) && e.key.toLowerCase()==="k"){ e.preventDefault(); cmdk.classList.contains("open")?closeCmd():openCmd(); return; }
+    if(cmdk.classList.contains("open")){
+      if(e.key==="Escape"){ e.preventDefault(); closeCmd(); }
+      else if(e.key==="ArrowDown"){ e.preventDefault(); sel=Math.min(sel+1,filtered.length-1); paintSel(); }
+      else if(e.key==="ArrowUp"){ e.preventDefault(); sel=Math.max(sel-1,0); paintSel(); }
+      else if(e.key==="Enter"){ e.preventDefault(); if(filtered[sel]){ go(filtered[sel].id); closeCmd(); } }
+      return;
+    }
+    if(inField) return;
+    if(e.key==="/"){ e.preventDefault(); openCmd(); }
+    else if(e.key==="j"){ step(1); }
+    else if(e.key==="k"){ step(-1); }
+    else if(e.key==="t"){ toggleTheme(); }
+    else if(e.key==="Escape"){ closeNav(); }
+  });
+
+  /* ---- live clock + countdown to 2105-07-09 ---- */
+  function tick(){
+    var now = new Date();
+    var hh=String(now.getUTCHours()).padStart(2,"0");
+    var mm=String(now.getUTCMinutes()).padStart(2,"0");
+    var ss=String(now.getUTCSeconds()).padStart(2,"0");
+    $("#clock").textContent = hh+":"+mm+":"+ss;
+    var target = new Date(Date.UTC(2105,6,9,0,0,0));
+    var diff = target - now;
+    var dayMs = 86400000;
+    var totalDays = Math.floor(diff/dayMs);
+    var yrs = Math.floor(totalDays/365.25);
+    var days = totalDays - Math.floor(yrs*365.25);
+    $("#countdown").textContent = yrs+"Y "+String(days).padStart(3,"0")+"D";
+  }
+  tick(); setInterval(tick, 1000);
+
+  /* ---- deep link ---- */
+  if(location.hash){
+    var h = location.hash.replace("#","");
+    if(SECTIONS.some(function(s){return s.id===h;})) go(h);
+  }
+
+  /* ---- boot sequence ---- */
+  var boot = $("#boot"), bl = $("#bootline");
+  var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion:reduce)").matches;
+  var lines = [
+    "» initializing hyper-geology kernel ........ <span class='ok'>OK</span>",
+    "» mounting custody ledger 2018→2105 ........ <span class='ok'>OK</span>",
+    "» loading 15 documentation modules ......... <span class='ok'>OK</span>",
+    "» protocol: TSSP / proof-of-care ........... <span class='ok'>OK</span>",
+    "» ready."
+  ];
+  function endBoot(){ boot.classList.add("gone"); setTimeout(function(){ if(boot && boot.parentNode) boot.parentNode.removeChild(boot); },420); }
+  if(reduce){ endBoot(); }
+  else {
+    var li=0;
+    (function next(){
+      if(li>=lines.length){ setTimeout(endBoot, 350); return; }
+      bl.innerHTML = lines[li++];
+      setTimeout(next, 230);
+    })();
+    var skip = function(){ endBoot(); document.removeEventListener("keydown",skip); document.removeEventListener("click",skip); };
+    document.addEventListener("keydown", skip);
+    document.addEventListener("click", skip);
+  }
+
+  updateCrumb("overview");
+})();
+</script>
+</body>
+</html>
