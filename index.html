@@ -97,13 +97,7 @@ body{
   -webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12 2 L22 8 L22 16 L12 22 L2 16 L2 8 Z M12 7 L17 10 L12 13 L7 10 Z'/%3E%3C/svg%3E") center/contain no-repeat;
           mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12 2 L22 8 L22 16 L12 22 L2 16 L2 8 Z M12 7 L17 10 L12 13 L7 10 Z'/%3E%3C/svg%3E") center/contain no-repeat;
 }
-.tb-path{
-  flex:1;display:flex;align-items:center;gap:1ch;padding:0 16px;
-  color:var(--fg-dim);overflow:hidden;white-space:nowrap;
-}
-.tb-path .seg-host{color:var(--fg-bright);}
-.tb-path .seg-sep{color:var(--fg-faint);}
-.tb-path .seg-cur{color:var(--fg);background:var(--bg-inset);padding:1px 6px;border:1px solid var(--line);}
+.tb-spacer{flex:1;}
 .tb-meta{display:flex;align-items:center;height:100%;}
 .tb-cell{
   height:100%;display:flex;align-items:center;gap:.6ch;
@@ -456,16 +450,18 @@ body{
 /* ===== RESPONSIVE =================================================== */
 @media (max-width:920px){
   :root{--sidebar:0px;}
-  .menu-toggle{display:flex;}
-  .tb-brand{width:auto;min-width:0;max-width:64vw;border-right:1px solid var(--line);}
+  .menu-toggle{display:flex;min-width:48px;font-size:18px;justify-content:center;}
+  .tb-brand{width:auto;min-width:0;flex:1;border-right:none;}
   .tb-title{-webkit-line-clamp:1;}
   .sidebar{transform:translateX(-100%);width:300px;transition:transform .2s ease;box-shadow:0 0 60px rgba(0,0,0,.5);}
   body.nav-open .sidebar{transform:none;}
   .main{margin-left:0;}
   .progress{left:0;}
-  .section{padding:28px 22px 110px;}
+  .section{padding:28px 20px 110px;}
   .agents{grid-template-columns:1fr;}
   .tb-cell.hide-sm{display:none;}
+  .btn-lbl{display:none;}
+  .tb-btn{padding:0 16px;min-width:44px;justify-content:center;}
   .scrim{position:fixed;inset:var(--topbar) 0 var(--footbar) 0;background:rgba(0,0,0,.5);z-index:105;display:none;}
   body.nav-open .scrim{display:block;}
 }
@@ -491,18 +487,16 @@ body{
 <!-- TOP BAR -->
 <header class="topbar">
   <div class="tb-brand">
-    <button class="tb-btn menu-toggle" id="menuToggle" style="border-left:none;padding:0 12px 0 14px;">≡</button>
+    <button class="tb-btn menu-toggle" id="menuToggle" style="border-left:none;">≡</button>
     <span class="glyph"></span>
     <span class="tb-title">Un meteorito para la Sociedad Científica Argentina del año 2105 <span class="by">· Faivovich &amp; Goldberg</span></span>
   </div>
-  <div class="tb-path" id="crumb">
-    <span class="seg-host">hyper://</span><span class="seg-cur">overview</span>
-  </div>
+  <div class="tb-spacer"></div>
   <div class="tb-meta">
     <div class="tb-cell hide-sm">T−<b id="countdown">…</b> → 2105</div>
     <div class="tb-cell hide-sm">UTC <b id="clock">--:--:--</b></div>
-    <button class="tb-btn" id="openCmd"><span class="sb-icon">⌕</span>SEARCH <kbd>⌘K</kbd></button>
-    <button class="tb-btn" id="themeBtn" title="toggle theme (t)">◑ THEME</button>
+    <button class="tb-btn" id="openCmd"><span class="sb-icon">⌕</span><span class="btn-lbl">SEARCH <kbd>⌘K</kbd></span></button>
+    <button class="tb-btn" id="themeBtn" title="toggle theme (t)">◑<span class="btn-lbl"> THEME</span></button>
   </div>
 </header>
 
@@ -1472,15 +1466,7 @@ body{
     try{ history.replaceState(null,"","#"+id); }catch(e){}
   }
 
-  function updateCrumb(id){
-    var meta = SECTIONS.filter(function(s){return s.id===id;})[0];
-    if(!meta) return;
-    var path = GROUP_PATH[meta.grp] || "";
-    $("#crumb").innerHTML =
-      '<span class="seg-host">hyper://</span>' +
-      (path? '<span class="seg-sep">'+path.replace("/","")+'</span><span class="seg-sep">/</span>' : '') +
-      '<span class="seg-cur">'+id+'</span>';
-  }
+  function updateCrumb(){ }
 
   function navIndex(id){
     for(var i=0;i<SECTIONS.length;i++){ if(SECTIONS[i].id===id) return i; }
