@@ -1,0 +1,483 @@
+<title>Atlas Hyper Geology</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Courier+Prime:ital,wght@0,400;0,700;1,400&family=IBM+Plex+Mono:ital,wght@0,300;0,400;0,500;1,300&display=swap">
+<style>
+:root{
+  --paper:#ECEBE6; --paper-2:#E2E1DB; --ink:#151513; --ink-2:#4B4B47; --ink-3:#8C8B84; --line:#C6C5BE; --faint:#D9D8D1;
+  --iron:#8B4A2B; --iron-2:#B86A45;
+  --mono:'IBM Plex Mono',ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  --disp:'Courier Prime','Courier New',Courier,monospace;
+  --grain:.55;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --paper:#131312; --paper-2:#1C1C1A; --ink:#DDDBD2; --ink-2:#A6A49B; --ink-3:#6F6E67; --line:#33332F; --faint:#26261F;
+    --iron:#C97A55; --iron-2:#A85A38; --grain:.35;
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#131312; --paper-2:#1C1C1A; --ink:#DDDBD2; --ink-2:#A6A49B; --ink-3:#6F6E67; --line:#33332F; --faint:#26261F;
+  --iron:#C97A55; --iron-2:#A85A38; --grain:.35;
+}
+html,body{height:100%;margin:0}
+body{background:var(--paper);color:var(--ink);font-family:var(--mono);font-size:12px;line-height:1.45;overflow:hidden;
+  -webkit-user-select:none;user-select:none;-webkit-tap-highlight-color:transparent;overscroll-behavior:none}
+#stage{position:fixed;inset:0;touch-action:none;cursor:grab}
+#stage.grabbing{cursor:grabbing}
+/* grain */
+#grain{position:fixed;inset:0;pointer-events:none;opacity:var(--grain);mix-blend-mode:multiply;z-index:1;
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 .18 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>")}
+:root[data-theme="dark"] #grain{mix-blend-mode:screen}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) #grain{mix-blend-mode:screen}}
+
+/* chrome */
+.ui{position:fixed;z-index:2;font-family:var(--mono)}
+#top{top:0;left:0;right:0;display:flex;align-items:flex-start;justify-content:space-between;gap:12px;
+  padding:calc(10px + env(safe-area-inset-top,0px)) 16px 8px;pointer-events:none}
+#top>*{pointer-events:auto}
+#brand{display:flex;flex-direction:column;gap:2px}
+#brand h1{font-family:var(--disp);font-weight:400;font-size:15px;letter-spacing:.02em;margin:0;line-height:1.1}
+#brand h1 em{font-style:italic;color:var(--ink-2)}
+#brand h1 #ver{color:var(--ink-3);font-size:11px;letter-spacing:.06em;margin-left:4px}
+#brand .sub{font-size:10px;color:var(--ink-3);letter-spacing:.08em;text-transform:uppercase}
+#counts{display:flex;gap:14px;flex-wrap:wrap;justify-content:flex-end;font-size:10px;color:var(--ink-3);letter-spacing:.06em;text-transform:uppercase;text-align:right}
+#counts b{display:block;font-weight:400;color:var(--ink);font-size:14px;font-variant-numeric:tabular-nums;letter-spacing:0;text-transform:none}
+#tools{display:flex;gap:6px;align-items:center}
+button,input{font-family:var(--mono);font-size:11px;color:var(--ink);background:transparent;border:1px solid var(--line);border-radius:2px;
+  padding:0 10px;height:34px;cursor:pointer;letter-spacing:.04em}
+button:hover{border-color:var(--ink-2)}
+button:focus-visible,input:focus-visible{outline:1.5px solid var(--iron);outline-offset:1px}
+button.on{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+#search{width:180px;padding:0 10px;background:var(--paper)}
+#search::placeholder{color:var(--ink-3)}
+
+#modes{bottom:calc(14px + env(safe-area-inset-bottom,0px));left:50%;transform:translateX(-50%);display:flex;border:1px solid var(--line);
+  background:var(--paper);border-radius:2px;overflow:hidden}
+#modes button{border:0;border-radius:0;height:44px;padding:0 18px;min-width:44px}
+#modes button+button{border-left:1px solid var(--line)}
+#modes button small{display:block;font-size:9px;color:var(--ink-3);letter-spacing:.08em;text-transform:uppercase;margin-top:-2px}
+#modes button.on small{color:var(--paper);opacity:.75}
+
+#legend{bottom:calc(14px + env(safe-area-inset-bottom,0px));left:16px;display:flex;flex-direction:column;gap:2px;max-width:46vw}
+#legend button{display:flex;align-items:center;gap:8px;height:30px;border:0;padding:0 6px;justify-content:flex-start;color:var(--ink-2)}
+#legend button.off{color:var(--ink-3);text-decoration:line-through;opacity:.6}
+#legend button:hover{color:var(--ink)}
+#legend svg{width:14px;height:14px;flex:none}
+#legend .n{color:var(--ink-3);font-variant-numeric:tabular-nums;margin-left:auto;padding-left:8px}
+
+#hint{bottom:calc(72px + env(safe-area-inset-bottom,0px));left:50%;transform:translateX(-50%);color:var(--ink-3);font-size:10px;letter-spacing:.08em;
+  text-transform:uppercase;pointer-events:none;transition:opacity .6s;white-space:nowrap;max-width:90vw;overflow:hidden;text-overflow:ellipsis}
+
+/* inspector */
+#panel{top:0;right:0;bottom:0;width:min(420px,100vw);background:var(--paper);border-left:1px solid var(--line);
+  transform:translateX(102%);transition:transform .45s cubic-bezier(.2,.8,.2,1);display:flex;flex-direction:column;
+  padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+#panel.open{transform:none}
+#panel header{display:flex;align-items:flex-start;gap:10px;padding:16px 16px 10px;border-bottom:1px solid var(--line)}
+#panel header .kind{font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3);display:flex;gap:10px;align-items:center}
+#panel header .kind svg{width:12px;height:12px}
+#panel h2{font-family:var(--disp);font-weight:400;font-size:20px;line-height:1.15;margin:6px 0 0;text-wrap:balance}
+#panel #close{margin-left:auto;width:34px;padding:0;flex:none}
+#panel .body{overflow-y:auto;padding:14px 16px 24px;-webkit-user-select:text;user-select:text;font-size:12px;color:var(--ink-2)}
+#panel .meta{display:grid;grid-template-columns:auto 1fr;gap:4px 14px;font-size:11px;margin-bottom:14px}
+#panel .meta dt{color:var(--ink-3);letter-spacing:.06em;text-transform:uppercase;font-size:10px;padding-top:1px}
+#panel .meta dd{margin:0;word-break:break-word;font-variant-numeric:tabular-nums}
+#panel .excerpt{font-family:var(--disp);font-size:14px;line-height:1.5;color:var(--ink);margin:0 0 18px;max-width:60ch;text-wrap:pretty}
+#panel h3{font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3);font-weight:400;margin:16px 0 6px;display:flex;justify-content:space-between}
+#panel ul{list-style:none;margin:0;padding:0}
+#panel li button{display:flex;gap:8px;align-items:center;width:100%;border:0;border-bottom:1px solid var(--faint);border-radius:0;height:auto;
+  min-height:34px;padding:6px 0;text-align:left;justify-content:flex-start;color:var(--ink)}
+#panel li button svg{width:11px;height:11px;flex:none;color:var(--ink-2)}
+#panel li button .w{margin-left:auto;color:var(--ink-3);font-size:10px;font-variant-numeric:tabular-nums;padding-left:8px}
+#panel li button:hover{color:var(--iron)}
+
+/* strata axis labels are drawn on canvas; this is the dream banner */
+#dream{top:50%;left:16px;transform:translateY(-50%);pointer-events:none;color:var(--ink-3);font-size:10px;letter-spacing:.14em;text-transform:uppercase;
+  writing-mode:vertical-rl;opacity:0;transition:opacity 1.2s}
+#dream.on{opacity:1}
+
+@media (max-width:640px){
+  #counts{display:none}
+  #search{width:120px}
+  #legend{max-width:40vw}
+  #legend button{height:26px;font-size:10px}
+  #modes button{padding:0 10px}
+  #modes button small{display:none}
+  #hint{display:none}
+}
+@media (prefers-reduced-motion: reduce){#panel{transition:none}}
+</style>
+
+<canvas id="stage" aria-label="Interactive graph of the Faivovich & Goldberg archive"></canvas>
+<div id="grain"></div>
+
+<div id="top" class="ui">
+  <div id="brand">
+    <h1>Atlas <em>Hyper Geology</em> <span id="ver"></span> · Faivovich &amp; Goldberg</h1>
+    <div class="sub" id="span">2006 → 2105 · un archivo en movimiento</div>
+  </div>
+  <div id="tools">
+    <input id="search" type="search" placeholder="buscar / search" autocomplete="off" aria-label="Search nodes">
+    <button id="btnFull" title="Pantalla completa">⛶</button>
+    <button id="btnTheme" title="Tema">◐</button>
+  </div>
+  <div id="counts"></div>
+</div>
+
+<div id="legend" class="ui" role="group" aria-label="Toggle node types"></div>
+
+<div id="hint" class="ui">toca un nodo · arrastra · pellizca para acercar</div>
+
+<div id="modes" class="ui" role="tablist">
+  <button data-mode="graph" class="on" role="tab">Constelación<small>red</small></button>
+  <button data-mode="strata" role="tab">Estratos<small>2006 → 2105</small></button>
+  <button data-mode="lexicon" role="tab">Léxico<small>palabras</small></button>
+</div>
+
+<div id="dream" class="ui">el archivo sueña · toca para despertar</div>
+
+<aside id="panel" class="ui" aria-hidden="true">
+  <header>
+    <div>
+      <div class="kind" id="pKind"></div>
+      <h2 id="pTitle"></h2>
+    </div>
+    <button id="close" aria-label="Cerrar">×</button>
+  </header>
+  <div class="body" id="pBody"></div>
+</aside>
+
+<div id="fail" class="ui" hidden style="top:50%;left:50%;transform:translate(-50%,-50%);max-width:min(560px,90vw);padding:18px 20px;border:1px solid var(--iron);background:var(--paper);color:var(--ink);font-size:12px;line-height:1.5;-webkit-user-select:text;user-select:text"></div>
+<script>
+// Load order: local d3 (works offline) → cdnjs fallback → graph.js → boot. Every failure is written on screen.
+window.__atlasFail = function(msg){ var f=document.getElementById('fail'); f.hidden=false; f.innerHTML='<b>Atlas no pudo arrancar.</b><br>'+msg+'<br><br><span style="color:var(--ink-3)">Cómo abrirlo: <code>python3 atlas/build_graph.py</code> y luego abrir <code>atlas/index.html</code> en Chrome/Safari, o <code>cd atlas && python3 -m http.server 8765</code> → http://localhost:8765</span>'; };
+window.addEventListener('error', function(e){ if(!document.getElementById('fail').hidden) return; window.__atlasFail('Error: '+(e.message||e.type)+(e.filename?' — '+e.filename.split('/').pop()+':'+e.lineno:'')); });
+</script>
+<script src="vendor/d3.v7.min.js" onerror="this.remove();var s=document.createElement('script');s.src='https://cdnjs.cloudflare.com/ajax/libs/d3/7.9.0/d3.min.js';s.onerror=function(){window.__atlasFail('No se pudo cargar d3 (ni vendor/d3.v7.min.js ni cdnjs). ¿Sin conexión y falta la carpeta atlas/vendor/?')};document.head.appendChild(s)"></script>
+<script src="graph.js" onerror="window.__atlasFail('No se encontró <code>graph.js</code> junto a index.html. Generalo con <code>python3 atlas/build_graph.py</code>.')"></script>
+<script>
+window.addEventListener('load', function boot(){
+'use strict';
+if(!window.d3){ window.__atlasFail('d3 no está disponible.'); return; }
+const DATA = window.ATLAS;
+if(!DATA){ if(document.getElementById('fail').hidden) window.__atlasFail('<code>graph.js</code> cargó pero no define <code>window.ATLAS</code>. Regeneralo con <code>python3 atlas/build_graph.py</code>.'); return; }
+
+// ------------------------------------------------------------------ types & glyphs
+const TYPES = {
+  work:        {label:'obras',         glyph:'ring',    r:7,  charge:-260, weight:3},
+  concept:     {label:'conceptos',     glyph:'circle',  r:6,  charge:-220, weight:3},
+  feeling:     {label:'sentimientos',  glyph:'cross',   r:6,  charge:-160, weight:2.4},
+  actor:       {label:'actores',       glyph:'dot',     r:5.5,charge:-200, weight:2.6},
+  institution: {label:'instituciones', glyph:'diamond', r:6,  charge:-200, weight:2.6},
+  place:       {label:'lugares',       glyph:'tri',     r:6,  charge:-150, weight:2},
+  slot:        {label:'septenios',     glyph:'square',  r:6,  charge:-120, weight:2.2},
+  chapter:     {label:'wiki · capítulos', glyph:'dsquare', r:6, charge:-140, weight:2},
+  doc:         {label:'documentos',    glyph:'square',  r:5,  charge:-110, weight:1.8},
+  section:     {label:'secciones',     glyph:'pt',      r:2.2,charge:-14,  weight:0.7},
+  word:        {label:'palabras',      glyph:'text',    r:0,  charge:-40,  weight:1.2},
+};
+const ORDER = Object.keys(TYPES);
+const glyphSVG = (g)=>{
+  const s='fill="none" stroke="currentColor" stroke-width="1.2"';
+  switch(g){
+    case 'ring': return `<svg viewBox="0 0 14 14"><circle cx="7" cy="7" r="5" ${s}/><circle cx="7" cy="7" r="1.6" fill="currentColor"/></svg>`;
+    case 'circle': return `<svg viewBox="0 0 14 14"><circle cx="7" cy="7" r="5" ${s}/></svg>`;
+    case 'dot': return `<svg viewBox="0 0 14 14"><circle cx="7" cy="7" r="4.5" fill="currentColor"/></svg>`;
+    case 'cross': return `<svg viewBox="0 0 14 14"><path d="M3 3l8 8M11 3l-8 8" ${s}/></svg>`;
+    case 'diamond': return `<svg viewBox="0 0 14 14"><path d="M7 1.5L12.5 7 7 12.5 1.5 7z" ${s}/></svg>`;
+    case 'tri': return `<svg viewBox="0 0 14 14"><path d="M2 3h10L7 12z" ${s}/></svg>`;
+    case 'square': return `<svg viewBox="0 0 14 14"><rect x="2.5" y="2.5" width="9" height="9" ${s}/></svg>`;
+    case 'dsquare': return `<svg viewBox="0 0 14 14"><rect x="1.5" y="1.5" width="11" height="11" ${s}/><rect x="4" y="4" width="6" height="6" ${s}/></svg>`;
+    case 'pt': return `<svg viewBox="0 0 14 14"><circle cx="7" cy="7" r="1.8" fill="currentColor"/></svg>`;
+    case 'text': return `<svg viewBox="0 0 14 14"><text x="7" y="11" font-size="11" text-anchor="middle" font-family="monospace" fill="currentColor">a</text></svg>`;
+  }
+  return '';
+};
+
+// ------------------------------------------------------------------ data prep
+const nodes = DATA.nodes.map(n=>Object.assign({}, n));
+const byId = new Map(nodes.map(n=>[n.id,n]));
+const maxDeg = d3.max(nodes, n=>n.deg)||1;
+const maxTf = d3.max(nodes.filter(n=>n.type==='word'), n=>n.tf)||1;
+nodes.forEach(n=>{
+  const t = TYPES[n.type]||TYPES.section;
+  n.imp = t.weight * (0.35 + 0.65*Math.sqrt((n.deg||1)/maxDeg));           // importance for labels
+  n.r = n.type==='word' ? 0 : t.r * (0.8 + 0.5*Math.sqrt((n.deg||1)/maxDeg));
+  if(n.type==='word') n.fs = 9 + 13*Math.sqrt(n.tf/maxTf);
+  n.nb = [];
+});
+const edges = DATA.edges.map(e=>({source:e.s, target:e.t, w:e.w, kind:e.kind, primary:e.kind.split('+')[0]}));
+edges.forEach(e=>{ byId.get(e.source).nb.push({id:e.target,e}); byId.get(e.target).nb.push({id:e.source,e}); });
+// structural edges are drawn always; 'co' (co-mention) and 'next' only when a node is focused
+const isStructural = e => e.primary!=='co' && e.primary!=='next';
+const drawEdges = edges.filter(isStructural);
+
+// ------------------------------------------------------------------ state
+const state = { mode:'graph', focus:null, hover:null, hidden:new Set(['section']), query:'', dream:false, lastInput:performance.now(), t0:performance.now() };
+try{ const s=JSON.parse(localStorage.getItem('atlas.hidden')||'null'); if(Array.isArray(s)) state.hidden=new Set(s); }catch(_){}
+const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+// ------------------------------------------------------------------ canvas
+const canvas = document.getElementById('stage');
+const ctx = canvas.getContext('2d');
+let W=0,H=0,DPR=1;
+function resize(){ DPR=Math.min(2, window.devicePixelRatio||1); W=innerWidth; H=innerHeight; canvas.width=W*DPR; canvas.height=H*DPR; canvas.style.width=W+'px'; canvas.style.height=H+'px'; }
+addEventListener('resize', ()=>{resize(); if(state.mode!=='graph') applyMode(); });
+resize();
+
+const css = k => getComputedStyle(document.documentElement).getPropertyValue(k).trim();
+let COL = {};
+function readColors(){ COL={paper:css('--paper'), ink:css('--ink'), ink2:css('--ink-2'), ink3:css('--ink-3'), line:css('--line'), faint:css('--faint'), iron:css('--iron')}; }
+readColors();
+
+// ------------------------------------------------------------------ zoom / camera
+let transform = d3.zoomIdentity;
+const zoom = d3.zoom().scaleExtent([0.08, 8]).on('zoom', ev=>{ transform=ev.transform; markInput(); });
+d3.select(canvas).call(zoom).on('dblclick.zoom', null);
+function flyTo(x,y,k,ms){ d3.select(canvas).transition().duration(ms||900).ease(d3.easeCubicInOut).call(zoom.transform, d3.zoomIdentity.translate(W/2,H/2).scale(k).translate(-x,-y)); }
+
+// ------------------------------------------------------------------ simulation
+const visible = n => !state.hidden.has(n.type) && (state.mode!=='lexicon' || n.type==='word'||n.type==='concept'||n.type==='feeling'||n.type==='work');
+const sim = d3.forceSimulation(nodes)
+  .force('charge', d3.forceManyBody().strength(n=> visible(n) ? (TYPES[n.type]||TYPES.section).charge : 0).theta(0.9).distanceMax(600))
+  .force('link', d3.forceLink(edges).id(n=>n.id).distance(e=>linkDist(e)).strength(e=>linkStr(e)))
+  .force('collide', d3.forceCollide().radius(n=> visible(n) ? (n.type==='word' ? n.fs*0.9 : n.r+4) : 0).iterations(1))
+  .force('x', d3.forceX(0).strength(0.045))
+  .force('y', d3.forceY(0).strength(0.045))
+  .alphaDecay(0.02).velocityDecay(0.35);
+function linkDist(e){ const a=e.source,b=e.target; if(!visible(a)||!visible(b)) return 40; if(e.primary==='contains') return 22; if(e.primary==='related') return 70; if(e.primary==='term') return 60; if(e.primary==='mention') return 55; return 50; }
+function linkStr(e){ const a=e.source,b=e.target; if(!visible(a)||!visible(b)) return 0; if(state.mode==='lexicon') return (e.primary==='term'||e.primary==='related'||e.primary==='mention')?0.25:0.02; if(e.primary==='contains') return 0.7; if(e.primary==='related') return 0.5; if(e.primary==='co') return 0.02; if(e.primary==='next') return 0.05; if(e.primary==='term') return 0.35; return 0.18*Math.min(1,e.w); }
+
+// ------------------------------------------------------------------ modes
+const YEAR0=2006, YEAR1=2105, NOW=2026;
+const yearX = d3.scaleLinear();
+function bandY(t){ const bands={work:-0.34,actor:-0.22,institution:-0.12,place:-0.04,concept:0.06,feeling:0.16,slot:0.28,chapter:0.36,doc:0.42,section:0.46,word:0.5}; return (bands[t]||0)*H; }
+function applyMode(){
+  const m=state.mode;
+  document.querySelectorAll('#modes button').forEach(b=>b.classList.toggle('on', b.dataset.mode===m));
+  if(m==='graph'){
+    sim.force('x', d3.forceX(0).strength(0.045)).force('y', d3.forceY(0).strength(0.045));
+    sim.force('charge').strength(n=> visible(n) ? (TYPES[n.type]||TYPES.section).charge : 0);
+    document.getElementById('hint').textContent='toca un nodo · arrastra · pellizca para acercar';
+  } else if(m==='strata'){
+    yearX.domain([YEAR0-4, YEAR1+2]).range([-W*0.62, W*0.62]);
+    sim.force('x', d3.forceX(n=>{ const y=n.year; if(y==null) return W*0.72; return yearX(Math.max(YEAR0-4, Math.min(YEAR1+2, y))); }).strength(n=> n.year==null ? 0.15 : 0.6))
+       .force('y', d3.forceY(n=> n.year==null ? H*0.55 : bandY(n.type)).strength(n=> n.year==null?0.25:0.12));
+    sim.force('charge').strength(n=> visible(n) ? (TYPES[n.type]||TYPES.section).charge*0.35 : 0);
+    document.getElementById('hint').textContent='los nodos caen a su año · lo sin fecha se sedimenta a la derecha';
+  } else {
+    sim.force('x', d3.forceX(0).strength(0.03)).force('y', d3.forceY(0).strength(0.03));
+    sim.force('charge').strength(n=> visible(n) ? (n.type==='word' ? -90 : -420) : 0);
+    document.getElementById('hint').textContent='las palabras del corpus orbitan sus conceptos · toca una palabra';
+  }
+  sim.force('link').strength(e=>linkStr(e)).distance(e=>linkDist(e));
+  sim.force('collide').radius(n=> visible(n) ? (n.type==='word' ? n.fs*0.9 : n.r+4) : 0);
+  sim.alpha(0.9).restart();
+  if(m==='strata') flyTo(0, H*0.05, Math.min(1, (W-80)/(W*1.3)), 1200); else if(m==='graph') flyTo(0,0,0.75,1200); else flyTo(0,0,0.9,1200);
+}
+document.querySelectorAll('#modes button').forEach(b=>b.addEventListener('click', ()=>{ state.mode=b.dataset.mode; markInput(); applyMode(); }));
+
+// ------------------------------------------------------------------ legend
+const legend = document.getElementById('legend');
+const counts = d3.rollup(nodes, v=>v.length, n=>n.type);
+ORDER.forEach(t=>{
+  const b=document.createElement('button'); b.dataset.type=t; b.innerHTML=glyphSVG(TYPES[t].glyph)+`<span>${TYPES[t].label}</span><span class="n">${counts.get(t)||0}</span>`;
+  b.classList.toggle('off', state.hidden.has(t));
+  b.addEventListener('click', ()=>{ if(state.hidden.has(t)) state.hidden.delete(t); else state.hidden.add(t); b.classList.toggle('off', state.hidden.has(t));
+    try{localStorage.setItem('atlas.hidden', JSON.stringify([...state.hidden]));}catch(_){}
+    markInput(); applyMode(); });
+  legend.appendChild(b);
+});
+const mt=DATA.meta;
+document.getElementById('ver').textContent = mt.version ? 'v'+mt.version + (mt.scope==='public'?' · público':'') : '';
+if(mt.version) document.title = 'Atlas Hyper Geology v'+mt.version;
+document.getElementById('counts').innerHTML = [['nodos',mt.nodes],['vínculos',mt.edges],['documentos',mt.docs],['palabras',mt.words_in_corpus.toLocaleString('es-AR')],['construido',mt.built]]
+  .map(([k,v])=>`<span>${k}<b>${v}</b></span>`).join('');
+
+// ------------------------------------------------------------------ interaction
+let drag=null, downAt=null, downNode=null;
+function markInput(){ state.lastInput=performance.now(); if(state.dream) stopDream(); }
+function pick(px,py){
+  const [x,y]=transform.invert([px,py]);
+  const R = (12 + 6*(('ontouchstart' in window)?1:0)) / transform.k;
+  let best=null, bd=Infinity;
+  for(const n of nodes){ if(!visible(n)) continue; const rr = n.type==='word' ? Math.max(R, n.fs*0.5/1) : Math.max(R, n.r+2); const dx=n.x-x, dy=n.y-y, d=dx*dx+dy*dy; if(d<rr*rr && d<bd){ best=n; bd=d; } }
+  return best;
+}
+d3.select(canvas).call(d3.drag().container(canvas)
+  .subject(ev=>{ const n=pick(ev.x,ev.y); return n ? n : null; })
+  .filter(ev=>!ev.ctrlKey && !ev.button)
+  .on('start', ev=>{ markInput(); downAt=[ev.x,ev.y]; downNode=ev.subject; canvas.classList.add('grabbing'); if(!ev.active) sim.alphaTarget(0.12).restart(); ev.subject.fx=ev.subject.x; ev.subject.fy=ev.subject.y; })
+  .on('drag', ev=>{ const [x,y]=transform.invert([ev.x,ev.y]); ev.subject.fx=x; ev.subject.fy=y; })
+  .on('end', ev=>{ canvas.classList.remove('grabbing'); if(!ev.active) sim.alphaTarget(0); ev.subject.fx=null; ev.subject.fy=null;
+    const moved = Math.hypot(ev.x-downAt[0], ev.y-downAt[1]); if(moved<5) focusNode(ev.subject, true); }));
+canvas.addEventListener('pointerdown', ev=>{ markInput(); if(!pick(ev.clientX,ev.clientY)) { downAt=[ev.clientX,ev.clientY]; } });
+canvas.addEventListener('pointerup', ev=>{ if(downAt && !pick(ev.clientX,ev.clientY) && Math.hypot(ev.clientX-downAt[0], ev.clientY-downAt[1])<5 && !downNode) clearFocus(); downNode=null; });
+canvas.addEventListener('pointermove', ev=>{ if(ev.pointerType==='mouse'){ state.hover=pick(ev.clientX,ev.clientY); canvas.style.cursor = state.hover?'pointer':'grab'; } });
+addEventListener('keydown', ev=>{ if(ev.key==='Escape'){ clearFocus(); document.getElementById('search').blur(); } });
+
+// ------------------------------------------------------------------ focus & panel
+const panel=document.getElementById('panel');
+function focusNode(n, fly){
+  state.focus=n; markInput();
+  n.hl = new Set([n.id, ...n.nb.map(x=>x.id)]);
+  renderPanel(n);
+  panel.classList.add('open'); panel.setAttribute('aria-hidden','false');
+  if(fly){ const k=Math.max(transform.k, 1.4); const off = innerWidth>640 ? (Math.min(420,innerWidth)/2)/k : 0; flyTo(n.x+off, n.y, k, 800); }
+  sim.alpha(0.25).restart();
+}
+function clearFocus(){ state.focus=null; panel.classList.remove('open'); panel.setAttribute('aria-hidden','true'); }
+document.getElementById('close').addEventListener('click', clearFocus);
+const esc = s => String(s??'').replace(/[&<>"]/g, c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+function renderPanel(n){
+  const t=TYPES[n.type]||TYPES.section;
+  document.getElementById('pKind').innerHTML = glyphSVG(t.glyph)+`<span>${t.label}${n.group&&n.group!==n.type?' · '+esc(n.group):''}</span>`;
+  document.getElementById('pTitle').textContent = n.label;
+  const meta=[];
+  if(n.year!=null) meta.push(['año', n.end? `${n.year} → ${n.end}` : n.year]);
+  if(n.words) meta.push(['palabras', n.words.toLocaleString('es-AR')]);
+  if(n.mentions) meta.push(['menciones', n.mentions]);
+  if(n.tf) meta.push(['frecuencia', `${n.tf} en ${n.df} documentos`]);
+  meta.push(['vínculos', n.deg]);
+  if(n.path) meta.push(['fuente', n.path]);
+  if(n.aliases && n.aliases.length>1) meta.push(['alias', n.aliases.slice(0,6).join(' · ')]);
+  // neighbors grouped by type, strongest first
+  const groups = new Map();
+  n.nb.slice().sort((a,b)=>b.e.w-a.e.w).forEach(x=>{ const m=byId.get(x.id); if(!groups.has(m.type)) groups.set(m.type,[]); groups.get(m.type).push({m,e:x.e}); });
+  let html = `<dl class="meta">${meta.map(([k,v])=>`<dt>${k}</dt><dd>${esc(v)}</dd>`).join('')}</dl>`;
+  if(n.excerpt) html += `<p class="excerpt">${esc(n.excerpt)}</p>`;
+  ORDER.forEach(t=>{ if(!groups.has(t)) return; const g=groups.get(t);
+    html += `<h3><span>${TYPES[t].label}</span><span>${g.length}</span></h3><ul>` + g.slice(0,40).map(({m,e})=>`<li><button data-id="${esc(m.id)}">${glyphSVG(TYPES[t].glyph)}<span>${esc(m.label)}</span><span class="w">${e.primary}</span></button></li>`).join('') + (g.length>40?`<li><button disabled>… ${g.length-40} más</button></li>`:'') + `</ul>`; });
+  const body=document.getElementById('pBody'); body.innerHTML=html; body.scrollTop=0;
+  body.querySelectorAll('button[data-id]').forEach(b=>b.addEventListener('click', ()=>{ const m=byId.get(b.dataset.id); if(state.hidden.has(m.type)){ state.hidden.delete(m.type); legend.querySelector(`[data-type="${m.type}"]`).classList.remove('off'); applyMode(); } focusNode(m, true); }));
+}
+
+// ------------------------------------------------------------------ search
+const searchEl=document.getElementById('search');
+searchEl.addEventListener('input', ()=>{ state.query=searchEl.value.trim().toLowerCase(); markInput(); });
+searchEl.addEventListener('keydown', ev=>{ if(ev.key==='Enter'){ const q=state.query; if(!q) return; const hit = nodes.filter(n=>n.label.toLowerCase().includes(q)).sort((a,b)=>b.imp-a.imp)[0]; if(hit){ if(state.hidden.has(hit.type)){ state.hidden.delete(hit.type); legend.querySelector(`[data-type="${hit.type}"]`).classList.remove('off'); applyMode(); } focusNode(hit,true); } } });
+
+// ------------------------------------------------------------------ theme / fullscreen / wake lock
+document.getElementById('btnTheme').addEventListener('click', ()=>{ const r=document.documentElement; const dark = r.dataset.theme==='dark' || (!r.dataset.theme && matchMedia('(prefers-color-scheme: dark)').matches); r.dataset.theme = dark?'light':'dark'; readColors(); markInput(); });
+matchMedia('(prefers-color-scheme: dark)').addEventListener('change', readColors);
+document.getElementById('btnFull').addEventListener('click', async ()=>{ markInput(); try{ if(!document.fullscreenElement) await document.documentElement.requestFullscreen(); else await document.exitFullscreen(); }catch(_){}
+  try{ if(navigator.wakeLock) await navigator.wakeLock.request('screen'); }catch(_){} });
+
+// ------------------------------------------------------------------ dream (idle attract mode for the kiosk)
+let dreamTimer=null;
+function startDream(){ if(reduced) return; state.dream=true; document.getElementById('dream').classList.add('on'); clearFocus(); dreamStep(); }
+function stopDream(){ state.dream=false; document.getElementById('dream').classList.remove('on'); clearTimeout(dreamTimer); }
+function dreamStep(){ if(!state.dream) return;
+  const pool = nodes.filter(n=>visible(n) && n.type!=='section' && n.type!=='word' && n.deg>3);
+  const n = pool[Math.floor(Math.random()*pool.length)]; if(!n) return;
+  state.focus=n; n.hl=new Set([n.id, ...n.nb.map(x=>x.id)]);
+  flyTo(n.x, n.y, 1.2+Math.random()*0.8, 4500);
+  dreamTimer=setTimeout(()=>{ if(!state.dream) return; state.focus=null; flyTo(0,0,0.75,3000); dreamTimer=setTimeout(dreamStep, 3200); }, 7000);
+}
+
+// ------------------------------------------------------------------ render
+let breath=0;
+function draw(now){
+  requestAnimationFrame(draw);
+  const idle = now - state.lastInput;
+  if(!state.dream && idle>60000 && !reduced) startDream();
+  // breathing: a very slow drift keeps the archive alive when the simulation cools (0.08 Hz)
+  if(!reduced){ breath = now/1000; if(sim.alpha()<0.02 && idle>4000){ for(let i=0;i<nodes.length;i+=7){ const n=nodes[i]; if(!visible(n)||n.fx!=null) continue; n.vx += Math.sin(breath*0.5 + n.index*0.37)*0.012; n.vy += Math.cos(breath*0.42 + n.index*0.53)*0.012; } sim.alpha(0.012).restart(); } }
+
+  ctx.setTransform(DPR,0,0,DPR,0,0);
+  ctx.fillStyle=COL.paper; ctx.fillRect(0,0,W,H);
+  ctx.translate(transform.x, transform.y); ctx.scale(transform.k, transform.k);
+  const k=transform.k;
+  const focus=state.focus, hl=focus?focus.hl:null;
+  const q=state.query;
+
+  // strata: axis
+  if(state.mode==='strata'){
+    ctx.save(); ctx.strokeStyle=COL.line; ctx.lineWidth=1/k; ctx.fillStyle=COL.ink3; ctx.font=`${10/k}px ${css('--mono')}`; ctx.textAlign='center';
+    const y0=-H*0.42, y1=H*0.52;
+    for(let y=YEAR0; y<=YEAR1; y+=1){ const x=yearX(y); const major=y%7===4 || y===YEAR0 || y===YEAR1; // slots start 2018 + 7n → 2018,2025,…
+      const isSlot = y>=2018 && (y-2018)%7===0; if(!(y%10===0 || isSlot || y===YEAR0||y===YEAR1)) continue;
+      ctx.globalAlpha = isSlot?0.9:0.45; ctx.setLineDash(isSlot?[]:[2/k,4/k]); ctx.beginPath(); ctx.moveTo(x,y0); ctx.lineTo(x,y1); ctx.stroke();
+      ctx.setLineDash([]); ctx.globalAlpha=1; ctx.fillText(String(y), x, y1+14/k); if(isSlot) ctx.fillText(y===2018?'slot 000':(y===2102?'slot SCA':'slot '+String((y-2018)/7).padStart(2,'0')), x, y0-6/k); }
+    // now
+    const xn=yearX(NOW + (new Date().getMonth()/12)); ctx.strokeStyle=COL.iron; ctx.lineWidth=1.5/k; ctx.beginPath(); ctx.moveTo(xn,y0-20/k); ctx.lineTo(xn,y1+20/k); ctx.stroke();
+    ctx.fillStyle=COL.iron; ctx.textAlign='left'; ctx.fillText('ahora · '+new Date().toISOString().slice(0,10), xn+6/k, y0-18/k);
+    ctx.textAlign='right'; ctx.fillStyle=COL.ink3; ctx.fillText('9 · VII · 2105 → SCA', yearX(YEAR1), y0-18/k);
+    ctx.fillText('sin fecha ↓', W*0.72, H*0.42);
+    // band labels
+    ctx.textAlign='left'; ctx.fillStyle=COL.ink3; ctx.font=`${9/k}px ${css('--mono')}`;
+    for(const t of ORDER){ if(state.hidden.has(t)) continue; ctx.fillText(TYPES[t].label, yearX(YEAR0-4), bandY(t)-8/k); }
+    ctx.restore();
+  }
+
+  // edges
+  ctx.lineWidth = 1/k;
+  const edgesToDraw = focus ? edges : drawEdges;
+  for(const e of edgesToDraw){
+    const a=e.source,b=e.target; if(!visible(a)||!visible(b)) continue;
+    let alpha;
+    if(focus){ const on = a.id===focus.id||b.id===focus.id; if(!on){ if(!isStructural(e)) continue; alpha=0.05; } else alpha = e.primary==='co'?0.25:0.7; }
+    else alpha = e.primary==='contains'?0.22 : e.primary==='related'?0.5 : e.primary==='term'?0.18 : 0.14;
+    if(state.mode==='lexicon' && e.primary!=='term' && e.primary!=='related' && e.primary!=='mention') alpha*=0.3;
+    ctx.globalAlpha=alpha; ctx.strokeStyle= (focus && (a.id===focus.id||b.id===focus.id)) ? COL.iron : COL.ink2;
+    ctx.beginPath(); ctx.moveTo(a.x,a.y);
+    if(e.primary==='related'||e.primary==='co'){ const mx=(a.x+b.x)/2, my=(a.y+b.y)/2, dx=b.x-a.x, dy=b.y-a.y; ctx.quadraticCurveTo(mx-dy*0.12, my+dx*0.12, b.x, b.y); } else ctx.lineTo(b.x,b.y);
+    ctx.stroke();
+  }
+  ctx.globalAlpha=1;
+
+  // nodes
+  const labelThreshold = 2.1/ k;   // smaller k → only important labels
+  for(const n of nodes){
+    if(!visible(n)) continue;
+    const t=TYPES[n.type]||TYPES.section;
+    let dim = 1;
+    if(hl && !hl.has(n.id)) dim = 0.18;
+    if(q){ dim = n.label.toLowerCase().includes(q) ? 1 : 0.12; }
+    const isF = focus && n.id===focus.id, isH = state.hover===n;
+    const col = isF ? COL.iron : (dim<1? COL.ink3 : COL.ink);
+    ctx.globalAlpha = dim;
+    if(n.type==='word'){
+      if(!(isF||isH) && dim===1) ctx.globalAlpha = state.mode==='lexicon' ? 0.9 : 0.5;
+      ctx.fillStyle=col; ctx.font=`${(isF||isH)?'500':'300'} ${n.fs}px ${css('--mono')}`; ctx.textAlign='center'; ctx.textBaseline='middle';
+      ctx.fillText(n.label, n.x, n.y); continue;
+    }
+    drawGlyph(t.glyph, n.x, n.y, n.r*(isF?1.5:1)*(1+ (isF&&!reduced? 0.08*Math.sin(breath*2.4):0)), col, k, isF||isH);
+    if(isF||isH||q&&dim===1|| n.imp>labelThreshold){
+      const fs = Math.max(9, Math.min(13, 9 + n.imp*1.2))/Math.max(0.7,k)**0.5;
+      ctx.fillStyle=col; ctx.font=`${(n.type==='section'||n.type==='doc')?'300':'400'} ${fs}px ${css('--mono')}`; ctx.textAlign='left'; ctx.textBaseline='middle';
+      const lab = n.type==='section' && n.label.length>34 ? n.label.slice(0,33)+'…' : n.label;
+      // halo
+      ctx.strokeStyle=COL.paper; ctx.lineWidth=3/k; ctx.lineJoin='round'; ctx.strokeText(lab, n.x+n.r+4/k, n.y); ctx.fillText(lab, n.x+n.r+4/k, n.y);
+      if((isF||isH) && n.year!=null){ ctx.fillStyle=COL.ink3; ctx.font=`300 ${fs*0.85}px ${css('--mono')}`; ctx.fillText(n.end?`${n.year}→${n.end}`:String(n.year), n.x+n.r+4/k, n.y+fs*1.1); }
+    }
+  }
+  ctx.globalAlpha=1;
+}
+function drawGlyph(g,x,y,r,col,k,strong){
+  ctx.strokeStyle=col; ctx.fillStyle=col; ctx.lineWidth=(strong?1.6:1)/Math.max(0.6,k)**0.5; ctx.beginPath();
+  switch(g){
+    case 'ring': ctx.arc(x,y,r,0,7); ctx.stroke(); ctx.beginPath(); ctx.arc(x,y,r*0.3,0,7); ctx.fill(); break;
+    case 'circle': ctx.arc(x,y,r,0,7); ctx.stroke(); ctx.fillStyle=COL.paper; ctx.globalAlpha*=1; break;
+    case 'dot': ctx.arc(x,y,r*0.8,0,7); ctx.fill(); break;
+    case 'cross': ctx.moveTo(x-r,y-r); ctx.lineTo(x+r,y+r); ctx.moveTo(x+r,y-r); ctx.lineTo(x-r,y+r); ctx.stroke(); break;
+    case 'diamond': ctx.moveTo(x,y-r); ctx.lineTo(x+r,y); ctx.lineTo(x,y+r); ctx.lineTo(x-r,y); ctx.closePath(); ctx.stroke(); break;
+    case 'tri': ctx.moveTo(x-r,y-r*0.7); ctx.lineTo(x+r,y-r*0.7); ctx.lineTo(x,y+r*0.9); ctx.closePath(); ctx.stroke(); break;
+    case 'square': ctx.rect(x-r*0.85,y-r*0.85,r*1.7,r*1.7); ctx.stroke(); break;
+    case 'dsquare': ctx.rect(x-r,y-r,r*2,r*2); ctx.stroke(); ctx.beginPath(); ctx.rect(x-r*0.5,y-r*0.5,r,r); ctx.stroke(); break;
+    default: ctx.arc(x,y,Math.max(1.2,r),0,7); ctx.fill();
+  }
+}
+
+// ------------------------------------------------------------------ boot
+document.getElementById('span').textContent = `${DATA.meta.span?DATA.meta.span[0]:2006} → 2105 · un archivo en movimiento · ${DATA.meta.by_type.doc||0} documentos, ${DATA.meta.by_type.section||0} secciones, ${DATA.meta.by_type.word||0} palabras`;
+// seed positions in a disc so the first frame already reads as a constellation
+nodes.forEach((n,i)=>{ const a=i*2.399963, rr=40*Math.sqrt(i); n.x=rr*Math.cos(a); n.y=rr*Math.sin(a); });
+transform = d3.zoomIdentity.translate(W/2,H/2).scale(0.75);
+d3.select(canvas).call(zoom.transform, transform);
+sim.alpha(1).restart();
+applyMode();
+requestAnimationFrame(draw);
+});
+</script>
