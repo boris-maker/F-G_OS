@@ -1,0 +1,310 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Micrositio Klemm — propuesta</title>
+<style>
+:root {
+  --bg: #f7f6f2;
+  --surface: #ffffff;
+  --ink: #1b1b19;
+  --quiet: #66645e;
+  --rule: #d9d6cd;
+  --axis: #8a877e;
+  --grid: #e3e0d7;
+  --accent: #8a4a1f;
+  --tint: #efece4;
+  --mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  --serif: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #151513; --surface: #1d1d1a; --ink: #ecebe6; --quiet: #a3a199;
+    --rule: #34332e; --axis: #8d8a81; --grid: #2c2b27; --accent: #d9915c; --tint: #24231f;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #151513; --surface: #1d1d1a; --ink: #ecebe6; --quiet: #a3a199;
+  --rule: #34332e; --axis: #8d8a81; --grid: #2c2b27; --accent: #d9915c; --tint: #24231f;
+}
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0; background: var(--bg); color: var(--ink);
+  font-family: var(--serif); font-size: 18px; line-height: 1.6;
+}
+main { max-width: 760px; margin: 0 auto; padding: 48px 16px 96px; }
+.kicker { font-family: var(--mono); font-size: 12px; letter-spacing: .06em; text-transform: uppercase; color: var(--quiet); }
+h1 { font-size: clamp(28px, 6vw, 40px); line-height: 1.15; font-weight: 500; margin: 12px 0 8px; letter-spacing: -.01em; }
+h2 { font-size: 24px; font-weight: 500; margin: 56px 0 12px; padding-top: 20px; border-top: 1px solid var(--rule); }
+.meta { font-family: var(--mono); font-size: 13px; color: var(--quiet); margin-bottom: 28px; }
+.lede { font-size: 20px; color: var(--ink); }
+p { margin: 0 0 16px; }
+ul, ol { padding-left: 24px; margin: 0 0 18px; }
+li { margin-bottom: 8px; }
+code { font-family: var(--mono); font-size: .85em; background: var(--tint); padding: 1px 5px; border-radius: 3px; }
+a { color: var(--accent); text-underline-offset: 2px; }
+figure { margin: 28px 0 32px; }
+figure svg { display: block; width: 100%; height: auto; background: var(--surface); border: 1px solid var(--rule); border-radius: 6px; font-family: var(--mono); }
+figcaption { font-size: 15px; color: var(--quiet); margin-top: 10px; }
+.scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; margin: 0 0 20px; }
+table { border-collapse: collapse; width: 100%; font-size: 15px; line-height: 1.45; min-width: 520px; }
+th, td { text-align: left; vertical-align: top; padding: 9px 10px; border-bottom: 1px solid var(--rule); }
+th { font-family: var(--mono); font-size: 12px; text-transform: uppercase; letter-spacing: .05em; color: var(--quiet); font-weight: 500; }
+td:first-child { font-weight: 600; white-space: nowrap; }
+.checks { list-style: none; padding-left: 0; }
+.checks li { padding-left: 28px; position: relative; }
+.checks li::before { content: ""; position: absolute; left: 2px; top: .42em; width: 13px; height: 13px; border: 1.5px solid var(--axis); border-radius: 3px; }
+footer { margin-top: 64px; padding-top: 16px; border-top: 1px solid var(--rule); font-family: var(--mono); font-size: 12px; color: var(--quiet); }
+svg .ink { fill: var(--ink); } svg .quiet { fill: var(--quiet); } svg .acc { fill: var(--accent); }
+@media (max-width: 520px) { body { font-size: 17px; } main { padding-top: 32px; } }
+</style>
+</head>
+<body>
+<main>
+
+<div class="kicker">Propuesta · para discutir</div>
+<h1>Micrositio Klemm — Custodia Nº 1</h1>
+<div class="meta">23 oct 2026 · Boris / both.ventures</div>
+
+<p class="lede">Propuesta de index, estructura y dinámica de uso para el micrositio de <em>Un meteorito para la Sociedad Científica Argentina del año 2105</em> dentro de klemm.org.ar, para discutir entre Boris, Guillermo y Nico antes de llevarla a la Fundación.</p>
+
+<h2>Premisa</h2>
+
+<p>El micrositio es el espacio online de la Custodia Nº 1 (CI-01): la cara pública de la gestión y el acompañamiento que la Fundación Klemm y los artistas acordaron en el comodato del 1 de octubre de 2026. No es una página promocional de la obra — es un instrumento de la obra. Es el lugar donde el compromiso de custodia se vuelve visible y verificable, entrada por entrada, durante el septenio.</p>
+
+<p>Tiene dos funciones que conviene no mezclar:</p>
+<ul>
+  <li><strong>Acompañamiento</strong> — lo que cualquier visitante lee: qué es la obra, qué acordó Klemm, qué está pasando ahora, cómo participar del programa.</li>
+  <li><strong>Gestión</strong> — el registro durable de la custodia: la bitácora fechada, los documentos, el estado de la obra. Lo que un custodio de 2040, o un lector de 2105, necesita poder reconstruir.</li>
+</ul>
+
+<p>Una tercera idea ordena todo: este micrositio es la <strong>primera instancia de un patrón que se repite</strong>. Cada custodio futuro va a montar el suyo. Lo que se diseñe acá es una plantilla para los próximos 79 años, no un sitio de ocasión — por eso conviene que sea simple, sobrio y archivable.</p>
+
+<figure>
+<svg viewBox="0 0 760 280" role="img" aria-label="La Custodia Nº 1 es el primer tramo institucional de un viaje de 87 años" font-size="13">
+  <text class="ink" x="24" y="28" font-size="15" font-weight="600">La Custodia Nº 1 es el primer tramo institucional de un viaje de 87 años</text>
+  <text class="quiet" x="24" y="48" font-size="11.5">2018 → 2105, a escala</text>
+  <g stroke="var(--grid)">
+    <line x1="260.6" x2="260.6" y1="88" y2="254"/><line x1="366.8" x2="366.8" y1="88" y2="254"/>
+    <line x1="473.1" x2="473.1" y1="88" y2="254"/><line x1="579.3" x2="579.3" y1="88" y2="254"/>
+    <line x1="685.5" x2="685.5" y1="88" y2="254"/>
+  </g>
+  <g class="quiet" font-size="11.5" text-anchor="middle">
+    <text x="260.6" y="78">2020</text><text x="366.8" y="78">2040</text><text x="473.1" y="78">2060</text>
+    <text x="579.3" y="78">2080</text><text x="685.5" y="78">2100</text>
+  </g>
+  <line x1="250" x2="720" y1="88" y2="88" stroke="var(--axis)" stroke-width="1.25"/>
+  <line x1="714.8" x2="714.8" y1="88" y2="254" stroke="var(--accent)" stroke-width="1.25" stroke-dasharray="4 4"/>
+  <g stroke="var(--grid)">
+    <line x1="250" x2="252.1" y1="112" y2="112"/><line x1="250" x2="296.5" y1="144" y2="144"/>
+    <line x1="250" x2="327.1" y1="176" y2="176"/><line x1="250" x2="698.9" y1="208" y2="208"/>
+    <line x1="250" x2="714.8" y1="240" y2="240"/>
+  </g>
+  <rect x="252.1" y="105" width="37.8" height="14" rx="7" fill="var(--axis)" fill-opacity=".12" stroke="var(--axis)" stroke-width="1.25"/>
+  <text class="quiet" x="303.9" y="116" font-size="11.5">2018–2025</text>
+  <rect x="296.5" y="137" width="30.6" height="14" rx="7" fill="var(--accent)" fill-opacity=".18" stroke="var(--accent)" stroke-width="2"/>
+  <text class="ink" x="341.1" y="148" font-size="11.5" font-weight="600">2026–2032</text>
+  <rect x="327.1" y="169" width="371.8" height="14" rx="7" fill="var(--axis)" fill-opacity=".12" stroke="var(--axis)" stroke-width="1.25"/>
+  <text class="quiet" x="513" y="180" font-size="11.5" text-anchor="middle">2032–2102</text>
+  <rect x="698.9" y="201" width="15.9" height="14" rx="7" fill="var(--axis)" fill-opacity=".12" stroke="var(--axis)" stroke-width="1.25"/>
+  <text class="quiet" x="690.9" y="196" font-size="11.5" text-anchor="end">2102–2105</text>
+  <path d="M714.8 232l8 8l-8 8l-8 -8z" fill="var(--accent)"/>
+  <text class="ink" x="704.8" y="228" font-size="11.5" font-weight="600" text-anchor="end">9 jul 2105</text>
+  <text class="ink" x="24" y="116">Custodia fundacional · artistas</text>
+  <text class="ink" x="24" y="148" font-weight="600">Custodia Nº 1 · Klemm</text>
+  <text class="ink" x="24" y="180">Custodias sucesivas</text>
+  <text class="ink" x="24" y="212">Trienio final</text>
+  <text class="ink" x="24" y="244">Entrega a la SCA</text>
+</svg>
+<figcaption>La custodia fundacional de los artistas, el septenio de Klemm, y el tramo largo que queda hasta la entrega del 9 de julio de 2105.</figcaption>
+</figure>
+
+<h2>Index propuesto</h2>
+
+<p>Siete secciones más la portada, bajo una URL corta y estable dentro del sitio de la Fundación (propuesta: <code>klemm.org.ar/2105</code>).</p>
+<ol>
+  <li><strong>Portada</strong> — la obra en una pantalla: título, una imagen de la instalación, la línea 2018 → 2105, y el estado presente: “Custodia Nº 1 · Fundación Klemm · 2026–2032”.</li>
+  <li><strong>La obra</strong> — qué es: la cápsula, la Escala Pro Tempore, el meteorito de 41 kg, los artistas, el horizonte del 9 de julio de 2105.</li>
+  <li><strong>La custodia</strong> — qué acordaron Klemm y los artistas: el comodato del 1 de octubre de 2026, la ceremonia, las responsabilidades, el documento y su verificación.</li>
+  <li><strong>Bitácora</strong> — el corazón vivo del sitio: registro fechado de todo lo que le pasa a la obra durante el septenio. Solo se agrega, nunca se reescribe.</li>
+  <li><strong>Programa</strong> — las tres líneas de trabajo del septenio: el Coloquio Anual del 1 de octubre, los adolescentes del Programa de Aprendizaje, la Asociación de Amigos del Futuro.</li>
+  <li><strong>La cadena</strong> — dónde está parada la obra en su recorrido: custodia fundacional 2018–2025, CI-01 2026–2032, los custodios por venir, el 2105.</li>
+  <li><strong>Archivo</strong> — documentos, imágenes, prensa, y los enlaces al resto del ecosistema (wiki, atlas, campodelcielo.info).</li>
+  <li><strong>Visita</strong> — cómo ver la obra en la Fundación: dónde está instalada, horarios, contacto.</li>
+</ol>
+<p>El orden de navegación es también el orden de lectura para quien llega por primera vez: obra → acuerdo → presente → futuro.</p>
+
+<figure>
+<svg viewBox="0 0 760 440" role="img" aria-label="Lo fijo lo aprueban los artistas; lo vivo lo alimenta Klemm" font-size="13">
+  <defs><marker id="mapa-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="var(--axis)"/></marker></defs>
+  <text class="ink" x="24" y="28" font-size="15" font-weight="600">Lo fijo lo aprueban los artistas; lo vivo lo alimenta Klemm</text>
+  <text class="quiet" x="24" y="48" font-size="11.5">Mapa del micrositio · ocho secciones bajo klemm.org.ar/2105</text>
+  <rect x="24" y="64" width="688" height="44" rx="8" fill="var(--tint)" stroke="var(--axis)" stroke-width="1.25"/>
+  <text class="ink" x="368" y="90" text-anchor="middle" font-weight="600">Portada · estado presente de la custodia</text>
+  <g fill="none" stroke="var(--axis)" stroke-width="1.25">
+    <path d="M189 108V136" marker-end="url(#mapa-arrow)"/><path d="M547 108V136" marker-end="url(#mapa-arrow)"/>
+    <rect x="24" y="136" width="330" height="252" rx="8"/>
+    <rect x="382" y="136" width="330" height="200" rx="8"/>
+    <rect x="40" y="176" width="298" height="40" rx="8"/><rect x="40" y="228" width="298" height="40" rx="8"/>
+    <rect x="40" y="280" width="298" height="40" rx="8"/><rect x="40" y="332" width="298" height="40" rx="8"/>
+    <rect x="398" y="228" width="298" height="40" rx="8"/><rect x="398" y="280" width="298" height="40" rx="8"/>
+  </g>
+  <rect x="398" y="176" width="298" height="40" rx="8" fill="var(--accent)" fill-opacity=".12" stroke="var(--accent)" stroke-width="2"/>
+  <text class="ink" x="40" y="158" font-weight="600">Fijas · las aprueban los artistas</text>
+  <text class="ink" x="398" y="158" font-weight="600">Vivas · las alimenta Klemm</text>
+  <g class="ink" text-anchor="middle">
+    <text x="189" y="200">La obra</text><text x="189" y="252">La custodia</text>
+    <text x="189" y="304">La cadena</text><text x="189" y="356">Visita</text>
+    <text x="547" y="200" font-weight="600">Bitácora</text><text x="547" y="252">Programa</text><text x="547" y="304">Archivo</text>
+  </g>
+  <text class="quiet" x="24" y="416" font-size="11.5">Orden de lectura para quien llega por primera vez: la obra → el acuerdo → el presente → el futuro</text>
+</svg>
+<figcaption>Las cinco secciones fijas se escriben una vez; las tres vivas son las que la Fundación alimenta durante el septenio. La bitácora es el corazón del sitio.</figcaption>
+</figure>
+
+<h2>Las secciones, una por una</h2>
+
+<p>Cada sección tiene un régimen: <strong>fija</strong> (se escribe una vez, cambia solo con aprobación de los artistas) o <strong>viva</strong> (se alimenta durante el septenio).</p>
+<div class="scroll"><table>
+  <thead><tr><th>Sección</th><th>Qué contiene</th><th>Régimen</th><th>La alimenta</th></tr></thead>
+  <tbody>
+    <tr><td>Portada</td><td>Imagen, título, estado presente de la custodia</td><td>Fija (el estado se actualiza solo)</td><td>—</td></tr>
+    <tr><td>La obra</td><td>Statement (base: el texto del anuncio de e-flux), ficha de la instalación y del meteorito, los artistas</td><td>Fija</td><td>F&amp;G</td></tr>
+    <tr><td>La custodia</td><td>Resumen del comodato en lenguaje llano, la ceremonia del 1-oct (quiénes hablaron, fotos), el PDF del comodato, su verificación</td><td>Fija</td><td>F&amp;G + Klemm</td></tr>
+    <tr><td>Bitácora</td><td>Entradas fechadas: actas, condition reports, visitas, eventos, movimientos de la obra</td><td>Viva</td><td>Klemm</td></tr>
+    <tr><td>Programa</td><td>Las tres líneas del septenio, convocatorias, crónicas de cada Coloquio</td><td>Viva</td><td>Klemm</td></tr>
+    <tr><td>La cadena</td><td>Línea de tiempo 2018 → 2105 con la posición actual marcada</td><td>Fija (avanza una vez por septenio)</td><td>F&amp;G</td></tr>
+    <tr><td>Archivo</td><td>Documentos, imágenes con derechos y pies, prensa, enlaces al ecosistema</td><td>Viva (crece lento)</td><td>Klemm + F&amp;G</td></tr>
+    <tr><td>Visita</td><td>Sala, horarios, acceso, contacto</td><td>Fija</td><td>Klemm</td></tr>
+  </tbody>
+</table></div>
+
+<p>Tres mecánicas que distinguen a este sitio de una página institucional común:</p>
+<ul>
+  <li><strong>El estado presente en la portada.</strong> Una línea que sitúa al visitante en el tiempo de la obra: en qué custodia está, desde cuándo, hasta cuándo, cuántos años faltan para 2105. Es la única concesión “dinámica” de la portada y le da al sitio su razón de volver.</li>
+  <li><strong>La bitácora es un registro, no un blog.</strong> Cada entrada lleva fecha, autor y tipo (acta · estado · evento · movimiento). No se edita retroactivamente: una corrección es una entrada nueva que remite a la anterior. Pocas entradas verdaderas valen más que actividad constante.</li>
+  <li><strong>La verificación, sobria.</strong> El comodato ya es público y verificable (PDF en IPFS, token #0 del contrato FG2105). La sección La custodia puede ofrecer esa verificación como lo que es — una nota al pie técnica, con las instrucciones para comprobarla — sin vocabulario cripto ni protagonismo. La tecnología es herramienta, nunca el titular.</li>
+</ul>
+
+<h2>Dinámica de uso</h2>
+
+<p>El sitio vive en la infraestructura de Klemm y lo opera Klemm; los artistas gobiernan lo identitario; el repo de F-G_OS archiva copia de todo. Tres roles:</p>
+<div class="scroll"><table>
+  <thead><tr><th>Rol</th><th>Quién</th><th>Qué hace</th></tr></thead>
+  <tbody>
+    <tr><td>Editor de la custodia</td><td>Fundación Klemm (equipo de Colección y Archivo, referente: Cintia Mezza)</td><td>Publica bitácora, programa y archivo; mantiene Visita</td></tr>
+    <tr><td>Autoridad de identidad</td><td>Faivovich &amp; Goldberg</td><td>Aprueban La obra, La custodia y La cadena, y todo texto nuevo que hable en nombre de la obra</td></tr>
+    <tr><td>Archivo y respaldo</td><td>Boris / Comander (F-G_OS)</td><td>Prepara contenidos cuando haga falta, guarda snapshot de cada cambio en el repo, verifica que nada se pierda</td></tr>
+  </tbody>
+</table></div>
+
+<p><strong>Cadencia mínima garantizada</strong> — el compromiso es deliberadamente bajo, para que se cumpla 7 años seguidos:</p>
+<ul>
+  <li><strong>Anual, cada 1 de octubre</strong>: acta del Coloquio + un informe de estado de la obra. Dos entradas por año, pase lo que pase.</li>
+  <li><strong>Cuando ocurra</strong>: visitas relevantes, movimientos de la obra, préstamos, prensa, decisiones. Sin cadencia forzada.</li>
+  <li><strong>Una vez por año</strong>: snapshot completo del sitio al repo (y eventualmente su huella — hash — al registro en cadena, si F&amp;G lo deciden).</li>
+</ul>
+
+<p><strong>Reglas de la casa:</strong></p>
+<ol>
+  <li>La bitácora solo crece; las correcciones son entradas nuevas.</li>
+  <li>Ningún texto que hable en nombre de la obra se publica sin OK de F&amp;G (la regla del Charter, extendida al micrositio).</li>
+  <li>URLs estables: una vez publicada, una página no cambia de dirección en todo el septenio.</li>
+  <li>Español primario, inglés para el statement y la custodia (las dos páginas que el mundo va a citar).</li>
+</ol>
+
+<p><strong>El final también está diseñado</strong>: en 2032, al cerrar CI-01, el micrositio se congela y queda archivado como parte del expediente de la custodia — en klemm.org.ar si la Fundación quiere, y en el archivo de la obra siempre. La estructura (no el contenido) pasa como plantilla al custodio Nº 2. Así, en 2105, habrá trece bitácoras comparables, una por custodia.</p>
+
+<figure>
+<svg viewBox="0 0 760 344" role="img" aria-label="El ciclo anual se repite siete veces; en 2032 la plantilla sigue viaje" font-size="13">
+  <defs><marker id="ciclo-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="var(--axis)"/></marker></defs>
+  <text class="ink" x="24" y="34" font-size="15" font-weight="600">El ciclo anual se repite siete veces; en 2032 la plantilla sigue viaje</text>
+  <g fill="none" stroke="var(--axis)" stroke-width="1.25">
+    <path d="M180 120H212" marker-end="url(#ciclo-arrow)"/><path d="M368 120H400" marker-end="url(#ciclo-arrow)"/>
+    <path d="M556 120H588" marker-end="url(#ciclo-arrow)"/><path d="M666 148V196H102V148" marker-end="url(#ciclo-arrow)"/>
+    <path d="M380 196V260" marker-end="url(#ciclo-arrow)"/><path d="M488 288H541" marker-end="url(#ciclo-arrow)"/>
+    <rect x="24" y="92" width="156" height="56" rx="8"/><rect x="212" y="92" width="156" height="56" rx="8"/>
+    <rect x="400" y="92" width="156" height="56" rx="8"/><rect x="588" y="92" width="156" height="56" rx="8"/>
+    <rect x="272" y="260" width="216" height="56" rx="8"/>
+  </g>
+  <rect x="541" y="260" width="190" height="56" rx="8" fill="var(--accent)" fill-opacity=".12" stroke="var(--accent)" stroke-width="2"/>
+  <g text-anchor="middle">
+    <text class="ink" x="102" y="116" font-weight="600">Coloquio Anual</text><text class="quiet" x="102" y="132" font-size="11.5">cada 1 de octubre</text>
+    <text class="ink" x="290" y="116" font-weight="600">Acta + informe</text><text class="quiet" x="290" y="132" font-size="11.5">a la bitácora</text>
+    <text class="ink" x="478" y="116" font-weight="600">Entradas</text><text class="quiet" x="478" y="132" font-size="11.5">cuando ocurra</text>
+    <text class="ink" x="666" y="116" font-weight="600">Snapshot anual</text><text class="quiet" x="666" y="132" font-size="11.5">al repo F-G_OS</text>
+    <text class="ink" x="380" y="284" font-weight="600">2032: el sitio se congela</text><text class="quiet" x="380" y="300" font-size="11.5">y queda archivado</text>
+    <text class="ink" x="636" y="284" font-weight="600">La plantilla pasa</text><text class="quiet" x="636" y="300" font-size="11.5">al custodio Nº 2</text>
+    <text class="quiet" x="384" y="188" font-size="11.5">cada año del septenio</text>
+  </g>
+  <text class="quiet" x="392" y="232" font-size="11.5">al cierre del septenio</text>
+</svg>
+<figcaption>Cada año del septenio repite el mismo ciclo mínimo — dos entradas garantizadas más lo que ocurra — y al cierre el sitio se congela y la estructura pasa al custodio siguiente.</figcaption>
+</figure>
+
+<h2>Integración con klemm.org.ar y el ecosistema</h2>
+
+<p><strong>Dentro del sitio de Klemm.</strong> El micrositio es una sección de klemm.org.ar — hereda su navegación y su marca, pero con registro propio: archivo institucional, tipografía y grillas legibles, nada de estética tecnológica. Técnicamente conviene lo más simple que el sitio de Klemm soporte (páginas estáticas o su CMS), con cada página imprimible y archivable: el lector de referencia está a 80 años de distancia.</p>
+
+<p><strong>División de aguas con lo que ya existe.</strong> Cada superficie cuenta una parte y enlaza a las demás, sin duplicar contenido:</p>
+<div class="scroll"><table>
+  <thead><tr><th>Superficie</th><th>Qué cuenta</th><th>De quién</th></tr></thead>
+  <tbody>
+    <tr><td>Micrositio en klemm.org.ar</td><td>La Custodia Nº 1: el acuerdo, el presente, el programa</td><td>Klemm</td></tr>
+    <tr><td><a href="https://boris-maker.github.io/F-G_OS/">Wiki público</a></td><td>El sistema entero: protocolo de custodias, gobernanza, economía</td><td>F&amp;G</td></tr>
+    <tr><td><a href="https://boris-maker.github.io/F-G_OS/atlas/">Atlas</a> (build público)</td><td>El archivo del proyecto como grafo navegable</td><td>F&amp;G</td></tr>
+    <tr><td>campodelcielo.info</td><td>La investigación madre, <em>A Guide to Campo del Cielo</em></td><td>F&amp;G</td></tr>
+    <tr><td>Repo privado F-G_OS</td><td>Fuente de verdad y copia de archivo de todo lo anterior</td><td>Boris</td></tr>
+  </tbody>
+</table></div>
+
+<p>La regla práctica: el micrositio habla de <strong>esta custodia</strong>; para el sistema completo, enlaza al wiki. Así Klemm nunca queda a cargo de explicar la obra entera, y los artistas nunca dependen del CMS de Klemm para su propio relato.</p>
+
+<p><strong>El anuncio de e-flux</strong> (sale el 31-oct o el 2-nov, lo publica Klemm) es la primera puerta de entrada masiva. Si la portada y La obra están publicadas para esa fecha, el anuncio puede apuntar directo al micrositio en vez de a la home de Klemm — vale la pena intentarlo, y si no se llega, el anuncio apunta a klemm.org.ar y el micrositio se estrena después sin drama.</p>
+
+<h2>Próximos pasos</h2>
+
+<p>Propuesta de fases — la primera es chica a propósito:</p>
+<ol>
+  <li><strong>Ahora</strong>: F&amp;G revisan este index. En particular: nombres de las secciones, qué sobra, y si la verificación en cadena se muestra y cómo.</li>
+  <li><strong>Con Klemm</strong>: acordar URL (<code>/2105</code> u otra), quién publica (acceso al CMS o entrega de HTML), y el referente editorial del lado de la Fundación.</li>
+  <li><strong>Fase 1 — antes del anuncio de e-flux si se llega</strong>: portada + La obra + La custodia, con el texto v1.0 del anuncio como base (ya está escrito y aprobado en lo esencial).</li>
+  <li><strong>Fase 2 — noviembre</strong>: bitácora con sus primeras entradas retroactivas (la firma y la izada del 1-oct, el anuncio), Programa y Visita.</li>
+  <li><strong>Fase 3 — diciembre</strong>: La cadena, Archivo, versión en inglés de La obra y La custodia, primer snapshot al repo.</li>
+</ol>
+
+<figure>
+<svg viewBox="0 0 760 204" role="img" aria-label="La Fase 1 debe estar en línea antes del anuncio de e-flux" font-size="13">
+  <text class="ink" x="24" y="34" font-size="15" font-weight="600">La Fase 1 debe estar en línea antes del anuncio de e-flux</text>
+  <rect x="24" y="76" width="224" height="76" rx="8" fill="var(--accent)" fill-opacity=".12" stroke="var(--accent)" stroke-width="2"/>
+  <g fill="none" stroke="var(--axis)" stroke-width="1.25">
+    <rect x="256" y="76" width="224" height="76" rx="8"/><rect x="488" y="76" width="224" height="76" rx="8"/>
+  </g>
+  <text class="ink" x="40" y="100" font-weight="600">Fase 1 · octubre</text>
+  <text class="ink" x="40" y="120" font-size="11.5">Portada · La obra</text><text class="ink" x="40" y="136" font-size="11.5">La custodia</text>
+  <text class="ink" x="272" y="100" font-weight="600">Fase 2 · noviembre</text>
+  <text class="ink" x="272" y="120" font-size="11.5">Bitácora · Programa</text><text class="ink" x="272" y="136" font-size="11.5">Visita</text>
+  <text class="ink" x="504" y="100" font-weight="600">Fase 3 · diciembre</text>
+  <text class="ink" x="504" y="120" font-size="11.5">La cadena · Archivo</text><text class="ink" x="504" y="136" font-size="11.5">inglés · snapshot al repo</text>
+  <polygon points="252,102 264,114 252,126 240,114" fill="var(--accent)"/>
+  <line x1="252" x2="252" y1="126" y2="166" stroke="var(--axis)" stroke-dasharray="3 3"/>
+  <text class="quiet" x="252" y="180" text-anchor="middle" font-size="11.5">anuncio e-flux · 31 oct / 2 nov</text>
+</svg>
+<figcaption>La única fecha dura del plan es el anuncio de e-flux; si la Fase 1 no llega, el anuncio apunta a klemm.org.ar y el micrositio se estrena después.</figcaption>
+</figure>
+
+<p><strong>Decisiones abiertas que condicionan el contenido:</strong></p>
+<ul class="checks">
+  <li>Fecha de cierre de CI-01: 25 de mayo vs 9 de julio de 2032 (el “riddle de los 45 días”, pendiente en el repo) — define qué fecha publica la línea de tiempo.</li>
+  <li>Cómo se presenta la verificación del comodato (token #0): nota al pie con instrucciones, página propia, o nada por ahora.</li>
+  <li>Imágenes: cuáles tienen derechos resueltos, autor de los dibujos y fotógrafo para los pies (mismo pendiente que el anuncio de e-flux).</li>
+  <li>Si el micrositio publica el PDF del comodato completo (ya es público en IPFS por decisión de F&amp;G) o un resumen con enlace.</li>
+</ul>
+
+<footer>Faivovich &amp; Goldberg · propuesta de trabajo, no publicada · rev. 12 del documento, 23 oct 2026</footer>
+</main>
+</body>
+</html>
