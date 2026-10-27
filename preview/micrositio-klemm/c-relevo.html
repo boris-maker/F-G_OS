@@ -1,5 +1,9 @@
-<title>Micrositio 2105 · C · Relevo</title>
-<meta name="claude:viewport-fit-sides" content="cover">
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Un meteorito para la Sociedad Científica Argentina del año 2105 · Custodia Pro Tempore CI-01 · Fundación Federico Jorge Klemm</title>
 <meta name="robots" content="noindex, nofollow">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -244,7 +248,7 @@ h1, h2, h3 { overflow-wrap: anywhere; min-width: 0; }
   .C { --pad: 12px; --hh: 46px; }
   .C-bar { grid-template-columns: minmax(0, 1fr) 48%; }
   .C-bar .mail, .C-bar nav { display: none; }
-  .C-or h1 { font-size: 9cqi; }
+  .C-or h1 { font-size: 8.4cqi; max-width: none; }
   .C-or .row { top: 36%; grid-template-columns: minmax(0, 1fr) auto; gap: 8px; }
   .C-or .row p { grid-column: 1 / -1; grid-row: 2; }
   .C-glyph { left: auto; right: 5%; bottom: 37%; width: 44%; }
@@ -280,8 +284,14 @@ h1, h2, h3 { overflow-wrap: anywhere; min-width: 0; }
 @media (prefers-reduced-motion: reduce) {
   * { transition: none !important; animation: none !important; scroll-behavior: auto !important; }
 }
-</style>
 
+/* bare publish: the site is the page */
+body { background: var(--paper); }
+.site { min-height: 100svh; }
+.C { --H: 100svh; } .C-scroll { height: 100svh; } body { overflow: hidden; }
+</style>
+</head>
+<body>
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
   <filter id="duotone" color-interpolation-filters="sRGB">
     <feColorMatrix type="matrix" values="0.2126 0.7152 0.0722 0 0  0.2126 0.7152 0.0722 0 0  0.2126 0.7152 0.0722 0 0  0 0 0 1 0"/>
@@ -303,50 +313,7 @@ h1, h2, h3 { overflow-wrap: anywhere; min-width: 0; }
   </filter>
 </svg>
 
-<div class="desk">
-  <div class="desk-bar">
-    <div class="who"><b>Micrositio 2105</b> · C · Relevo · v0.3 · 26.10.2026</div>
-    <div class="spacer"></div>
-    <button type="button" class="btn-comment" id="comment-btn" hidden>Comentar</button>
-    <div class="seg" aria-label="Ancho de vista">
-      <button id="v-desk" aria-pressed="true" data-v="desk">Escritorio</button>
-      <button id="v-phone" aria-pressed="false" data-v="phone">Teléfono</button>
-    </div>
-  </div>
-
-  <section class="proposal" id="p-c" data-p="c">
-    <div class="notes">
-      <h2><span>C</span>Relevo · tarjetas de color que se pasan la obra</h2>
-      <div>
-        <h3>Idea</h3>
-        <p>Rehecha de cero el 26.10 sobre una referencia que pasó Boris: una grabación del sitio de Archon. La custodia se lee como un relevo. Cada custodio es una tarjeta de color que entra desde abajo y se apoya sobre la anterior sin taparla del todo. Las trece custodias caben en cuatro tarjetas: la fundacional, Klemm, los diez septenios sin nombre y el trienio final.</p>
-        <p>Entre medio van secciones negras. Su párrafo llega con las letras corridas y se acomoda al entrar, y sus fotos están en trama rosa y recuperan el color al pasar el mouse. Abajo, la bitácora corre de costado con el scroll.</p>
-        <div class="pal"><i style="background:#ff5b00"></i><i style="background:#2e23c2"></i><i style="background:#18171c"></i><i style="background:#f6a6d9"></i><i style="background:#10804a"></i><i style="background:#ffb52e"></i><i style="background:#42c3ff"></i><i style="background:#efefef"></i></div>
-      </div>
-      <div>
-        <h3>Mapa</h3>
-        <ul>
-          <li>Portada: tarjeta naranja con el título; la tarjeta azul de la capucha sube más lento y se va por arriba; el glifo →I· es la custodia 2 en la Escala</li>
-          <li>1.0 La custodia: el comienzo del comunicado se descifra; la cápsula en la Escala, en trama</li>
-          <li>2.0 La obra: 2016, 2018, la cita; tarjeta verde con los años que faltan, calculados hoy; la frase de los artistas se escribe sola</li>
-          <li>3.0 Trece custodias: cuatro tarjetas que se apilan</li>
-          <li>4.0 Bitácora: fichas que corren de costado</li>
-          <li>5.0 Visita · la Escala completa</li>
-        </ul>
-      </div>
-      <div>
-        <h3>De la referencia</h3>
-        <figure class="ref"><img src="img/ref-archon.jpg" alt="Portada de la referencia: tarjeta naranja con el título, tarjeta azul abajo a la izquierda, glifo negro grande"><img src="img/ref-archon-2.jpg" alt="Las tarjetas de pasos apiladas en la referencia"></figure>
-        <ul>
-          <li><b>Igual:</b> grilla, grotesca, numeración 1.0–5.0, la caja negra fija arriba a la derecha, el texto que se descifra, las tarjetas que se apilan transparentándose al entrar, el carrusel lateral</li>
-          <li><b>Cambiado:</b> la tarjeta azul es el azul de la capucha; el glifo es la Escala, no un ideograma; todas las cifras se calculan con la fecha de hoy</li>
-          <li><b>A decidir:</b> el naranja, el rosa y el verde no son del sistema de Cem; acá las fotos oficiales van en trama rosa, no en duotono azul</li>
-        </ul>
-      </div>
-    </div>
-    <div class="frame">
-      <div class="urlbar"><span>2105.klemm.org.ar</span><b class="glyph">C · relevo</b></div>
-      <div class="site C">
+<div class="site C">
         <div class="C-scroll" id="c-scroll">
           <header class="C-head" id="c-head" data-t="light">
             <div class="C-bar">
@@ -458,9 +425,6 @@ h1, h2, h3 { overflow-wrap: anywhere; min-width: 0; }
           </footer>
         </div>
       </div>
-    </div>
-  </section>
-</div>
 
 <script>
 (() => {
@@ -599,3 +563,5 @@ h1, h2, h3 { overflow-wrap: anywhere; min-width: 0; }
   if (h.includes('phone')) document.getElementById('v-phone').click();
 })();
 </script>
+</body>
+</html>

@@ -1,5 +1,9 @@
-<title>Micrositio 2105 · A · Ficha</title>
-<meta name="claude:viewport-fit-sides" content="cover">
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Un meteorito para la Sociedad Científica Argentina del año 2105 · Custodia Pro Tempore CI-01 · Fundación Federico Jorge Klemm</title>
 <meta name="robots" content="noindex, nofollow">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -217,7 +221,7 @@ h1, h2, h3 { overflow-wrap: anywhere; min-width: 0; }
 
 @container site (max-width: 760px) {
   .A-nav { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
-  .A-nav .crumb { grid-column: 1 / -1; border-right: 0; border-bottom: 1px solid var(--blue); }
+  .A-nav .crumb { grid-column: 1 / -1; border-right: 0; border-bottom: 1px solid var(--blue); display: block; line-height: 2.2em; }
   .A-nav .cell { font-size: 10.5px; padding-inline: 10px; letter-spacing: 0; gap: 7px; }
   .A-main { grid-template-columns: minmax(0, 1fr); }
   .A-view { position: static; border-right: 0; border-bottom: 1px solid var(--blue); padding: 22px 44px 18px; }
@@ -232,8 +236,14 @@ h1, h2, h3 { overflow-wrap: anywhere; min-width: 0; }
   .A-foot .A-in > div:first-child { border-top: 0; padding-top: 0; }
   .A-escala .y { font-size: 13px; }
 }
-</style>
 
+/* bare publish: the site is the page */
+body { background: var(--paper); }
+.site { min-height: 100svh; }
+.A-view { top: 0; }
+</style>
+</head>
+<body>
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
   <filter id="duotone" color-interpolation-filters="sRGB">
     <feColorMatrix type="matrix" values="0.2126 0.7152 0.0722 0 0  0.2126 0.7152 0.0722 0 0  0.2126 0.7152 0.0722 0 0  0 0 0 1 0"/>
@@ -255,62 +265,7 @@ h1, h2, h3 { overflow-wrap: anywhere; min-width: 0; }
   </filter>
 </svg>
 
-<div class="desk">
-  <div class="desk-bar">
-    <div class="who"><b>Micrositio 2105</b> · A · Ficha · v0.3 · 26.10.2026</div>
-    <div class="spacer"></div>
-    <button type="button" class="btn-comment" id="comment-btn" hidden>Comentar</button>
-    <div class="seg" aria-label="Ancho de vista">
-      <button id="v-desk" aria-pressed="true" data-v="desk">Escritorio</button>
-      <button id="v-phone" aria-pressed="false" data-v="phone">Teléfono</button>
-    </div>
-  </div>
-  <section class="brief">
-    <div>
-      <div class="kick">Para Guillermo y Nico · A · v0.3 · 26.10.2026</div>
-      <h1>A · Ficha <i>Un meteorito para la Sociedad Científica Argentina del año 2105</i></h1>
-      <p>La misma dirección de la v0.2, más mínima. Una sola tipografía y un solo cuerpo —mono, 12,5 px— con una única excepción grande: el título. Filetes de un píxel, celdas, un visor a la izquierda que se queda quieto mientras la derecha se despliega en acordeones. Lo vivo: la barra 2018 —● 2105 y el estado en la celda de arriba. El archivo de abajo quedó como estaba.</p>
-      <p>Pasen el mouse por las fotos para ver el color original; abran los acordeones; usen <b>Teléfono</b>. Lo que está entre corchetes, como <span class="miss">[X]</span>, es un dato que falta.</p>
-    </div>
-    <dl>
-      <dt>Qué cambió</dt><dd>Desaparecen el marquee, las pestañas, la banda negra del hero, el 2105 gigante, las cifras grandes y las columnas A1–D1. Todo eso ahora vive en siete acordeones: la obra, la custodia, el 1 de octubre (con las transcripciones), el programa, la bitácora, la cadena, la visita.</dd>
-      <dt>Qué no cambió</dt><dd>El archivo en negro con la grilla tramada, la Escala y el zócalo. El estado calculado con la fecha de hoy. El duotono de las fotos oficiales. Gris + azul + negro.</dd>
-      <dt>Más contenido</dt><dd>Los siete párrafos del comunicado repartidos en los acordeones; la ficha técnica; el comodato en lenguaje llano; las tres líneas del programa; la cadena completa de 13 tramos; la visita.</dd>
-      <dt>Referencia</dt><dd>La ficha de producto que mandó Boris (Eric &amp; Alex): mono de un solo cuerpo, celdas con filete, visor con flechas y puntos, botón sólido, acordeones.</dd>
-    </dl>
-  </section>
-
-  <section class="proposal" id="p-a" data-p="a">
-    <div class="notes">
-      <h2><span>A</span>Ficha · gris, azul y negro</h2>
-      <div>
-        <h3>Idea</h3>
-        <p>Una ficha de producto para una custodia. Lo que en una tienda es el frasco, acá es la cápsula; lo que es "add to bag", acá es leer el anuncio; lo que son ingredientes, envío y reseñas, acá son la obra, el comodato y la bitácora. Nada compite con el título.</p>
-        <div class="pal"><i style="background:#e6e6e6"></i><i style="background:#2e23c2"></i><i style="background:#0b0b10"></i></div>
-      </div>
-      <div>
-        <h3>Mapa</h3>
-        <ul>
-          <li>Cabecera centrada · fila de celdas: migas, estado, custodia</li>
-          <li>Barra 2018 —● 2105 a todo el ancho</li>
-          <li>Visor (3 fotos del 1 de octubre) + ficha con título, dos párrafos, botón a e-flux</li>
-          <li>Siete acordeones: obra · custodia · 1 de octubre · programa · bitácora · cadena · visita</li>
-          <li>Archivo en negro (v0.2, sin cambios) · Escala · zócalo</li>
-        </ul>
-      </div>
-      <div>
-        <h3>Del board</h3>
-        <ul>
-          <li>Eric &amp; Alex: un cuerpo, celdas, visor, botón, acordeones</li>
-          <li>Counterpractice: una página de un solo color, solo scroll</li>
-          <li>Kunsthal Gent: zócalo con dirección y horarios</li>
-          <li>HH: la claqueta sobrevive en la bitácora (fecha · tipo · glifo)</li>
-        </ul>
-      </div>
-    </div>
-    <div class="frame">
-      <div class="urlbar"><span>2105.klemm.org.ar</span><b class="glyph">A · ficha</b></div>
-      <div class="site A">
+<div class="site A">
         <header class="A-top">Fundación Federico Jorge Klemm</header>
         <div class="A-nav">
           <div class="crumb"><a href="#">Colección</a><span>›</span><a href="#">Custodia Pro Tempore CI-01</a><span>›</span>Un meteorito para la Sociedad Científica Argentina del año 2105</div>
@@ -442,9 +397,6 @@ h1, h2, h3 { overflow-wrap: anywhere; min-width: 0; }
         </div>
 
       </div>
-    </div>
-  </section>
-</div>
 
 <script>
 (() => {
@@ -550,3 +502,5 @@ h1, h2, h3 { overflow-wrap: anywhere; min-width: 0; }
   if (h.includes('open')) setTimeout(() => { const t = document.querySelector('[data-test-open]'); if (t) { t.scrollIntoView({ block: 'center' }); t.click(); } }, 150);
 })();
 </script>
+</body>
+</html>

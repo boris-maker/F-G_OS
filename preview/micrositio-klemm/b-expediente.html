@@ -1,5 +1,9 @@
-<title>Micrositio 2105 · B · Expediente</title>
-<meta name="claude:viewport-fit-sides" content="cover">
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Un meteorito para la Sociedad Científica Argentina del año 2105 · Custodia Pro Tempore CI-01 · Fundación Federico Jorge Klemm</title>
 <meta name="robots" content="noindex, nofollow">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -212,8 +216,10 @@ h1, h2, h3 { overflow-wrap: anywhere; min-width: 0; }
   .B-meta .c, .B-meta span:nth-child(2) { display: none; }
   .B-hero { margin: 10px -16px 0 -34px; height: 150cqi; }
   .B-hero .over { padding: 14px 16px 18px 34px; }
+  .B-hero .over .top { flex-wrap: wrap; gap: 4px 12px; }
+  .B-hero .over .top span:first-child { flex: 1 1 100%; }
   .B-hero .over .top span:nth-child(2) { display: none; }
-  .B-hero .over h1 { font-size: 9cqi; }
+  .B-hero .over h1 { font-size: 8cqi; max-width: none; }
   .B-hero .over .sub { flex-direction: column; align-items: start; gap: 8px; }
   .B-hero .duo figcaption { right: 16px; }
   .B-nav { font-size: 7.4cqi; }
@@ -231,8 +237,14 @@ h1, h2, h3 { overflow-wrap: anywhere; min-width: 0; }
 .B-visit div { background: var(--paper); padding: 10px 12px 14px; }
 .B-visit b { display: block; font-weight: 500; text-transform: uppercase; letter-spacing: .04em; font-size: 10px; margin-bottom: 6px; }
 @container site (max-width: 760px) { .B-visit { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); } }
-</style>
 
+/* bare publish: the site is the page */
+body { background: var(--paper); }
+.site { min-height: 100svh; }
+
+</style>
+</head>
+<body>
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
   <filter id="duotone" color-interpolation-filters="sRGB">
     <feColorMatrix type="matrix" values="0.2126 0.7152 0.0722 0 0  0.2126 0.7152 0.0722 0 0  0.2126 0.7152 0.0722 0 0  0 0 0 1 0"/>
@@ -254,64 +266,7 @@ h1, h2, h3 { overflow-wrap: anywhere; min-width: 0; }
   </filter>
 </svg>
 
-<div class="desk">
-  <div class="desk-bar">
-    <div class="who"><b>Micrositio 2105</b> · B · Expediente · v0.2.2 · 26.10.2026</div>
-    <div class="spacer"></div>
-    <button type="button" class="btn-comment" id="comment-btn" hidden>Comentar</button>
-    <div class="seg" aria-label="Ancho de vista">
-      <button id="v-desk" aria-pressed="true" data-v="desk">Escritorio</button>
-      <button id="v-phone" aria-pressed="false" data-v="phone">Teléfono</button>
-    </div>
-  </div>
-  <section class="brief">
-    <div>
-      <div class="kick">Para Guillermo y Nico · B · v0.2.2 · 26.10.2026</div>
-      <h1>B · Expediente desenfocado <i>Un meteorito para la Sociedad Científica Argentina del año 2105</i></h1>
-      <p>La B de la v0.2.1, ahora en su propio documento para seguir trabajándola aparte. Un solo color: el azul de la capucha sobre el gris de Cem. Lo que no se abrió todavía está borroso. Home de una sola foto, (1) News, (2) Fuentes con panel lateral, (3) Visita.</p>
-      <p>Pasen el mouse por las fotos para ver el color original; toquen las fichas; usen <b>Teléfono</b>. Lo que está entre corchetes, como <span class="miss">[X]</span>, es un dato que falta.</p>
-    </div>
-    <dl>
-      <dt>Qué cambió</dt><dd>Catorce fichas nuevas (DOC 15–28), tomadas del índice de fuentes primarias del <i>Report Proposal</i> de Studio Cem Eskinazi (21.07.2026): el acta notarial de 2018, el certificado de donación, la carta a la SCA, el memo Negri, el informe de toxicidad, Tamayo, Litoteca, Recordadores, Barro, MAMBA, Trabucco, SCA2105. Sección (3) Visita.</dd>
-      <dt>Qué no cambió</dt><dd>Hero, News con los dos primeros párrafos y botón a e-flux, panel que entra desde la derecha, imágenes borrosas provisorias (al azar en cada carga).</dd>
-      <dt>Pendiente</dt><dd>Digitalizar y enlazar los documentos; transcripciones; horarios y sala; créditos de fotos.</dd>
-    </dl>
-  </section>
-
-  <section class="proposal" id="p-b" data-p="b">
-    <div class="notes">
-      <h2><span>B</span>Expediente desenfocado · una sola tinta</h2>
-      <div>
-        <h3>Idea</h3>
-        <p>La idea de Nico llevada al límite: lo que no se abrió todavía está borroso. El home es una sola foto a pantalla completa, teñida de azul; al pasar el mouse vuelve su color. Debajo, dos secciones: <b>(1) News</b>, el comunicado que empieza acá y termina en e-flux, y <b>(2) Fuentes</b>, las fichas. Cada ficha abre un panel que entra desde la derecha, con códigos en las esquinas como un fotograma.</p>
-        <p>Un solo color. Nada más entra: ni negro, ni gradiente. El contraste lo hace el blur. <b>v0.2.1</b> · 26.10: hero en vez del escritorio, News, panel lateral, imagen borrosa en todas las fichas.</p>
-        <div class="pal"><i style="background:#e6e6e6"></i><i style="background:#2e23c2"></i></div>
-      </div>
-      <div>
-        <h3>Mapa</h3>
-        <ul>
-          <li>Nota de una línea · hoja de expediente · barra fija 2018 —● 2105</li>
-          <li>Home: una foto a pantalla completa en duotono azul, título y estado encima</li>
-          <li>Navegación escrita como frase</li>
-          <li>(1) News: los dos primeros párrafos del comunicado + botón «leer completo» a e-flux</li>
-          <li>(2) Fuentes: 28 fichas de catálogo; cada una abre un panel lateral con imagen borrosa</li>
-          <li>(3) Visita: sala, horarios, contacto</li>
-        </ul>
-      </div>
-      <div>
-        <h3>Del board</h3>
-        <ul>
-          <li>Liam Young: blur como estado de lo no abierto, panel con "Now viewing"</li>
-          <li>Counterpractice: una tinta, nota de apertura, bloque lleno</li>
-          <li>PC Music: grilla de fichas con código y URL</li>
-          <li>HH: claqueta en las esquinas de cada ventana abierta</li>
-          <li>Report Proposal de Cem: hoja perforada, cabecera de documento</li>
-        </ul>
-      </div>
-    </div>
-    <div class="frame">
-      <div class="urlbar"><span>2105.klemm.org.ar</span><b class="glyph">B · expediente</b></div>
-      <div class="site B" id="b-site">
+<div class="site B" id="b-site">
         <div class="B-sheet">
           <div class="B-holes" aria-hidden="true"><div class="B-edge"></div><i style="top:300px"></i><i style="top:900px"></i><i style="top:1500px"></i><i style="top:2100px"></i></div>
           <div class="B-note">/* — este sitio es de un solo color. se lee de corrido. lo que está borroso todavía no se abrió. actualizado <span data-live="todayShort"></span> — */</div>
@@ -371,10 +326,6 @@ h1, h2, h3 { overflow-wrap: anywhere; min-width: 0; }
           <div class="slate" id="b-open-doc"></div>
         </div>
       </div>
-    </div>
-  </section>
-</div>
-
 
 <script>
 (() => {
@@ -478,7 +429,7 @@ h1, h2, h3 { overflow-wrap: anywhere; min-width: 0; }
     if (!bOpen.classList.contains('on')) return;
     const r = bSite.getBoundingClientRect();
     if (r.width <= 760) { bOpen.style.cssText = ''; return; }
-    const bar = document.querySelector('.desk-bar').getBoundingClientRect().bottom;
+    const deskBar = document.querySelector('.desk-bar'); const bar = deskBar ? deskBar.getBoundingClientRect().bottom : 0;
     bOpen.style.top = Math.max(r.top, bar, 0) + 'px';
     bOpen.style.bottom = Math.max(0, window.innerHeight - r.bottom) + 'px';
     bOpen.style.right = Math.max(0, window.innerWidth - r.right) + 'px';
@@ -520,3 +471,5 @@ h1, h2, h3 { overflow-wrap: anywhere; min-width: 0; }
   if (h.includes('open')) setTimeout(() => { const t = document.querySelector('[data-test-open]'); if (t) { t.scrollIntoView({ block: 'center' }); t.click(); } }, 150);
 })();
 </script>
+</body>
+</html>
