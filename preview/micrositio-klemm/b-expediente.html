@@ -136,6 +136,8 @@ h1, h2, h3 { overflow-wrap: anywhere; min-width: 0; }
 .B-hero .duo { position: absolute; inset: 0; margin: 0; cursor: crosshair; }
 .B-hero .duo::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, transparent 50%, var(--blue-70) 100%); pointer-events: none; }
 .B-hero .duo figcaption { left: auto; right: clamp(16px, 4cqi, 64px); bottom: 14px; }
+/* the home photo never returns to colour: on hover (or tap) it goes to black and white */
+.B-hero .duo:hover img.tint, .B-hero .duo.reveal img.tint { opacity: 1; filter: grayscale(1); }
 .B-hero .over { position: absolute; inset: 0; pointer-events: none; color: var(--paper); padding: clamp(14px, 2.4cqi, 28px) clamp(16px, 4cqi, 64px) clamp(18px, 3cqi, 36px) clamp(36px, 6cqi, 88px); display: flex; flex-direction: column; justify-content: space-between; }
 .B-hero .over .top { display: flex; justify-content: space-between; gap: 16px; font-family: var(--mono); font-size: 11px; letter-spacing: .02em; }
 .B-hero .over h1 { font-family: var(--serif); font-weight: 400; font-size: clamp(30px, 5.4cqi, 68px); line-height: 1.02; letter-spacing: -.01em; margin: 0; max-width: 16ch; text-wrap: balance; text-shadow: 0 1px 24px rgb(20 16 90 / .35); }
@@ -277,7 +279,7 @@ body { background: var(--paper); }
           </div>
 
           <div class="B-hero" id="b-hero">
-            <figure class="duo"><img src="img/2026-escala.jpg" alt="La cápsula izada de la Escala Pro Tempore en la sala de la Fundación Klemm, 1 de octubre de 2026"><figcaption>color original</figcaption></figure>
+            <figure class="duo"><img src="img/2026-escala.jpg" alt="La cápsula izada de la Escala Pro Tempore en la sala de la Fundación Klemm, 1 de octubre de 2026"><figcaption>blanco y negro</figcaption></figure>
             <div class="over">
               <div class="top"><span>Fundación Federico Jorge Klemm · Custodia Pro Tempore CI-01</span><span data-live="custody"></span><span data-live="todayShort"></span></div>
               <div>
