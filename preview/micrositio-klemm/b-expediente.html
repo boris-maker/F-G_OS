@@ -1,0 +1,522 @@
+<title>Micrositio 2105 · B · Expediente</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="robots" content="noindex, nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=IBM+Plex+Mono:wght@400;500&family=Libre+Franklin:wght@400;500;600;700&family=Old+Standard+TT:ital,wght@0,400;0,700;1,400&display=swap">
+<style>
+/* v0.2 · 26.10.2026 · Layout: a review desk holds three full site mocks, each a container-query frame
+   (desktop / phone). Tokens: one blue (the capucha), one grey (Cem's paper), black as the third tone
+   in A and C, one signal green reserved for what is alive (C only). Nothing else. */
+:root {
+  --blue: #2e23c2;
+  --paper: #e6e6e6;
+  --black: #0b0b10;            /* black with a trace of blue */
+  --desk: #d4d4d1;
+  --signal: #c8ff1e;           /* C only: live state */
+  --blue-70: rgb(46 35 194 / .72);
+  --blue-45: rgb(46 35 194 / .45);
+  --blue-18: rgb(46 35 194 / .18);
+  --blue-08: rgb(46 35 194 / .08);
+  --paper-45: rgb(230 230 230 / .45);
+  --paper-18: rgb(230 230 230 / .18);
+  --grad-sky: linear-gradient(180deg, #2e23c2 0%, #211a8c 38%, #120f3a 72%, #0b0b10 100%);
+  --grad-dusk: linear-gradient(180deg, #0b0b10 0%, #1b1660 55%, #2e23c2 100%);
+  --serif: "Old Standard TT", "Scotch Text", Georgia, "Times New Roman", serif;
+  --cond: "Barlow Condensed", "Arial Narrow", "Helvetica Neue", sans-serif;
+  --mono: "IBM Plex Mono", "Letter Gothic", Menlo, Consolas, monospace;
+  --sans: "Libre Franklin", "News Gothic", "Helvetica Neue", Arial, sans-serif;
+  color-scheme: light;
+}
+* { box-sizing: border-box; }
+html, body { overflow-x: clip; }
+body { margin: 0; background: var(--desk); color: var(--blue); font-family: var(--sans); font-size: 15px; line-height: 1.45; -webkit-font-smoothing: antialiased; }
+a { color: inherit; }
+button { font: inherit; color: inherit; }
+:focus-visible { outline: 2px solid currentColor; outline-offset: 2px; }
+img { max-width: 100%; display: block; }
+h1, h2, h3 { overflow-wrap: anywhere; min-width: 0; }
+
+/* ───────── review desk ───────── */
+.desk { padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); padding-block: 0 72px; }
+.desk-bar { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 50; background: var(--desk); border-bottom: 1px solid var(--blue-18); margin-inline: calc(-1 * max(16px, env(safe-area-inset-left, 0px))); padding: 10px max(16px, env(safe-area-inset-left, 0px)); display: flex; flex-wrap: wrap; align-items: center; gap: 10px 18px; font-family: var(--mono); font-size: 12px; }
+.desk-bar .who b { font-weight: 500; }
+.tabs, .seg { display: flex; border: 1px solid var(--blue); border-radius: 2px; overflow: hidden; }
+.tabs button, .seg button { background: none; border: 0; padding: 6px 12px; cursor: pointer; font-family: var(--mono); font-size: 12px; letter-spacing: .02em; white-space: nowrap; }
+.tabs button + button, .seg button + button { border-left: 1px solid var(--blue); }
+.tabs button[aria-selected="true"], .seg button[aria-pressed="true"] { background: var(--blue); color: var(--paper); }
+.desk-bar .spacer { flex: 1; }
+.btn-comment { background: none; border: 1px solid var(--blue); padding: 6px 12px; cursor: pointer; font-family: var(--mono); font-size: 12px; border-radius: 2px; }
+.btn-comment:hover { background: var(--blue); color: var(--paper); }
+
+.brief { max-width: 1240px; margin: 28px auto 0; display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); gap: 28px; }
+.brief h1 { font-family: var(--serif); font-weight: 400; font-size: clamp(30px, 4.4vw, 52px); line-height: 1.02; margin: 0 0 14px; letter-spacing: -.01em; text-wrap: balance; }
+.brief p { margin: 0 0 10px; max-width: 62ch; }
+.kick { font-family: var(--mono); font-size: 11.5px; letter-spacing: .06em; text-transform: uppercase; margin-bottom: 12px; }
+.brief dl { margin: 0; display: grid; grid-template-columns: max-content minmax(0, 1fr); gap: 7px 14px; font-size: 13.5px; border-top: 1px solid var(--blue-45); padding-top: 12px; }
+.brief dt { font-family: var(--mono); font-size: 11px; letter-spacing: .05em; text-transform: uppercase; padding-top: 2px; }
+.brief dd { margin: 0; }
+
+/* board study */
+.study { max-width: 1240px; margin: 36px auto 0; }
+.study h2 { font-family: var(--serif); font-weight: 400; font-size: clamp(24px, 3vw, 34px); margin: 0 0 6px; line-height: 1.1; }
+.study .sub { font-size: 13.5px; max-width: 70ch; margin: 0 0 18px; }
+.crit { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 1px; background: var(--blue-45); border: 1px solid var(--blue-45); }
+.crit article { background: var(--desk); padding: 10px 10px 12px; display: grid; grid-template-rows: auto auto 1fr auto; gap: 8px; min-width: 0; }
+.crit figure { margin: 0; aspect-ratio: 4 / 3; overflow: hidden; background: var(--paper); }
+.crit figure img { width: 100%; height: 100%; object-fit: cover; object-position: top; }
+.crit h3 { font-family: var(--mono); font-weight: 500; font-size: 11px; letter-spacing: .05em; text-transform: uppercase; margin: 0; }
+.crit h3 span { display: block; font-weight: 400; text-transform: none; letter-spacing: 0; opacity: .8; }
+.crit p { margin: 0; font-size: 12.5px; line-height: 1.4; }
+.crit .to { font-family: var(--mono); font-size: 11px; display: flex; gap: 4px; }
+.crit .to b { font-weight: 500; border: 1px solid var(--blue); padding: 0 6px; }
+.crit .to b.on { background: var(--blue); color: var(--paper); }
+
+.notes { max-width: 1240px; margin: 44px auto 14px; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1fr); gap: 22px; }
+.notes h2 { grid-column: 1 / -1; font-family: var(--serif); font-weight: 400; font-size: clamp(24px, 3vw, 34px); margin: 0; line-height: 1.1; text-wrap: balance; }
+.notes h2 span { font-family: var(--cond); font-weight: 600; font-size: .7em; letter-spacing: .02em; border: 1.5px solid var(--blue); border-radius: 50%; display: inline-grid; place-items: center; width: 1.45em; height: 1.45em; margin-right: 10px; vertical-align: .12em; }
+.notes h3 { font-family: var(--mono); font-weight: 500; font-size: 11px; letter-spacing: .06em; text-transform: uppercase; margin: 0 0 6px; padding-bottom: 6px; border-bottom: 1px solid var(--blue-45); }
+.notes ul { margin: 0; padding-left: 16px; font-size: 13.5px; }
+.notes li { margin-bottom: 5px; }
+.notes p { margin: 0 0 8px; font-size: 13.5px; }
+.notes .pal { display: flex; gap: 6px; margin-top: 8px; }
+.notes .pal i { width: 22px; height: 22px; border: 1px solid var(--blue-45); display: inline-block; }
+
+.frame { max-width: 1240px; margin: 0 auto; background: var(--paper); box-shadow: 0 1px 0 var(--blue-18), 0 20px 50px -30px rgb(20 16 90 / .45); transition: max-width .35s ease; }
+.frame.phone { max-width: 390px; }
+.urlbar { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 5px 12px; font-family: var(--mono); font-size: 11px; border-bottom: 1px solid var(--blue-18); background: #dcdcdb; color: var(--blue); }
+.site { container-type: inline-size; container-name: site; position: relative; overflow: hidden; }
+.proposal[hidden] { display: none !important; }
+
+/* ───────── shared atoms ───────── */
+.duo { position: relative; margin: 0; overflow: hidden; background: var(--blue); cursor: crosshair; }
+.duo img { width: 100%; height: 100%; object-fit: cover; }
+.duo img.tint { position: absolute; inset: 0; filter: url(#duotone); transition: opacity .6s ease, filter .5s ease; }
+.duo.night img.tint { filter: url(#duo-night); }
+.duo:hover img.tint, .duo.reveal img.tint { opacity: 0; }
+.duo figcaption { position: absolute; left: 8px; bottom: 7px; font-family: var(--mono); font-size: 10.5px; color: var(--paper); background: var(--blue); padding: 1px 5px; opacity: 0; transition: opacity .3s; }
+.duo:hover figcaption, .duo.reveal figcaption { opacity: 1; }
+.half { position: relative; overflow: hidden; background: var(--black); }
+.half img { width: 100%; height: 100%; object-fit: cover; filter: grayscale(1) contrast(1.35) brightness(1.05); }
+.half::after { content: ""; position: absolute; inset: 0; background: radial-gradient(circle, transparent 38%, var(--black) 42%) 0 0 / 4px 4px; mix-blend-mode: multiply; opacity: .55; pointer-events: none; }
+.miss { font-family: var(--mono); font-size: .82em; background: var(--blue-08); padding: 0 3px; white-space: nowrap; }
+.glyph { font-family: var(--cond); font-weight: 700; letter-spacing: .08em; }
+.marquee { overflow: hidden; white-space: nowrap; }
+.marquee > div { display: inline-flex; gap: 0; animation: slide 38s linear infinite; }
+.marquee span { padding-inline: 18px; }
+@keyframes slide { to { transform: translateX(-50%); } }
+
+/* ═════════════ B · EXPEDIENTE/* ═════════════ B · EXPEDIENTE DESENFOCADO ═════════════ */
+.B { font-family: var(--serif); position: relative; background: var(--paper); }
+.B-sheet { position: relative; padding: 0 clamp(16px, 4cqi, 64px) 0 clamp(36px, 6cqi, 88px); }
+.B-holes { position: absolute; left: clamp(12px, 2.2cqi, 30px); top: 0; bottom: 0; width: 14px; }
+.B-holes i { position: absolute; width: 13px; height: 13px; border-radius: 50%; background: var(--blue); left: 0; }
+.B-edge { position: absolute; top: 10px; bottom: 10px; left: 6px; border-left: 1px solid var(--blue-45); }
+.B-note { font-family: var(--sans); font-weight: 600; font-size: 10px; letter-spacing: .02em; text-transform: uppercase; padding-block: 12px 0; }
+.B-meta { display: grid; grid-template-columns: auto auto 1fr auto; gap: 22px; font-family: var(--sans); font-size: 10.5px; font-weight: 600; padding-block: 10px 12px; align-items: center; }
+.B-meta .c { text-align: center; }
+.B-meta .c::before { content: "⟶"; font-weight: 400; margin-right: 6px; }
+.B-meta .d { font-family: var(--mono); font-weight: 400; }
+.B-time { border-block: 1px solid var(--blue); padding: 24px 0 10px; position: sticky; top: 0; background: var(--paper); z-index: 4; }
+.B-time .track { position: relative; height: 34px; margin-inline: 8px; }
+.B-time .solid { position: absolute; top: 12px; height: 3px; background: var(--blue); }
+.B-time .dots { position: absolute; top: 12px; height: 3px; background-image: radial-gradient(circle, var(--blue) 1.2px, transparent 1.5px); background-size: 7px 3px; }
+.B-time .end { position: absolute; top: 4px; width: 3px; height: 19px; background: var(--blue); }
+.B-time .now { position: absolute; top: 5px; width: 17px; height: 17px; margin-left: -8.5px; border-radius: 50%; background: var(--blue); }
+.B-time .lab { position: absolute; top: 25px; transform: translateX(-50%); font-family: var(--cond); font-weight: 700; font-size: 12px; letter-spacing: .05em; white-space: nowrap; }
+.B-time .lab.l { transform: none; } .B-time .lab.r { transform: translateX(-100%); }
+.B-time .state { font-family: var(--mono); font-size: 11px; margin-top: 6px; display: flex; flex-wrap: wrap; gap: 4px 18px; justify-content: space-between; }
+
+/* the desk of windows */
+.B-hero { position: relative; margin: 14px calc(-1 * clamp(16px, 4cqi, 64px)) 0 calc(-1 * clamp(36px, 6cqi, 88px)); height: clamp(480px, 70cqi, 840px); background: var(--blue); z-index: 1; }
+.B-hero .duo { position: absolute; inset: 0; margin: 0; cursor: crosshair; }
+.B-hero .duo::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, transparent 50%, var(--blue-70) 100%); pointer-events: none; }
+.B-hero .duo figcaption { left: auto; right: clamp(16px, 4cqi, 64px); bottom: 14px; }
+.B-hero .over { position: absolute; inset: 0; pointer-events: none; color: var(--paper); padding: clamp(14px, 2.4cqi, 28px) clamp(16px, 4cqi, 64px) clamp(18px, 3cqi, 36px) clamp(36px, 6cqi, 88px); display: flex; flex-direction: column; justify-content: space-between; }
+.B-hero .over .top { display: flex; justify-content: space-between; gap: 16px; font-family: var(--mono); font-size: 11px; letter-spacing: .02em; }
+.B-hero .over h1 { font-family: var(--serif); font-weight: 400; font-size: clamp(30px, 5.4cqi, 68px); line-height: 1.02; letter-spacing: -.01em; margin: 0; max-width: 16ch; text-wrap: balance; text-shadow: 0 1px 24px rgb(20 16 90 / .35); }
+.B-hero .over .sub { display: flex; justify-content: space-between; gap: 16px; align-items: end; margin-top: 14px; font-family: var(--mono); font-size: 11.5px; line-height: 1.5; }
+.B-hero .over .sub .dn { font-family: var(--cond); font-weight: 700; font-size: 12px; letter-spacing: .08em; text-transform: uppercase; white-space: nowrap; }
+
+.B-nav { font-family: var(--serif); font-size: clamp(26px, 4.3cqi, 54px); line-height: 1.08; letter-spacing: -.01em; margin: clamp(28px, 5cqi, 60px) 0 0; max-width: 22ch; text-wrap: balance; }
+.B-nav a { text-decoration: none; }
+.B-nav a:hover { background: var(--blue); color: var(--paper); }
+.B-nav .n { font-family: var(--mono); font-size: .26em; vertical-align: 1.9em; margin-right: 3px; letter-spacing: 0; }
+
+.B-body { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 15rem); gap: clamp(20px, 5cqi, 70px); margin-top: clamp(30px, 5cqi, 60px); padding-top: 18px; border-top: 1px solid var(--blue); }
+.B-text h2 { font-family: var(--mono); font-weight: 400; font-size: 11.5px; margin: 0 0 16px; }
+.B-text p { font-size: clamp(17px, 1.9cqi, 20px); line-height: 1.58; margin: 0 0 1em; max-width: 60ch; }
+.B-text .lang[hidden] { display: none; }
+.B-text h2 a { text-decoration: none; border-bottom: 1px solid var(--blue-45); }
+.B-text h2 a.on { background: var(--blue); color: var(--paper); border-bottom: 0; padding: 0 4px; }
+.B-more { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 18px; margin-top: 22px; }
+.B-btn { display: inline-flex; align-items: center; gap: 12px; border: 1.5px solid var(--blue); padding: 11px 18px; font-family: var(--mono); font-size: 12px; letter-spacing: .04em; text-transform: uppercase; text-decoration: none; transition: background .2s, color .2s; }
+.B-btn:hover { background: var(--blue); color: var(--paper); }
+.B-more small { font-family: var(--mono); font-size: 10.5px; }
+.B-text a.h { text-decoration: none; border-bottom: 1.5px solid var(--blue); cursor: pointer; }
+.B-text a.h:hover, .B-text a.h.on { background: var(--blue); color: var(--paper); }
+.B-text a.h.k { background: var(--blue); color: var(--paper); padding: 0 4px; border-bottom: 0; }
+.B-text a.h sup { font-family: var(--mono); font-size: 9.5px; margin-left: 1px; }
+.B-text .ital { font-style: italic; }
+.B-aside { font-family: var(--mono); font-size: 11px; line-height: 1.6; }
+.B-aside .ficha { border: 1px solid var(--blue); padding: 10px 11px; margin-bottom: 16px; background: var(--paper); }
+.B-aside .ficha b { font-weight: 500; display: block; margin-bottom: 4px; }
+.B-aside .how { border-top: 1px solid var(--blue-45); padding-top: 10px; }
+
+/* PC Music grid of sources */
+.B-src { margin-top: clamp(28px, 5cqi, 56px); border-top: 1px solid var(--blue); padding-top: 16px; }
+.B-src h2 { font-family: var(--mono); font-weight: 400; font-size: 11.5px; margin: 0 0 12px; display: flex; justify-content: space-between; }
+.B-cards { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1px; background: var(--blue-45); border: 1px solid var(--blue-45); }
+.B-card { background: var(--paper); display: grid; grid-template-rows: auto auto 1fr auto; min-width: 0; cursor: pointer; }
+.B-card .code { display: flex; justify-content: space-between; font-family: var(--mono); font-size: 9.5px; padding: 5px 8px 3px; }
+.B-card .duo { aspect-ratio: 1; margin: 0 8px; }
+.B-card .duo img.tint { filter: url(#duotone) blur(7px); transform: scale(1.06); }
+.B-card .duo figcaption { display: none; }
+.B-card.fill { cursor: default; align-content: end; padding: 8px; font-family: var(--mono); font-size: 11px; line-height: 1.5; background: var(--blue-08); }
+.B-card:hover .duo img.tint { filter: url(#duotone); transform: none; }
+.B-card .t { padding: 8px 8px 2px; font-family: var(--serif); font-size: 19px; line-height: 1.15; }
+.B-card .t small { display: block; font-size: 15px; }
+.B-card .t small i { font-style: italic; font-size: 12px; margin-right: 4px; }
+.B-card .tags { padding: 6px 8px 8px; display: flex; gap: 4px; flex-wrap: wrap; font-family: var(--mono); font-size: 9.5px; }
+.B-card .tags b { font-weight: 400; background: var(--blue-08); padding: 0 4px; }
+.B-card .tags b.solid { background: var(--blue); color: var(--paper); }
+.B-foot { display: grid; grid-template-columns: auto 1fr auto; gap: 22px; font-family: var(--sans); font-size: 10.5px; font-weight: 600; padding-block: 40px 16px; align-items: end; }
+.B-foot .pg { border-top: 1px solid var(--blue); border-bottom: 1px solid var(--blue); padding: 3px 26px; }
+
+/* the open window (slate) */
+.B-open { position: fixed; top: 0; right: 0; bottom: 0; z-index: 45; width: min(540px, 46%); background: var(--paper); border-left: 1.5px solid var(--blue); box-shadow: -14px 0 50px rgb(20 16 90 / .28); overflow-y: auto; overscroll-behavior: contain; transform: translateX(calc(100% + 60px)); visibility: hidden; transition: transform .5s cubic-bezier(.2, .85, .25, 1), visibility 0s .5s; }
+.B-open.on { transform: none; visibility: visible; transition: transform .5s cubic-bezier(.2, .85, .25, 1), visibility 0s; }
+.B-open .bar { position: sticky; top: 0; background: var(--paper); z-index: 2; }
+.B-open .bar { display: flex; justify-content: space-between; align-items: center; font-family: var(--mono); font-size: 11px; text-transform: uppercase; padding: 8px 12px; border-bottom: 1.5px solid var(--blue); }
+.B-open .bar button { background: none; border: 1px solid var(--blue); padding: 2px 8px; cursor: pointer; font-family: var(--mono); font-size: 11px; text-transform: uppercase; }
+.B-open .slate { position: relative; padding: 22px 18px 26px; font-family: var(--mono); font-size: 12.5px; line-height: 1.6; min-height: 240px; }
+.B-open .slate .c { position: absolute; font-size: 9.5px; letter-spacing: .04em; text-transform: uppercase; }
+.B-open .slate .c.tl { top: 6px; left: 10px; } .B-open .slate .c.tr { top: 6px; right: 10px; } .B-open .slate .c.bl { bottom: 6px; left: 10px; } .B-open .slate .c.br { bottom: 6px; right: 10px; }
+.B-open h3 { font-family: var(--serif); font-weight: 400; font-size: 30px; line-height: 1.05; margin: 14px 0 12px; }
+.B-open .rows { border-top: 1px solid var(--blue); margin-bottom: 14px; }
+.B-open .rows div { display: grid; grid-template-columns: 7.5em minmax(0, 1fr); gap: 8px; border-bottom: 1px solid var(--blue-45); padding: 4px 0; font-size: 11.5px; }
+.B-open p { margin: 0 0 12px; }
+.B-open blockquote { margin: 0 0 14px; font-family: var(--serif); font-size: 18px; line-height: 1.5; border-left: 2px solid var(--blue); padding-left: 12px; }
+.B-open .duo { aspect-ratio: 4 / 3; margin-bottom: 14px; }
+.B-open .duo img.tint { filter: url(#duotone) blur(11px); transform: scale(1.1); }
+.B-open .duo:hover img.tint { filter: url(#duotone) blur(0); transform: none; opacity: 0; }
+.B-open .duo .rnd { position: absolute; right: 8px; top: 7px; font-family: var(--mono); font-size: 9.5px; letter-spacing: .04em; text-transform: uppercase; color: var(--paper); background: var(--blue); padding: 1px 5px; }
+.B-open .stamp { display: inline-block; font-family: var(--cond); font-weight: 700; font-size: 15px; border: 2px solid var(--blue); padding: 2px 8px; transform: rotate(-4deg); margin-top: 6px; letter-spacing: .04em; }
+.B-open .big { font-family: var(--cond); font-weight: 700; font-size: 20px; letter-spacing: .08em; line-height: 1.35; }
+.B-open .big span { background: var(--blue); color: var(--paper); padding: 0 4px; }
+
+@container site (max-width: 760px) {
+  .B-sheet { padding-left: 34px; padding-right: 16px; }
+  .B-holes { left: 10px; }
+  .B-meta { grid-template-columns: 1fr auto; gap: 4px 12px; }
+  .B-meta .c, .B-meta span:nth-child(2) { display: none; }
+  .B-hero { margin: 10px -16px 0 -34px; height: 150cqi; }
+  .B-hero .over { padding: 14px 16px 18px 34px; }
+  .B-hero .over .top span:nth-child(2) { display: none; }
+  .B-hero .over h1 { font-size: 9cqi; }
+  .B-hero .over .sub { flex-direction: column; align-items: start; gap: 8px; }
+  .B-hero .duo figcaption { right: 16px; }
+  .B-nav { font-size: 7.4cqi; }
+  .B-body { grid-template-columns: minmax(0, 1fr); }
+  .B-aside { order: 1; }
+  .B-aside .how { display: none; }
+  .B-cards { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
+  .B-card.fill { display: none; }
+  .B-foot { grid-template-columns: 1fr auto; }
+  .B-foot span:nth-child(2) { display: none; }
+  .B-open { top: auto; left: 0; right: 0; bottom: 0; width: min(390px, 100%); margin-inline: auto; max-height: 76vh; border-left: 0; border-top: 1.5px solid var(--blue); box-shadow: 0 -10px 40px rgb(20 16 90 / .4); z-index: 60; transform: translateY(calc(100% + 40px)); }
+}
+
+.B-visit { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 1px; background: var(--blue-45); border: 1px solid var(--blue-45); font-family: var(--mono); font-size: 11.5px; line-height: 1.55; }
+.B-visit div { background: var(--paper); padding: 10px 12px 14px; }
+.B-visit b { display: block; font-weight: 500; text-transform: uppercase; letter-spacing: .04em; font-size: 10px; margin-bottom: 6px; }
+@container site (max-width: 760px) { .B-visit { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); } }
+</style>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <filter id="duotone" color-interpolation-filters="sRGB">
+    <feColorMatrix type="matrix" values="0.2126 0.7152 0.0722 0 0  0.2126 0.7152 0.0722 0 0  0.2126 0.7152 0.0722 0 0  0 0 0 1 0"/>
+    <feComponentTransfer><feFuncR type="gamma" exponent="1.5"/><feFuncG type="gamma" exponent="1.5"/><feFuncB type="gamma" exponent="1.5"/></feComponentTransfer>
+    <feComponentTransfer>
+      <feFuncR type="table" tableValues="0.180 0.902"/>
+      <feFuncG type="table" tableValues="0.137 0.902"/>
+      <feFuncB type="table" tableValues="0.761 0.902"/>
+    </feComponentTransfer>
+  </filter>
+  <filter id="duo-night" color-interpolation-filters="sRGB">
+    <feColorMatrix type="matrix" values="0.2126 0.7152 0.0722 0 0  0.2126 0.7152 0.0722 0 0  0.2126 0.7152 0.0722 0 0  0 0 0 1 0"/>
+    <feComponentTransfer><feFuncR type="gamma" exponent="1.3"/><feFuncG type="gamma" exponent="1.3"/><feFuncB type="gamma" exponent="1.3"/></feComponentTransfer>
+    <feComponentTransfer>
+      <feFuncR type="table" tableValues="0.043 0.180 0.70"/>
+      <feFuncG type="table" tableValues="0.043 0.137 0.68"/>
+      <feFuncB type="table" tableValues="0.063 0.761 0.95"/>
+    </feComponentTransfer>
+  </filter>
+</svg>
+
+<div class="desk">
+  <div class="desk-bar">
+    <div class="who"><b>Micrositio 2105</b> · B · Expediente · v0.2.2 · 26.10.2026</div>
+    <div class="spacer"></div>
+    <button type="button" class="btn-comment" id="comment-btn" hidden>Comentar</button>
+    <div class="seg" aria-label="Ancho de vista">
+      <button id="v-desk" aria-pressed="true" data-v="desk">Escritorio</button>
+      <button id="v-phone" aria-pressed="false" data-v="phone">Teléfono</button>
+    </div>
+  </div>
+  <section class="brief">
+    <div>
+      <div class="kick">Para Guillermo y Nico · B · v0.2.2 · 26.10.2026</div>
+      <h1>B · Expediente desenfocado <i>Un meteorito para la Sociedad Científica Argentina del año 2105</i></h1>
+      <p>La B de la v0.2.1, ahora en su propio documento para seguir trabajándola aparte. Un solo color: el azul de la capucha sobre el gris de Cem. Lo que no se abrió todavía está borroso. Home de una sola foto, (1) News, (2) Fuentes con panel lateral, (3) Visita.</p>
+      <p>Pasen el mouse por las fotos para ver el color original; toquen las fichas; usen <b>Teléfono</b>. Lo que está entre corchetes, como <span class="miss">[X]</span>, es un dato que falta.</p>
+    </div>
+    <dl>
+      <dt>Qué cambió</dt><dd>Catorce fichas nuevas (DOC 15–28), tomadas del índice de fuentes primarias del <i>Report Proposal</i> de Studio Cem Eskinazi (21.07.2026): el acta notarial de 2018, el certificado de donación, la carta a la SCA, el memo Negri, el informe de toxicidad, Tamayo, Litoteca, Recordadores, Barro, MAMBA, Trabucco, SCA2105. Sección (3) Visita.</dd>
+      <dt>Qué no cambió</dt><dd>Hero, News con los dos primeros párrafos y botón a e-flux, panel que entra desde la derecha, imágenes borrosas provisorias (al azar en cada carga).</dd>
+      <dt>Pendiente</dt><dd>Digitalizar y enlazar los documentos; transcripciones; horarios y sala; créditos de fotos.</dd>
+    </dl>
+  </section>
+
+  <section class="proposal" id="p-b" data-p="b">
+    <div class="notes">
+      <h2><span>B</span>Expediente desenfocado · una sola tinta</h2>
+      <div>
+        <h3>Idea</h3>
+        <p>La idea de Nico llevada al límite: lo que no se abrió todavía está borroso. El home es una sola foto a pantalla completa, teñida de azul; al pasar el mouse vuelve su color. Debajo, dos secciones: <b>(1) News</b>, el comunicado que empieza acá y termina en e-flux, y <b>(2) Fuentes</b>, las fichas. Cada ficha abre un panel que entra desde la derecha, con códigos en las esquinas como un fotograma.</p>
+        <p>Un solo color. Nada más entra: ni negro, ni gradiente. El contraste lo hace el blur. <b>v0.2.1</b> · 26.10: hero en vez del escritorio, News, panel lateral, imagen borrosa en todas las fichas.</p>
+        <div class="pal"><i style="background:#e6e6e6"></i><i style="background:#2e23c2"></i></div>
+      </div>
+      <div>
+        <h3>Mapa</h3>
+        <ul>
+          <li>Nota de una línea · hoja de expediente · barra fija 2018 —● 2105</li>
+          <li>Home: una foto a pantalla completa en duotono azul, título y estado encima</li>
+          <li>Navegación escrita como frase</li>
+          <li>(1) News: los dos primeros párrafos del comunicado + botón «leer completo» a e-flux</li>
+          <li>(2) Fuentes: 28 fichas de catálogo; cada una abre un panel lateral con imagen borrosa</li>
+          <li>(3) Visita: sala, horarios, contacto</li>
+        </ul>
+      </div>
+      <div>
+        <h3>Del board</h3>
+        <ul>
+          <li>Liam Young: blur como estado de lo no abierto, panel con "Now viewing"</li>
+          <li>Counterpractice: una tinta, nota de apertura, bloque lleno</li>
+          <li>PC Music: grilla de fichas con código y URL</li>
+          <li>HH: claqueta en las esquinas de cada ventana abierta</li>
+          <li>Report Proposal de Cem: hoja perforada, cabecera de documento</li>
+        </ul>
+      </div>
+    </div>
+    <div class="frame">
+      <div class="urlbar"><span>2105.klemm.org.ar</span><b class="glyph">B · expediente</b></div>
+      <div class="site B" id="b-site">
+        <div class="B-sheet">
+          <div class="B-holes" aria-hidden="true"><div class="B-edge"></div><i style="top:300px"></i><i style="top:900px"></i><i style="top:1500px"></i><i style="top:2100px"></i></div>
+          <div class="B-note">/* — este sitio es de un solo color. se lee de corrido. lo que está borroso todavía no se abrió. actualizado <span data-live="todayShort"></span> — */</div>
+          <div class="B-meta"><span>Un meteorito para la Sociedad Científica Argentina del año 2105</span><span>Faivovich &amp; Goldberg</span><span class="c">Custodia Pro Tempore CI-01</span><span class="d" data-live="todayShort"></span></div>
+          <div class="B-time">
+            <div class="track" id="b-track"></div>
+            <div class="state"><span data-live="custody"></span><span data-live="pct"></span><span data-live="left"></span></div>
+          </div>
+
+          <div class="B-hero" id="b-hero">
+            <figure class="duo"><img src="img/2026-escala.jpg" alt="La cápsula izada de la Escala Pro Tempore en la sala de la Fundación Klemm, 1 de octubre de 2026"><figcaption>color original</figcaption></figure>
+            <div class="over">
+              <div class="top"><span>Fundación Federico Jorge Klemm · Custodia Pro Tempore CI-01</span><span data-live="custody"></span><span data-live="todayShort"></span></div>
+              <div>
+                <h1>Un meteorito para la Sociedad Científica Argentina del año 2105</h1>
+                <div class="sub"><span>Faivovich &amp; Goldberg · 2016/2018<br>Período Nominal 9.07.2025 → 25.05.2032 · <span data-live="left"></span></span><span class="dn">↓ (1) News</span></div>
+              </div>
+            </div>
+          </div>
+
+          <p class="B-nav"><a href="#b-text"><span class="n">01</span>News</a>, <a href="#b-src"><span class="n">02</span>las fuentes</a>, <a href="#b-visit"><span class="n">03</span>la visita</a>.</p>
+
+          <div class="B-body" id="b-text">
+            <div class="B-text">
+              <h2>(1) News · Comunicado · 1 de octubre de 2026 · <a href="#" class="on" data-l="es">castellano</a> / <a href="#" data-l="en">English</a></h2>
+              <div class="lang" data-l="es">
+                <p class="first">La <a class="h k" data-f="klemm">Fundación Federico Jorge Klemm</a> comienza su custodia pro tempore de <span class="ital">Un meteorito para la Sociedad Científica Argentina del año 2105</span>, una obra del dúo de artistas Faivovich &amp; Goldberg con horizonte en el amanecer del siglo XXII.</p>
+                <p>Cuando la Sociedad Científica Argentina (SCA) vuelva a decidir el destino del meteorito, el <a class="h" data-f="2105">9 de julio de 2105<sup>2</sup></a>, este acto estará entre sus antecedentes. El 1 de octubre de 2026, en una ceremonia privada en una de las salas de la Fundación y ante pocos testigos, se firmó el primer <a class="h" data-f="comodato">acuerdo de custodia institucional<sup>3</sup></a> de la obra.</p>
+              </div>
+              <div class="lang" data-l="en" hidden>
+                <p class="first"><a class="h k" data-f="klemm">Fundación Klemm</a> is pleased to announce the beginning of its pro tempore custody of <span class="ital">Un meteorito para la Sociedad Científica Argentina del año 2105</span>, a work by the artist duo Faivovich &amp; Goldberg with a horizon at the dawn of the twenty-second century.</p>
+                <p>When the Sociedad Científica Argentina (SCA) once again decides the fate of the meteorite on <a class="h" data-f="2105">July 9, 2105<sup>2</sup></a>, this act will stand among its antecedents. On October 1, 2026, in a private ceremony in one of the Fundación’s galleries, before a limited number of witnesses, the first <a class="h" data-f="comodato">institutional custody agreement<sup>3</sup></a> for the work was signed.</p>
+              </div>
+              <div class="B-more"><a class="B-btn" href="https://www.e-flux.com/" target="_blank" rel="noopener">Leer el anuncio completo en e-flux <span aria-hidden="true">↗</span></a><small>por ahora al inicio de e-flux · cuando se publique, al artículo</small></div>
+            </div>
+            <aside class="B-aside">
+              <div class="ficha"><b>Ficha</b>Faivovich &amp; Goldberg<br><i>Un meteorito para la Sociedad Científica Argentina del año 2105</i>, 2016/2018<br>Madera, meteorito de hierro, tela<br>50 × 31 × 31 cm<br>Custodia Pro Tempore CI-01 (comodato)<br>Fundación Federico Jorge Klemm</div>
+              <div class="how">El comunicado sigue en e-flux. Los términos subrayados abren un panel: una transcripción, un documento, una fecha. Los paneles no llevan a otros paneles. Para el sistema completo, el texto enlaza al wiki de la obra.</div>
+            </aside>
+          </div>
+
+          <div class="B-src" id="b-src">
+            <h2><span>(2) Fuentes primarias · para descargar</span><span>28 fichas · 14 por digitalizar</span></h2>
+            <div class="B-cards" id="b-cards"></div>
+          </div>
+
+          <div class="B-src" id="b-visit">
+            <h2><span>(3) La visita</span><span>Fundación Federico Jorge Klemm</span></h2>
+            <div class="B-visit"><div><b>Dónde</b>Marcelo T. de Alvear 626<br>Buenos Aires, Argentina</div><div><b>Sala</b>La cápsula cuelga de la Escala Pro Tempore en la sala <span class="miss">[X]</span></div><div><b>Horarios</b><span class="miss">[X]</span><br>entrada libre</div><div><b>Contacto</b><span class="miss">[X]</span><br>Instagram <span class="miss">[@]</span></div></div>
+          </div>
+
+          <div class="B-foot" id="b-foot"><span>Fundación Federico Jorge Klemm</span><span>2105.klemm.org.ar · Custodia Pro Tempore CI-01 · actualizado <span data-live="todayShort"></span></span><span class="pg">1 de 1</span></div>
+        </div>
+
+        <div class="B-open" id="b-open">
+          <div class="bar"><span id="b-open-bar">—</span><button type="button" id="b-open-close">cerrar ✕</button></div>
+          <div class="slate" id="b-open-doc"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+
+<script>
+(() => {
+  const D = (s) => new Date(s + 'T12:00:00-03:00');
+  const T0 = D('2018-05-25'), T1 = D('2105-07-09'), CI0 = D('2025-07-09'), CI1 = D('2032-05-25');
+  const now = new Date();
+  const pct = (a, b, t) => Math.max(0, Math.min(1, (t - a) / (b - a)));
+  const meses = ['ene','feb','mar','abr','may','jun','jul','ago','sep','oct','nov','dic'];
+  const fmt = (d) => `${d.getDate()} ${meses[d.getMonth()]} ${d.getFullYear()}`;
+  const fmtShort = (d) => `${String(d.getDate()).padStart(2,'0')}.${String(d.getMonth()+1).padStart(2,'0')}.${d.getFullYear()}`;
+  function diffYMD(a, b) {
+    let y = b.getFullYear() - a.getFullYear(), m = b.getMonth() - a.getMonth(), d = b.getDate() - a.getDate();
+    if (d < 0) { m -= 1; d += new Date(b.getFullYear(), b.getMonth(), 0).getDate(); }
+    if (m < 0) { y -= 1; m += 12; }
+    return { y, m, d };
+  }
+  const left = diffYMD(now, T1);
+  let nextOct = new Date(now.getFullYear(), 9, 1); if (nextOct <= now) nextOct = new Date(now.getFullYear() + 1, 9, 1);
+  const ciP = pct(CI0, CI1, now);
+  const live = {
+    today: `hoy · ${fmt(now)}`,
+    todayShort: fmtShort(now),
+    left: `faltan ${left.y} años, ${left.m} meses y ${left.d} días para el 9.07.2105`,
+    left2: `${left.m} meses y ${left.d} días`,
+    custody: `Custodia 2 de 13 · CI-01 · Fundación Klemm`,
+    custodyN: `2 / 13`,
+    pct: `${(ciP * 100).toFixed(1).replace('.', ',')} % del septenio`,
+    ciPct: `${(ciP * 100).toFixed(1).replace('.', ',')} %`,
+    yearsLeft: `${left.y}`,
+    nextOct: `${Math.ceil((nextOct - now) / 864e5)}`
+  };
+  const fill = (root = document) => {
+    root.querySelectorAll('[data-live]').forEach(el => { const v = live[el.dataset.live]; if (v != null) el.textContent = v; });
+    root.querySelectorAll('[data-live-width="ci"]').forEach(el => el.style.width = (ciP * 100) + '%');
+  };
+  const years = [2018, 2025, 2032, 2039, 2046, 2053, 2060, 2067, 2074, 2081, 2088, 2095, 2102, 2105];
+  const glyph = (n) => n.toString(2).replace(/1/g, 'I').replace(/0/g, '·');
+  const curIdx = years.findIndex((y, i) => i < 13 && now.getFullYear() >= y && now.getFullYear() < years[i + 1]);
+  const marq = (el, items) => { if (!el) return; const s = items.map(t => `<span>${t}</span>`).join(''); el.innerHTML = s + s; };
+
+  // ── B
+  const bTrack = document.getElementById('b-track');
+  if (bTrack) {
+    const x = (t) => (pct(T0, T1, t) * 100) + '%';
+    bTrack.innerHTML = `<span class="end" style="left:0"></span><span class="solid" style="left:0;width:${x(now)}"></span><span class="dots" style="left:${x(now)};right:0"></span><span class="end" style="right:0"></span><span class="now" style="left:${x(now)}"></span><span class="lab l" style="left:0">25.05.2018</span><span class="lab" style="left:${x(now)};top:-16px">hoy</span><span class="lab r" style="left:100%">09.07.2105</span>`;
+  }
+  const doc = (code, kind, title, rows, body, img) => ({ code, kind, title, rows, body, img });
+  const SRC = '<p style="font-size:11px">Del índice de fuentes primarias del <i>Report Proposal</i> (Studio Cem Eskinazi, 21.07.2026). Documento <span class="miss">[por digitalizar]</span>.</p>';
+  const fichas = {
+    klemm: doc('DOC 01', 'documento', 'Fundación Federico Jorge Klemm', [['Rol', 'Custodio CI-01'], ['Período', '9.07.2025 → 25.05.2032'], ['Dirección', 'Marcelo T. de Alvear 626, Buenos Aires']], '<p>Primera institución en recibir la obra. La cuida junto a su Colección hasta 2032; es el primer comodato de largo plazo de su inventario.</p><p>Por testamento de Federico Klemm, la Academia Nacional de Bellas Artes integra su Consejo de Administración, y la Colección pasará al Estado argentino cuando se agote el fondo que la sostiene.</p>', 'img/2026-escala.jpg'),
+    '2105': doc('DOC 02', 'fecha', '9 de julio de 2105', [['Destinatario', 'Sociedad Científica Argentina'], ['Faltan', live.left.replace('faltan ', '').replace(' para el 9.07.2105', '')]], '<p>Ese día la SCA puede volver a elegir si incorpora a su acervo el meteorito que descansa en el vientre de la escultura. Hasta entonces la cápsula no se abre.</p>', 'img/sca.jpg'),
+    comodato: doc('DOC 03', 'documento', 'Comodato CI-01', [['Firma', '1.10.2026'], ['Período Nominal', '9.07.2025 → 25.05.2032 (cl. 3.1)'], ['Estado', 'Público']], '<p>Resumen en lenguaje llano <span class="miss">[X]</span>. El documento completo se puede descargar en PDF.</p><p style="font-size:11px">Nota técnica: el PDF del comodato tiene una huella pública que permite comprobar que nadie lo modificó. Instrucciones para verificarlo <span class="miss">[X]</span>.</p><span class="stamp">CI-01 · I·</span>', null),
+    mezza: doc('DOC 04', 'transcripcion', 'Cintia Mezza', [['Cargo', 'Jefa de Colección, Archivo y Programas Públicos'], ['Fecha', '1.10.2026'], ['Fuente', 'audio de la ceremonia [X]']], '<blockquote>La Fundación no es dueña del meteorito ni de la Colección: es custodia temporal de ambos.</blockquote><p><span class="miss">[paráfrasis del anuncio · reemplazar por la transcripción completa]</span></p>', null),
+    baur: doc('DOC 05', 'transcripcion', 'Sergio Baur', [['Cargo', 'Presidente, Academia Nacional de Bellas Artes'], ['Fecha', '1.10.2026']], '<p><span class="miss">[transcripción pendiente]</span></p><p>Lo que la Academia dijo en nombre propio sobre los artistas y la custodia.</p>', null),
+    marin: doc('DOC 06', 'transcripcion', 'Matilde Marín', [['Cargo', 'Presidenta del Consejo de Administración [confirmar]'], ['Fecha', '1.10.2026']], '<p><span class="miss">[transcripción pendiente]</span></p>', null),
+    selles: doc('DOC 07', 'transcripcion', 'José Sellés-Martínez', [['Cargo', 'Primer Vicepresidente, SCA'], ['Fecha', '1.10.2026']], '<p><span class="miss">[transcripción pendiente]</span></p>', null),
+    escala: doc('DOC 08', 'imagen', 'Escala Pro Tempore', [['Material', 'hierro'], ['Largo', '3 m'], ['Segmentos', '13 · 12 septenios + 1 trienio']], `<p>Segmenta el tiempo entre la constitución de la obra y su hora definitiva. Cada tramo lleva su número en barras y puntos: I = 1, · = 0.</p><p class="big">2018 I 2025 <span>I·</span> 2032 II 2039 I·· 2046 … 2102 II·I 2105</p>`, 'img/2026-cadena.jpg'),
+    benefactor: doc('DOC 09', 'fecha', 'Benefactor anónimo · 2016', [['Año', '2016'], ['Objeto', 'meteorito de hierro, 41 kg']], '<p>Entregó el meteorito a los artistas para que lo donaran en su nombre a la SCA. La donación no pudo completarse.</p>', null),
+    fundacional: doc('DOC 10', 'imagen', 'Custodia fundacional · 25.05.2018', [['Custodio', 'Faivovich & Goldberg'], ['Período', '25.05.2018 → 9.07.2025'], ['Cierre', 'certificado en un registro público']], '<p>Los siete años en que la obra aprendió lo que era. Texto de los artistas <span class="miss">[X]</span>.</p>', 'img/2018-capsula.jpg'),
+    septenio: doc('DOC 11', 'fecha', 'Septenio', [['Duración', '7 años'], ['Custodias', '12 septenios + trienio final']], '<p>Cada custodio tiene la obra siete años y la entrega al siguiente. El último tramo, 2102–2105, dura tres.</p>', null),
+    coloquio: doc('DOC 12', 'documento', 'Coloquio Anual', [['Cuándo', 'cada 1 de octubre, desde 2027'], ['Registro', 'acta + informe de estado']], '<p>Sobre gestión patrimonial, transiciones de colecciones y temporalidades institucionales.</p>', null),
+    aprendizaje: doc('DOC 13', 'documento', 'Programa de Aprendizaje', [['Quiénes', 'adolescentes'], ['Con', 'escuelas secundarias y universidades']], '<p>Los chicos del programa de la Fundación participan del Coloquio Anual.</p>', null),
+    amigos: doc('DOC 14', 'documento', 'Asociación de Amigos del Futuro', [['Estado', 'a constituir']], '<p>Sostiene los principios de Federico Klemm: el premio a artistas jóvenes, la entrada libre, la educación y la memoria de los archivos.</p>', null),
+    acta2018: doc('DOC 15', 'documento', 'Acta de comprobación · Escritura Nº 26', [['Fecha', '25.05.2018'], ['Escribana', 'Nora Lidia Feldman · Reg. 1297'], ['Páginas', '4'], ['Estado', 'por digitalizar']], '<p>El acta notarial del encapsulamiento: el documento que difiere la decisión sobre el meteorito al 9 de julio de 2105.</p>' + SRC, null),
+    donacion: doc('DOC 16', 'documento', 'Certificado de donación del meteorito', [['Fecha', '22.05.2018'], ['Estado', 'por digitalizar']], '<p>Certifica la entrega del meteorito a los artistas por parte del benefactor anónimo, para su donación a la SCA.</p>' + SRC, null),
+    cartasca: doc('DOC 17', 'documento', 'Carta al presidente de la SCA', [['Destinatario', 'Dr. E. Castro · Mesa de Entrada'], ['Fecha', 'c. 2016 / mayo 2018'], ['Estado', 'por digitalizar']], '<p>La oferta de donación que no pudo completarse. Fotografía del documento original.</p>' + SRC, null),
+    villaro: doc('DOC 18', 'documento', 'Julia Villaro · OtraParte Semanal', [['Fecha', '7.06.2018'], ['Tipo', 'prensa']], '<p>«Sobre <i>Un meteorito para la Sociedad Científica Argentina del año 2105</i>». Primer texto crítico sobre la obra.</p>' + SRC, null),
+    negri: doc('DOC 19', 'documento', 'Sobre la legítima tenencia · memo', [['Fecha', '27.06.2019'], ['Autor', 'Dr. J. J. Negri'], ['Estado', 'por digitalizar']], '<p>Informe legal sobre la tenencia del meteorito durante la custodia fundacional. Base de la arquitectura legal de la obra.</p>' + SRC, null),
+    toxicidad: doc('DOC 20', 'documento', 'Informe de toxicidad', [['Fecha', '15.07.2019'], ['Autor', 'Dr. José Sellés-Martínez'], ['Estado', 'por digitalizar']], '<p>Dictamen geológico sobre el meteorito encapsulado.</p>' + SRC, null),
+    estatuto: doc('DOC 21', 'documento', 'Estatuto borrador · Meteorito SCA', [['Fecha', '2019'], ['Estado', 'por digitalizar']], '<p>Primer borrador de gobernanza de la obra; antecedente de la constitución de SCA2105.</p>' + SRC, null),
+    tamayo: doc('DOC 22', 'documento', 'Carta de préstamo digital · Museo Tamayo', [['Fecha', '5.02.2021'], ['Firma', 'Humberto Moro · The Back Room, ICI'], ['Estado', 'por digitalizar']], '<p>La obra, prestada en formato digital al Museo Tamayo, Ciudad de México.</p>' + SRC, null),
+    litoteca: doc('DOC 23', 'imagen', 'Litoteca · SCA Select', [['Año', '2022'], ['Piezas', '9 piedras litográficas'], ['Estado', 'por digitalizar']], '<p>Fragmentos del archivo como piedras litográficas: Chi, Delta, Epsilon, Gamma, Mu, Phi, Psi.</p>' + SRC, null),
+    recordadores: doc('DOC 24', 'imagen', 'Recordadores 2105', [['Año', '2022'], ['Piezas', '8 · frentes y dorsos'], ['Apertura', '2101–2103'], ['Estado', 'por digitalizar']], '<p>Cartas anónimas para lectores anónimos de 2101–2103. Premio Adquisición Alberto J. Trabucco 2025, Fundación Klemm.</p>' + SRC, null),
+    saxa: doc('DOC 25', 'documento', '¡Saxa Loquuntur! · texto de sala', [['Fecha', 'nov 2022'], ['Lugar', 'Galería Barro, Buenos Aires'], ['Estado', 'por digitalizar']], '<p>Primera exposición de los Recordadores.</p>' + SRC, null),
+    mamba: doc('DOC 26', 'documento', '18 Minutos del Sol · texto de sala', [['Año', '2023'], ['Lugar', 'Museo de Arte Moderno de Buenos Aires'], ['Estado', 'por digitalizar']], '<p>Texto de la Sala A.</p>' + SRC, null),
+    trabucco: doc('DOC 27', 'documento', 'Premio Trabucco 2025 · catálogo', [['Fecha', 'ago 2025'], ['Editor', 'Fundación Federico J. Klemm'], ['Estado', 'por digitalizar']], '<p>El antecedente de la relación con la Fundación: los Recordadores reciben el Premio Adquisición Alberto J. Trabucco.</p>' + SRC, null),
+    sca2105: doc('DOC 28', 'fecha', 'SCA2105 · cierre de la custodia fundacional', [['Fecha', '9.07.2025'], ['Registro', 'certificado en un registro público'], ['Estado', 'por digitalizar']], '<p>Fotografía de la ceremonia del 9 de julio de 2025. Termina la custodia de los artistas; empieza el Período Nominal de CI-01.</p>' + SRC, null)
+  };
+  const kindLabel = { transcripcion: 'Transcripción', documento: 'Documento', imagen: 'Imagen', fecha: 'Fecha' };
+  const pool = ['img/2018-ceremonia.jpg', 'img/2018-firma.jpg', 'img/2018-martillo.jpg', 'img/2018-publico.jpg', 'img/2018-tela.jpg', 'img/2018-trompeta.jpg', 'img/2026-artistas.jpg', 'img/capucha.jpg', 'img/capucha-detalle.jpg', 'img/carpeta.jpg', 'img/dibujo-llegada.jpg', 'img/dibujo-izado.jpg'].sort(() => Math.random() - .5);
+  Object.values(fichas).forEach((f, i) => { if (!f.img) { f.img = pool[i % pool.length]; f.rand = true; } });
+  const cards = document.getElementById('b-cards');
+  Object.keys(fichas).forEach(k => {
+    const f = fichas[k]; const c = document.createElement('div'); c.className = 'B-card'; c.dataset.f = k; if (k === 'escala') c.dataset.testOpen = '1';
+    const by = f.kind === 'transcripcion' ? '<small><i>dijo</i>' + f.title + '</small>' : '';
+    c.innerHTML = `<div class="code"><span>${f.code}</span><span>2105.klemm.org.ar</span></div><figure class="duo"><img src="${f.img}" alt=""></figure><div class="t">${f.kind === 'transcripcion' ? 'Transcripción' : f.title}${by}</div><div class="tags"><b class="${f.kind === 'transcripcion' ? 'solid' : ''}">${kindLabel[f.kind]}</b><b>PDF</b>${f.rand ? '' : '<b>JPG</b>'}</div>`;
+    cards.appendChild(c); c.addEventListener('click', () => openB(k, c));
+  });
+  cards.insertAdjacentHTML('beforeend', '<div class="B-card fill" style="grid-column: span ' + (3 - Object.keys(fichas).length % 3) + '">DOC 29 → <br>las fichas que siguen se agregan a medida que se abren: actas del Coloquio, informes de estado, transcripciones.</div>');
+  const bOpen = document.getElementById('b-open'); const bDoc = document.getElementById('b-open-doc'); const bSite = document.getElementById('b-site');
+  let lastH = null;
+  function openB(k, from) {
+    const f = fichas[k]; if (!f) return;
+    lastH && lastH.classList.remove('on'); if (from && from.classList.contains('h')) { from.classList.add('on'); lastH = from; }
+    document.getElementById('b-open-bar').textContent = `${f.code} · ${kindLabel[f.kind]} · M-SCA2105-CI-01`;
+    bDoc.innerHTML = `<span class="c tl">${f.code}</span><span class="c tr">${kindLabel[f.kind]}</span><span class="c bl">CI-01 · Klemm</span><span class="c br">${live.todayShort}</span><h3>${f.title}</h3><div class="rows">${f.rows.map(r => `<div><span>${r[0]}</span><span>${r[1]}</span></div>`).join('')}</div><figure class="duo"><img src="${f.img}" alt=""><figcaption>color original</figcaption>${f.rand ? '<span class="rnd">imagen provisoria · al azar</span>' : ''}</figure>${f.body}`;
+    wireDuo(bDoc); bOpen.scrollTop = 0;
+    bOpen.classList.add('on'); placeB();
+  }
+  function placeB() {
+    if (!bOpen.classList.contains('on')) return;
+    const r = bSite.getBoundingClientRect();
+    if (r.width <= 760) { bOpen.style.cssText = ''; return; }
+    const bar = document.querySelector('.desk-bar').getBoundingClientRect().bottom;
+    bOpen.style.top = Math.max(r.top, bar, 0) + 'px';
+    bOpen.style.bottom = Math.max(0, window.innerHeight - r.bottom) + 'px';
+    bOpen.style.right = Math.max(0, window.innerWidth - r.right) + 'px';
+    bOpen.style.width = Math.min(540, r.width * .46) + 'px';
+  }
+  window.addEventListener('scroll', placeB, { passive: true }); window.addEventListener('resize', placeB);
+  document.querySelectorAll('.B-text h2 a[data-l]').forEach(a => a.addEventListener('click', (e) => {
+    e.preventDefault(); document.querySelectorAll('.B-text h2 a[data-l]').forEach(x => x.classList.toggle('on', x === a));
+    document.querySelectorAll('.B-text .lang').forEach(d => d.hidden = d.dataset.l !== a.dataset.l);
+  }));
+  document.querySelectorAll('.B-text a.h').forEach(a => { a.setAttribute('href', '#'); a.setAttribute('role', 'button'); a.addEventListener('click', (e) => { e.preventDefault(); openB(a.dataset.f, a); }); });
+  const closeB = () => { bOpen.classList.remove('on'); lastH && lastH.classList.remove('on'); };
+  document.getElementById('b-open-close').addEventListener('click', closeB);
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeB(); });
+
+  function wireDuo(root) {
+    root.querySelectorAll('figure.duo').forEach(f => {
+      if (f.dataset.w) return; f.dataset.w = 1;
+      const img = f.querySelector('img'); if (!img) return; const t = img.cloneNode(); t.alt = ''; t.className = 'tint'; t.setAttribute('aria-hidden', 'true'); img.after(t);
+      f.addEventListener('click', () => { if (!f.closest('.B-card')) f.classList.toggle('reveal'); });
+    });
+  }
+  wireDuo(document); fill();
+  (async () => {
+    const c = window.claude && window.claude.use ? await window.claude.use('comments') : null; if (!c) return;
+    const btn = document.getElementById('comment-btn'); btn.hidden = false; let lastRange = null;
+    document.addEventListener('selectionchange', () => { const sel = document.getSelection(); if (sel && sel.rangeCount && !sel.isCollapsed && !btn.contains(sel.anchorNode)) lastRange = sel.getRangeAt(0).cloneRange(); });
+    btn.addEventListener('mousedown', (e) => e.preventDefault());
+    btn.addEventListener('click', async () => { const target = lastRange && lastRange.startContainer.isConnected ? { range: lastRange } : { element: document.querySelector('.proposal:not([hidden]) .notes h2') }; lastRange = null; try { await c.openComposer(target); } catch (e) { if (e && e.code === 'unavailable') btn.hidden = true; } });
+  })();
+
+  document.querySelectorAll('.seg button').forEach(b => b.addEventListener('click', () => {
+    document.querySelectorAll('.seg button').forEach(x => x.setAttribute('aria-pressed', x === b));
+    document.querySelectorAll('.frame').forEach(f => f.classList.toggle('phone', b.dataset.v === 'phone'));
+    document.dispatchEvent(new CustomEvent('viewchange'));
+  }));
+  const h = (location.hash || '').replace('#', '');
+  if (h.includes('phone')) document.getElementById('v-phone').click();
+  if (h.includes('open')) setTimeout(() => { const t = document.querySelector('[data-test-open]'); if (t) { t.scrollIntoView({ block: 'center' }); t.click(); } }, 150);
+})();
+</script>

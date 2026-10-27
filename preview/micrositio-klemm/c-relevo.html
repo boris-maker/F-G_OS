@@ -1,0 +1,601 @@
+<title>Micrositio 2105 · C · Relevo</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="robots" content="noindex, nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700&family=Barlow+Condensed:wght@500;600;700&family=IBM+Plex+Mono:wght@400;500&family=Libre+Franklin:wght@400;500;600;700&family=Old+Standard+TT:ital,wght@0,400;0,700;1,400&display=swap">
+<style>
+/* v0.2 · 26.10.2026 · Layout: a review desk holds three full site mocks, each a container-query frame
+   (desktop / phone). Tokens: one blue (the capucha), one grey (Cem's paper), black as the third tone
+   in A and C, one signal green reserved for what is alive (C only). Nothing else. */
+:root {
+  --blue: #2e23c2;
+  --paper: #e6e6e6;
+  --black: #0b0b10;            /* black with a trace of blue */
+  --desk: #d4d4d1;
+  --signal: #c8ff1e;           /* C only: live state */
+  --blue-70: rgb(46 35 194 / .72);
+  --blue-45: rgb(46 35 194 / .45);
+  --blue-18: rgb(46 35 194 / .18);
+  --blue-08: rgb(46 35 194 / .08);
+  --paper-45: rgb(230 230 230 / .45);
+  --paper-18: rgb(230 230 230 / .18);
+  --grad-sky: linear-gradient(180deg, #2e23c2 0%, #211a8c 38%, #120f3a 72%, #0b0b10 100%);
+  --grad-dusk: linear-gradient(180deg, #0b0b10 0%, #1b1660 55%, #2e23c2 100%);
+  --serif: "Old Standard TT", "Scotch Text", Georgia, "Times New Roman", serif;
+  --cond: "Barlow Condensed", "Arial Narrow", "Helvetica Neue", sans-serif;
+  --mono: "IBM Plex Mono", "Letter Gothic", Menlo, Consolas, monospace;
+  --grot: "Inter Tight", "Helvetica Neue", Arial, sans-serif;
+  --sans: "Libre Franklin", "News Gothic", "Helvetica Neue", Arial, sans-serif;
+  color-scheme: light;
+}
+* { box-sizing: border-box; }
+html, body { overflow-x: clip; }
+body { margin: 0; background: var(--desk); color: var(--blue); font-family: var(--sans); font-size: 15px; line-height: 1.45; -webkit-font-smoothing: antialiased; }
+a { color: inherit; }
+button { font: inherit; color: inherit; }
+:focus-visible { outline: 2px solid currentColor; outline-offset: 2px; }
+img { max-width: 100%; display: block; }
+h1, h2, h3 { overflow-wrap: anywhere; min-width: 0; }
+
+/* ───────── review desk ───────── */
+.desk { padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); padding-block: 0 72px; }
+.desk-bar { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 50; background: var(--desk); border-bottom: 1px solid var(--blue-18); margin-inline: calc(-1 * max(16px, env(safe-area-inset-left, 0px))); padding: 10px max(16px, env(safe-area-inset-left, 0px)); display: flex; flex-wrap: wrap; align-items: center; gap: 10px 18px; font-family: var(--mono); font-size: 12px; }
+.desk-bar .who b { font-weight: 500; }
+.tabs, .seg { display: flex; border: 1px solid var(--blue); border-radius: 2px; overflow: hidden; }
+.tabs button, .seg button { background: none; border: 0; padding: 6px 12px; cursor: pointer; font-family: var(--mono); font-size: 12px; letter-spacing: .02em; white-space: nowrap; }
+.tabs button + button, .seg button + button { border-left: 1px solid var(--blue); }
+.tabs button[aria-selected="true"], .seg button[aria-pressed="true"] { background: var(--blue); color: var(--paper); }
+.desk-bar .spacer { flex: 1; }
+.btn-comment { background: none; border: 1px solid var(--blue); padding: 6px 12px; cursor: pointer; font-family: var(--mono); font-size: 12px; border-radius: 2px; }
+.btn-comment:hover { background: var(--blue); color: var(--paper); }
+
+.brief { max-width: 1240px; margin: 28px auto 0; display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); gap: 28px; }
+.brief h1 { font-family: var(--serif); font-weight: 400; font-size: clamp(30px, 4.4vw, 52px); line-height: 1.02; margin: 0 0 14px; letter-spacing: -.01em; text-wrap: balance; }
+.brief p { margin: 0 0 10px; max-width: 62ch; }
+.kick { font-family: var(--mono); font-size: 11.5px; letter-spacing: .06em; text-transform: uppercase; margin-bottom: 12px; }
+.brief dl { margin: 0; display: grid; grid-template-columns: max-content minmax(0, 1fr); gap: 7px 14px; font-size: 13.5px; border-top: 1px solid var(--blue-45); padding-top: 12px; }
+.brief dt { font-family: var(--mono); font-size: 11px; letter-spacing: .05em; text-transform: uppercase; padding-top: 2px; }
+.brief dd { margin: 0; }
+
+/* board study */
+.study { max-width: 1240px; margin: 36px auto 0; }
+.study h2 { font-family: var(--serif); font-weight: 400; font-size: clamp(24px, 3vw, 34px); margin: 0 0 6px; line-height: 1.1; }
+.study .sub { font-size: 13.5px; max-width: 70ch; margin: 0 0 18px; }
+.crit { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 1px; background: var(--blue-45); border: 1px solid var(--blue-45); }
+.crit article { background: var(--desk); padding: 10px 10px 12px; display: grid; grid-template-rows: auto auto 1fr auto; gap: 8px; min-width: 0; }
+.crit figure { margin: 0; aspect-ratio: 4 / 3; overflow: hidden; background: var(--paper); }
+.crit figure img { width: 100%; height: 100%; object-fit: cover; object-position: top; }
+.crit h3 { font-family: var(--mono); font-weight: 500; font-size: 11px; letter-spacing: .05em; text-transform: uppercase; margin: 0; }
+.crit h3 span { display: block; font-weight: 400; text-transform: none; letter-spacing: 0; opacity: .8; }
+.crit p { margin: 0; font-size: 12.5px; line-height: 1.4; }
+.crit .to { font-family: var(--mono); font-size: 11px; display: flex; gap: 4px; }
+.crit .to b { font-weight: 500; border: 1px solid var(--blue); padding: 0 6px; }
+.crit .to b.on { background: var(--blue); color: var(--paper); }
+
+.notes { max-width: 1240px; margin: 44px auto 14px; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1fr); gap: 22px; }
+.notes h2 { grid-column: 1 / -1; font-family: var(--serif); font-weight: 400; font-size: clamp(24px, 3vw, 34px); margin: 0; line-height: 1.1; text-wrap: balance; }
+.notes h2 span { font-family: var(--cond); font-weight: 600; font-size: .7em; letter-spacing: .02em; border: 1.5px solid var(--blue); border-radius: 50%; display: inline-grid; place-items: center; width: 1.45em; height: 1.45em; margin-right: 10px; vertical-align: .12em; }
+.notes h3 { font-family: var(--mono); font-weight: 500; font-size: 11px; letter-spacing: .06em; text-transform: uppercase; margin: 0 0 6px; padding-bottom: 6px; border-bottom: 1px solid var(--blue-45); }
+.notes ul { margin: 0; padding-left: 16px; font-size: 13.5px; }
+.notes li { margin-bottom: 5px; }
+.notes p { margin: 0 0 8px; font-size: 13.5px; }
+.notes .pal { display: flex; gap: 6px; margin-top: 8px; }
+.notes figure.ref { margin: 0 0 10px; display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
+.notes figure.ref img { width: 100%; border: 1px solid var(--blue-18); }
+.notes .pal i { width: 22px; height: 22px; border: 1px solid var(--blue-45); display: inline-block; }
+
+.frame { max-width: 1240px; margin: 0 auto; background: var(--paper); box-shadow: 0 1px 0 var(--blue-18), 0 20px 50px -30px rgb(20 16 90 / .45); transition: max-width .35s ease; }
+.frame.phone { max-width: 390px; }
+.urlbar { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 5px 12px; font-family: var(--mono); font-size: 11px; border-bottom: 1px solid var(--blue-18); background: #dcdcdb; color: var(--blue); }
+.site { container-type: inline-size; container-name: site; position: relative; overflow: hidden; }
+.proposal[hidden] { display: none !important; }
+
+/* ───────── shared atoms ───────── */
+.duo { position: relative; margin: 0; overflow: hidden; background: var(--blue); cursor: crosshair; }
+.duo img { width: 100%; height: 100%; object-fit: cover; }
+.duo img.tint { position: absolute; inset: 0; filter: url(#duotone); transition: opacity .6s ease, filter .5s ease; }
+.duo.night img.tint { filter: url(#duo-night); }
+.duo:hover img.tint, .duo.reveal img.tint { opacity: 0; }
+.duo figcaption { position: absolute; left: 8px; bottom: 7px; font-family: var(--mono); font-size: 10.5px; color: var(--paper); background: var(--blue); padding: 1px 5px; opacity: 0; transition: opacity .3s; }
+.duo:hover figcaption, .duo.reveal figcaption { opacity: 1; }
+.half { position: relative; overflow: hidden; background: var(--black); }
+.half img { width: 100%; height: 100%; object-fit: cover; filter: grayscale(1) contrast(1.35) brightness(1.05); }
+.half::after { content: ""; position: absolute; inset: 0; background: radial-gradient(circle, transparent 38%, var(--black) 42%) 0 0 / 4px 4px; mix-blend-mode: multiply; opacity: .55; pointer-events: none; }
+.miss { font-family: var(--mono); font-size: .82em; background: var(--blue-08); padding: 0 3px; white-space: nowrap; }
+.glyph { font-family: var(--cond); font-weight: 700; letter-spacing: .08em; }
+.marquee { overflow: hidden; white-space: nowrap; }
+.marquee > div { display: inline-flex; gap: 0; animation: slide 38s linear infinite; }
+.marquee span { padding-inline: 18px; }
+@keyframes slide { to { transform: translateX(-50%); } }
+
+/* ═════════════ C · RELEVO · v0.3 ═════════════
+   Rebuilt 26.10 (evening) on Boris's reference, a screen recording of archon.inc: a colour-card
+   cover, dark sections whose paragraph decodes on entry, halftone photos, a proof card with a
+   big figure, custody cards that stack like a relay, an archive that runs sideways with the scroll.
+   The blue card is the capucha blue; every other colour comes from the reference. */
+.C { --ink: #18171c; --pp: #efefef; --pk: #f6a6d9; --or: #ff5b00; --ye: #ffb52e; --gr: #10804a; --cy: #42c3ff;
+  --H: clamp(560px, calc(100svh - 64px), 860px); --pad: clamp(12px, 1.6cqi, 22px); --hh: clamp(44px, 4.4cqi, 56px);
+  font-family: var(--grot); font-weight: 500; letter-spacing: -.01em; background: var(--pp); color: var(--ink); }
+.C-scroll { height: var(--H); overflow-y: auto; overflow-x: hidden; overscroll-behavior: contain; position: relative; }
+.C a { text-decoration: none; }
+.C .miss { background: rgb(24 23 28 / .08); }
+.C-hd::before { content: ""; display: inline-block; width: .6em; height: .6em; border-radius: 50%; background: currentColor; margin-right: .2em; vertical-align: .04em; }
+.C-lbl { display: flex; gap: 8px; align-items: flex-start; }
+.C-lbl::before { content: ""; flex: none; width: 7px; height: 7px; border-radius: 50%; background: currentColor; margin-top: 2px; }
+.C-lbl span { max-width: 10em; }
+.arr { flex: none; width: 16px; height: 16px; border-radius: 50%; background: #fff; color: var(--ink); display: inline-grid; place-items: center; }
+.arr svg { width: 9px; height: 9px; }
+
+/* header: transparent, its ink follows the section underneath */
+.C-head { position: sticky; top: 0; height: 0; z-index: 40; }
+.C-bar { position: absolute; inset: 0 0 auto 0; height: var(--hh); display: grid; grid-template-columns: 19% 28% minmax(0, 1fr) 16%; align-items: center; padding-left: var(--pad); font-size: clamp(10px, .95cqi, 12.5px); color: var(--ink); transition: color .35s; pointer-events: none; }
+.C-bar > * { pointer-events: auto; }
+.C-head[data-t="dark"] .C-bar { color: #fff; }
+.C-logo { font-size: clamp(17px, 1.8cqi, 23px); letter-spacing: -.045em; justify-self: start; }
+.C-bar nav { display: flex; gap: clamp(14px, 3cqi, 40px); }
+.C-cta { align-self: start; height: calc(var(--hh) + 8px); background: var(--ink); color: #fff; display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 8px 12px 0; }
+
+/* cover */
+.C-hero { position: relative; height: var(--H); overflow: hidden; background: var(--pp); }
+.C-hero .shade { position: absolute; left: 38%; right: 0; top: 64%; bottom: 0; background: var(--ink); }
+.C-or { position: absolute; top: var(--hh); left: 1.4%; right: 1.2%; bottom: 10px; background: var(--or); padding: clamp(12px, 1.6cqi, 22px) var(--pad); }
+.C-or h1 { font-size: clamp(28px, 4.1cqi, 56px); line-height: .98; letter-spacing: -.045em; font-weight: 500; margin: 0; max-width: 11em; }
+.C-or .row { position: absolute; left: var(--pad); right: var(--pad); top: 31%; border-top: 1px solid rgb(24 23 28 / .55); padding-top: 10px; display: grid; grid-template-columns: 46% minmax(0, 1fr) auto; gap: 16px; font-size: clamp(9px, .82cqi, 11px); line-height: 1.3; }
+.C-or .row .cap { text-transform: uppercase; font-weight: 700; letter-spacing: .02em; }
+.C-or .row p { margin: 0; max-width: 30ch; }
+.C-seals { display: flex; }
+.C-seals span { width: 30px; height: 30px; border-radius: 50%; background: var(--blue); color: #fff; box-shadow: 0 0 0 2px var(--or), inset 0 0 0 2px #fff; font-family: var(--cond); font-weight: 700; font-size: 10px; letter-spacing: .06em; display: grid; place-items: center; }
+.C-seals span + span { margin-left: -5px; }
+.C-glyph { position: absolute; left: 46.5%; bottom: 7%; width: 34%; color: var(--ink); overflow: visible; }
+.C-blue { position: absolute; left: 0; bottom: -56px; width: 38%; height: calc(34% + 56px); background: var(--blue); color: #fff; padding: var(--pad); display: flex; flex-direction: column; justify-content: flex-end; z-index: 2; will-change: transform; }
+.C-blue::after { content: ""; position: absolute; top: 12px; right: 12px; width: 13px; height: 13px; border-radius: 50%; background: var(--or); }
+.C-blue b { display: block; font-weight: 500; font-size: clamp(17px, 2.2cqi, 30px); line-height: 1.02; letter-spacing: -.03em; max-width: 12em; margin-bottom: 26px; }
+.C-btn { display: flex; align-items: center; justify-content: space-between; gap: 10px; background: #f4f4f4; color: var(--ink); height: 42px; padding: 0 12px; font-size: clamp(10px, .9cqi, 12px); width: min(100%, 15em); }
+.C-btn .arr { background: var(--ink); color: #fff; }
+
+/* dark sections */
+.C-dark { position: relative; background: var(--ink); color: var(--pk); }
+.C-meta { margin: 0 var(--pad); border-top: 1px solid currentColor; padding-top: 10px; display: grid; grid-template-columns: 25% minmax(0, 39%) minmax(0, 1fr); font-size: clamp(9px, .82cqi, 11px); line-height: 1.25; }
+.C-dark .C-meta { border-top-color: rgb(246 166 217 / .55); }
+.C-light .C-meta, .C-foot .C-meta { border-top-color: rgb(24 23 28 / .45); }
+.C-meta .note { max-width: 27em; }
+.C-say { font-size: clamp(19px, 2.85cqi, 38px); line-height: 1.04; letter-spacing: -.03em; font-weight: 500; margin: 0; }
+.C-say .scr { opacity: .38; }
+.C-s1 { padding-top: calc(var(--hh) + 14px); }
+.C-s1 .C-say { margin: clamp(44px, 7cqi, 92px) var(--pad) clamp(20px, 2.6cqi, 32px) 25%; text-indent: 15cqi; }
+.C-s1 .C-ht { margin-left: 25%; height: calc(var(--H) * .8); }
+.C-s2 { padding-top: clamp(50px, 9cqi, 120px); }
+.C-arrow { display: block; width: clamp(56px, 12.5cqi, 160px); margin: 0 0 14px var(--pad); color: var(--pk); }
+.C-s2 .C-say { margin: clamp(44px, 6cqi, 80px) var(--pad) clamp(34px, 5cqi, 64px); max-width: 66%; text-indent: 23.5cqi; }
+
+/* halftone: grey, screened, tinted; the original colour comes back on hover */
+.C-ht { position: relative; margin: 0; overflow: hidden; background: var(--ink); cursor: crosshair; }
+.C-ht img { width: 100%; height: 100%; object-fit: cover; filter: grayscale(1) contrast(1.55) brightness(1.06); transition: filter .6s; }
+.C-ht::before { content: ""; position: absolute; inset: 0; z-index: 1; background: var(--pk); mix-blend-mode: multiply; transition: opacity .6s; pointer-events: none; }
+.C-ht::after { content: ""; position: absolute; inset: 0; z-index: 2; background: radial-gradient(circle, transparent 0 1px, rgb(24 23 28 / .92) 1.7px) 0 0 / 4px 4px; mix-blend-mode: multiply; opacity: .6; transition: opacity .6s; pointer-events: none; }
+.C-ht:hover img, .C-ht.reveal img { filter: none; }
+.C-ht:hover::before, .C-ht:hover::after, .C-ht.reveal::before, .C-ht.reveal::after { opacity: 0; }
+
+/* proof: a wide picture, the green card, the artists' sentence */
+.C-proof { position: relative; height: calc(var(--H) * 1.3); }
+.C-proof .wide { position: absolute; left: var(--pad); top: 0; width: 59%; height: calc(var(--H) * .52); }
+.C-green { position: absolute; right: 0; top: calc(var(--H) * .36); width: 37.8%; height: calc(var(--H) * .74); z-index: 2; background: var(--gr); color: #fff; padding: 12px var(--pad) 0; display: flex; flex-direction: column; }
+.C-green .dot { position: absolute; top: 14px; left: 14px; width: 14px; height: 14px; border-radius: 50%; background: var(--ink); }
+.C-green .num { align-self: flex-end; overflow: hidden; font-size: clamp(64px, 9.4cqi, 124px); line-height: .9; letter-spacing: -.055em; padding-bottom: .04em; font-variant-numeric: tabular-nums; }
+.C-green .num span { display: block; transform: translateY(105%); transition: transform 1.1s cubic-bezier(.2, .8, .2, 1); }
+.C-green.in .num span { transform: none; }
+.C-green .lab { margin-top: auto; border-bottom: 1px solid rgb(255 255 255 / .6); padding-bottom: 8px; font-size: clamp(9px, .82cqi, 11px); }
+.C-green p { margin: 18px 0 0; font-size: clamp(17px, 2.15cqi, 28px); line-height: 1.04; letter-spacing: -.03em; max-width: 12.5em; }
+.C-green .C-btn { margin-top: clamp(26px, 4cqi, 52px); height: clamp(42px, 4.6cqi, 60px); width: 46%; align-items: flex-end; padding-bottom: 12px; }
+.C-quote { position: absolute; left: var(--pad); top: calc(var(--H) * .9); display: grid; grid-template-columns: clamp(62px, 8.5cqi, 104px) minmax(0, 17em); gap: 14px; align-items: start; }
+.C-quote .C-ht { aspect-ratio: 3 / 4; }
+.C-quote .qm { display: block; font-size: clamp(26px, 2.6cqi, 36px); line-height: .7; font-weight: 700; margin-bottom: 10px; }
+.C-quote p { margin: 0; font-size: clamp(13px, 1.3cqi, 17px); line-height: 1.18; letter-spacing: -.015em; }
+.C-quote .ty { opacity: .35; } .C-quote .ty0 { visibility: hidden; }
+.C-proof .who { position: absolute; left: var(--pad); bottom: clamp(16px, 3cqi, 32px); font-size: clamp(9px, .82cqi, 11px); line-height: 1.3; }
+
+/* light: thirteen custodies */
+.C-light { position: relative; background: var(--pp); color: var(--ink); }
+.C-h2 { font-size: clamp(28px, 4.1cqi, 56px); line-height: .98; letter-spacing: -.045em; font-weight: 500; margin: 0 var(--pad) clamp(18px, 2.6cqi, 32px); max-width: 9em; }
+.C-s3 { padding-top: clamp(64px, 10cqi, 130px); }
+.C-stack { position: relative; padding: clamp(60px, 9cqi, 120px) 0 calc(var(--H) * .12); }
+.C-card { position: sticky; top: var(--t); margin: 0 var(--r) calc(var(--H) * .18) var(--l); height: calc(var(--H) - var(--t) - 12px); background: var(--c); display: grid; grid-template-columns: 37% minmax(0, 1fr); padding: 12px 0 0 var(--pad); overflow: hidden; }
+.C-card:last-child { margin-bottom: 0; }
+.C-card .k { display: block; font-size: clamp(8.5px, .78cqi, 10.5px); margin-bottom: 4px; }
+.C-card .lft, .C-card .rgt { position: relative; z-index: 2; }
+.C-card .no { font-size: clamp(54px, 7.4cqi, 100px); line-height: .86; letter-spacing: -.065em; font-weight: 600; }
+.C-card .rgt { border-left: 1px solid rgb(24 23 28 / .7); margin-top: 12px; padding: 0 var(--pad) 0 14px; display: flex; flex-direction: column; min-width: 0; }
+.C-card .sv { font-size: clamp(13px, 1.45cqi, 19px); line-height: 1.05; letter-spacing: -.02em; }
+.C-card .ic { position: absolute; right: var(--pad); top: 0; display: flex; }
+.C-card .ic span { height: 19px; min-width: 19px; padding: 0 5px; border-radius: 10px; background: var(--ink); color: var(--c); font-family: var(--cond); font-weight: 700; font-size: 10px; letter-spacing: .08em; display: grid; place-items: center; }
+.C-card .ic span + span { margin-left: 2px; }
+.C-card .txt { margin-top: auto; padding-bottom: clamp(18px, 3.2cqi, 42px); }
+.C-card .txt .C-lbl { font-size: clamp(8.5px, .78cqi, 10.5px); margin-bottom: 10px; }
+.C-card .txt p { margin: 0; font-size: clamp(16px, 2.05cqi, 27px); line-height: 1.04; letter-spacing: -.03em; text-indent: 9cqi; max-width: 19em; }
+.C-card figure { position: absolute; left: 3%; bottom: 0; width: 62%; height: 74%; margin: 0; z-index: 1; mix-blend-mode: multiply; pointer-events: none; -webkit-mask-image: linear-gradient(to top, #000 45%, transparent 100%), linear-gradient(to left, transparent, #000 30%); -webkit-mask-composite: source-in; mask-image: linear-gradient(to top, #000 45%, transparent 100%), linear-gradient(to left, transparent, #000 30%); mask-composite: intersect; }
+.C-card figure img { width: 100%; height: 100%; object-fit: cover; filter: grayscale(1) contrast(1.1) brightness(1.3); opacity: .6; }
+.C-card figure::after { content: ""; position: absolute; inset: 0; background: radial-gradient(circle, transparent 0 1px, var(--c) 1.7px) 0 0 / 4px 4px; opacity: .55; }
+
+/* archive: pinned, runs sideways */
+.C-blog { position: relative; }
+.C-pin { position: sticky; top: 0; overflow: hidden; padding-top: clamp(64px, 9cqi, 120px); }
+.C-blog .C-h2 { max-width: 6em; }
+.C-track { display: flex; gap: clamp(8px, 1cqi, 12px); padding: clamp(40px, 6cqi, 72px) var(--pad) 0; will-change: transform; }
+.C-post { flex: 0 0 30%; min-height: calc(var(--H) * .62); display: flex; flex-direction: column; }
+.C-post figure { margin: 0; overflow: hidden; background: rgb(24 23 28 / .06); }
+.C-post figure img { width: 100%; height: 100%; object-fit: cover; }
+.C-post figure span { height: 100%; display: grid; place-items: center; border: 1px dashed rgb(24 23 28 / .4); font-size: 11px; }
+.C-post h3 { margin: 10px 0 0; font-weight: 500; font-size: clamp(14px, 1.45cqi, 19px); line-height: 1.06; letter-spacing: -.02em; max-width: 17em; }
+.C-post .when { margin-top: auto; padding: 24px 0 10px; border-bottom: 1px solid rgb(24 23 28 / .5); display: grid; grid-template-columns: 31% minmax(0, 1fr); align-items: end; font-size: clamp(8.5px, .78cqi, 10.5px); line-height: 1.3; }
+.C-post .when b { font-weight: 500; font-size: clamp(18px, 2cqi, 26px); letter-spacing: -.035em; line-height: 1; }
+.C-post .when sup { font-size: 9px; letter-spacing: 0; margin-left: 4px; vertical-align: 1.1em; }
+.C-post.next { opacity: .5; }
+
+/* visit */
+.C-foot { background: var(--pp); padding-top: clamp(60px, 9cqi, 110px); }
+.C-end { position: relative; margin-top: clamp(40px, 6cqi, 80px); background: var(--or); padding: clamp(16px, 2.4cqi, 30px) var(--pad) clamp(22px, 3cqi, 40px); display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 20px; align-items: end; }
+.C-esc { display: flex; flex-wrap: wrap; gap: 4px 14px; font-family: var(--cond); font-weight: 700; font-size: clamp(14px, 1.8cqi, 24px); letter-spacing: .06em; }
+.C-esc .on { background: var(--blue); color: #fff; padding: 0 5px; }
+.C-end small { display: block; font-size: clamp(9px, .82cqi, 11px); margin-top: 14px; letter-spacing: 0; font-family: var(--grot); font-weight: 500; }
+.C-end .C-glyph { position: static; width: clamp(90px, 14cqi, 190px); }
+
+@container site (max-width: 760px) {
+  .C { --pad: 12px; --hh: 46px; }
+  .C-bar { grid-template-columns: minmax(0, 1fr) 48%; }
+  .C-bar .mail, .C-bar nav { display: none; }
+  .C-or h1 { font-size: 9cqi; }
+  .C-or .row { top: 36%; grid-template-columns: minmax(0, 1fr) auto; gap: 8px; }
+  .C-or .row p { grid-column: 1 / -1; grid-row: 2; }
+  .C-glyph { left: auto; right: 5%; bottom: 37%; width: 44%; }
+  .C-blue { width: 78%; height: calc(31% + 56px); }
+  .C-blue b { font-size: 6.2cqi; margin-bottom: 18px; }
+  .C-meta { grid-template-columns: 18% minmax(0, 1fr); }
+  .C-meta .note { grid-column: 2; margin-top: 8px; }
+  .C-s1 .C-say, .C-s2 .C-say { margin-left: var(--pad); margin-right: var(--pad); max-width: none; font-size: 6.4cqi; text-indent: 18cqi; }
+  .C-s1 .C-ht { margin-left: var(--pad); height: calc(var(--H) * .5); }
+  .C-proof { height: auto; display: flex; flex-direction: column; gap: 24px; padding-bottom: 28px; }
+  .C-proof .wide, .C-green, .C-quote, .C-proof .who { position: relative; inset: auto; }
+  .C-proof .wide { width: auto; height: calc(var(--H) * .42); margin-right: var(--pad); }
+  .C-green { width: auto; height: auto; min-height: 400px; margin-left: 12%; }
+  .C-green .C-btn { width: 64%; }
+  .C-quote { left: var(--pad); grid-template-columns: 70px minmax(0, 1fr); padding-right: 24px; }
+  .C-quote p { font-size: 4.4cqi; }
+  .C-proof .who { left: var(--pad); bottom: auto; }
+  .C-card { margin-left: 6px !important; margin-right: 6px !important; grid-template-columns: minmax(0, 1fr); grid-template-rows: auto minmax(0, 1fr); padding-right: var(--pad); }
+  .C-card .no { font-size: 16cqi; }
+  .C-card .rgt { border-left: 0; padding: 0; margin-top: 10px; }
+  .C-card .ic { top: -64px; right: 0; }
+  .C-card .txt p { text-indent: 0; font-size: 5.2cqi; }
+  .C-card figure { width: 94%; height: 58%; }
+  .C-post { flex-basis: 76%; }
+  .C-end { grid-template-columns: minmax(0, 1fr); }
+}
+
+@media (max-width: 900px) {
+  .brief, .notes { grid-template-columns: minmax(0, 1fr); }
+  .crit { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
+}
+@media (max-width: 520px) { .crit { grid-template-columns: minmax(0, 1fr); } }
+@media (prefers-reduced-motion: reduce) {
+  * { transition: none !important; animation: none !important; scroll-behavior: auto !important; }
+}
+</style>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <filter id="duotone" color-interpolation-filters="sRGB">
+    <feColorMatrix type="matrix" values="0.2126 0.7152 0.0722 0 0  0.2126 0.7152 0.0722 0 0  0.2126 0.7152 0.0722 0 0  0 0 0 1 0"/>
+    <feComponentTransfer><feFuncR type="gamma" exponent="1.5"/><feFuncG type="gamma" exponent="1.5"/><feFuncB type="gamma" exponent="1.5"/></feComponentTransfer>
+    <feComponentTransfer>
+      <feFuncR type="table" tableValues="0.180 0.902"/>
+      <feFuncG type="table" tableValues="0.137 0.902"/>
+      <feFuncB type="table" tableValues="0.761 0.902"/>
+    </feComponentTransfer>
+  </filter>
+  <filter id="duo-night" color-interpolation-filters="sRGB">
+    <feColorMatrix type="matrix" values="0.2126 0.7152 0.0722 0 0  0.2126 0.7152 0.0722 0 0  0.2126 0.7152 0.0722 0 0  0 0 0 1 0"/>
+    <feComponentTransfer><feFuncR type="gamma" exponent="1.3"/><feFuncG type="gamma" exponent="1.3"/><feFuncB type="gamma" exponent="1.3"/></feComponentTransfer>
+    <feComponentTransfer>
+      <feFuncR type="table" tableValues="0.043 0.180 0.70"/>
+      <feFuncG type="table" tableValues="0.043 0.137 0.68"/>
+      <feFuncB type="table" tableValues="0.063 0.761 0.95"/>
+    </feComponentTransfer>
+  </filter>
+</svg>
+
+<div class="desk">
+  <div class="desk-bar">
+    <div class="who"><b>Micrositio 2105</b> · C · Relevo · v0.3 · 26.10.2026</div>
+    <div class="spacer"></div>
+    <button type="button" class="btn-comment" id="comment-btn" hidden>Comentar</button>
+    <div class="seg" aria-label="Ancho de vista">
+      <button id="v-desk" aria-pressed="true" data-v="desk">Escritorio</button>
+      <button id="v-phone" aria-pressed="false" data-v="phone">Teléfono</button>
+    </div>
+  </div>
+
+  <section class="proposal" id="p-c" data-p="c">
+    <div class="notes">
+      <h2><span>C</span>Relevo · tarjetas de color que se pasan la obra</h2>
+      <div>
+        <h3>Idea</h3>
+        <p>Rehecha de cero el 26.10 sobre una referencia que pasó Boris: una grabación del sitio de Archon. La custodia se lee como un relevo. Cada custodio es una tarjeta de color que entra desde abajo y se apoya sobre la anterior sin taparla del todo. Las trece custodias caben en cuatro tarjetas: la fundacional, Klemm, los diez septenios sin nombre y el trienio final.</p>
+        <p>Entre medio van secciones negras. Su párrafo llega con las letras corridas y se acomoda al entrar, y sus fotos están en trama rosa y recuperan el color al pasar el mouse. Abajo, la bitácora corre de costado con el scroll.</p>
+        <div class="pal"><i style="background:#ff5b00"></i><i style="background:#2e23c2"></i><i style="background:#18171c"></i><i style="background:#f6a6d9"></i><i style="background:#10804a"></i><i style="background:#ffb52e"></i><i style="background:#42c3ff"></i><i style="background:#efefef"></i></div>
+      </div>
+      <div>
+        <h3>Mapa</h3>
+        <ul>
+          <li>Portada: tarjeta naranja con el título; la tarjeta azul de la capucha sube más lento y se va por arriba; el glifo →I· es la custodia 2 en la Escala</li>
+          <li>1.0 La custodia: el comienzo del comunicado se descifra; la cápsula en la Escala, en trama</li>
+          <li>2.0 La obra: 2016, 2018, la cita; tarjeta verde con los años que faltan, calculados hoy; la frase de los artistas se escribe sola</li>
+          <li>3.0 Trece custodias: cuatro tarjetas que se apilan</li>
+          <li>4.0 Bitácora: fichas que corren de costado</li>
+          <li>5.0 Visita · la Escala completa</li>
+        </ul>
+      </div>
+      <div>
+        <h3>De la referencia</h3>
+        <figure class="ref"><img src="img/ref-archon.jpg" alt="Portada de la referencia: tarjeta naranja con el título, tarjeta azul abajo a la izquierda, glifo negro grande"><img src="img/ref-archon-2.jpg" alt="Las tarjetas de pasos apiladas en la referencia"></figure>
+        <ul>
+          <li><b>Igual:</b> grilla, grotesca, numeración 1.0–5.0, la caja negra fija arriba a la derecha, el texto que se descifra, las tarjetas que se apilan transparentándose al entrar, el carrusel lateral</li>
+          <li><b>Cambiado:</b> la tarjeta azul es el azul de la capucha; el glifo es la Escala, no un ideograma; todas las cifras se calculan con la fecha de hoy</li>
+          <li><b>A decidir:</b> el naranja, el rosa y el verde no son del sistema de Cem; acá las fotos oficiales van en trama rosa, no en duotono azul</li>
+        </ul>
+      </div>
+    </div>
+    <div class="frame">
+      <div class="urlbar"><span>2105.klemm.org.ar</span><b class="glyph">C · relevo</b></div>
+      <div class="site C">
+        <div class="C-scroll" id="c-scroll">
+          <header class="C-head" id="c-head" data-t="light">
+            <div class="C-bar">
+              <a class="C-logo" href="#c-top">2105</a>
+              <span class="mail">Marcelo T. de Alvear 626</span>
+              <nav aria-label="Secciones"><a href="#c-s1">La custodia</a><a href="#c-s2">La obra</a><a href="#c-s3">Custodias</a><a href="#c-s4">Bitácora</a></nav>
+              <a class="C-cta" href="https://www.e-flux.com/" target="_blank" rel="noopener"><span>Leer en e-flux</span><i class="arr"><svg viewBox="0 0 10 10" aria-hidden="true"><path d="M1.5 5h6.5M5.2 2.2 8 5 5.2 7.8" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></i></a>
+            </div>
+          </header>
+
+          <section class="C-hero" id="c-top" data-t="light">
+            <div class="shade"></div>
+            <div class="C-or">
+              <h1 class="C-hd">Un meteorito para la Sociedad Científica Argentina del año 2105</h1>
+              <div class="row">
+                <span class="cap">Faivovich &amp; Goldberg<br>2016/2018</span>
+                <p>La Fundación Federico Jorge Klemm custodia la obra del 9 de julio de 2025 al 25 de mayo de 2032.</p>
+                <span class="C-seals" aria-hidden="true"><span>I·</span><span>2105</span></span>
+              </div>
+              <svg class="C-glyph" viewBox="0 0 300 140" aria-label="→ I· · custodia 2 en la Escala Pro Tempore" role="img"><path d="M0 70H150M98 17l53 53-53 53M206 4v132" fill="none" stroke="currentColor" stroke-width="13"/><circle cx="266" cy="70" r="14" fill="currentColor"/></svg>
+            </div>
+            <div class="C-blue" id="c-blue"><b>La cápsula se izó por primera vez el 1 de octubre de 2026</b><a class="C-btn" href="#c-s1">Leer el comunicado <i class="arr"><svg viewBox="0 0 10 10" aria-hidden="true"><path d="M1.5 5h6.5M5.2 2.2 8 5 5.2 7.8" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></i></a></div>
+          </section>
+
+          <section class="C-dark C-s1" id="c-s1" data-t="dark">
+            <div class="C-meta"><span>1.0</span><span class="C-lbl"><span>La custodia</span></span></div>
+            <p class="C-say" data-scr>Cuando la Sociedad Científica Argentina vuelva a decidir el destino del meteorito, el 9 de julio de 2105, este acto estará entre sus antecedentes. El 1 de octubre de 2026, ante pocos testigos, se firmó el primer acuerdo de custodia institucional de la obra.</p>
+            <figure class="C-ht"><img src="img/2026-escala.jpg" alt="La cápsula cuelga de la Escala Pro Tempore en la sala de la Fundación Klemm, 1 de octubre de 2026"></figure>
+          </section>
+
+          <section class="C-dark C-s2" id="c-s2" data-t="dark">
+            <svg class="C-arrow" viewBox="0 0 120 130" aria-hidden="true"><path d="M60 0v122M8 70l52 52 52-52" fill="none" stroke="currentColor" stroke-width="9"/></svg>
+            <div class="C-meta"><span>2.0</span><span class="C-lbl"><span>La obra</span></span></div>
+            <p class="C-say" data-scr>Un meteorito de hierro de 41 kilos, entregado en 2016 por un benefactor anónimo para donarlo a la SCA. La donación no pudo completarse. El 25 de mayo de 2018 se encapsuló en una ceremonia pública y la decisión sobre su destino se difirió hasta 2105.</p>
+            <div class="C-proof">
+              <figure class="C-ht wide"><img src="img/2018-ceremonia.jpg" alt="El público de la ceremonia de encapsulamiento, 25 de mayo de 2018"></figure>
+              <div class="C-green" id="c-green">
+                <i class="dot"></i>
+                <div class="num"><span data-live="yearsLeft"></span></div>
+                <div class="lab">Años para la cita del 9.07.2105, calculados hoy.</div>
+                <p>La Fundación Klemm es la primera institución en custodiar la obra. La cuida junto a su Colección hasta el 25 de mayo de 2032.</p>
+                <a class="C-btn" href="#c-s3">Las trece custodias <i class="arr"><svg viewBox="0 0 10 10" aria-hidden="true"><path d="M1.5 5h6.5M5.2 2.2 8 5 5.2 7.8" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></i></a>
+              </div>
+              <div class="C-quote">
+                <figure class="C-ht"><img src="img/2026-artistas.jpg" alt="Guillermo Faivovich y Nicolás Goldberg junto a la cápsula" style="object-position:22% 40%"></figure>
+                <div><span class="qm" aria-hidden="true">“</span><p data-type>El meteorito permanecerá sellado hasta el 9 de julio de 2105.</p></div>
+              </div>
+              <div class="who">Faivovich &amp; Goldberg<br>cuaderno de la obra</div>
+            </div>
+          </section>
+
+          <section class="C-light C-s3" id="c-s3" data-t="light">
+            <h2 class="C-h2 C-hd">Trece custodias hasta 2105</h2>
+            <div class="C-meta"><span>3.0</span><span class="C-lbl"><span>Cómo funciona</span></span><span class="note">La obra pasa de un custodio al siguiente cada siete años. Un trienio final cierra la cadena.</span></div>
+            <div class="C-stack">
+              <article class="C-card" style="--c:var(--ye);--t:calc(var(--hh) + 52px);--l:1.2%;--r:3.4%">
+                <div class="lft"><span class="k">Custodia:</span><div class="no">1.</div></div>
+                <div class="rgt">
+                  <div class="sv"><span class="k">Período:</span>→ 25.05.2018<br>→ 09.07.2025</div>
+                  <div class="ic" aria-hidden="true"><span>I</span></div>
+                  <div class="txt"><span class="C-lbl"><span>Custodia fundacional</span></span><p>Faivovich &amp; Goldberg cuidan la obra durante siete años. El cierre de esa custodia queda certificado en un registro público.</p></div>
+                </div>
+                <figure><img src="img/2018-tela.jpg" alt=""></figure>
+              </article>
+              <article class="C-card" style="--c:var(--or);--t:calc(var(--hh) + 6px);--l:5.8%;--r:6.2%">
+                <div class="lft"><span class="k">Custodia:</span><div class="no">2.</div></div>
+                <div class="rgt">
+                  <div class="sv"><span class="k">Período:</span>→ 09.07.2025<br>→ 25.05.2032</div>
+                  <div class="ic" aria-hidden="true"><span>I·</span></div>
+                  <div class="txt"><span class="C-lbl"><span>Fundación Klemm · CI-01</span></span><p>El 1 de octubre de 2026 se firma el comodato y la cápsula se iza por primera vez, colgada de la Escala Pro Tempore. Es la primera custodia institucional.</p></div>
+                </div>
+                <figure><img src="img/dibujo-izado.jpg" alt=""></figure>
+              </article>
+              <article class="C-card" style="--c:var(--pk);--t:calc(var(--hh) + 96px);--l:10.4%;--r:1.2%">
+                <div class="lft"><span class="k">Custodias:</span><div class="no">3.–12.</div></div>
+                <div class="rgt">
+                  <div class="sv"><span class="k">Período:</span>→ 2032 · 2102<br>→ 10 septenios</div>
+                  <div class="ic" aria-hidden="true"><span>II</span><span>II··</span></div>
+                  <div class="txt"><span class="C-lbl"><span>Custodios por designar</span></span><p>Cada siete años la obra pasa a un nuevo custodio. Los diez septenios entre 2032 y 2102 todavía no tienen nombre.</p></div>
+                </div>
+                <figure><img src="img/capucha.jpg" alt=""></figure>
+              </article>
+              <article class="C-card" style="--c:var(--cy);--t:calc(var(--hh) + 58px);--l:16.5%;--r:1.2%">
+                <div class="lft"><span class="k">Custodia:</span><div class="no">13.</div></div>
+                <div class="rgt">
+                  <div class="sv"><span class="k">Último tramo:</span>→ 2102 · 2105<br>→ Trienio final</div>
+                  <div class="ic" aria-hidden="true"><span>II·I</span></div>
+                  <div class="txt"><span class="C-lbl"><span>La cita</span></span><p>El 9 de julio de 2105 la Sociedad Científica Argentina puede volver a elegir si incorpora a su acervo el meteorito que descansa en el vientre de la escultura.</p></div>
+                </div>
+                <figure><img src="img/sca.jpg" alt=""></figure>
+              </article>
+            </div>
+          </section>
+
+          <section class="C-light C-blog" id="c-s4" data-t="light">
+            <div class="C-pin" id="c-pin">
+              <h2 class="C-h2">Bitácora</h2>
+              <div class="C-meta" id="c-blog-meta"><span>4.0</span><span class="C-lbl"><span>Del archivo</span></span><span class="note">Solo crece. Dos entradas garantizadas cada 1 de octubre: el acta del Coloquio Anual y el informe de estado de la obra.</span></div>
+              <div class="C-track" id="c-track"></div>
+            </div>
+          </section>
+
+          <footer class="C-foot" id="c-s5" data-t="light">
+            <div class="C-meta"><span>5.0</span><span class="C-lbl"><span>Visita</span></span><span class="note">Fundación Federico Jorge Klemm · Marcelo T. de Alvear 626, Buenos Aires · Horarios <span class="miss">[X]</span> · entrada libre · Instagram <span class="miss">[@]</span></span></div>
+            <div class="C-end">
+              <div><div class="C-esc" id="c-esc"></div><small><i>Escala Pro Tempore</i> · segmentación del tiempo entre la constitución de la obra y su hora definitiva · I = 1, · = 0</small></div>
+              <svg class="C-glyph" viewBox="0 0 300 140" aria-hidden="true"><path d="M0 70H150M98 17l53 53-53 53M206 4v132" fill="none" stroke="currentColor" stroke-width="13"/><circle cx="266" cy="70" r="14" fill="currentColor"/></svg>
+            </div>
+          </footer>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<script>
+(() => {
+  const D = (s) => new Date(s + 'T12:00:00-03:00');
+  const T0 = D('2018-05-25'), T1 = D('2105-07-09'), CI0 = D('2025-07-09'), CI1 = D('2032-05-25');
+  const now = new Date();
+  const pct = (a, b, t) => Math.max(0, Math.min(1, (t - a) / (b - a)));
+  const meses = ['ene','feb','mar','abr','may','jun','jul','ago','sep','oct','nov','dic'];
+  const fmt = (d) => `${d.getDate()} ${meses[d.getMonth()]} ${d.getFullYear()}`;
+  const fmtShort = (d) => `${String(d.getDate()).padStart(2,'0')}.${String(d.getMonth()+1).padStart(2,'0')}.${d.getFullYear()}`;
+  function diffYMD(a, b) {
+    let y = b.getFullYear() - a.getFullYear(), m = b.getMonth() - a.getMonth(), d = b.getDate() - a.getDate();
+    if (d < 0) { m -= 1; d += new Date(b.getFullYear(), b.getMonth(), 0).getDate(); }
+    if (m < 0) { y -= 1; m += 12; }
+    return { y, m, d };
+  }
+  const left = diffYMD(now, T1);
+  let nextOct = new Date(now.getFullYear(), 9, 1); if (nextOct <= now) nextOct = new Date(now.getFullYear() + 1, 9, 1);
+  const ciP = pct(CI0, CI1, now);
+  const live = {
+    today: `hoy · ${fmt(now)}`,
+    todayShort: fmtShort(now),
+    left: `faltan ${left.y} años, ${left.m} meses y ${left.d} días para el 9.07.2105`,
+    left2: `${left.m} meses y ${left.d} días`,
+    custody: `Custodia 2 de 13 · CI-01 · Fundación Klemm`,
+    custodyN: `2 / 13`,
+    pct: `${(ciP * 100).toFixed(1).replace('.', ',')} % del septenio`,
+    ciPct: `${(ciP * 100).toFixed(1).replace('.', ',')} %`,
+    yearsLeft: `${left.y}`,
+    nextOct: `${Math.ceil((nextOct - now) / 864e5)}`
+  };
+  const fill = (root = document) => {
+    root.querySelectorAll('[data-live]').forEach(el => { const v = live[el.dataset.live]; if (v != null) el.textContent = v; });
+    root.querySelectorAll('[data-live-width="ci"]').forEach(el => el.style.width = (ciP * 100) + '%');
+  };
+  const years = [2018, 2025, 2032, 2039, 2046, 2053, 2060, 2067, 2074, 2081, 2088, 2095, 2102, 2105];
+  const glyph = (n) => n.toString(2).replace(/1/g, 'I').replace(/0/g, '·');
+  const curIdx = years.findIndex((y, i) => i < 13 && now.getFullYear() >= y && now.getFullYear() < years[i + 1]);
+  const marq = (el, items) => { if (!el) return; const s = items.map(t => `<span>${t}</span>`).join(''); el.innerHTML = s + s; };
+
+  // ── C · Relevo
+  const cs = document.getElementById('c-scroll'), cHead = document.getElementById('c-head'), cBlue = document.getElementById('c-blue');
+  const cBlog = document.getElementById('c-s4'), cPin = document.getElementById('c-pin'), cTrack = document.getElementById('c-track');
+  const cPosts = [
+    ['2016', '', 'Origen', 'Un benefactor anónimo entrega el meteorito a los artistas para donarlo en su nombre a la SCA', 'img/carpeta.jpg', .30],
+    ['25', '05', 'Mayo / 2018<br>Acta', 'Encapsulamiento del meteorito en una ceremonia pública', 'img/2018-capsula.jpg', .25],
+    ['25', '05', 'Mayo / 2018<br>Acta notarial', 'La decisión sobre el destino del meteorito se difiere hasta el 9 de julio de 2105', 'img/2018-firma.jpg', .34],
+    ['09', '07', 'Julio / 2025<br>Acta', 'Cierre de la custodia fundacional, certificado en un registro público', 'img/capucha-detalle.jpg', .22],
+    ['01', '10', 'Octubre / 2026<br>Acta', 'Firma del comodato CI-01 e izado de la cápsula en la Fundación Klemm', 'img/2026-cadena.jpg', .31],
+    ['01', '10', 'Octubre / 2026<br>Transcripciones', 'Hablaron Cintia Mezza, Sergio Baur, Matilde Marín y José Sellés-Martínez', 'img/2026-artistas.jpg', .26],
+    ['31', '10', 'Octubre / 2026<br>Prensa · programado', 'Anuncio en e-flux, con los dibujos de la llegada y la firma', 'img/dibujo-llegada.jpg', .29, 'next'],
+    ['01', '10', 'Octubre / 2027<br>Evento', 'Primer Coloquio Anual y primer informe de estado de la obra', '', .24, 'next']
+  ];
+  cTrack.innerHTML = cPosts.map(([d, m, k, t, img, h, cls]) => `<article class="C-post${cls ? ' ' + cls : ''}"><figure style="height:calc(var(--H) * ${h})">${img ? `<img src="${img}" alt="">` : '<span>por venir</span>'}</figure><h3>${t}</h3><div class="when"><b>${d}${m ? `.<sup>${m}</sup>` : ''}</b><span>${k}</span></div></article>`).join('');
+  document.getElementById('c-esc').innerHTML = years.map((y, i) => `<span>${y}</span>${i < 13 ? `<span class="${i === curIdx ? 'on' : ''}">${glyph(i + 1)}</span>` : ''}`).join('');
+
+  // the paragraph arrives shifted (each letter a few places along the alphabet) and settles left to right
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const escH = (s) => s.replace(/&/g, '&amp;').replace(/</g, '&lt;');
+  const shiftCh = (ch, n) => {
+    const c = ch.charCodeAt(0);
+    if (c >= 97 && c <= 122) return String.fromCharCode(97 + (c - 97 + n) % 26);
+    if (c >= 65 && c <= 90) return String.fromCharCode(65 + (c - 65 + n) % 26);
+    if (c >= 48 && c <= 57) return String.fromCharCode(48 + (c - 48 + n) % 10);
+    return ch;
+  };
+  const shifted = (s, n) => [...s].map(ch => shiftCh(ch, n)).join('');
+  const scrSrc = new Map();
+  cs.querySelectorAll('[data-scr]').forEach(el => { scrSrc.set(el, el.textContent); if (!reduce) el.innerHTML = `<span class="scr">${escH(shifted(el.textContent, 2))}</span>`; });
+  cs.querySelectorAll('[data-type]').forEach(el => { scrSrc.set(el, el.textContent); if (!reduce) el.innerHTML = `<span class="ty0">${escH(el.textContent)}</span>`; });
+  const animate = (dur, frame) => { const t0 = performance.now(); const step = (t) => { const p = Math.min(1, (t - t0) / dur); frame(p, t); if (p < 1) requestAnimationFrame(step); }; requestAnimationFrame(step); };
+  const scramble = (el) => { const src = scrSrc.get(el); animate(900 + src.length * 6, (p, t) => { const r = Math.floor(src.length * p); el.innerHTML = escH(src.slice(0, r)) + (r < src.length ? `<span class="scr">${escH(shifted(src.slice(r), 1 + Math.floor(t / 60) % 3))}</span>` : ''); }); };
+  const typeIn = (el) => { const src = scrSrc.get(el); animate(src.length * 42, (p) => { const r = Math.floor(src.length * p); el.innerHTML = escH(src.slice(0, r)) + `<span class="ty">${escH(src.slice(r, r + 7))}</span><span class="ty0">${escH(src.slice(r + 7))}</span>`; }); };
+  const io = new IntersectionObserver((ents) => ents.forEach(e => {
+    if (!e.isIntersecting) return; const el = e.target; io.unobserve(el);
+    if (reduce) { if (scrSrc.has(el)) el.textContent = scrSrc.get(el); el.classList.add('in'); return; }
+    if (el.hasAttribute('data-scr')) scramble(el); else if (el.hasAttribute('data-type')) typeIn(el); else el.classList.add('in');
+  }), { root: cs, threshold: .35 });
+  cs.querySelectorAll('[data-scr], [data-type], #c-green').forEach(el => io.observe(el));
+
+  // scroll: the blue card lags behind the cover, the header changes ink, cards turn opaque as they land, the archive runs sideways
+  const cSecs = [...cs.querySelectorAll(':scope > section[data-t], :scope > footer[data-t]')];
+  const cCards = [...cs.querySelectorAll('.C-card')];
+  let cH = 0, cO = 0, cDx = 0, cTops = [], cRaf = 0;
+  const cScroll = () => {
+    const s = cs.scrollTop;
+    cBlue.style.transform = `translateY(${Math.min(s, cH) * .55}px)`;
+    let t = 'light'; cSecs.forEach(sec => { if (sec.offsetTop <= s + 24) t = sec.dataset.t; }); cHead.dataset.t = t;
+    const top0 = cs.getBoundingClientRect().top;
+    cCards.forEach((c, i) => { const d = c.getBoundingClientRect().top - top0 - cTops[i]; c.style.opacity = d <= 1 ? '' : (1 - Math.min(1, d / (cH * .75)) * .6).toFixed(3); });
+    const p = cDx ? Math.max(0, Math.min(1, (s - cBlog.offsetTop - cO) / cDx)) : 0;
+    cTrack.style.transform = `translateX(${(-p * cDx).toFixed(1)}px)`;
+  };
+  const cLayout = () => {
+    if (!cs.offsetParent) return;
+    cH = cs.clientHeight;
+    cTops = cCards.map(c => parseFloat(getComputedStyle(c).top) || 0);
+    const meta = document.getElementById('c-blog-meta'); const hh = cHead.querySelector('.C-bar').offsetHeight;
+    cO = Math.max(0, meta.offsetTop - hh - 6);
+    cPin.style.top = -cO + 'px'; cPin.style.height = (cH + cO) + 'px';
+    cTrack.style.transform = '';
+    cDx = Math.max(0, cTrack.scrollWidth - cPin.clientWidth);
+    cBlog.style.height = (cH + cO + cDx) + 'px';
+    cScroll();
+  };
+  cs.addEventListener('scroll', () => { if (!cRaf) cRaf = requestAnimationFrame(() => { cRaf = 0; cScroll(); }); }, { passive: true });
+  if (window.ResizeObserver) new ResizeObserver(cLayout).observe(cs); else window.addEventListener('resize', cLayout);
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(cLayout);
+  cs.querySelectorAll('a[href^="#c-"]').forEach(a => a.addEventListener('click', (e) => { const t = document.querySelector(a.getAttribute('href')); if (!t) return; e.preventDefault(); cs.scrollTo({ top: t.id === 'c-top' ? 0 : t.offsetTop, behavior: reduce ? 'auto' : 'smooth' }); }));
+  cs.querySelectorAll('.C-ht').forEach(f => f.addEventListener('click', () => f.classList.toggle('reveal')));
+
+  function wireDuo(root) {
+    root.querySelectorAll('figure.duo').forEach(f => {
+      if (f.dataset.w) return; f.dataset.w = 1;
+      const img = f.querySelector('img'); if (!img) return; const t = img.cloneNode(); t.alt = ''; t.className = 'tint'; t.setAttribute('aria-hidden', 'true'); img.after(t);
+      f.addEventListener('click', () => { if (!f.closest('.B-card')) f.classList.toggle('reveal'); });
+    });
+  }
+  wireDuo(document); fill();
+
+  (async () => {
+    const c = window.claude && window.claude.use ? await window.claude.use('comments') : null; if (!c) return;
+    const btn = document.getElementById('comment-btn'); btn.hidden = false; let lastRange = null;
+    document.addEventListener('selectionchange', () => { const sel = document.getSelection(); if (sel && sel.rangeCount && !sel.isCollapsed && !btn.contains(sel.anchorNode)) lastRange = sel.getRangeAt(0).cloneRange(); });
+    btn.addEventListener('mousedown', (e) => e.preventDefault());
+    btn.addEventListener('click', async () => { const target = lastRange && lastRange.startContainer.isConnected ? { range: lastRange } : { element: document.querySelector('.proposal:not([hidden]) .notes h2') }; lastRange = null; try { await c.openComposer(target); } catch (e) { if (e && e.code === 'unavailable') btn.hidden = true; } });
+  })();
+
+  document.querySelectorAll('.seg button').forEach(b => b.addEventListener('click', () => {
+    document.querySelectorAll('.seg button').forEach(x => x.setAttribute('aria-pressed', x === b));
+    document.querySelectorAll('.frame').forEach(f => f.classList.toggle('phone', b.dataset.v === 'phone'));
+    requestAnimationFrame(cLayout);
+  }));
+  requestAnimationFrame(cLayout);
+  const h = (location.hash || '').replace('#', '');
+  if (h.includes('phone')) document.getElementById('v-phone').click();
+})();
+</script>
