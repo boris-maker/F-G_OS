@@ -1,0 +1,572 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Un meteorito para la Sociedad Científica Argentina del año 2105 · Custodia Pro Tempore CI-01 · Fundación Federico Jorge Klemm</title>
+<meta name="robots" content="noindex, nofollow">
+<!-- preview del link (WhatsApp, iMessage, Slack…): la tarjeta de la ficha de la obra; URLs absolutas a la versión pública -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Fundación Federico Jorge Klemm · 2105.klemm.org.ar">
+<meta property="og:title" content="Un meteorito para la Sociedad Científica Argentina del año 2105">
+<meta property="og:description" content="Custodia Institucional CI-01 · 2025–2032 · Fundación Federico Jorge Klemm. Una obra de Faivovich &amp; Goldberg.">
+<meta property="og:url" content="https://boris-maker.github.io/F-G_OS/preview/micrositio-klemm/ficha-v0.4.html">
+<meta property="og:image" content="https://boris-maker.github.io/F-G_OS/preview/micrositio-klemm/img/og-v0.4.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Frente testado de la invitación a la ceremonia de encapsulamiento del 25 de mayo de 2018">
+<meta property="og:locale" content="es_AR">
+<meta property="og:locale:alternate" content="en_US">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Un meteorito para la Sociedad Científica Argentina del año 2105">
+<meta name="twitter:image" content="https://boris-maker.github.io/F-G_OS/preview/micrositio-klemm/img/og-v0.4.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=IBM+Plex+Mono:ital,wght@0,400;0,500;1,400;1,500&family=Libre+Franklin:wght@400;500;600;700&family=Old+Standard+TT:ital,wght@0,400;0,700;1,400&display=swap">
+<style>
+/* Ficha v0.4 · 30.10.2026 · La v0.3 con la ronda del viernes 30.10 (llamada "viernes FYG" + "Notas MicroSitio.2105",
+   pestaña 30OCT) y los textos bilingües del doc "Drafts Textos MicroSite.2105". ES/EN: un solo archivo, el botón de la
+   cabecera cambia el idioma (?lang=en). Imágenes trabajadas por los artistas (img/fichas4/), sin re-teñir. Color decidido:
+   cianotipo #006698, sin switch. La única descarga es el discurso de Cintia Mezza; el resto del material se lee dentro de
+   "Leer más": en castellano el original, en inglés la traducción y debajo el original. */
+:root {
+  --blue: #006698;
+  --paper: #e6e6e6;
+  --desk: #d4d4d1;
+  --blue-70: rgb(0 102 152 / .72);
+  --blue-45: rgb(0 102 152 / .45);
+  --blue-18: rgb(0 102 152 / .18);
+  --blue-08: rgb(0 102 152 / .08);
+  --serif: "Old Standard TT", "Scotch Text", Georgia, "Times New Roman", serif;
+  --cond: "Barlow Condensed", "Arial Narrow", "Helvetica Neue", sans-serif;
+  --mono: "IBM Plex Mono", "Letter Gothic", Menlo, Consolas, monospace;
+  --sans: "Libre Franklin", "News Gothic", "Helvetica Neue", Arial, sans-serif;
+  color-scheme: light;
+}
+* { box-sizing: border-box; }
+html, body { overflow-x: clip; }
+body { margin: 0; background: var(--desk); color: var(--blue); font-family: var(--sans); font-size: 15px; line-height: 1.45; -webkit-font-smoothing: antialiased; -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
+a { color: inherit; }
+button { font: inherit; color: inherit; }
+:focus-visible { outline: 2px solid currentColor; outline-offset: 2px; }
+img { max-width: 100%; display: block; }
+h1, h2, h3 { overflow-wrap: anywhere; min-width: 0; }
+
+/* ───────── review desk ───────── */
+.desk { padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); padding-block: 0 72px; }
+.desk-bar { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 50; background: var(--desk); border-bottom: 1px solid var(--blue-18); margin-inline: calc(-1 * max(16px, env(safe-area-inset-left, 0px))); padding: 10px max(16px, env(safe-area-inset-left, 0px)); display: flex; flex-wrap: wrap; align-items: center; gap: 10px 18px; font-family: var(--mono); font-size: 12px; }
+.desk-bar .who b { font-weight: 500; }
+.seg { display: flex; border: 1px solid var(--blue); border-radius: 2px; overflow: hidden; }
+.seg button { background: none; border: 0; padding: 6px 12px; cursor: pointer; font-family: var(--mono); font-size: 12px; letter-spacing: .02em; white-space: nowrap; }
+.seg button + button { border-left: 1px solid var(--blue); }
+.seg button[aria-pressed="true"] { background: var(--blue); color: var(--paper); }
+.desk-bar .spacer { flex: 1; }
+.btn-comment { background: none; border: 1px solid var(--blue); padding: 6px 12px; cursor: pointer; font-family: var(--mono); font-size: 12px; border-radius: 2px; }
+.btn-comment:hover { background: var(--blue); color: var(--paper); }
+.brief { max-width: 1240px; margin: 28px auto 24px; display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); gap: 28px; }
+.brief h1 { font-family: var(--serif); font-weight: 400; font-size: clamp(30px, 4.4vw, 52px); line-height: 1.02; margin: 0 0 14px; letter-spacing: -.01em; text-wrap: balance; }
+.brief p { margin: 0 0 10px; max-width: 62ch; }
+.kick { font-family: var(--mono); font-size: 11.5px; letter-spacing: .06em; text-transform: uppercase; margin-bottom: 12px; }
+.brief dl { margin: 0; display: grid; grid-template-columns: max-content minmax(0, 1fr); gap: 7px 14px; font-size: 13.5px; border-top: 1px solid var(--blue-45); padding-top: 12px; }
+.brief dt { font-family: var(--mono); font-size: 11px; letter-spacing: .05em; text-transform: uppercase; padding-top: 2px; }
+.brief dd { margin: 0; }
+.frame { max-width: 1240px; margin: 0 auto; background: var(--paper); box-shadow: 0 1px 0 var(--blue-18), 0 20px 50px -30px rgb(0 40 70 / .45); transition: max-width .35s ease; }
+.frame.phone { max-width: 390px; }
+.urlbar { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 5px 12px; font-family: var(--mono); font-size: 11px; border-bottom: 1px solid var(--blue-18); background: #dcdcdb; color: var(--blue); }
+.site { container-type: inline-size; container-name: site; position: relative; overflow: clip; }
+@container site (max-width: 760px) { .brief { grid-template-columns: minmax(0, 1fr); } }
+
+/* ───────── shared atoms ───────── */
+.miss { font-family: var(--mono); font-size: .82em; background: var(--blue-08); padding: 0 3px; }
+.glyph { font-family: var(--cond); font-weight: 700; letter-spacing: .08em; }
+/* un idioma a la vez */
+.A[data-lang="es"] [lang="en"], .A[data-lang="en"] [lang="es"] { display: none !important; }
+
+/* ═════════════ FICHA v0.4 ═════════════ */
+.A { font-family: var(--mono); font-size: 12.5px; line-height: 1.5; background: var(--paper); color: var(--blue); --head: 120px; }
+.A-in { padding-inline: clamp(14px, 3cqi, 40px); }
+
+/* cabecera frizada: ES/EN · el título de la obra (vuelve al inicio) · los artistas (a su sitio, pestaña nueva) */
+.A-head { position: sticky; top: 0; z-index: 5; background: var(--paper); }
+.A-top { display: grid; grid-template-columns: minmax(max-content, 1fr) minmax(0, auto) minmax(max-content, 1fr); align-items: center; gap: 16px; padding: 12px 16px; border-bottom: 1px solid var(--blue); }
+.A-top .ttl { font-size: clamp(14px, 1.45cqi, 17px); font-weight: 500; letter-spacing: .005em; text-align: center; text-decoration: none; line-height: 1.25; }
+.A-top .ttl:hover { text-decoration: underline; text-underline-offset: 4px; text-decoration-thickness: 1px; }
+.A-top .lang { display: flex; align-items: center; gap: 4px; white-space: nowrap; }
+.A-top .lang button { display: inline-grid; place-items: center; height: 2em; min-width: 2.6em; border: 1px solid transparent; background: none; padding: 0 7px; font-weight: 500; cursor: pointer; opacity: .55; }
+.A-top .lang button[aria-pressed="true"] { border-color: var(--blue); opacity: 1; cursor: default; }
+.A-top .lang button:not([aria-pressed="true"]):hover { opacity: 1; text-decoration: underline; text-underline-offset: 3px; }
+.A-top .fyg { justify-self: end; text-transform: uppercase; letter-spacing: .04em; font-size: 11px; text-decoration: none; white-space: nowrap; }
+.A-top .fyg:hover { text-decoration: underline; text-underline-offset: 3px; }
+/* segunda línea: la custodia y cuánto falta (la línea de estado de abajo se fue, 30.10) */
+.A-nav { display: grid; grid-template-columns: minmax(0, 1fr) auto; border-bottom: 1px solid var(--blue); }
+.A-nav > div { padding: 8px 16px; display: flex; align-items: center; gap: 10px; min-width: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.A-nav > div + div { border-left: 1px solid var(--blue); }
+.A-nav > div.crumb { display: block; }   /* texto corrido: en teléfono parte línea sin romperse en columnas */
+.A-nav .crumb span.sep { margin-inline: 6px; }
+/* la línea de tiempo, con el mismo aire arriba y abajo */
+.A-bar { border-bottom: 1px solid var(--blue); padding: 19px 16px 19px; }
+.A-bar .track { position: relative; height: 22px; }
+.A-bar .line { position: absolute; left: 0; right: 0; top: 6px; height: 1px; background: var(--blue); }
+.A-bar .ci { position: absolute; top: 4px; height: 5px; background: var(--blue); }
+.A-bar .now { position: absolute; top: 2px; width: 9px; height: 9px; margin-left: -4.5px; border-radius: 50%; background: var(--blue); }
+.A-bar .tick { position: absolute; top: 3px; width: 1px; height: 7px; background: var(--blue); }
+.A-bar .lab { position: absolute; top: 12px; transform: translateX(-50%); font-size: 10.5px; white-space: nowrap; }
+.A-bar .lab.l { transform: none; } .A-bar .lab.r { transform: translateX(-100%); } .A-bar .lab.hoy { top: -15px; }
+
+/* imagen + fichas */
+.A-main { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
+.A-view { position: sticky; top: var(--head); align-self: start; height: calc(100svh - var(--head)); border-right: 1px solid var(--blue); padding: clamp(20px, 3.5cqi, 48px) clamp(24px, 4cqi, 56px); display: grid; grid-template-rows: minmax(0, 1fr) auto; gap: 12px; }
+.A-view .stage { position: relative; min-height: 0; }
+.A-view .stage figure { position: absolute; inset: 0; margin: 0; opacity: 0; transition: opacity .45s ease; pointer-events: none; }
+.A-view .stage figure.on { opacity: 1; pointer-events: auto; }
+.A-view .stage img { position: absolute; inset: 0; margin: auto; max-width: 100%; max-height: 100%; width: auto; height: auto; object-fit: contain; display: block; }
+.A-view .cap { font-size: 11px; min-height: 1.5em; }
+.A-view .cap:empty { display: none; }
+
+.A-info { min-width: 0; }
+/* una ficha ocupa casi toda la ventana bajo la cabecera: de la anterior y la siguiente asoma solo un borde */
+.ficha { position: relative; min-height: calc((100svh - var(--head)) * .84); padding: clamp(22px, 3.4cqi, 40px) clamp(18px, 3.4cqi, 44px) clamp(28px, 3.6cqi, 44px); border-bottom: 1px solid var(--blue); scroll-margin-top: var(--head); }
+.ficha:last-child { border-bottom: 0; }   /* el pie ya trae su línea: sin línea doble al final */
+.ficha .d { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; font-size: 11px; text-transform: uppercase; letter-spacing: .04em; margin-bottom: 14px; }
+.ficha .d .n { white-space: nowrap; margin-left: auto; }
+.ficha h2 { font-family: var(--serif); font-weight: 400; font-size: clamp(24px, 2.9cqi, 38px); line-height: 1.08; letter-spacing: -.01em; margin: 0 0 22px; text-wrap: balance; max-width: 22em; }
+.ficha .tx { max-width: 64ch; position: relative; }
+.ficha .tx p { margin: 0 0 12px; }
+.ficha .tx p:last-child { margin-bottom: 0; }
+.tx .epi { font-family: var(--serif); font-style: italic; font-size: 17px; line-height: 1.4; margin-bottom: 18px; }
+.tx .tomb { line-height: 1.55; margin-bottom: 18px; }
+.ficha .tx.clamp { max-height: 16.5em; overflow: hidden; -webkit-mask-image: linear-gradient(#000 70%, transparent 100%); mask-image: linear-gradient(#000 70%, transparent 100%); }
+.ficha .more { display: none; margin-top: 12px; background: none; border: 1px solid var(--blue); padding: 6px 12px; cursor: pointer; text-transform: uppercase; letter-spacing: .06em; font-size: 11px; }
+.ficha .more:hover { background: var(--blue); color: var(--paper); }
+.ficha.has-more .more { display: inline-block; }
+.dl { display: grid; grid-template-columns: minmax(0, 1fr); gap: 4px; max-width: 64ch; margin-top: 22px; }
+.dl a { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 10px; text-decoration: none; border: 1px solid var(--blue); padding: 6px 10px; min-width: 0; }
+.dl a:hover { background: var(--blue); color: var(--paper); }
+.dl a span:last-child { white-space: nowrap; }
+.ficha .caps { display: none; }
+.ficha figure.inline, .ficha .cap-inline { display: none; }
+.ficha figure.inline { margin: 22px 0 0; }
+.ficha figure.inline img { width: 100%; height: auto; }
+.ficha .cap-inline { margin: 8px 0 0; font-size: 11.5px; }
+.tx .ext { text-decoration: underline; text-underline-offset: 3px; text-decoration-color: var(--blue-45); }
+
+/* la ficha entera, a pantalla completa: el texto y, debajo, el material (no vuelve la imagen) */
+.A-full { position: fixed; inset: 0; z-index: 60; background: var(--paper); color: var(--blue); overflow-y: auto; -webkit-overflow-scrolling: touch; font-family: var(--mono); font-size: 12.5px; line-height: 1.5; }
+.A-full[hidden] { display: none; }
+.A-full .top { position: sticky; top: 0; z-index: 1; background: var(--paper); border-bottom: 1px solid var(--blue); display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 10px 16px; font-size: 11px; text-transform: uppercase; letter-spacing: .04em; }
+.A-full .top button { background: none; border: 1px solid var(--blue); padding: 5px 10px; cursor: pointer; font-size: 11px; letter-spacing: .06em; text-transform: uppercase; }
+.A-full .top button:hover { background: var(--blue); color: var(--paper); }
+.A-full .in { max-width: 76ch; margin: 0 auto; padding: clamp(24px, 5vw, 56px) 20px 96px; }
+.A-full .d { font-size: 11px; text-transform: uppercase; letter-spacing: .04em; margin-bottom: 14px; }
+.A-full h1 { font-family: var(--serif); font-weight: 400; font-size: clamp(28px, 4vw, 44px); line-height: 1.06; letter-spacing: -.012em; margin: 0 0 28px; text-wrap: balance; }
+.A-full .tx p { font-family: var(--serif); font-size: 17px; line-height: 1.55; margin: 0 0 16px; }
+.A-full .tx .tomb { font-family: var(--mono); font-size: 12.5px; }
+.A-full .tx p:last-child { margin-bottom: 0; }
+.A-full .mat { margin-top: 44px; border-top: 1px solid var(--blue); padding-top: 14px; }
+.A-full .mat .k { font-size: 11px; text-transform: uppercase; letter-spacing: .04em; margin-bottom: 14px; }
+.A-full .mat figure { margin: 0 0 28px; }
+.A-full .mat figure img { width: 100%; height: auto; box-shadow: 0 1px 0 var(--blue-18), 0 10px 30px -18px rgb(0 40 70 / .5); }
+.A-full .mat figcaption { font-size: 11px; margin-top: 8px; }
+.phone-only { display: none; }
+
+/* pie institucional (30.10): la Fundación, con aire, y los artistas; sin dirección, horarios ni divisores */
+.A-foot { background: var(--paper); color: var(--blue); border-top: 1px solid var(--blue); }
+.A-foot .row { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); align-items: end; }
+.A-foot .row > div { padding: clamp(40px, 6cqi, 72px) clamp(18px, 3.4cqi, 44px) clamp(28px, 3.6cqi, 40px); min-width: 0; }
+.A-foot .row > div:first-child { padding-left: clamp(24px, 4cqi, 56px); }
+.A-foot .k { font-family: var(--serif); font-size: clamp(20px, 2.2cqi, 28px); line-height: 1.1; display: block; margin-bottom: 8px; }
+.A-foot .f { text-transform: uppercase; letter-spacing: .04em; font-size: 11px; display: block; margin-bottom: 8px; }
+.A-foot a { font-size: 11.5px; text-decoration: underline; text-underline-offset: 3px; text-decoration-color: var(--blue-45); white-space: nowrap; }
+.A-foot a:hover { text-decoration-color: currentColor; }
+
+@container site (max-width: 760px) {
+  /* teléfono: letra más grande (30.10: "el texto se ve muy chico en el teléfono") */
+  .A { font-size: 14px; }
+  .A-top { grid-template-columns: minmax(0, 1fr) auto; gap: 6px 10px; padding: 9px 12px; }
+  .A-top .ttl { grid-column: 1 / -1; font-size: 14px; text-align: left; }
+  .A-top .lang { grid-row: 2; }
+  .A-top .lang button { height: 1.9em; font-size: 12px; }
+  .A-top .fyg { grid-row: 2; font-size: 11px; }
+  .A-nav { grid-template-columns: minmax(0, 1fr); }
+  .A-nav > div { padding: 6px 12px; white-space: normal; font-size: 11.5px; line-height: 1.35; }
+  .A-nav > div + div { border-left: 0; padding-top: 0; }
+  .A-bar { padding: 17px 12px 15px; }
+  .desk-only { display: none; } .phone-only { display: inline; }
+  .A-main { grid-template-columns: minmax(0, 1fr); }
+  .A-view { display: none; }
+  .ficha { min-height: 0; padding: 24px 16px 28px; }
+  .ficha .d { font-size: 12px; }
+  .ficha h2 { font-size: 8cqi; }
+  .ficha .tx { font-size: 14.5px; line-height: 1.55; }
+  .tx .epi { font-size: 18px; }
+  .ficha .more { font-size: 12px; padding: 8px 14px; }
+  .dl a { font-size: 13px; padding: 9px 12px; }
+  .ficha figure.inline { display: block; }
+  .ficha .cap-inline:not(:empty) { display: block; font-size: 12.5px; }
+  .A-full { font-size: 14px; }
+  .A-full .tx p { font-size: 18px; }
+  .A-full .top, .A-full .d, .A-full .mat .k { font-size: 12px; }
+  .A-foot .row { grid-template-columns: minmax(0, 1fr); }
+  .A-foot .row > div, .A-foot .row > div:first-child { padding: 28px 16px 0; }
+  .A-foot .row > div:last-child { padding-bottom: 32px; }
+  .A-foot .k { font-size: 24px; }
+  .A-foot a { font-size: 13px; }
+}
+
+/* bare publish: the site is the page */
+body { background: var(--paper); }
+.site { min-height: 100svh; }
+
+</style>
+</head>
+<body>
+
+
+<div class="site A" id="site" data-lang="es">
+
+        <div class="A-head" id="a-head">
+          <header class="A-top">
+            <span class="lang" role="group" aria-label="Idioma / Language"><button type="button" data-lang="es" aria-pressed="true" title="Español">ES</button><button type="button" data-lang="en" aria-pressed="false" title="English">EN</button></span>
+            <a class="ttl" href="#" id="a-home">Un meteorito para la Sociedad Científica Argentina del año 2105</a>
+            <a class="fyg" href="https://faivovich-goldberg.com/" target="_blank" rel="noopener">Faivovich &amp; Goldberg ↗</a>
+          </header>
+          <div class="A-nav">
+            <div class="crumb"><span lang="es">Custodia Institucional CI-01</span><span lang="en">Institutional Custody CI-01</span><span class="sep">›</span>2025–2032<span class="sep">›</span>Fundación Federico Jorge Klemm</div>
+            <div class="left" data-live="left"></div>
+          </div>
+          <div class="A-bar">
+            <div class="track" id="a-track"></div>
+          </div>
+        </div>
+
+        <div class="A-main">
+          <aside class="A-view" id="a-view" aria-label="Imagen de la ficha">
+            <div class="stage" id="a-stage"></div>
+            <div class="cap" id="a-cap"></div>
+          </aside>
+
+          <div class="A-info">
+            <div class="A-log" id="a-log">
+
+              <article class="ficha" id="f-obra" data-img="obra.jpg">
+                <div class="d"><span class="n"></span></div>
+                <h2>Un meteorito para la Sociedad Científica Argentina del año 2105</h2>
+                <div class="tx">
+                  <p class="tomb">Faivovich &amp; Goldberg<br>2018 – 2105<br><span lang="es">Madera, metal y tela</span><span lang="en">Wood, metal and fabric</span><br>50 × 31 × 31 cm</p>
+                  <p class="epi" lang="es">Un prisma navega<br>hacia otras manos,<br>hacia otros ojos</p>
+                  <p class="epi" lang="en">A prism sails<br>toward other hands,<br>toward other eyes</p>
+                  <p lang="es">En 2016, un donante que prefirió permanecer en el anonimato dejó un meteorito bajo la tenencia legítima de Faivovich &amp; Goldberg, y ellos se lo ofrecieron a la Sociedad Científica Argentina. La incorporación a su acervo no pudo concretarse en el presente. Frente a esa imposibilidad, los artistas transformaron un proceso inconcluso de donación en una cápsula de tiempo: el 25 de mayo de 2018 encapsularon el meteorito y difirieron su destino al 9 de julio de 2105, fecha en la que la Sociedad Científica Argentina del futuro podrá decidir si lo incorpora a su acervo.</p>
+                  <p lang="es">La conozco desde entonces como una obra hecha de tiempo. Plantea un problema de transmisión entre generaciones: cómo sostener, durante ochenta y siete años, la legibilidad material, jurídica, simbólica y económica de una voluntad dirigida a quienes todavía no nacieron. Este sitio es parte de esa respuesta. Lo que sigue es su bitácora.</p>
+                  <p lang="en">In 2016, a donor who wished to remain anonymous placed a meteorite in the lawful custody of Faivovich &amp; Goldberg, who subsequently offered it to the Sociedad Científica Argentina. Its incorporation into the institution’s collection could not be completed at the time. Faced with this impossibility, the artists transformed an unfinished donation process into a time capsule: on May 25, 2018, they encapsulated the meteorite and deferred its fate until July 9, 2105, when the Sociedad Científica Argentina of the future will be able to decide whether to incorporate it into its collection.</p>
+                  <p lang="en">I have known it ever since as a work made of time. It raises a question of intergenerational transmission: how to sustain, over eighty-seven years, the material, legal, symbolic, and economic legibility of an intention addressed to those who have not yet been born. This website is part of that response. What follows is its logbook.</p>
+                </div><button type="button" class="more"><span lang="es">Leer más</span><span lang="en">Full text</span></button>
+                <div class="caps"><span lang="es">Frente testado de la invitación a la ceremonia de encapsulamiento del 25 de mayo de 2018.</span><span lang="en">Redacted front of the invitation to the encapsulation ceremony of May 25, 2018.</span></div>
+                <figure class="inline"></figure><p class="cap-inline"></p>
+              </article>
+
+              <article class="ficha" id="f-2026" data-img="2026-10-01.jpg">
+                <div class="d"><span class="when"><span lang="es">1 OCT 2026, Fundación Klemm, Buenos Aires</span><span lang="en">1 OCT 2026, Fundación Klemm, Buenos Aires</span></span><span class="n"></span></div>
+                <h2><span lang="es">Custodia Institucional 01: Ingreso de la obra en la Colección de la Fundación Klemm</span><span lang="en">Institutional Custody 01: Entry of the work into the Collection of Fundación Klemm</span></h2>
+                <div class="tx">
+                  <p lang="es">El 1 de octubre de 2026, a las 17.30, durante la ceremonia de formalización del comodato de <i>Un meteorito para la Sociedad Científica Argentina del año 2105</i>, entre Faivovich &amp; Goldberg y la Fundación Federico Klemm, se produjo una colisión entre una obra que proyecta hacia el futuro la custodia de un meteorito y una institución que, ante la posibilidad de su propia desaparición próxima, debe imaginar su transferencia.</p>
+                  <p lang="es">En un discurso pronunciado ante artistas, curadores, directores de instituciones y críticos de arte, la atmósfera festiva se convirtió en otra cosa: el anuncio de un final. Lo fue también para quien estuvo allí sin comprender del todo lo que estaba sucediendo. Alguien contempla una luz sin saberlo; años después comprenderá que aquella luz era también la imagen de una muerte. Entonces habrá que contar lo sucedido, como quien escribe una noticia o como quien, al leer un diario, encuentra entre las noticias del día el relato de algo que ya ha comenzado a desaparecer. Quizás, entonces, un acontecimiento no comienza cuando sucede, sino cuando alguien advierte que ha sucedido.</p>
+                  <p lang="en">On October 1, 2026, at 5:30 p.m., during the ceremony formalizing the loan agreement for <i>A Meteorite for the Sociedad Científica Argentina of the Year 2105</i> between Faivovich &amp; Goldberg and the Federico Klemm Foundation, a collision occurred between a work that projects the custody of a meteorite into the future and an institution that, faced with the possibility of its own imminent disappearance, must imagine its transfer.</p>
+                  <p lang="en">During a speech delivered before artists, curators, institutional directors, and art critics, the festive atmosphere turned into something else: the announcement of an ending. It was also such an announcement for someone who was there without fully understanding what was taking place. Someone gazes at a light, unaware; years later, they will understand that the light was also the image of a death. Then what happened will have to be told, as one might write a news report, or as someone reading a newspaper comes across, among the news of the day, the account of something that has already begun to disappear.</p>
+                  <p lang="en">Perhaps, then, an event does not begin when it happens, but when someone realizes that it has happened.</p>
+                </div><button type="button" class="more"><span lang="es">Leer más</span><span lang="en">Full text</span></button>
+                <div class="dl">
+                  <a lang="es" role="link" aria-disabled="true" title="Pendiente de OK para publicar"><span>Discurso de Cintia Mezza 1.10.2026</span><span>PDF ↓ 162 KB</span></a>
+                  <a lang="en" role="link" aria-disabled="true" title="Pendiente de OK para publicar"><span>Remarks by Cintia Mezza 1.10.2026</span><span>PDF ↓ 155 KB</span></a>
+                </div>
+                <div class="caps"><span lang="es">Sobre la mesa de Federico Klemm, 1 de octubre 2026. Registro de Eugenia Bekeris.</span><span lang="en">On Federico Klemm's table, October 1, 2026. Drawing by Eugenia Bekeris.</span></div>
+                <figure class="inline"></figure><p class="cap-inline"></p>
+              </article>
+
+              <article class="ficha" id="f-escala" data-img="2025-08-14-escala.jpg">
+                <div class="d"><span class="when"><span lang="es">14 AGO 2025. Premio Trabucco/ ANBA, Buenos Aires</span><span lang="en">14 AUG 2025. Premio Trabucco / ANBA, Buenos Aires</span></span><span class="n"></span></div>
+                <h2><i>Escala Pro Tempore</i></h2>
+                <div class="tx">
+                  <p lang="es">Estuve en el encapsulamiento, en 2018, y desde entonces sigo a la caja adonde vaya. A fines de 2024, Faivovich &amp; Goldberg fueron nominados al Premio Trabucco, que ese año se exhibía en la Fundación Klemm, y recorrimos juntos sus salas para pensar qué presentar. Nos quedamos con una columna de hormigón que todavía muestra las marcas del encofrado. No la elegimos por su aspecto, sino por lo que hace: es una de las piezas que sostienen el edificio. Si se la saca, todo lo demás se cae.</p>
+                  <p lang="es">Eso era lo que la obra necesitaba: una institución de la que colgarse. Durante siete años la habían cargado los artistas de un lugar a otro. Para que llegue a 2105 tenían que poder soltarla, liberar las manos y seguir construyendo, con otros, la infraestructura que la lleve hasta su cita. La columna era la forma más directa de decirlo.</p>
+                  <p lang="es">Diseñamos una omega de acero que abrazara la columna sin perforarla, y de ella salía una barra de hierro macizo de tres metros, en voladizo, para sostener cincuenta kilos de madera y meteorito. Hicimos las cuentas varias veces.</p>
+                  <p lang="es">El premio no aceptó la primera propuesta: su reglamento pedía obras que pudieran donarse, y lo que se ofrecía era tiempo. Hubo tres semanas para repensarla. En esos días la barra dejó de ser un soporte. Tres metros alcanzaban para medir otra cosa: los ochenta y siete años entre el encapsulamiento y la cita, divididos en trece custodias, doce septenios y un trienio final. Cada tramo de hierro pasó a ser un período, una institución por venir, alguien que todavía no sabe que va a tener la obra en sus manos.</p>
+                  <p lang="es">La cápsula cedió su lugar a un recordador, el del 9 de octubre de 2101. Ahora la muestra está abierta. Cada tanto paso por la sala y miro la columna. La omega la abraza, la barra sale firme hacia adelante y, de ella, cuelga el recordador. Como el fiel de una balanza, marca dónde estamos.</p>
+                  <p lang="en">I attended the encapsulation in 2018, and since then I have followed the capsule wherever it goes. At the end of 2024, Faivovich &amp; Goldberg were nominated for the Trabucco Prize, which would be held at Fundación Klemm, and we walked through its galleries together thinking about what to exhibit. We settled on a concrete column that still bears the marks of its formwork. We did not choose it for it looks, but for what it does: it is one of the load-bearing elements of the building. Take it away, and everything else collapses.</p>
+                  <p lang="en">That was what the work needed: an institution to hang from. For seven years the artists had carried it from one place to another. For it to reach 2105, they had to be able to let go of it, free their hands and go on building, with others, the infrastructure that will carry it to its destiny. The column was the most direct way of saying so.</p>
+                  <p lang="en">We designed a steel omega that would embrace the column without piercing it, and from it extended a three-meter cantilevered bar of solid iron, to hold fifty kilos of wood and meteorite. We ran the numbers several times.</p>
+                  <p lang="en">The prize did not accept the first proposal: its rules called for works that could be donated, and what was being offered was time. There were three weeks to rethink it. In those days the bar stopped being a support. Three meters were enough to measure something else: the eighty-seven years between the encapsulation and the appointment, divided into thirteen custodies, twelve seven-year periods and a final three-year one. Each stretch of iron became a period, an institution yet to come, someone who does not yet know they will hold the work in their hands.</p>
+                  <p lang="en">The capsule gave up its place to a <i>recordador</i> [reminder], the one dated October 9, 2101. Now the exhibition is open. Every so often I stop by the room and look at the column. The omega embraces it, the bar juts firmly forward and, from it, hangs the <i>recordador</i>. Like the pointer of a balance, it marks where we are.</p>
+                </div><button type="button" class="more"><span lang="es">Leer más</span><span lang="en">Full text</span></button>
+                <div class="caps"><span lang="es"><i>Escala Pro Tempore</i>. Metal, 300 x 2,5 x 14 cm. 2025.</span><span lang="en"><i>Escala Pro Tempore</i>. Metal, 300 x 14 x 2,5 cm. 2025.</span></div>
+                <figure class="inline"></figure><p class="cap-inline"></p>
+              </article>
+
+              <article class="ficha" id="f-2025" data-img="2025-07-09.jpg" data-mat-es="certificado_es-1.jpg" data-mat-en="certificado_en-1.jpg certificado_en-2.jpg">
+                <div class="d"><span class="when"><span lang="es">9 JUL 2025. Blockchain de Ethereum</span><span lang="en">9 JUL 2025. Ethereum Blockchain</span></span><span class="n"></span></div>
+                <h2><span lang="es">Fin de la Custodia Fundacional</span><span lang="en">End of the Foundational Custody</span></h2>
+                <div class="tx">
+                  <p lang="es">Hoy faltan exactamente ochenta años para que la Sociedad Científica Argentina de 2105 pueda volver a decidir si incorpora el meteorito a su colección. No sabemos cómo pensarán ni qué alternativas tendrán. Solo podemos imaginarlo, porque esa decisión está más allá de este tiempo y de todos nosotros.</p>
+                  <p lang="es">Hoy también termina la Custodia Fundacional. Empezó el 25 de mayo de 2018 y estuvo a cargo de los artistas, que dejaron constancia de sus tareas en un certificado: investigación, exhibición, guarda, conservación, logística y difusión. El certificado quedó registrado en la blockchain de Ethereum, donde cualquiera puede consultarlo y nadie puede modificarlo. Ahí también se fija lo que sigue: doce custodias pro tempore, once de siete años y una última de tres, hasta 2105.</p>
+                  <p lang="es">Todavía no está definida la institución que tomará la primera. Mientras tanto, la obra sigue con los artistas.</p>
+                  <p lang="en">Today marks exactly eighty years until the Sociedad Científica Argentina of 2105 can once again decide whether to incorporate the meteorite into its collection. We do not know how they will think or what options will be available to them. We can only imagine, because that decision lies beyond our time and beyond all of us.</p>
+                  <p lang="en">Today also marks the end of the Foundational Custody. It began on May 25, 2018, and was undertaken by the artists, who documented their responsibilities in a certificate: research, exhibition, safekeeping, conservation, logistics, and dissemination. The certificate was recorded on the Ethereum blockchain, where anyone can consult it and no one can alter it. It also establishes what comes next: twelve <i>pro tempore</i> custodianships, eleven lasting seven years and a final one lasting three, through 2105.</p>
+                  <p lang="en">The institution that will assume the first custodianship has yet to be determined. In the meantime, the work remains with the artists.</p>
+                  <p><a class="ext" href="https://etherscan.io/nft/0x889836c131d061368fab2da7115ba1944ec5139d/94796921461686086826220693392254722823713731407516714556151759053042007146497" target="_blank" rel="noopener">etherscan.io ↗</a></p>
+                </div><button type="button" class="more"><span lang="es">Leer más</span><span lang="en">Full text</span></button>
+                <div class="caps"><span lang="es">Certificado de finalización de la Custodia Fundacional</span><span lang="en">Certificate of Completion of the Foundational Custody</span></div>
+                <figure class="inline"></figure><p class="cap-inline"></p>
+              </article>
+
+              <article class="ficha" id="f-2023" data-img="2023-moderno.jpg">
+                <div class="d"><span class="when"><span lang="es">30 NOV 2023. Museo Moderno, Buenos Aires</span><span lang="en">30 NOV 2023. Museo Moderno, Buenos Aires</span></span><span class="n"></span></div>
+                <h2>A 18 minutos del Sol</h2>
+                <div class="tx">
+                  <p lang="es">Llegó en junio, antes que casi todo lo demás, dentro de una caja naranja con esquinas de metal y manijas, como las que usan los músicos para llevar sus instrumentos de gira. Me acuerdo porque la abrieron con un cuidado que no se suele ver ni con los cuadros caros. Adentro había otra caja, de madera, sin nada para ver. Me dijeron que es la primera vez que se muestra en un museo.</p>
+                  <p lang="es">Al rato vino una conservadora. Fotografió cada cara del prisma, despacio, y fue anotando en una planilla: deformación, hundimiento, roturas, rayado, acreción. Al costado de cada marca escribía “phenomena”. Pregunté qué quería decir y me explicaron que así se registra todo lo que le pasa a una superficie. Desde entonces miro la caja de otra manera. Cada vez que paso, busco si le apareció un fenómeno nuevo.</p>
+                  <p lang="es">Un par de días después la bajaron a sala, porque habían traído la base para instalarla: un tronco de pirámide facetado, que parece de cemento, pensado entre los artistas y la gente de museografía. La caja va arriba, apoyada sobre unos cubitos, en el centro de la sala. Las demás obras quedaron alrededor. El texto de la pared dice que orbitan “como un grupo de planetas atraído por un agujero negro”.</p>
+                  <p lang="es">Casi cien artistas en la muestra, y la gente se para frente a la que no se puede ver. Leen que adentro hay un meteorito enviado al futuro y se acercan. La base los deja a un brazo de distancia, pero casi nadie estira la mano. Los que lo intentan lo hacen despacio, como pidiendo permiso, y después se quedan un rato más mirando la madera.</p>
+                  <p lang="es">A veces, a última hora, la sala se vacía y me quedo un momento con ella. Abrirla está prevista para 2105. La muestra termina en febrero, y entonces va a volver a su estuche naranja y se la van a llevar… vaya saber cómo sigue.</p>
+                  <p lang="en">It arrived in June, before almost everything else, inside an orange case with metal corners and handles, like the ones musicians use to transport their instruments on tour. I remember because they opened it with a level of care you rarely see, even with expensive paintings. Inside was another enclosure, made of wood, with nothing inherently to see. They told me this was the first time it would be shown in a museum.</p>
+                  <p lang="en">A little later, a conservator arrived. She photographed each face of the prism, slowly, and began making notes on a condition report: deformation, indentation, breakage, scratches, accretion. Next to each mark, she wrote “phenomena.” I asked what it meant, and they explained that this is how everything that happens to a surface is recorded. Since then, I have looked at the prism differently. Every time I pass by, I check whether a new phenomenon has appeared.</p>
+                  <p lang="en">A couple of days later, they brought it down to the gallery, because the base for its installation had arrived: a faceted truncated pyramid that looks like concrete, designed jointly by the artists and the exhibition design team. The prism sits on top, resting on small cubes, at the center of the room. The other works were arranged around it. The wall text says they orbit “like a group of planets drawn toward a black hole.”</p>
+                  <p lang="en">Almost a hundred artists are represented in the exhibition, yet people stop in front of the one thing they cannot see. They read that inside is a meteorite sent into the future, and they move closer. The base keeps them at arm’s length, but almost no one reaches out. Those who do move slowly, as if asking permission, and then linger a little longer, looking at the wood.</p>
+                  <p lang="en">Sometimes, near closing time, the gallery empties and I stay with it for a moment. It is scheduled to be opened in 2105. The exhibition ends in February, and then it will go back into its orange case and be taken away… who knows what happens next.</p>
+                </div><button type="button" class="more"><span lang="es">Leer más</span><span lang="en">Full text</span></button>
+                <div class="caps"><span lang="es">La cápsula sobre la base de tronco piramidal en Museo Moderno.</span><span lang="en">The capsule on its truncated pyramidal base at Museo Moderno.</span></div>
+                <figure class="inline"></figure><p class="cap-inline"></p>
+              </article>
+
+              <article class="ficha" id="f-2022" data-img="2022-saxa.jpg" data-mat-es="saxa_es-1.jpg" data-mat-en="saxa_en-1.jpg saxa_en-2.jpg">
+                <div class="d"><span class="when"><span lang="es">8 FEB 2022, Barro Galería, Buenos Aires</span><span lang="en">8 FEB 2022. Barro Galería, Buenos Aires</span></span><span class="n"></span></div>
+                <h2>¡Saxa Loquuntur!</h2>
+                <div class="tx">
+                  <p lang="es">Quedan pocos días de muestra en Barro, una gran nave donde alguna vez funcionó un astillero. Hoy la ocupa un sistema de grandes telas blancas, colgadas en hileras como hojas de esos almanaques que se arrancan una por día. Son semitransparentes, y a media luz funcionan como velos: dejan adivinar lo que viene sin mostrarlo. En el recorrido aparecen siete piedras litográficas con imágenes, textos y una partitura grabados en sus caras. No explican nada. Parecen pistas de algo que todavía no se ve.</p>
+                  <p lang="es">En el centro de la sala, casi en penumbra, está la cápsula: la caja de madera de 50 por 31 por 31 centímetros que guarda un meteorito desde mayo de 2018. La rodea un hipercubo de caños de hierro que toma sus proporciones y las proyecta hacia afuera, como si el objeto ocupara más espacio del que tiene. Se la puede recorrer con la mirada, pero no tocar. Desde ahí irradia algo difícil de nombrar, más una presencia que una escultura.</p>
+                  <p lang="es">Alrededor están los recordadores. Son ocho piezas únicas que vienen a resolver el problema más viejo del género. Las cápsulas de tiempo casi nunca fallan por la madera o por el sello. Fallan por olvido. Se cierran con ceremonia, se guardan, cambian las personas, los edificios y las instituciones, y cuando llega su hora no queda nadie que se acuerde. Esta cápsula tiene una cita dentro de ochenta y dos años, y los recordadores son su manera de no quedar sola. Cada uno lleva al frente, grabada en puntos sobre una chapa de acero, una fecha entre 2101 y 2103. Sobre ella, el contorno del meteorito está calado en el metal a tamaño real, como un bocado completo, con un espejo al fondo. La ventana dibuja el perfil de la piedra, pero lo que muestra del interior es el rostro de quien mira. Son mecanismos de activación diferida: en los años previos a 2105, uno detrás de otro, van a recordar que la cita se acerca. Adentro, sellados herméticamente, guardan paquetes de cartas anónimas dirigidas a la Sociedad Científica Argentina del año 2105, viñetas de lo que pasa y de lo que importa hoy. Hasta entonces, su único trabajo es durar y no dejarse olvidar.</p>
+                  <p lang="es">Más allá, después de otro tramo de telas que es casi un bosque, casi un laberinto, están las litotecas, el lugar al que pertenecen las piedras del principio. Recién ahí se entiende que las pistas vuelven a su origen.</p>
+                  <p lang="en">Only a few days remain of the exhibition at Barro, a vast hall that once housed a shipyard. Today, it is occupied by a system of large white fabric panels, hung in rows like the pages of those calendars from which a sheet is torn off each day. They are semitransparent, and in the dim light they function as veils: they hint at what lies ahead without revealing it. Along the way, seven lithographic stones appear, with images, texts, and a musical score engraved on their surfaces. They explain nothing. They seem like clues to something that has yet to come into view.</p>
+                  <p lang="en">At the center of the gallery, almost in darkness, stands the capsule: a wooden box measuring 50 x 31 x 31 centimeters, which has held a meteorite since May 2018. Surrounding it is a hypercube made of iron pipes that takes its proportions and projects them outward, as though the object occupied more space than it actually does. It can be explored with the eyes, but not touched. Something difficult to name radiates from it, more a presence than a sculpture.</p>
+                  <p lang="en">Around it are the <i>recordadores</i>. Eight unique pieces designed to address the oldest problem of their genre. Time capsules almost never fail because of the wood or their seal. They fail because they are forgotten. They are closed through ceremony, stored away, people change, buildings and institutions change, and when their time comes, no one is left who remembers. This capsule has an appointment eighty-two years from now, and the <i>recordadores</i> are its way of ensuring it will not be left alone. Each bears a date between 2101 and 2103, engraved in dots on a steel plate. Above it, the meteorite’s outline is cut through the metal one-to-one, like a complete bite taken out of the surface, with a mirror at the back. The opening traces the profile of the stone, but what it reveals inside is the face of whoever is looking. They are mechanisms of deferred activation: in the years leading up to 2105, one after another, they will serve as reminders that the appointment is approaching. Inside, hermetically sealed, they contain packages of anonymous letters addressed to the Sociedad Científica Argentina of the year 2105, snapshots of what is happening and what matters today. Until then, their only task is to endure and resist being forgotten.</p>
+                  <p lang="en">Further on, beyond another stretch of fabric that is almost a forest, almost a labyrinth, are the lithotheques, the place where the stones encountered at the beginning belong. Only then does it become clear that the clues lead back to their origin.</p>
+                </div><button type="button" class="more"><span lang="es">Leer más</span><span lang="en">Full text</span></button>
+                <div class="caps"><span lang="es"><i>17 MAY 2102</i>. Hierro, nylon, papel y cristal, 50 x 31 x 11 cm. 2022.</span><span lang="en"><i>17 MAY 2102</i>. Iron, nylon, paper, and glass, 50 x 31 x 11 cm. 2022.</span></div>
+                <figure class="inline"></figure><p class="cap-inline"></p>
+              </article>
+
+              <article class="ficha" id="f-2021" data-img="2021-tamayo.png">
+                <div class="d"><span class="when"><span lang="es">11 MAR 2021, Museo Tamayo, CDMX</span><span lang="en">11 MAR 2021, Museo Tamayo, CDMX</span></span><span class="n"></span></div>
+                <h2><span lang="es">Custodia Remota</span><span lang="en">A remote custody</span></h2>
+                <div class="tx">
+                  <p lang="es">Son las once de la noche en Ciudad de México y en la pantalla, a siete mil kilómetros, hay una caja de madera en un estudio de Buenos Aires. No pasa nada. La imagen tiembla apenas, como tiemblan las transmisiones en vivo, y eso es lo único que confirma que no es una foto.</p>
+                  <p lang="es">Sabía que este prisma tenía otro destino. Iba a ser el Rosa Galisteo, en Santa Fe: la primera custodia institucional, el primer eslabón de una cadena de comodatos que debería llegar hasta 2105. Había expediente, había memos, había una llegada estimada para el primer semestre de 2020. En marzo el mundo se detuvo, y el primer eslabón se rompió antes de cerrarse.</p>
+                  <p lang="es">En septiembre salió otra invitación, la de The Backroom, el programa del Museo Tamayo con Independent Curators International. Iba a ser en línea, como casi todo ese año. Las instituciones habían aprendido de golpe a exhibir sin recibir a nadie, y muchas lo hacían a regañadientes. Los artistas, en cambio, lo tomaron como una oportunidad para mostrar el estado de las cosas: qué es esta obra cuando no puede ir a ningún lado.</p>
+                  <p lang="es">El micrositio despliega el archivo de la obra. Hay fotografías de los aniversarios de la Sociedad Científica Argentina, con su frente y su dorso; una carta al presidente firmada por los artistas, con el sello de mesa de entrada; un certificado de legítima tenencia; un memo sobre el régimen jurídico de la donación; una partitura; las fotos del encapsulamiento en arteBA. Es toda una liturgia en documentos. Al final hay una ventana: la cámara apuntada a la caja en el lugar donde quedó guardada. Para que eso fuera posible se firmó un comodato digital. Un museo tomó en custodia una obra que nunca llegó a sus salas. La custodia consiste en mirarla.</p>
+                  <p lang="en">It is eleven at night in Mexico City, and on the screen, seven thousand kilometers away, there is a wooden box in a studio in Buenos Aires. Nothing happens. The image trembles slightly, the way live broadcasts do, and that is the only thing confirming it is not a photograph.</p>
+                  <p lang="en">I knew this prism was meant to go somewhere else. It was supposed to be the Rosa Galisteo Museum in Santa Fe: the first institutional custody, the first link in a chain of loan agreements intended to extend until 2105. There was a case file, there were memos, and an estimated arrival date in the first half of 2020. In March, the world came to a halt, and the first link broke before it could be secured.</p>
+                  <p lang="en">In September, another invitation arrived, this time from The Backroom, a program organized by the Museo Tamayo and Independent Curators International. It would take place online, like almost everything that year. Institutions had suddenly learned how to exhibit without receiving visitors, and many did so reluctantly. The artists, on the other hand, saw it as an opportunity to show the state of things: what this work becomes when it cannot go anywhere.</p>
+                  <p lang="en">The microsite unfolds the work’s archive. There are photographs of the Sociedad Científica Argentina’s anniversaries, showing both front and back; a letter to its president signed by the artists, bearing the incoming correspondence stamp; a certificate of lawful possession; a memo on the legal framework governing the donation; a musical score; photographs of the encapsulation at arteBA. An entire liturgy of documents. At the end, there is a window: a camera pointed at the box in the place where it has been stored. To make this possible, a digital loan agreement was signed. A museum took custody of a work that never entered its galleries. The custody consists in watching it.</p>
+                </div><button type="button" class="more"><span lang="es">Leer más</span><span lang="en">Full text</span></button>
+                <div class="caps"><span lang="es">Vista del micrositio de Faivovich &amp; Goldberg en <i>The Backroom</i>, Museo Tamayo e Independent Curators International, 2021.</span><span lang="en">View of Faivovich &amp; Goldberg’s microsite in <i>The Backroom</i>, Museo Tamayo and Independent Curators International, 2021.</span></div>
+                <figure class="inline"></figure><p class="cap-inline"></p>
+              </article>
+
+              <article class="ficha" id="f-2019" data-img="2019-galisteo.jpg" data-mat-es="galisteo_es-1.jpg" data-mat-en="galisteo_en-1.jpg galisteo_en-2.jpg">
+                <div class="d"><span class="when"><span lang="es">16 DIC 2019. Museo Provincial de Bellas Artes Rosa Galisteo de Rodríguez, Santa Fé</span><span lang="en">16 DEC 2019. Museo Provincial de Bellas Artes Rosa Galisteo de Rodríguez, Santa Fé</span></span><span class="n"></span></div>
+                <h2>Pensamiento Crítico</h2>
+                <div class="tx">
+                  <p lang="es">El Museo Rosa Galisteo pasó estos años en reformas. La principal era la de sus bodegas, y para poder hacerla había que vaciarlas. Su directora buscó una salida radical: sacó la colección entera a las salas, con cuadros de piso a techo y halls llenos de esculturas. Todo el patrimonio de casi un siglo, a la vista. La muestra se llamó <i>Museo Tomado</i>. Las bodegas quedaron vacías, a la espera de la partida presupuestaria para terminar los trabajos.</p>
+                  <p lang="es">En busca de proyectos alternativos, se interesó por la práctica de Faivovich &amp; Goldberg y los invitó a ser los primeros residentes de Plataforma Rosa Pensamiento Crítico, una suerte de residencia en el seno de la institución que terminó siendo su objeto de estudio. Entendieron que lo más potente que podían ofrecer era la radicación transitoria de la cápsula de tiempo. Para cumplir con las premisas del proyecto (investigación, conservación, difusión), se puso en marcha un programa de trabajo que se iba escribiendo a medida que avanzaba. En ese contexto surgió la idea de que la obra debía viajar a su cita de 2105 a través de custodias institucionales. El museo tomaría la primera.</p>
+                  <p lang="es">En agosto, el museo dedicó tres encuentros a una pregunta que pocas veces llega a una institución: qué se les debe a quienes todavía no nacieron. Un grupo de abogados y docentes armó el programa, y un especialista en patrimonio viajó desde Buenos Aires para el cierre. Se habló de los derechos de la naturaleza en la Constitución de Ecuador y, en la misma mesa, de un prisma de madera con un meteorito de 41 kilos adentro y una cita fijada para el 9 de julio de 2105.</p>
+                  <p lang="es">La conversación fue seria y generosa. Concluyó que la obra necesita un estatuto propio, una especie de constitución mínima para un objeto que va a sobrevivir a todos los presentes. Se esbozaron sus temas.</p>
+                  <p lang="es">Mientras tanto, la pieza no llega. El ofrecimiento entró hace un año, y antes de recibirla el museo necesitaba garantías sobre dos cosas: que la piedra perteneciera legítimamente a quienes la ofrecían y que no representara un riesgo para nadie. Un memo jurídico respondió lo primero y un geólogo certificó lo segundo. Cada garantía trajo nuevas consultas: papeles que se van a dormir la siesta y vuelven con nuevos requerimientos.</p>
+                  <p lang="es">La semana pasada, el museo dejó constancia del estado del trámite. Falta definir el plazo, el seguro y el flete. La provincia cambia de gobierno y hay que esperar a los nuevos funcionarios.</p>
+                  <p lang="es">En este año se pensó con mucho cuidado cómo resguardar la obra durante ochenta y seis años. Todavía no se encontró la forma de traerla. Una obra que espera hasta 2105 puede esperar unos meses más.</p>
+                  <p lang="es">La llegada se estima para el primer semestre de 2020.</p>
+                  <p lang="en">The Rosa Galisteo museum spent these years undergoing renovations. The main project involved its storage facilities, which had to be emptied out before work could begin. Its director came up with a radical solution: she brought the entire collection into the galleries, with paintings hung from floor to ceiling and halls filled with sculptures. Nearly a century’s worth of the museum’s holdings, all on view. The exhibition was called <i>Museo Tomado</i>. The storage facilities remained empty, awaiting the budget allocation needed to complete the work.</p>
+                  <p lang="en">In search of alternative projects, the director became interested in Faivovich &amp; Goldberg’s practice and invited them to become the first residents of <i>Plataforma Rosa Pensamiento Crítico</i>, a kind of residency within the institution that ultimately became the subject of their study. They understood that the most significant contribution they could make was the temporary placement of the time capsule. To fulfill the project’s objectives—research, conservation, and communication—a work program was set in motion, taking shape as it progressed. It was in this context that the idea emerged that the work should make its way to its appointment in 2105 through a succession of institutional custodianships. The museum would assume the first.</p>
+                  <p lang="en">In August, the museum devoted three sessions to a question rarely posed within an institution: what do we owe to those who have not yet been born? A group of lawyers and educators organized the program, and a heritage specialist traveled from Buenos Aires for the closing session. The discussions addressed the rights of nature enshrined in Ecuador’s Constitution and, at the same table, a wooden prism containing a 41-kilogram meteorite, with an appointment set for July 9, 2105.</p>
+                  <p lang="en">The conversation was serious and generous. It concluded that the work needed a legal framework of its own, a kind of minimal constitution for an object that would outlive everyone present. Its main provisions were outlined.</p>
+                  <p lang="en">Meanwhile, the piece has yet to arrive. The offer was submitted a year ago, and before accepting it, the museum needed assurances on two matters: that the stone was lawfully held by those offering it, and that it posed no risk to anyone. A legal memorandum addressed the first, and a geologist certified the second. Each assurance prompted further inquiries: paperwork that goes off for a siesta and returns with new requirements.</p>
+                  <p lang="en">Last week, the museum formally recorded the status of the process. The duration of the agreement, insurance, and transportation still need to be determined. The provincial government is changing, and the arrival of new officials must be awaited.</p>
+                  <p lang="en">Over the course of this year, considerable thought has gone into how to safeguard the work for eighty-six years. A way to bring it to the museum has yet to be found. A work that can wait until 2105 can wait a few more months.</p>
+                  <p lang="en">Its arrival is expected in the first half of 2020.</p>
+                </div><button type="button" class="more"><span lang="es">Leer más</span><span lang="en">Full text</span></button>
+                <div class="caps"><span lang="es">Portada de <i>Guía General de Obras 1922-1947 del Museo Rosa Galisteo de Rodríguez</i>, 14 de agosto 2018.</span><span lang="en">Cover of <i>Guía General de Obras 1922–1947</i>, Museo Rosa Galisteo de Rodríguez, August 14, 2018.</span></div>
+                <figure class="inline"></figure><p class="cap-inline"></p>
+              </article>
+
+              <article class="ficha" id="f-2018" data-img="2018-lacma.jpg" data-mat-es="lacma_es-1.jpg" data-mat-en="lacma_en-1.jpg lacma_en-2.jpg">
+                <div class="d"><span class="when">12 JUN 2018</span><span class="n"></span></div>
+                <h2><span lang="es">Nuestro hombre en Los Angeles</span><span lang="en">Our Man in Los Angeles</span></h2>
+                <div class="tx">
+                  <p lang="es">El sellado fue un viernes de mayo, en arteBA. El meteorito entró a su caja de madera delante de un público que no terminaba de saber si estaba en una ceremonia o en una performance. Entre los que miraban había un curador del LACMA, el museo de Los Ángeles. Se notaba que no estaba de paso: hacía preguntas y se quedó hasta el final.</p>
+                  <p lang="es">Más tarde, estábamos con los artistas en el salón VIP de la feria y volvió a aparecer. Tenía un montón de inquietudes sobre el futuro de la obra, y hablaron de todo lo que se le abría: la custodia, la herencia, las instituciones que todavía no existen, qué significa prestar algo por ochenta y siete años. Preguntó cómo podría participar un museo como el suyo. En algún momento alguien trajo champaña y brindamos.</p>
+                  <p lang="es">Supe que unos días después los artistas le mandaron una carta en papel, despachada por correo postal. En ella enumeraban los temas de aquella noche y lo invitaban a seguir el diálogo. Me gustó que la mandaran así. Para una obra que piensa en 2105, el correo electrónico es demasiado rápido. Una carta, en cambio, tarda lo suficiente como para que quien la recibe tenga tiempo de pensar.</p>
+                  <p lang="es">Ahora hay que esperar.</p>
+                  <p lang="en">The sealing took place on a Friday in May, at arteBA. The meteorite was placed inside its wooden box before an audience that wasn’t quite sure whether it was witnessing a ceremony or a performance. Among those watching was a curator from LACMA, the museum in Los Angeles. It was clear he wasn’t just passing through: he asked questions and stayed until the end.</p>
+                  <p lang="en">Later, we were with the artists in the fair’s VIP lounge when he appeared again. He had plenty of questions about the future of the work, and they talked about everything it opened up: custody, inheritance, institutions that do not yet exist, what it means to lend something for eighty-seven years. He asked how a museum like his might become involved. At some point, someone brought champagne, and we raised our glasses.</p>
+                  <p lang="en">I learned that a few days later, the artists sent him a letter on paper, through the postal service. In it, they listed the topics discussed that evening and invited him to continue the conversation. I liked that they sent it that way. For a work conceived with 2105 in mind, email is too fast. A letter, on the other hand, takes just long enough to give its recipient time to think.</p>
+                  <p lang="en">Now we have to wait.</p>
+                </div><button type="button" class="more"><span lang="es">Leer más</span><span lang="en">Full text</span></button>
+                <div class="caps"><span lang="es">Carta a JLB, Arizona, junio 2018.</span><span lang="en">Letter to JLB, Arizona, June 2018.</span></div>
+                <figure class="inline"></figure><p class="cap-inline"></p>
+              </article>
+
+            </div>
+          </div>
+        </div>
+
+        <footer class="A-foot" id="a-foot">
+          <div class="row">
+            <div><span class="k">Fundación Federico Jorge Klemm</span><a href="https://klemm.org.ar/" target="_blank" rel="noopener">klemm.org.ar&nbsp;↗</a></div>
+            <div><span class="f">Faivovich &amp; Goldberg</span><a href="https://faivovich-goldberg.com/" target="_blank" rel="noopener">faivovich-goldberg.com&nbsp;↗</a></div>
+          </div>
+        </footer>
+
+        <div class="A-full" id="a-full" hidden role="dialog" aria-modal="true" aria-label="Ficha completa">
+          <div class="top"><button type="button" id="a-full-close"><span lang="es">× Cerrar</span><span lang="en">× Close</span></button><span id="a-full-idx"></span></div>
+          <div class="in" id="a-full-in"></div>
+        </div>
+
+      </div>
+
+<script>
+(() => {
+  const site = document.getElementById('site'), head = document.getElementById('a-head');
+  const lang = () => site.dataset.lang;
+
+  // tiempo: con el reloj y el huso de quien mira (Guillermo, 30.10: "es un registro de lectura")
+  const T0 = new Date(2018, 4, 25), T1 = new Date(2105, 6, 9), CI0 = new Date(2025, 6, 9), CI1 = new Date(2032, 4, 25);
+  const pct = (a, b, t) => Math.max(0, Math.min(1, (t - a) / (b - a)));
+  function diffYMD(a, b) {
+    let y = b.getFullYear() - a.getFullYear(), m = b.getMonth() - a.getMonth(), d = b.getDate() - a.getDate();
+    if (d < 0) { m -= 1; d += new Date(b.getFullYear(), b.getMonth(), 0).getDate(); }
+    if (m < 0) { y -= 1; m += 12; }
+    return { y, m, d };
+  }
+  const plural = (n, one, many) => `${n} ${n === 1 ? one : many}`;
+  const LIVE = {
+    es: (l) => `faltan ${plural(l.y, 'año', 'años')}, ${plural(l.m, 'mes', 'meses')} y ${plural(l.d, 'día', 'días')} para el 9 JUL 2105`,
+    en: (l) => `${plural(l.y, 'year', 'years')}, ${plural(l.m, 'month', 'months')}, ${plural(l.d, 'day', 'days')} until 9 JUL 2105`
+  };
+  const aTrack = document.getElementById('a-track');
+  const live = () => {
+    const now = new Date(), x = (t) => (pct(T0, T1, t) * 100) + '%';
+    document.querySelector('[data-live="left"]').textContent = LIVE[lang()](diffYMD(now, T1));
+    aTrack.innerHTML = `<span class="line"></span><span class="ci" style="left:${x(CI0)};width:${(pct(T0, T1, CI1) - pct(T0, T1, CI0)) * 100}%"></span><span class="tick" style="left:0"></span><span class="tick" style="left:100%"></span><span class="now" style="left:${x(now)}"></span><span class="lab l" style="left:0">2018</span><span class="lab hoy" style="left:${x(now)}">${lang() === 'en' ? 'today' : 'hoy'}</span><span class="lab r" style="left:100%">2105</span>`;
+  };
+  live(); setInterval(live, 60e3);
+
+  // altura de la cabecera frizada → --head (el visor, el alto de la ficha y el scroll-margin dependen de ella)
+  const setHead = () => site.style.setProperty('--head', head.offsetHeight + 'px');
+  new ResizeObserver(setHead).observe(head); setHead();
+
+  const IMG = 'img/fichas4/', MAT = IMG + 'material/';
+  const fichas = [...document.querySelectorAll('.ficha')];
+  const stage = document.getElementById('a-stage'), cap = document.getElementById('a-cap');
+  const capHTML = (f) => { const c = f.querySelector(`.caps [lang="${lang()}"]`); return c ? c.innerHTML.replace(/\[([^\]]+)\]/g, '<span class="miss">[$1]</span>') : ''; };
+  const num = (i) => `${String(i + 1).padStart(2, '0')} / ${String(fichas.length).padStart(2, '0')}`;
+  fichas.forEach((f, i) => {
+    f.querySelector('.d .n').textContent = num(i);
+    const fig = document.createElement('figure'); fig.dataset.for = f.id; fig.innerHTML = `<img src="${IMG}${f.dataset.img}" alt="" loading="${i < 3 ? 'eager' : 'lazy'}">`;
+    stage.appendChild(fig);
+    f.querySelector('figure.inline').innerHTML = `<img src="${IMG}${f.dataset.img}" alt="" loading="lazy">`;
+  });
+  // epígrafes y textos alternativos en el idioma de turno
+  const caps = () => fichas.forEach(f => {
+    const c = capHTML(f), alt = (f.querySelector(`.caps [lang="${lang()}"]`) || {}).textContent || '';
+    f.querySelector('.cap-inline').innerHTML = c;
+    f.querySelectorAll('figure img').forEach(im => im.alt = alt);
+    const s = stage.querySelector(`[data-for="${f.id}"] img`); if (s) s.alt = alt;
+  });
+  let active = null;
+  const show = (f, force) => {
+    if (active === f && !force) return; active = f;
+    stage.querySelectorAll('figure').forEach(g => g.classList.toggle('on', g.dataset.for === f.id));
+    cap.innerHTML = capHTML(f);
+  };
+  // la ficha activa es la última cuyo borde superior ya pasó el 45 % de la ventana
+  const pick = () => { const y = innerHeight * 0.45; let best = fichas[0]; for (const f of fichas) { if (f.getBoundingClientRect().top <= y) best = f; } show(best); };
+  addEventListener('scroll', () => requestAnimationFrame(pick), { passive: true });
+  addEventListener('resize', pick); addEventListener('load', pick);
+
+  // recorte + Leer más. En escritorio el cuerpo se recorta a lo que entra en el alto de la ficha; en teléfono, a 16,5 líneas
+  const desk = () => getComputedStyle(document.getElementById('a-view')).display !== 'none';
+  const clampAll = () => fichas.forEach(f => {
+    const tx = f.querySelector('.tx'); tx.classList.remove('clamp'); tx.style.maxHeight = ''; f.classList.remove('has-more');
+    const full = tx.scrollHeight;
+    let room = null;
+    if (desk()) {
+      const fh = parseFloat(getComputedStyle(f).minHeight) || 0;
+      room = Math.max(7 * 1.5 * 12.5, fh - (f.offsetHeight - tx.offsetHeight) - 46);   // 46 ≈ el botón Leer más; nunca menos de 7 líneas
+    }
+    tx.classList.add('clamp'); if (room) tx.style.maxHeight = room + 'px';
+    const over = full > tx.clientHeight + 24;
+    if (!over) { tx.classList.remove('clamp'); tx.style.maxHeight = ''; }
+    f.classList.toggle('has-more', over || !!f.dataset.matEs);   // con material adentro, siempre hay Leer más
+  });
+
+  // Leer más: el texto entero y, si la ficha tiene, el material (ES: el original · EN: la traducción y debajo el original)
+  const full = document.getElementById('a-full'), fullIn = document.getElementById('a-full-in'), fullIdx = document.getElementById('a-full-idx');
+  const T = { es: { mat: 'Documento', tr: '', or: '' }, en: { mat: 'Document', tr: 'English translation', or: 'Original, in Spanish' } };
+  let lastFocus = null, openF = null;
+  const pick1 = (root) => { const c = root.cloneNode(true); c.querySelectorAll(`[lang]:not([lang="${lang()}"])`).forEach(n => n.remove()); return c.innerHTML; };
+  const openFull = (f) => {
+    if (!openF) lastFocus = document.activeElement; openF = f;
+    const l = lang(), mats = (f.dataset['mat' + (l === 'en' ? 'En' : 'Es')] || '').split(' ').filter(Boolean);
+    const dl = f.querySelector('.dl'), when = f.querySelector('.d .when');
+    fullIn.innerHTML = (when ? `<div class="d">${pick1(when)}</div>` : '') + `<h1>${pick1(f.querySelector('h2'))}</h1>` +
+      `<div class="tx">${pick1(f.querySelector('.tx'))}</div>` + (dl ? `<div class="dl">${pick1(dl)}</div>` : '') +
+      (mats.length ? `<div class="mat"><div class="k">${T[l].mat}</div>` + mats.map((m, i) => `<figure><img src="${MAT}${m}" alt="" loading="lazy">${l === 'en' && mats.length > 1 ? `<figcaption>${i === 0 ? T.en.tr : T.en.or}</figcaption>` : ''}</figure>`).join('') + '</div>' : '');
+    fullIdx.textContent = f.querySelector('.d .n').textContent;
+    full.hidden = false; document.body.style.overflow = 'hidden'; full.scrollTop = 0; document.getElementById('a-full-close').focus();
+  };
+  const closeFull = () => { full.hidden = true; openF = null; document.body.style.overflow = ''; if (lastFocus) lastFocus.focus(); };
+  fichas.forEach(f => f.querySelector('.more').addEventListener('click', () => openFull(f)));
+  document.getElementById('a-full-close').addEventListener('click', closeFull);
+  addEventListener('keydown', (e) => { if (e.key === 'Escape' && !full.hidden) closeFull(); });
+
+  // idioma: ES / EN (?lang=en). Cambia textos, epígrafes, el reloj y, si está abierta, la ficha entera
+  const setLang = (l) => {
+    site.dataset.lang = l; document.documentElement.lang = l;
+    document.querySelectorAll('.A-top .lang button').forEach(b => b.setAttribute('aria-pressed', b.dataset.lang === l));
+    const u = new URL(location.href); if (l === 'en') u.searchParams.set('lang', 'en'); else u.searchParams.delete('lang');
+    history.replaceState(null, '', u);
+    live(); caps(); if (active) show(active, true); clampAll(); if (openF) openFull(openF);
+  };
+  document.querySelectorAll('.A-top .lang button').forEach(b => b.addEventListener('click', () => { if (lang() !== b.dataset.lang) setLang(b.dataset.lang); }));
+
+  // el sitio aterriza en la ficha del 1 de octubre, centrada bajo la cabecera (arriba queda la de la obra); el título vuelve ahí
+  const landing = document.getElementById('f-2026');
+  const land = (behavior) => {
+    const h = head.offsetHeight, r = landing.getBoundingClientRect();
+    scrollTo({ top: scrollY + r.top - h - Math.max(0, (innerHeight - h - r.height) / 2), behavior });
+  };
+  document.getElementById('a-home').addEventListener('click', (e) => { e.preventDefault(); land('smooth'); });
+  const bare = !document.querySelector('.desk');
+  if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+  const q = new URLSearchParams(location.search).get('lang');
+  site.dataset.lang = q === 'en' ? 'en' : 'es';
+  setLang(site.dataset.lang); pick();
+  const ready = () => { clampAll(); if (bare && !location.hash) land('instant'); pick(); };
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(ready); else ready();
+  addEventListener('resize', clampAll);
+
+  // comentarios (artifact) + escritorio
+  (async () => {
+    const c = window.claude && window.claude.use ? await window.claude.use('comments') : null; if (!c) return;
+    const btn = document.getElementById('comment-btn'); btn.hidden = false; let lastRange = null;
+    document.addEventListener('selectionchange', () => { const sel = document.getSelection(); if (sel && sel.rangeCount && !sel.isCollapsed && !btn.contains(sel.anchorNode)) lastRange = sel.getRangeAt(0).cloneRange(); });
+    btn.addEventListener('mousedown', (e) => e.preventDefault());
+    btn.addEventListener('click', async () => { const target = lastRange && lastRange.startContainer.isConnected ? { range: lastRange } : { element: document.querySelector('.brief h1') }; lastRange = null; try { await c.openComposer(target); } catch (e) { if (e && e.code === 'unavailable') btn.hidden = true; } });
+  })();
+  document.querySelectorAll('.seg button').forEach(b => b.addEventListener('click', () => {
+    document.querySelectorAll('.seg button').forEach(x => x.setAttribute('aria-pressed', x === b));
+    document.querySelectorAll('.frame').forEach(f => f.classList.toggle('phone', b.dataset.v === 'phone'));
+    setTimeout(clampAll, 400);
+  }));
+  if ((location.hash || '').includes('phone')) document.getElementById('v-phone').click();
+})();
+</script>
+</body>
+</html>
