@@ -27,10 +27,12 @@
    "Diseño de fichas y tratamiento visual" (28.10): cabecera con el nombre de la obra y la banda de datos
    frizada; a la izquierda una sola imagen, siempre velada, que cambia con el scroll; a la derecha la bitácora
    en fichas (fecha · título · cuerpo · descargas · imagen · caption). Duotono de las fotos: #06aafa (doc de Nico).
-   La UI sigue en el azul capucha; el switch de abajo a la derecha prueba todo en #06aafa. */
+   La UI sigue en el azul capucha; el switch de la cabecera prueba todo en #06aafa, en azul petróleo #006698 o en azul blueprint #0b5cc8 (29.10). */
 :root {
   --blue: #2e23c2;
   --duo: #06aafa;              /* el color del duotono de las imágenes (Drafts Textos MicroSite.2105) */
+  --petroleo: #006698;         /* tercera propuesta: azul petróleo (Boris, 29.10) */
+  --blueprint: #0b5cc8;        /* cuarta propuesta: azul de plano, el petróleo corrido hacia un azul más eléctrico (Boris, 29.10) */
   --paper: #e6e6e6;
   --black: #0b0b10;
   --desk: #d4d4d1;
@@ -86,6 +88,8 @@ h1, h2, h3 { overflow-wrap: anywhere; min-width: 0; }
 .duo img { width: 100%; height: 100%; object-fit: cover; }
 .duo img.tint { position: absolute; inset: 0; filter: url(#duotone); }
 .A[data-ui="duo"] .duo img.tint { filter: url(#duotone-duo); }
+.A[data-ui="petroleo"] .duo img.tint { filter: url(#duotone-petroleo); }
+.A[data-ui="blueprint"] .duo img.tint { filter: url(#duotone-blueprint); }
 .half { position: relative; overflow: hidden; background: var(--black); }
 .half img { width: 100%; height: 100%; object-fit: cover; filter: grayscale(1) contrast(1.35) brightness(1.05); }
 .half::after { content: ""; position: absolute; inset: 0; background: radial-gradient(circle, transparent 38%, var(--black) 42%) 0 0 / 4px 4px; mix-blend-mode: multiply; opacity: .55; pointer-events: none; }
@@ -94,6 +98,8 @@ h1, h2, h3 { overflow-wrap: anywhere; min-width: 0; }
 
 /* ═════════════ FICHA v0.2 ═════════════ */
 .A { font-family: var(--mono); font-size: 12.5px; line-height: 1.5; background: var(--paper); color: var(--blue); --head: 150px; }
+.A[data-ui="petroleo"] { --blue: #006698; --blue-70: rgb(0 102 152 / .72); --blue-45: rgb(0 102 152 / .45); --blue-18: rgb(0 102 152 / .18); --blue-08: rgb(0 102 152 / .08); }
+.A[data-ui="blueprint"] { --blue: #0b5cc8; --blue-70: rgb(11 92 200 / .72); --blue-45: rgb(11 92 200 / .45); --blue-18: rgb(11 92 200 / .18); --blue-08: rgb(11 92 200 / .08); }
 .A[data-ui="duo"] { --blue: #06aafa; --blue-70: rgb(6 170 250 / .72); --blue-45: rgb(6 170 250 / .45); --blue-18: rgb(6 170 250 / .18); --blue-08: rgb(6 170 250 / .08); }
 .A-in { padding-inline: clamp(14px, 3cqi, 40px); }
 
@@ -137,6 +143,8 @@ h1, h2, h3 { overflow-wrap: anywhere; min-width: 0; }
 /* el pie de cada ficha: un degradé azul → transparente, para ver dónde termina (pedido de Boris, 28.10 noche) */
 .ficha::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 72px; pointer-events: none; background: linear-gradient(to top, rgb(46 35 194 / .26), rgb(46 35 194 / 0)); }
 .A[data-ui="duo"] .ficha::after { background: linear-gradient(to top, rgb(6 170 250 / .28), rgb(6 170 250 / 0)); }
+.A[data-ui="petroleo"] .ficha::after { background: linear-gradient(to top, rgb(0 102 152 / .26), rgb(0 102 152 / 0)); }
+.A[data-ui="blueprint"] .ficha::after { background: linear-gradient(to top, rgb(11 92 200 / .26), rgb(11 92 200 / 0)); }
 .ficha .d { display: flex; justify-content: space-between; gap: 12px; font-size: 11px; text-transform: uppercase; letter-spacing: .04em; margin-bottom: 6px; }
 /* la taxonomía de la ficha (doc "MicroSite 2105.klemm"): un renglón por campo, una línea entre renglones */
 .row { display: grid; grid-template-columns: 7.5em minmax(0, 1fr); gap: 0 16px; padding: 10px 0; border-top: 1px solid var(--blue-45); min-width: 0; }
@@ -264,7 +272,8 @@ h1, h2, h3 { overflow-wrap: anywhere; min-width: 0; }
   .A-top .lang { gap: 6px; flex-wrap: wrap; justify-content: flex-end; }
   .A-top .lang .box { height: 1.8em; padding: 0 5px; }
   .A-switch { margin-left: 4px; font-size: 9.5px; }
-  .A-switch button { padding: 2px 5px; }
+  .A-switch button { padding: 5px 6px; font-size: 0; gap: 0; }   /* en teléfono, solo el color (tres botones no entran con nombre) */
+  .A-switch i { width: 10px; height: 10px; }
   .A-nav { display: none; }
   .A-bar { padding: 16px 12px 6px; }
   .A-bar .state { font-size: 10px; gap: 1px 10px; }
@@ -303,6 +312,24 @@ body { background: var(--paper); }
       <feFuncB type="table" tableValues="0.761 0.902"/>
     </feComponentTransfer>
   </filter>
+  <filter id="duotone-petroleo" color-interpolation-filters="sRGB">
+    <feColorMatrix type="matrix" values="0.2126 0.7152 0.0722 0 0  0.2126 0.7152 0.0722 0 0  0.2126 0.7152 0.0722 0 0  0 0 0 1 0"/>
+    <feComponentTransfer><feFuncR type="gamma" exponent="1.5"/><feFuncG type="gamma" exponent="1.5"/><feFuncB type="gamma" exponent="1.5"/></feComponentTransfer>
+    <feComponentTransfer>
+      <feFuncR type="table" tableValues="0 0.902"/>
+      <feFuncG type="table" tableValues="0.400 0.902"/>
+      <feFuncB type="table" tableValues="0.596 0.902"/>
+    </feComponentTransfer>
+  </filter>
+  <filter id="duotone-blueprint" color-interpolation-filters="sRGB">
+    <feColorMatrix type="matrix" values="0.2126 0.7152 0.0722 0 0  0.2126 0.7152 0.0722 0 0  0.2126 0.7152 0.0722 0 0  0 0 0 1 0"/>
+    <feComponentTransfer><feFuncR type="gamma" exponent="1.5"/><feFuncG type="gamma" exponent="1.5"/><feFuncB type="gamma" exponent="1.5"/></feComponentTransfer>
+    <feComponentTransfer>
+      <feFuncR type="table" tableValues="0.043 0.902"/>
+      <feFuncG type="table" tableValues="0.361 0.902"/>
+      <feFuncB type="table" tableValues="0.784 0.902"/>
+    </feComponentTransfer>
+  </filter>
   <filter id="duotone-duo" color-interpolation-filters="sRGB">
     <feColorMatrix type="matrix" values="0.2126 0.7152 0.0722 0 0  0.2126 0.7152 0.0722 0 0  0.2126 0.7152 0.0722 0 0  0 0 0 1 0"/>
     <feComponentTransfer>
@@ -320,7 +347,7 @@ body { background: var(--paper); }
             <span class="ttl"><i>Un meteorito para la Sociedad Científica Argentina del año 2105</i></span>
             <span class="lang">
               <span class="box">ES</span><span class="en" title="Versión en inglés: pendiente">EN</span>
-              <span class="A-switch" aria-label="Color (prueba)"><button type="button" data-ui="capucha" aria-pressed="true"><i style="background:#2e23c2"></i>capucha</button><button type="button" data-ui="duo" aria-pressed="false"><i style="background:#06aafa"></i>duotono</button></span>
+              <span class="A-switch" aria-label="Color (prueba)"><button type="button" data-ui="capucha" aria-label="capucha" title="capucha" aria-pressed="true"><i style="background:#2e23c2"></i>capucha</button><button type="button" data-ui="duo" aria-label="duotono" title="duotono" aria-pressed="false"><i style="background:#06aafa"></i>duotono</button><button type="button" data-ui="petroleo" aria-label="petróleo" title="petróleo" aria-pressed="false"><i style="background:#006698"></i>petróleo</button><button type="button" data-ui="blueprint" aria-label="blueprint" title="blueprint" aria-pressed="false"><i style="background:#0b5cc8"></i>blueprint</button></span>
             </span>
           </header>
           <div class="A-nav">
@@ -567,6 +594,7 @@ body { background: var(--paper); }
 
   // altura de la cabecera frizada → --head (el visor y el scroll-margin dependen de ella)
   const site = document.getElementById('site'), head = document.getElementById('a-head');
+  const SETS = { duo: 'duo/', petroleo: 'petroleo/', blueprint: 'blueprint/' }; // subcarpeta de img/fichas/ por color (capucha = la raíz)
   const setHead = () => site.style.setProperty('--head', head.offsetHeight + 'px');
   new ResizeObserver(setHead).observe(head); setHead();
 
@@ -613,7 +641,7 @@ body { background: var(--paper); }
       row('Título', `<h1>${f.querySelector('h2').innerHTML}</h1>`) +
       row('Cuerpo', `<div class="tx">${f.querySelector('.tx').innerHTML}</div>`) +
       row('Descargas', dl ? `<div class="dl">${dl.innerHTML}</div>` : '—') +
-      row('Imagen', `<figure><img src="${site.dataset.ui === 'duo' ? f.dataset.img.replace('img/fichas/', 'img/fichas/duo/') : f.dataset.img}" alt=""></figure>`) +
+      row('Imagen', `<figure><img src="${f.dataset.img.replace('img/fichas/', 'img/fichas/' + (SETS[site.dataset.ui] || ''))}" alt=""></figure>`) +
       (c ? row('Caption', capHTML(c)) : '');
     fullIdx.textContent = `Bitácora · ${f.querySelector('.d span:last-child').textContent}`;
     full.hidden = false; document.body.style.overflow = 'hidden'; full.scrollTop = 0; document.getElementById('a-full-close').focus();
@@ -629,16 +657,17 @@ body { background: var(--paper); }
   // archivo: la foto oficial, teñida en vivo (un solo estado)
   document.querySelectorAll('figure.duo').forEach(f => { const img = f.querySelector('img'); if (!img) return; const t = img.cloneNode(); t.alt = ''; t.className = 'tint'; t.setAttribute('aria-hidden', 'true'); img.after(t); });
 
-  // switch de color: la UI y el juego de imágenes (img/fichas/ = capucha #2E23C2 → papel · img/fichas/duo/ = #06aafa)
-  const swapImgs = (duo) => site.querySelectorAll('img[src*="img/fichas/"]').forEach(im => {
-    const s = im.getAttribute('src').replace('img/fichas/duo/', 'img/fichas/');
-    im.setAttribute('src', duo ? s.replace('img/fichas/', 'img/fichas/duo/') : s);
+  // switch de color: la UI y el juego de imágenes
+  // img/fichas/ = capucha #2E23C2 → papel · img/fichas/duo/ = negro → #06aafa → blanco · img/fichas/petroleo/ = #006698 → papel · img/fichas/blueprint/ = #0b5cc8 → papel
+  const swapImgs = (ui) => site.querySelectorAll('img[src*="img/fichas/"]').forEach(im => {
+    const s = im.getAttribute('src').replace(/img\/fichas\/(duo|petroleo|blueprint)\//, 'img/fichas/');
+    im.setAttribute('src', s.replace('img/fichas/', 'img/fichas/' + (SETS[ui] || '')));
   });
   document.querySelectorAll('.A-switch button').forEach(b => b.addEventListener('click', () => {
     document.querySelectorAll('.A-switch button').forEach(x => x.setAttribute('aria-pressed', x === b));
-    const duo = b.dataset.ui === 'duo';
-    if (duo) site.dataset.ui = 'duo'; else delete site.dataset.ui;
-    swapImgs(duo);
+    const ui = b.dataset.ui;
+    if (SETS[ui]) site.dataset.ui = ui; else delete site.dataset.ui;
+    swapImgs(ui);
   }));
 
   // comentarios (artifact) + escritorio
@@ -656,9 +685,10 @@ body { background: var(--paper); }
   }));
   const h = (location.hash || '').replace('#', '');
   if (h.includes('phone')) document.getElementById('v-phone').click();
-  if (location.search.includes('ui=duo')) document.querySelector('.A-switch [data-ui="duo"]').click(); // ?ui=duo abre en el otro color
+  const qui = new URLSearchParams(location.search).get('ui'); // ?ui=duo · ?ui=petroleo · ?ui=blueprint abren en ese color
+  if (SETS[qui]) document.querySelector(`.A-switch [data-ui="${qui}"]`).click();
   // el bloque Prensa descarga las fotos teñidas de capucha; en el otro color se avisa
-  document.querySelectorAll('.A-grid figure > a').forEach(a => a.addEventListener('click', (e) => { if (site.dataset.ui === 'duo') a.title = 'La descarga va en azul capucha'; }));
+  document.querySelectorAll('.A-grid figure > a').forEach(a => a.addEventListener('click', (e) => { if (site.dataset.ui) a.title = 'La descarga va en azul capucha'; }));
 })();
 </script>
 </body>

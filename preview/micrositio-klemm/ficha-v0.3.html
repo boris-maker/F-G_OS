@@ -1,0 +1,501 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Un meteorito para la Sociedad Científica Argentina del año 2105 · Custodia Pro Tempore CI-01 · Fundación Federico Jorge Klemm</title>
+<meta name="robots" content="noindex, nofollow">
+<!-- preview del link (WhatsApp, iMessage, Slack…): la tarjeta de la ficha de la obra, en cianotipo; URLs absolutas a la versión pública -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Fundación Federico Jorge Klemm · 2105.klemm.org.ar">
+<meta property="og:title" content="Un meteorito para la Sociedad Científica Argentina del año 2105">
+<meta property="og:description" content="Custodia Pro Tempore CI-01 · Fundación Federico Jorge Klemm · 9.07.2025 → 25.05.2032. Una obra de Faivovich &amp; Goldberg.">
+<meta property="og:url" content="https://boris-maker.github.io/F-G_OS/preview/micrositio-klemm/ficha-v0.3.html">
+<meta property="og:image" content="https://boris-maker.github.io/F-G_OS/preview/micrositio-klemm/img/og-v0.3.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Tarjeta con el título de la obra, con dos palabras tachadas: ▬ para la Sociedad ▬ del año 2105">
+<meta property="og:locale" content="es_AR">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Un meteorito para la Sociedad Científica Argentina del año 2105">
+<meta name="twitter:image" content="https://boris-maker.github.io/F-G_OS/preview/micrositio-klemm/img/og-v0.3.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=IBM+Plex+Mono:ital,wght@0,400;0,500;1,400;1,500&family=Libre+Franklin:wght@400;500;600;700&family=Old+Standard+TT:ital,wght@0,400;0,700;1,400&display=swap">
+<style>
+/* Ficha v0.3 · 29.10.2026 · La v0.2 con la devolución de los artistas (reunión del 29.10 "Diseño y publicación del
+   micrositio" + doc "Notas MicroSitio.2105") y los textos e imágenes nuevos del doc "Drafts Textos MicroSite.2105".
+   Color: cianotipo, el azul petróleo #006698 de los artistas, con el mapa leído de las dos pruebas de Guillermo
+   (scripts/duotono.py --fit): documentos y dibujo invertidos (papel azul, trazo blanco), fotos en duotono denso.
+   La UI va en #006698. El switch de la barra de navegación compara con capucha (#2E23C2), solo para esta prueba. */
+:root {
+  --blue: #006698;
+  --paper: #e6e6e6;
+  --desk: #d4d4d1;
+  --blue-70: rgb(0 102 152 / .72);
+  --blue-45: rgb(0 102 152 / .45);
+  --blue-18: rgb(0 102 152 / .18);
+  --blue-08: rgb(0 102 152 / .08);
+  --serif: "Old Standard TT", "Scotch Text", Georgia, "Times New Roman", serif;
+  --cond: "Barlow Condensed", "Arial Narrow", "Helvetica Neue", sans-serif;
+  --mono: "IBM Plex Mono", "Letter Gothic", Menlo, Consolas, monospace;
+  --sans: "Libre Franklin", "News Gothic", "Helvetica Neue", Arial, sans-serif;
+  color-scheme: light;
+}
+* { box-sizing: border-box; }
+html, body { overflow-x: clip; }
+body { margin: 0; background: var(--desk); color: var(--blue); font-family: var(--sans); font-size: 15px; line-height: 1.45; -webkit-font-smoothing: antialiased; }
+a { color: inherit; }
+button { font: inherit; color: inherit; }
+:focus-visible { outline: 2px solid currentColor; outline-offset: 2px; }
+img { max-width: 100%; display: block; }
+h1, h2, h3 { overflow-wrap: anywhere; min-width: 0; }
+
+/* ───────── review desk ───────── */
+.desk { padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); padding-block: 0 72px; }
+.desk-bar { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 50; background: var(--desk); border-bottom: 1px solid var(--blue-18); margin-inline: calc(-1 * max(16px, env(safe-area-inset-left, 0px))); padding: 10px max(16px, env(safe-area-inset-left, 0px)); display: flex; flex-wrap: wrap; align-items: center; gap: 10px 18px; font-family: var(--mono); font-size: 12px; }
+.desk-bar .who b { font-weight: 500; }
+.seg { display: flex; border: 1px solid var(--blue); border-radius: 2px; overflow: hidden; }
+.seg button { background: none; border: 0; padding: 6px 12px; cursor: pointer; font-family: var(--mono); font-size: 12px; letter-spacing: .02em; white-space: nowrap; }
+.seg button + button { border-left: 1px solid var(--blue); }
+.seg button[aria-pressed="true"] { background: var(--blue); color: var(--paper); }
+.desk-bar .spacer { flex: 1; }
+.btn-comment { background: none; border: 1px solid var(--blue); padding: 6px 12px; cursor: pointer; font-family: var(--mono); font-size: 12px; border-radius: 2px; }
+.btn-comment:hover { background: var(--blue); color: var(--paper); }
+.brief { max-width: 1240px; margin: 28px auto 24px; display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); gap: 28px; }
+.brief h1 { font-family: var(--serif); font-weight: 400; font-size: clamp(30px, 4.4vw, 52px); line-height: 1.02; margin: 0 0 14px; letter-spacing: -.01em; text-wrap: balance; }
+.brief p { margin: 0 0 10px; max-width: 62ch; }
+.kick { font-family: var(--mono); font-size: 11.5px; letter-spacing: .06em; text-transform: uppercase; margin-bottom: 12px; }
+.brief dl { margin: 0; display: grid; grid-template-columns: max-content minmax(0, 1fr); gap: 7px 14px; font-size: 13.5px; border-top: 1px solid var(--blue-45); padding-top: 12px; }
+.brief dt { font-family: var(--mono); font-size: 11px; letter-spacing: .05em; text-transform: uppercase; padding-top: 2px; }
+.brief dd { margin: 0; }
+.brief .pal { display: flex; gap: 6px; margin-top: 4px; }
+.brief .pal i { width: 22px; height: 22px; border: 1px solid var(--blue-45); display: inline-block; }
+.frame { max-width: 1240px; margin: 0 auto; background: var(--paper); box-shadow: 0 1px 0 var(--blue-18), 0 20px 50px -30px rgb(0 40 70 / .45); transition: max-width .35s ease; }
+.frame.phone { max-width: 390px; }
+.urlbar { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 5px 12px; font-family: var(--mono); font-size: 11px; border-bottom: 1px solid var(--blue-18); background: #dcdcdb; color: var(--blue); }
+.site { container-type: inline-size; container-name: site; position: relative; overflow: clip; }
+@container site (max-width: 760px) { .brief { grid-template-columns: minmax(0, 1fr); } }
+
+/* ───────── shared atoms ───────── */
+.miss { font-family: var(--mono); font-size: .82em; background: var(--blue-08); padding: 0 3px; }
+.glyph { font-family: var(--cond); font-weight: 700; letter-spacing: .08em; }
+
+/* ═════════════ FICHA v0.3 ═════════════ */
+.A { font-family: var(--mono); font-size: 12.5px; line-height: 1.5; background: var(--paper); color: var(--blue); --head: 150px; }
+.A[data-ui="capucha"] { --blue: #2e23c2; --blue-70: rgb(46 35 194 / .72); --blue-45: rgb(46 35 194 / .45); --blue-18: rgb(46 35 194 / .18); --blue-08: rgb(46 35 194 / .08); }
+.A-in { padding-inline: clamp(14px, 3cqi, 40px); }
+
+/* cabecera frizada: ES/EN · el título de la obra (vuelve al inicio) · los artistas (a su sitio, pestaña nueva) */
+.A-head { position: sticky; top: 0; z-index: 5; background: var(--paper); }
+.A-top { display: grid; grid-template-columns: minmax(max-content, 1fr) minmax(0, auto) minmax(max-content, 1fr); align-items: center; gap: 16px; padding: 12px 16px; border-bottom: 1px solid var(--blue); }
+.A-top .ttl { font-size: clamp(14px, 1.45cqi, 17px); font-weight: 500; font-style: italic; letter-spacing: .005em; text-align: center; text-decoration: none; line-height: 1.25; }
+.A-top .ttl:hover { text-decoration: underline; text-underline-offset: 4px; text-decoration-thickness: 1px; }
+.A-top .lang { display: flex; align-items: center; gap: 8px; white-space: nowrap; }
+.A-top .en { opacity: .45; }
+.A-top .fyg { justify-self: end; text-transform: uppercase; letter-spacing: .04em; font-size: 11px; text-decoration: none; white-space: nowrap; }
+.A-top .fyg:hover { text-decoration: underline; text-underline-offset: 3px; }
+.box { display: inline-grid; place-items: center; height: 2em; border: 1px solid var(--blue); padding: 0 8px; font-weight: 500; white-space: nowrap; flex: none; }
+.A-nav { display: grid; grid-template-columns: minmax(0, 1fr) auto; border-bottom: 1px solid var(--blue); }
+.A-nav > div { padding: 7px 16px; display: flex; align-items: center; gap: 10px; min-width: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.A-nav > div + div { border-left: 1px solid var(--blue); }
+.A-nav .crumb span { margin-inline: 4px; }
+.A-bar { border-bottom: 1px solid var(--blue); padding: 20px 16px 8px; }
+.A-bar .track { position: relative; height: 22px; }
+.A-bar .line { position: absolute; left: 0; right: 0; top: 6px; height: 1px; background: var(--blue); }
+.A-bar .ci { position: absolute; top: 4px; height: 5px; background: var(--blue); }
+.A-bar .now { position: absolute; top: 2px; width: 9px; height: 9px; margin-left: -4.5px; border-radius: 50%; background: var(--blue); }
+.A-bar .tick { position: absolute; top: 3px; width: 1px; height: 7px; background: var(--blue); }
+.A-bar .lab { position: absolute; top: 12px; transform: translateX(-50%); font-size: 10.5px; white-space: nowrap; }
+.A-bar .lab.l { transform: none; } .A-bar .lab.r { transform: translateX(-100%); } .A-bar .lab.hoy { top: -15px; }
+.A-bar .state { display: flex; justify-content: space-between; gap: 4px 18px; flex-wrap: wrap; margin-top: 6px; text-transform: uppercase; letter-spacing: .04em; font-size: 11px; }
+
+/* imagen + fichas */
+.A-main { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
+.A-view { position: sticky; top: var(--head); align-self: start; height: calc(100svh - var(--head)); border-right: 1px solid var(--blue); padding: clamp(20px, 3.5cqi, 48px) clamp(24px, 4cqi, 56px); display: grid; grid-template-rows: minmax(0, 1fr) auto; gap: 12px; }
+.A-view .stage { position: relative; min-height: 0; }
+.A-view .stage figure { position: absolute; inset: 0; margin: 0; opacity: 0; transition: opacity .45s ease; pointer-events: none; }
+.A-view .stage figure.on { opacity: 1; pointer-events: auto; }
+.A-view .stage img { position: absolute; inset: 0; margin: auto; max-width: 100%; max-height: 100%; width: auto; height: auto; display: block; }
+.A-view .cap { font-size: 11px; min-height: 1.5em; display: flex; justify-content: space-between; gap: 12px; }
+.A-view .cap:empty { display: none; }
+
+.A-info { min-width: 0; }
+/* una ficha ocupa casi toda la ventana bajo la cabecera: de la anterior y la siguiente asoma solo un borde (Notas, 29.10) */
+.ficha { position: relative; min-height: calc((100svh - var(--head)) * .84); padding: clamp(22px, 3.4cqi, 40px) clamp(18px, 3.4cqi, 44px) clamp(28px, 3.6cqi, 44px); border-bottom: 1px solid var(--blue); scroll-margin-top: var(--head); display: flex; flex-direction: column; }
+/* sin etiquetas, sin líneas internas ni degradé: la ficha se lee por su orden (fecha · lugar, título, cuerpo, descargas) */
+.ficha .d { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; font-size: 11px; text-transform: uppercase; letter-spacing: .04em; margin-bottom: 14px; }
+.ficha .d .n { white-space: nowrap; }
+.ficha h2 { font-family: var(--serif); font-weight: 400; font-size: clamp(24px, 2.9cqi, 38px); line-height: 1.08; letter-spacing: -.01em; margin: 0 0 22px; text-wrap: balance; max-width: 22em; }
+.ficha .tx { max-width: 64ch; position: relative; }
+.ficha .tx p { margin: 0 0 12px; }
+.ficha .tx p:last-child { margin-bottom: 0; }
+.ficha .tx .epi { font-family: var(--serif); font-style: italic; font-size: 17px; line-height: 1.4; margin-bottom: 18px; }
+.ficha .tx.clamp { max-height: 16.5em; overflow: hidden; -webkit-mask-image: linear-gradient(#000 70%, transparent 100%); mask-image: linear-gradient(#000 70%, transparent 100%); }
+.ficha .more { display: none; align-self: flex-start; margin-top: 12px; background: none; border: 1px solid var(--blue); padding: 6px 12px; cursor: pointer; text-transform: uppercase; letter-spacing: .06em; font-size: 11px; }
+.ficha .more:hover { background: var(--blue); color: var(--paper); }
+.ficha.has-more .more { display: inline-block; }
+.ficha .dl { display: grid; grid-template-columns: minmax(0, 1fr); gap: 4px; max-width: 64ch; margin-top: 22px; }
+.ficha .dl a { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 10px; text-decoration: none; border: 1px solid var(--blue); padding: 6px 10px; min-width: 0; }
+.ficha .dl a:hover { background: var(--blue); color: var(--paper); }
+.ficha .dl a span:last-child { white-space: nowrap; }
+.ficha .dl:empty { display: none; }
+.ficha figure.inline, .ficha .cap-inline { display: none; }
+.ficha figure.inline { margin: 22px 0 0; }
+.ficha figure.inline img { width: 100%; height: auto; }
+.ficha .cap-inline { margin: 8px 0 0; font-size: 11px; }
+
+/* la ficha entera, a pantalla completa */
+.A-full { position: fixed; inset: 0; z-index: 60; background: var(--paper); color: var(--blue); overflow-y: auto; font-family: var(--mono); font-size: 12.5px; line-height: 1.5; }
+.A-full[hidden] { display: none; }
+.A-full .top { position: sticky; top: 0; background: var(--paper); border-bottom: 1px solid var(--blue); display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 10px 16px; font-size: 11px; text-transform: uppercase; letter-spacing: .04em; }
+.A-full .top button { background: none; border: 1px solid var(--blue); padding: 5px 10px; cursor: pointer; font-size: 11px; letter-spacing: .06em; text-transform: uppercase; }
+.A-full .top button:hover { background: var(--blue); color: var(--paper); }
+.A-full .in { max-width: 76ch; margin: 0 auto; padding: clamp(24px, 5vw, 56px) 20px 96px; }
+.A-full .d { font-size: 11px; text-transform: uppercase; letter-spacing: .04em; margin-bottom: 14px; }
+.A-full h1 { font-family: var(--serif); font-weight: 400; font-size: clamp(28px, 4vw, 44px); line-height: 1.06; letter-spacing: -.012em; margin: 0 0 28px; text-wrap: balance; }
+.A-full .tx p { font-family: var(--serif); font-size: 17px; line-height: 1.55; margin: 0 0 16px; }
+.A-full .tx p:last-child { margin-bottom: 0; }
+.A-full .tx .epi { font-style: italic; margin-bottom: 22px; }
+.A-full .dl { display: grid; grid-template-columns: minmax(0, 1fr); gap: 4px; margin-top: 28px; }
+.A-full .dl a { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 10px; text-decoration: none; border: 1px solid var(--blue); padding: 6px 10px; min-width: 0; }
+.A-full .dl a:hover { background: var(--blue); color: var(--paper); }
+.A-full figure { margin: 36px 0 0; }
+.A-full figure img { width: 100%; height: auto; }
+.A-full figcaption { font-size: 11px; margin-top: 8px; }
+
+/* switch de color (prueba: no va en el sitio final), en la barra de navegación */
+.A-switch { display: inline-flex; align-items: center; gap: 8px; font-size: 10px; letter-spacing: .04em; text-transform: uppercase; }
+.A-switch .sw { display: inline-flex; border: 1px solid var(--blue); }
+.A-switch button { background: none; border: 0; padding: 3px 7px; cursor: pointer; display: flex; align-items: center; gap: 5px; font-size: 10px; letter-spacing: .04em; text-transform: uppercase; }
+.A-switch button + button { border-left: 1px solid var(--blue); }
+.A-switch button[aria-pressed="true"] { background: var(--blue); color: var(--paper); }
+.A-switch i { width: 8px; height: 8px; display: inline-block; border: 1px solid currentColor; }
+.phone-only { display: none; }
+
+/* pie institucional, con el look de la cabecera (Notas, 29.10): la Fundación y los artistas */
+.A-foot { background: var(--paper); color: var(--blue); border-top: 1px solid var(--blue); }
+.A-foot .A-in { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); padding-inline: 0; font-size: 11.5px; line-height: 1.5; }
+.A-foot .A-in > div { padding: 14px 16px 16px; border-left: 1px solid var(--blue); min-width: 0; }
+.A-foot .A-in > div:first-child { border-left: 0; }
+.A-foot b { font-weight: 500; text-transform: uppercase; letter-spacing: .04em; display: block; }
+.A-foot a { text-decoration: underline; text-underline-offset: 3px; text-decoration-color: var(--blue-45); }
+.A-foot a:hover { text-decoration-color: currentColor; }
+
+@container site (max-width: 760px) {
+  /* en teléfono: título arriba a todo el ancho; abajo ES/EN y los artistas; la banda de tiempo */
+  .A-top { grid-template-columns: minmax(0, 1fr) auto; gap: 6px 10px; padding: 9px 12px; }
+  .A-top .ttl { grid-column: 1 / -1; font-size: 12.5px; text-align: left; }
+  .A-top .lang { grid-row: 2; gap: 6px; }
+  .A-top .lang .box { height: 1.8em; padding: 0 5px; }
+  .A-top .fyg { grid-row: 2; font-size: 10px; }
+  .A-nav { grid-template-columns: minmax(0, 1fr); }
+  .A-nav .crumb { display: none; }
+  .A-nav > div + div { border-left: 0; }
+  .A-nav > div { padding: 5px 12px; justify-content: flex-end; }
+  .A-switch button { padding: 4px 6px; font-size: 0; gap: 0; }   /* en teléfono, solo el cuadrado de color */
+  .A-switch i { width: 10px; height: 10px; }
+  .A-bar { padding: 16px 12px 6px; }
+  .A-bar .state { font-size: 10px; gap: 1px 10px; }
+  .desk-only { display: none; } .phone-only { display: inline; }
+  .A-main { grid-template-columns: minmax(0, 1fr); }
+  .A-view { display: none; }
+  .ficha { min-height: 0; padding: 22px 16px 26px; }
+  .ficha h2 { font-size: 7.4cqi; }
+  .ficha figure.inline { display: block; }
+  .ficha .cap-inline:not(:empty) { display: block; }
+  .A-foot .A-in { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); font-size: 10.5px; }
+  .A-foot .A-in > div { padding: 12px; }
+  .A-foot .A-in > div:nth-child(odd) { border-left: 0; }
+  .A-foot .A-in > div:nth-child(n+3) { border-top: 1px solid var(--blue); }
+}
+
+/* bare publish: the site is the page */
+body { background: var(--paper); }
+.site { min-height: 100svh; }
+
+</style>
+</head>
+<body>
+
+
+<div class="site A" id="site" data-ui="cianotipo">
+
+        <div class="A-head" id="a-head">
+          <header class="A-top">
+            <span class="lang"><span class="box">ES</span><span class="en" title="Versión en inglés: pendiente">EN</span></span>
+            <a class="ttl" href="#" id="a-home">Un meteorito para la Sociedad Científica Argentina del año 2105</a>
+            <a class="fyg" href="https://faivovich-goldberg.com/" target="_blank" rel="noopener">Faivovich &amp; Goldberg ↗</a>
+          </header>
+          <div class="A-nav">
+            <div class="crumb">Custodia Pro Tempore CI-01<span>›</span>Fundación Federico Jorge Klemm</div>
+            <div><span class="A-switch" aria-label="Color (prueba)"><span class="desk-only">Color · prueba</span><span class="sw"><button type="button" data-ui="cianotipo" aria-label="cianotipo" title="cianotipo" aria-pressed="true"><i style="background:#006698"></i>cianotipo</button><button type="button" data-ui="capucha" aria-label="capucha" title="capucha" aria-pressed="false"><i style="background:#2e23c2"></i>capucha</button></span></span></div>
+          </div>
+          <div class="A-bar">
+            <div class="track" id="a-track"></div>
+            <div class="state"><span class="desk-only" data-live="custody"></span><span class="phone-only" data-live="custodyShort"></span><span data-live="pct"></span><span class="desk-only" data-live="left"></span><span class="phone-only" data-live="leftShort"></span></div>
+          </div>
+        </div>
+
+        <div class="A-main">
+          <aside class="A-view" id="a-view" aria-label="Imagen de la ficha">
+            <div class="stage" id="a-stage"></div>
+            <div class="cap" id="a-cap"></div>
+          </aside>
+
+          <div class="A-info">
+            <div class="A-log" id="a-log">
+
+              <article class="ficha" id="f-obra" data-img="obra.jpg" data-cap="">
+                <div class="d"><span class="when"><span class="miss">[fecha y lugar: pensar si van]</span></span><span class="n"></span></div>
+                <h2>Un meteorito para la Sociedad Científica Argentina del año 2105</h2>
+                <div class="tx">
+                  <p class="epi">Un prisma navega<br>hacia otras manos,<br>hacia otros ojos</p>
+                  <p><i>Un meteorito para la Sociedad Científica Argentina del año 2105</i> es una obra iniciada a partir de la legítima tenencia de un meteorito cedido por un donante anónimo, cuya incorporación al acervo de la Sociedad Científica Argentina no pudo concretarse en el presente. Frente a esa imposibilidad, los artistas transformaron un proceso inconcluso de donación en una cápsula de tiempo: el meteorito fue encapsulado el 25 de mayo de 2018 y su destino fue diferido al 9 de julio de 2105, fecha en la que la Sociedad Científica Argentina del futuro podrá decidir sobre su posible apertura.</p>
+                  <p>Concebida desde su origen como una obra en el tiempo, plantea un problema de transmisión intergeneracional: cómo sostener, durante ochenta y siete años, la legibilidad material, jurídica, simbólica y económica de una voluntad dirigida a las generaciones futuras.</p>
+                </div><button type="button" class="more">Leer completo</button>
+                <div class="dl">
+<a href="https://www.e-flux.com/" target="_blank" rel="noopener"><span>Anuncio en e-flux</span><span>↗ <span class="miss">[link]</span></span></a>
+                </div>
+                <figure class="inline"></figure><p class="cap-inline"></p>
+              </article>
+
+              <article class="ficha" id="f-2026" data-img="2026-10-01.jpg" data-cap="">
+                <div class="d"><span class="when">1 de octubre 2026 · Fundación Klemm</span><span class="n"></span></div>
+                <h2>Custodia Pro Tempore 01: Firma del comodato e ingreso de la obra en la Fundación Federico Klemm</h2>
+                <div class="tx">
+                  <p>El 1 de octubre de 2026, a las 17.30, durante la ceremonia de formalización del comodato de <i>Un meteorito para la Sociedad Científica Argentina del año 2105</i>, entre Faivovich &amp; Goldberg y la Fundación Federico Klemm, se produjo una colisión entre una obra que proyecta hacia el futuro la custodia de un meteorito y una institución que, ante la posibilidad de su propia desaparición próxima, debe imaginar su transferencia. En un discurso pronunciado ante artistas, curadores, directores de instituciones y críticos de arte, la atmósfera festiva se convirtió en otra cosa: el anuncio de un final. Lo fue también para quien estuvo allí sin comprender del todo lo que estaba sucediendo. Alguien contempla una luz sin saberlo; años después comprenderá que aquella luz era también la imagen de una muerte. Entonces habrá que contar lo sucedido, como quien escribe una noticia o como quien, al leer un diario, encuentra entre las noticias del día el relato de algo que ya ha comenzado a desaparecer. Quizás, entonces, un acontecimiento no comienza cuando sucede, sino cuando alguien advierte que ha sucedido.</p>
+                </div><button type="button" class="more">Leer completo</button>
+                <div class="dl">
+<a role="link" aria-disabled="true" title="Pendiente de OK para publicar"><span>Discurso de Cintia Mezza · 1.10.2026 <span class="miss">[inédito · confirmar publicación]</span></span><span>PDF ↓ 197 KB</span></a>
+                  <a href="dl/2026-10-01_comodato-klemm-ci-01.pdf" download><span>Acuerdo de comodato CI-01 · firmado, escaneado</span><span>PDF ↓ 11 MB</span></a>
+                </div>
+                <figure class="inline"></figure><p class="cap-inline"></p>
+              </article>
+
+              <article class="ficha" id="f-2025" data-img="2025-07-09.jpg" data-cap="Certificado de finalización de la Custodia Fundacional">
+                <div class="d"><span class="when">9 de julio 2025 · Ethereum Blockchain</span><span class="n"></span></div>
+                <h2>Conclusión de Custodia Fundacional (CF)</h2>
+                <div class="tx">
+                  <p class="epi">A través de la emisión de un certificado digital verificado en blockchain, se establece la conclusión de la Custodia Fundacional (CF), se indica la fecha de inicio y listan los ejes de trabajo del período. Se describe la segmentación del tiempo hasta “la cita con su destino en el año 2105”.</p>
+                  <p>El 9 de julio de 2025, al emitir el certificado de conclusión de la <i>Custodia Fundacional (CF)</i>, faltaría aún mas de un año para cerrar el acuerdo con la Fundación Federico Jorge Klemm para la <i>Primera Custodia Institucional (CI-01)</i>. Si bien lo deseable es una transición inmediata y orgánica, las circunstancias requirieron un período extendido en que la obra siguió en manos de los artistas, aunque a nivel calendario rige sobre el tiempo de <i>CI-01</i>. Es de esperar que habiendo saltado de la orbita personal a la institucional, y contando con casi 6 años para asignar las Custodias Pro Tempore venideras, las futuras transiciones sucedan.</p>
+                </div><button type="button" class="more">Leer completo</button>
+                <div class="dl">
+<a href="dl/2025-07-09_certificado-fin-custodia-fundacional.jpg" download><span>Certificado de fin de custodia · 9.07.2025</span><span>JPG ↓ 1,4 MB</span></a>
+                </div>
+                <figure class="inline"></figure><p class="cap-inline"></p>
+              </article>
+
+              <article class="ficha" id="f-2023" data-img="2023-moderno.jpg" data-cap="La cápsula sobre la base de tronco piramidal en Museo Moderno">
+                <div class="d"><span class="when">2023–24 · Museo Moderno</span><span class="n"></span></div>
+                <h2>A 18 minutos del Sol</h2>
+                <div class="tx">
+                  <p>Entre junio de 2023 y febrero de 2024 tuvo lugar la primera exhibición de la cápsula en un museo argentino, como parte de <i>A 18 minutos del Sol</i>, una muestra colectiva que reunió a casi 100 artistas, contemporáneos e históricos. De cara al préstamo, y previo a la entrega de la obra, nos ocupamos de diseñar una caja de transporte que funcionara como un embalaje que la acompañara siempre, buscando un tipo de recipiente que pudiera alojarla y asegurar un transporte cuidado. Tomando como referencia los estuches rígidos, fuimos referidos a la empresa Mamut, confiando en la durabilidad de los materiales y la cómoda manipulación que ofrecen los herrajes de este tipo de cajas. Contando con un prestigioso departamento de conservación, el Museo realizó el primer informe de condición de la pieza, que incluyó un detallado relevamiento fotográfico de las caras del prisma. Las anotaciones de la conservadora que realizó el diagnóstico fueron referenciadas como "phenomena", e interpretadas como deformación, hundimiento, roturas, rayado y acreción, entre otros términos. Trabajamos con el departamento de museografía del Museo desarrollando en conjunto una nueva base para disponer la cápsula en sala, explorando otras formas y materialidades. Decidimos que fuera una base de tronco piramidal facetada, en cuyo remate se posaba la cápsula, sugiriendo al espectador cierta distancia con la pieza aun estando al alcance de la mano. La obra estuvo ubicada nuevamente en el centro de la sala (tal como había sido dispuesta en <i>¡Saxa Loquuntur!</i>). El texto de sala iniciaba con la frase: "Como un grupo de planetas atraído por un agujero negro, las obras de esta sala orbitan en torno a la única materia extraterrestre de la exposición: una cápsula de tiempo que contiene un meteorito enviado al futuro." Una vez concluida la exhibición, la obra regresó a nuestro estudio.</p>
+                </div><button type="button" class="more">Leer completo</button>
+                <div class="dl"></div>
+                <figure class="inline"></figure><p class="cap-inline"></p>
+              </article>
+
+              <article class="ficha" id="f-2022" data-img="2022-saxa.jpg" data-cap="Recordador · 17 MAY 2102 [epígrafe a confirmar]" data-more-img="2022-saxa-piedra.jpg" data-more-cap="Una de las 7 piedras litográficas [epígrafe a confirmar]">
+                <div class="d"><span class="when">2022–23</span><span class="n"></span></div>
+                <h2>¡Saxa Loquuntur! Barro Galeria, Buenos Aires</h2>
+                <div class="tx">
+                  <p>Aparición de la cápsula nuevamente en público en el contexto de la exhibición que realizamos en la galería Barro entre noviembre de 2022 hasta febrero de 2023. Se dispone de una nueva estructura para exhibirla, desarrollo que en parte gira en torno a investigar otros tipos de soportes estructurales así como formas para que cápsula sea experimentada por los espectadores, salvaguardando el objeto en sala. Tomando las proporciones del prisma de madera de 50 x 31 x 31 cm, se realiza un hipercubo en caños estructurales de hierro, proyectando un nuevo volumen a partir de estas dimensiones. Dispuesto en el epicentro de la sala, casi en penumbras, irradiaba desde allí el misterio de una presencia espectral; rodeado de una nueva serie de 8 esculturas que habíamos realizado en ocasión de esta exhibición. Girando en torno a las problemáticas del género de la cápsula de tiempo, y sabiendo que una de las partes más complejas radica en lograr sostener la cita en ese futuro distante, creamos con ellas un sistema de <i>recordadores</i>, de activación diferida, programadas entre 2101 y 2103 y evocando así los años previos a la hora definitiva en 2105. Cada pieza, única, reproduce en su frente una fecha y el contorno del meteorito encapsulado, alojando en su interior paquetes de cartas anónimas, viñetas del contexto histórico y afectivo de nuestra época, selladas herméticamente. Sin un mecanismo visible de apertura estas esculturas sugieren una temporalidad clausurada. Como prólogo al encuentro de los visitantes con la cápsula y la obras mencionadas, el diseño del recorrido de la muestra, a través de tenues luces y pasillos tabicados con grandes telas blancas que funcionaban como velos, se ofrecía al espectador el encuentro con 7 piedras litograficas de nuestra autoría que tenían grabadas en sus caras imágenes, textos y una partitura, vinculantes y crípticos, diferentes pistas con las cuales se podría restituir cierta dimensión narrativa y conceptual de la exhibición como máquina de tiempo.</p>
+                </div><button type="button" class="more">Leer completo</button>
+                <div class="dl">
+<a href="dl/2022-10-22_carta-saxa-loquuntur.pdf" download><span>Carta de ¡Saxa Loquuntur! · participación · 22.10.2022</span><span>PDF ↓ 23 KB</span></a>
+                </div>
+                <figure class="inline"></figure><p class="cap-inline"></p>
+              </article>
+
+              <article class="ficha" id="f-2021" data-img="2021-tamayo.jpg" data-cap="The Backroom, Museo Tamayo · transmisión en vivo desde el estudio">
+                <div class="d"><span class="when">2021</span><span class="n"></span></div>
+                <h2>The Backroom, Museo Tamayo</h2>
+                <div class="tx">
+                  <p>El primer eslabón real de la cadena de comodatos se rompió antes de empezar. Rosa Galisteo se perfilaba como la primera custodia institucional de la cápsula, pero la pandemia se ocupó de poner freno al mundo a mediados de 2020. En septiembre del mismo año, llegó la invitación para participar del programa de investigación The Backroom (una colaboración del Museo Tamayo con Independent Curators International) para ser desarrollado en formato <i>online</i>, práctica forzada que muchas instituciones comenzaron a implementar. Tomamos esta oportunidad y la posibilidad de hacer uso del espacio virtual, como una herramienta para producir un retrato del estado de situación de la cápsula. El micrositio publicó una selección de documentación, en la forma de facsímiles e imágenes, que buscaron visibilizar el proyecto y su liturgia. Como parte de nuestra propuesta, incluimos una transmisión en vivo a través de una <i>webcam</i> desde nuestro estudio, lugar de resguardo de la obra, que fue instruído a partir de un comodato digital con el museo.</p>
+                </div><button type="button" class="more">Leer completo</button>
+                <div class="dl">
+<a href="https://www.museotamayo.org/thebackroom/faivovich-goldberg" target="_blank" rel="noopener"><span>The Backroom · museotamayo.org</span><span>↗</span></a>
+                  <a href="dl/2021-02-05_comodato-digital-museo-tamayo.pdf" download><span>Comodato digital con el Museo Tamayo · 5.02.2021</span><span>PDF ↓ 2,4 MB</span></a>
+                </div>
+                <figure class="inline"></figure><p class="cap-inline"></p>
+              </article>
+
+              <article class="ficha" id="f-2018b" data-img="2018-galisteo.jpg" data-cap="Guía del Museo Rosa Galisteo de Rodriguez [confirmar caption]">
+                <div class="d"><span class="when">2018–2019</span><span class="n"></span></div>
+                <h2>Museo Rosa Galisteo de Rodriguez</h2>
+                <div class="tx">
+                  <p>Por esos años, el Museo Provincial de Bellas Artes Rosa Galisteo de Rodriguez de la Ciudad de Santa Fé pasaba por reformas estructurales. Su directora buscaba formas radicales de actuar frente a esta anomalia. Una de las acciones fue colgar la colección entera atiborrando las salas del museo, con el objetivo de liberar sus bodegas para ser reformadas. En busca de proyectos alternativos se intersó por nuestra practica y ofreció a una suerte de residencia en el seno de la institución, que se transformó en nuestro objeto de estudio. Entendimos que lo mas potente que podiamos ofrecer era la radicació temporal de “…2105”. Así, con la intensión de satisfacer las premisas del proyecto —investigación, conservación, difusión— se puso en marcha un programa de trabajo que se iba escribiendo sobre la marcha. Es en este contexto surge la idea de que la obra debe viajar a su cita en el año 2105 a través de custodias institucionales. El museo tomaría la primera. Se decidió entonces remontar la burocracia institucional para lograr el permiso de exhibición y comodato. La burocracia se multiplicó, y los tiempos se estiraron. Asuntos jurídicos dictaminó la necesidad de acreditar la legitima tenencia del meteorito que viaja dentro de la escultura y su seguridad para el museo y las personas. Un abogado patrimonialista compuso un memo hechando luz sobre lo primero y un geologo certificó la no-toxicidad de la materia extraterrestre. Hubo un taller sobre patrimonio y futuras generaciones dictado por un grupo de abogados y docentes. Entre otros casos se trató el de los derechos de la naturaleza y la constitución de Ecuador y el de la obra. Se bocetó un estatuto que prefigura sus temas fundamentales.</p>
+                </div><button type="button" class="more">Leer completo</button>
+                <div class="dl">
+<a href="dl/2018-12-19_carta-para-comodato-rosa-galisteo.pdf" download><span>Carta para comodato · 19.12.2018</span><span>PDF ↓ 622 KB</span></a>
+                  <a href="dl/2018_nota-solomonoff-informe-tecnico-y-tenencia.pdf" download><span>Nota de Solomonoff · informe técnico y tenencia</span><span>PDF ↓ 442 KB</span></a>
+                </div>
+                <figure class="inline"></figure><p class="cap-inline"></p>
+              </article>
+
+              <article class="ficha" id="f-2018a" data-img="2018-lacma.jpg" data-cap="La carta, antes de enviarla · junio de 2018">
+                <div class="d"><span class="when">2018</span><span class="n"></span></div>
+                <h2>Carta a LACMA</h2>
+                <div class="tx">
+                  <p>Uno de los asistentes a la ceremonia de transmutación era curador del LACMA. Se mostró muy interesado en la obra. Algo mas tarde, en el salón VIP de la feria, conversamos extensamente de su futuro, de la multiplicidad de temas emergentes y de como una institución como LACMA podia participar. Brindamos con champaña. Unos días mas tarde le enviamos una carta por correo postal nombrando los distintos temas e invitándolos a continuar el dialogo.</p>
+                </div><button type="button" class="more">Leer completo</button>
+                <div class="dl">
+<a href="dl/2018-06-01_carta-lacma.jpg" download><span>Carta a LACMA · 1.06.2018</span><span>JPG ↓ 166 KB</span></a>
+                </div>
+                <figure class="inline"></figure><p class="cap-inline"></p>
+              </article>
+
+            </div>
+          </div>
+        </div>
+
+        <footer class="A-foot" id="a-foot">
+          <div class="A-in">
+            <div><b>Fundación Federico Jorge Klemm</b><a href="https://klemm.org.ar/" target="_blank" rel="noopener">klemm.org.ar&nbsp;↗</a></div>
+            <div>Marcelo T. de Alvear 626<br>Buenos Aires, Argentina</div>
+            <div>Visitas · horarios <span class="miss">[X]</span><br>entrada libre · Instagram <span class="miss">[@]</span></div>
+            <div><b>Faivovich &amp; Goldberg</b><a href="https://faivovich-goldberg.com/" target="_blank" rel="noopener">faivovich-goldberg.com&nbsp;↗</a></div>
+          </div>
+        </footer>
+
+        <div class="A-full" id="a-full" hidden role="dialog" aria-modal="true" aria-label="Ficha completa">
+          <div class="top"><button type="button" id="a-full-close">× Cerrar</button><span id="a-full-idx"></span></div>
+          <div class="in" id="a-full-in"></div>
+        </div>
+
+      </div>
+
+<script>
+(() => {
+  const D = (s) => new Date(s + 'T12:00:00-03:00');
+  const T0 = D('2018-05-25'), T1 = D('2105-07-09'), CI0 = D('2025-07-09'), CI1 = D('2032-05-25');
+  const now = new Date();
+  const pct = (a, b, t) => Math.max(0, Math.min(1, (t - a) / (b - a)));
+  function diffYMD(a, b) {
+    let y = b.getFullYear() - a.getFullYear(), m = b.getMonth() - a.getMonth(), d = b.getDate() - a.getDate();
+    if (d < 0) { m -= 1; d += new Date(b.getFullYear(), b.getMonth(), 0).getDate(); }
+    if (m < 0) { y -= 1; m += 12; }
+    return { y, m, d };
+  }
+  const left = diffYMD(now, T1);
+  const ciP = pct(CI0, CI1, now);
+  const live = {
+    left: `faltan ${left.y} años, ${left.m} meses y ${left.d} días para el 9.07.2105`,
+    custody: `CI-01 · Fundación Federico Jorge Klemm · 9.07.2025 → 25.05.2032`,
+    custodyShort: `CI-01 · Fundación Klemm · 2025 → 2032`,
+    leftShort: `faltan ${left.y} a · ${left.m} m · ${left.d} d`,
+    pct: `${(ciP * 100).toFixed(1).replace('.', ',')} % del septenio`
+  };
+  document.querySelectorAll('[data-live]').forEach(el => { const v = live[el.dataset.live]; if (v != null) el.textContent = v; });
+
+  // barra 2018 —● 2105
+  const aTrack = document.getElementById('a-track');
+  const x = (t) => (pct(T0, T1, t) * 100) + '%';
+  aTrack.innerHTML = `<span class="line"></span><span class="ci" style="left:${x(CI0)};width:${(pct(T0, T1, CI1) - pct(T0, T1, CI0)) * 100}%"></span><span class="tick" style="left:0"></span><span class="tick" style="left:100%"></span><span class="now" style="left:${x(now)}"></span><span class="lab l" style="left:0">2018</span><span class="lab hoy" style="left:${x(now)}">hoy</span><span class="lab r" style="left:100%">2105</span>`;
+
+  // altura de la cabecera frizada → --head (el visor, el alto de la ficha y el scroll-margin dependen de ella)
+  const site = document.getElementById('site'), head = document.getElementById('a-head');
+  const setHead = () => site.style.setProperty('--head', head.offsetHeight + 'px');
+  new ResizeObserver(setHead).observe(head); setHead();
+
+  // imágenes: img/fichas3/<color>/<archivo> · cianotipo (cianotipo invertido o denso, según la imagen) · capucha (#2E23C2 → papel)
+  const IMG = 'img/fichas3/';
+  const src = (name) => `${IMG}${site.dataset.ui || 'cianotipo'}/${name}`;
+
+  // fichas: una imagen por ficha en el visor; en teléfono, debajo de la ficha
+  const fichas = [...document.querySelectorAll('.ficha')];
+  const stage = document.getElementById('a-stage'), cap = document.getElementById('a-cap');
+  const capHTML = (t) => t.replace(/\[([^\]]+)\]/g, '<span class="miss">[$1]</span>');
+  const num = (i) => `${String(i + 1).padStart(2, '0')} / ${String(fichas.length).padStart(2, '0')}`;
+  fichas.forEach((f, i) => {
+    const alt = f.querySelector('h2').textContent;
+    f.querySelector('.d .n').textContent = num(i);
+    const fig = document.createElement('figure'); fig.dataset.for = f.id; fig.innerHTML = `<img data-name="${f.dataset.img}" src="${src(f.dataset.img)}" alt="${alt.replace(/"/g, '&quot;')}" loading="${i < 3 ? 'eager' : 'lazy'}">`;
+    stage.appendChild(fig);
+    f.querySelector('figure.inline').innerHTML = `<img data-name="${f.dataset.img}" src="${src(f.dataset.img)}" alt="" loading="lazy">`;
+    f.querySelector('.cap-inline').innerHTML = capHTML(f.dataset.cap || '');
+  });
+  let active = null;
+  const show = (f) => {
+    if (active === f) return; active = f;
+    stage.querySelectorAll('figure').forEach(g => g.classList.toggle('on', g.dataset.for === f.id));
+    cap.innerHTML = f.dataset.cap ? `<span>${capHTML(f.dataset.cap)}</span>` : '';
+  };
+  // la ficha activa es la última cuyo borde superior ya pasó el 45 % de la ventana
+  const pick = () => { const y = innerHeight * 0.45; let best = fichas[0]; for (const f of fichas) { if (f.getBoundingClientRect().top <= y) best = f; } show(best); };
+  addEventListener('scroll', () => requestAnimationFrame(pick), { passive: true });
+  addEventListener('resize', pick); addEventListener('load', pick); pick();
+
+  // recorte + Leer completo. En escritorio el cuerpo se recorta a lo que entra en el alto de la ficha; en teléfono, a 16,5 líneas
+  const desk = () => getComputedStyle(document.getElementById('a-view')).display !== 'none';
+  const clampAll = () => fichas.forEach(f => {
+    const tx = f.querySelector('.tx'); tx.classList.remove('clamp'); tx.style.maxHeight = ''; f.classList.remove('has-more');
+    const full = tx.scrollHeight;
+    let room = null;
+    if (desk()) {
+      const fh = parseFloat(getComputedStyle(f).minHeight) || 0;
+      room = Math.max(7 * 1.5 * 12.5, fh - (f.offsetHeight - tx.offsetHeight) - 46);   // 46 ≈ el botón Leer completo; nunca menos de 7 líneas
+    }
+    tx.classList.add('clamp'); if (room) tx.style.maxHeight = room + 'px';
+    const over = full > tx.clientHeight + 24;
+    if (!over) { tx.classList.remove('clamp'); tx.style.maxHeight = ''; }
+    f.classList.toggle('has-more', over || !!f.dataset.moreImg);   // con más imagen adentro (la piedra), siempre hay Leer completo
+  });
+  const full = document.getElementById('a-full'), fullIn = document.getElementById('a-full-in'), fullIdx = document.getElementById('a-full-idx');
+  let lastFocus = null;
+  const openFull = (f) => {
+    lastFocus = document.activeElement;
+    const dl = f.querySelector('.dl'), fig = (name, c) => `<figure><img data-name="${name}" src="${src(name)}" alt="">${c ? `<figcaption>${capHTML(c)}</figcaption>` : ''}</figure>`;
+    fullIn.innerHTML = `<div class="d">${f.querySelector('.d .when').innerHTML}</div><h1>${f.querySelector('h2').innerHTML}</h1>` +
+      `<div class="tx">${f.querySelector('.tx').innerHTML}</div>` +
+      (dl && dl.children.length ? `<div class="dl">${dl.innerHTML}</div>` : '') +
+      fig(f.dataset.img, f.dataset.cap) + (f.dataset.moreImg ? fig(f.dataset.moreImg, f.dataset.moreCap) : '');
+    fullIdx.textContent = f.querySelector('.d .n').textContent;
+    full.hidden = false; document.body.style.overflow = 'hidden'; full.scrollTop = 0; document.getElementById('a-full-close').focus();
+  };
+  const closeFull = () => { full.hidden = true; document.body.style.overflow = ''; if (lastFocus) lastFocus.focus(); };
+  fichas.forEach(f => f.querySelector('.more').addEventListener('click', () => openFull(f)));
+  document.getElementById('a-full-close').addEventListener('click', closeFull);
+  addEventListener('keydown', (e) => { if (e.key === 'Escape' && !full.hidden) closeFull(); });
+
+  // el sitio aterriza en la ficha del 1 de octubre, centrada bajo la cabecera (arriba queda la de la obra); el título vuelve ahí
+  const landing = document.getElementById('f-2026');
+  const land = (behavior) => {
+    const h = head.offsetHeight, r = landing.getBoundingClientRect();
+    scrollTo({ top: scrollY + r.top - h - Math.max(0, (innerHeight - h - r.height) / 2), behavior });
+  };
+  document.getElementById('a-home').addEventListener('click', (e) => { e.preventDefault(); land('smooth'); });
+  const bare = !document.querySelector('.desk');
+  if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+  const ready = () => { clampAll(); if (bare && !location.hash) land('instant'); pick(); };
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(ready); else ready();
+  addEventListener('resize', clampAll);
+
+  // switch de color (prueba): la UI y el juego de imágenes
+  const swap = () => site.querySelectorAll('img[data-name]').forEach(im => { im.src = src(im.dataset.name); });
+  document.querySelectorAll('.A-switch button').forEach(b => b.addEventListener('click', () => {
+    document.querySelectorAll('.A-switch button').forEach(x => x.setAttribute('aria-pressed', x === b));
+    site.dataset.ui = b.dataset.ui; swap();
+  }));
+
+  // comentarios (artifact) + escritorio
+  (async () => {
+    const c = window.claude && window.claude.use ? await window.claude.use('comments') : null; if (!c) return;
+    const btn = document.getElementById('comment-btn'); btn.hidden = false; let lastRange = null;
+    document.addEventListener('selectionchange', () => { const sel = document.getSelection(); if (sel && sel.rangeCount && !sel.isCollapsed && !btn.contains(sel.anchorNode)) lastRange = sel.getRangeAt(0).cloneRange(); });
+    btn.addEventListener('mousedown', (e) => e.preventDefault());
+    btn.addEventListener('click', async () => { const target = lastRange && lastRange.startContainer.isConnected ? { range: lastRange } : { element: document.querySelector('.brief h1') }; lastRange = null; try { await c.openComposer(target); } catch (e) { if (e && e.code === 'unavailable') btn.hidden = true; } });
+  })();
+  document.querySelectorAll('.seg button').forEach(b => b.addEventListener('click', () => {
+    document.querySelectorAll('.seg button').forEach(x => x.setAttribute('aria-pressed', x === b));
+    document.querySelectorAll('.frame').forEach(f => f.classList.toggle('phone', b.dataset.v === 'phone'));
+    setTimeout(clampAll, 400);
+  }));
+  if ((location.hash || '').includes('phone')) document.getElementById('v-phone').click();
+  const qui = new URLSearchParams(location.search).get('ui'); // ?ui=capucha abre en el otro color
+  if (qui === 'capucha') document.querySelector('.A-switch [data-ui="capucha"]').click();
+})();
+</script>
+</body>
+</html>
