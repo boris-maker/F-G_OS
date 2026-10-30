@@ -490,6 +490,8 @@ body { background: var(--paper); }
     });
   }
   addEventListener('resize', placeCaps);
+  // y cada vez que el visor cambia de tamaño (también al volver del formato teléfono al de escritorio)
+  new ResizeObserver(() => requestAnimationFrame(placeCaps)).observe(stage);
   let active = null;
   const show = (f, force) => {
     if (active === f && !force) return; active = f;
